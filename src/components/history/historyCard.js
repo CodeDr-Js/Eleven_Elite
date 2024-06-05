@@ -17,7 +17,7 @@ import NoData from "../noData/noData";
 
 
 const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const {setActivities_g} = useContext(DataContext)
   const [errorCancel, setErrorCancel] = useState();
   // const global_refresh = async () => {
@@ -40,6 +40,12 @@ const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) 
   // const [settled, setSettled] = useState([]);
   // const [openBet, setOpenBet] = useState([]);
   const token = Cookies.get("auth-token");
+  
+  useEffect(()=>{
+    if(!token) {
+      navigate("/login")
+    }
+  },[])
   //const [showLoader, setShowLoader] = useState(false);
 
 
@@ -139,7 +145,7 @@ const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) 
           spinner.classList.remove("d-none");
           button.classList.add("d-none");
 
-          API.cancelTicket({startDate, ticket_id}, token["auth-token"])
+          API.cancelTicket({startDate, ticket_id}, token)
           .then((result) => {
           spinner.classList.add("d-none");
           button.classList.remove("d-none");
@@ -183,7 +189,7 @@ const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) 
 
   const historycard = e.map(([item, ticket_head, id, date], index) => {
 
-    //console.log(ticket_head);
+    console.log(item);
     const gameStartTime = item.market.timestamp * 1000;
     let gameTime = CalculateStartDiff(gameStartTime);
 

@@ -235,8 +235,8 @@ const ScoreAnti = () => {
           //console.log("yes2");
           e.push(game);
           //console.log("The pushed data is ", game);
-          let endId = "ends-" + index;
-          let matchCard = "match-" + index;
+          let endId = "ends-" + game.fixture.id;
+          let matchCard = "match-" + game.fixture.id;
           const timeout = (endId, matchCard) => {
             let x = setInterval(() => {
               const end = document.getElementById(endId);
