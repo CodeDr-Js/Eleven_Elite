@@ -305,7 +305,7 @@ const ScoreAnti = () => {
                     <div>{game.teams.away.name}</div>
                   </div>
                 </div>
-                <div className="rounded-circle volume-div ms-3 shadow ">
+                <div className="rounded-circle volume-div ms-3 shadow d-none">
                   <div>
                     <div className="">Volume</div>
                     <div>4708K</div>
@@ -330,7 +330,7 @@ const ScoreAnti = () => {
                     {" "}
                     Score - {game.fixture.status.short}{" "}
                   </div>
-                  <div className="odd pe-5 ps-3 ">21.24%</div>
+                  <div className="odd pe-5 ps-3 d-none ">21.24%</div>
                 </div>
               </div>
             </div>

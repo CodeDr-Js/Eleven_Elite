@@ -12,6 +12,8 @@ import ErrorCard from "../anti-scores/errorCard";
 import SuccessCard from "../anti-scores/successCard";
 import { API } from "../../api-service/api-service";
 import { DataContext } from "../../APIs/Api";
+import Cookies  from "js-cookie";
+  
 
 const BetSecure = ({
   correctScore,
@@ -27,6 +29,7 @@ const BetSecure = ({
   id,
   onClick
 }) => {
+  
   const navigate = useNavigate();
   const {
     data,
@@ -37,12 +40,12 @@ const BetSecure = ({
     activities,
     user,
   } = useContext(DataContext);
-  const [token, setToken, removeToken] = useCookies(["auth-token"]);
-
+  // const [token, setToken, removeToken] = useCookies(["auth-token"]);
+  const token = Cookies.get("auth-token");
   //handling logout token
   const handleLogout = async () => {
     try {
-      API.logout(token["auth-token"]).then((result) => {
+      API.logout(token).then((result) => {
        // console.log(result);
         if (result.success) {
           removeToken("auth-token");
@@ -127,7 +130,7 @@ const BetSecure = ({
       setSuccess(null);
     }
 
-    API.paynow(dbValues, token["auth-token"])
+    API.paynow(dbValues, token)
       .then((result) => {
    //     console.log(result);
         setShowLoader(false);
