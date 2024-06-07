@@ -48,9 +48,9 @@ const BetSecure = ({
       API.logout(token).then((result) => {
        // console.log(result);
         if (result.success) {
-          removeToken("auth-token");
+         // removeToken("auth-token");
         } else {
-          removeToken("auth-token");
+          //removeToken("auth-token");
         }
       });
     } catch (error) {
@@ -139,7 +139,7 @@ const BetSecure = ({
           setSuccess(result.message);
           //setValues((values.amount = ""));
         } else if (result.detail) {
-          removeToken("auth-token");
+          Cookies.remove("auth-token")
           navigate("/login");
           //setValues(values.amount = "")
         } else {
