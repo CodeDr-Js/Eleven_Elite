@@ -31,16 +31,20 @@
         if(!IDBConfig)return;
 
        const dbData = IDBConfig.working_dir.data;
-        if (!Object.keys(dbData).includes('fixtures')) {
+        if (!Object.keys(dbData).includes('fixtures')||!Object.keys(dbData.fixtures).includes('response')) {
             fetchFixturesServer({'req_date':currentDateNow,timezone:client_timezone})
             .then(async(res)=>{
-                console.log('Data from server>>',res)
-                if (!Object.keys(res.fixtures)[0]) {
-                    //fetch  data from football api
-                    // await fetchFixtures(dbData,currentDateNow)
-                    
+                if (!Object.keys(res.fixtures).includes('response')) {
+                    //fixture was not loaded succesfuly, try second time
+                    fetchFixturesServer({'req_date':currentDateNow,timezone:client_timezone})
+                    .then((res)=>{
+                        if (Object.keys(res.fixtures).includes('response')){
+                            IDBConfig.working_dir.data.fixtures=res.fixtures
+                            postMessage({'data':IDBConfig.working_dir.data.fixtures.response,type:'setData',saveStoreObj:IDBConfig})
+                            fetchOddData(dbData,currentDateNow)
+                        }
+                    })
                 }else{
-                    // fixture was retrieved from server 'check if 
                     IDBConfig.working_dir.data.fixtures=res.fixtures
                     postMessage({'data':IDBConfig.working_dir.data.fixtures.response,type:'setData',saveStoreObj:IDBConfig})
                     fetchOddData(dbData,currentDateNow)
@@ -66,19 +70,9 @@
 
     const fetchOddData = async(dbData,currentDate) => {
 
-        console.log('NOW RUNNING ODDS FUNC',{currentDate});
         
         if(!Object.keys(dbData).includes('odds')){dbData['odds']=[]}
     
-    
-            /** 
-             const retrieve_odds
-                try to retrive the odd data from server
-                !dbData.total_page
-                const server_odd_data = await API.fetchOdd({req_date:client_date_str,timezone:client_timezone})
-                console.log({server_odd_data})
-            */
-        
             const request_APi = async (page) =>{
                 let endpoint = "soccer/retrieve_odds/";
                 return fetch(serverUrl + endpoint, {
@@ -102,8 +96,6 @@
                     
                     let page1 = await request_APi(1);
                     if(!page1) return
-
-                    console.log({page1})
                     // set Datas >><<
                     dbData.run_list = { 
                         to_run:range(1,page1.paging.total),
@@ -114,10 +106,8 @@
                     dbData['odds'].push(...page1.response);
                     dbData.total_page=page1.paging.total;
             
-                    // saveStoreObj(IDBConfig.working_dir)
                     postMessage({'data':page1.response,'type':'setAllData',saveStoreObj:IDBConfig})
                     
-                    // save odd page to server
             
                 }
                 
@@ -126,7 +116,7 @@
                     return !dbData.run_list.ran.includes(item) ? true : false;
                 });
             
-                console.log({loop_paginations});
+                // console.log({loop_paginations});
                 // return
 
                 //loop pages left to save >><<
@@ -165,17 +155,15 @@
                         let odds_pagination =  await request_APi(page)
                         if(!odds_pagination||!odds_pagination.response) {console.log('NO ODDS FOUND');not_run=true;return}
                         
-                        console.log('UPDATING>><<',{odds_pagination:odds_pagination.response,page})
+                        // console.log('UPDATING>><<',{odds_pagination:odds_pagination.response,page})
                             
                         dbData['odds'].push(...odds_pagination.response);
                         dbData.run_list.current_page += 1
                         dbData.run_list.ran[page]=page
                 
-                        // saveStoreObj(IDBConfig.working_dir) //save to IDB
-                        //   setAllData((prevData) => [...prevData, ...odds_pagination.response]); //send to users element
+                        
                         if (dbData.run_list.current_page>=dbData.run_list.to_run.length){
                             postMessage({'data':odds_pagination.response,'type':'setAllData', lastPage:true,saveStoreObj:IDBConfig});
-
                         } else {
                             postMessage({'data':odds_pagination.response,'type':'setAllData',saveStoreObj:IDBConfig})
                         }

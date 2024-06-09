@@ -13,7 +13,7 @@
 13. Volumn/Percentage display none
 14. witdrawal amount not showing
 15. Adjust secured bet width and make it responsive for all viewpoint
-16.
+16. Telegram Btn / Link
 17.
 18.
 19.
