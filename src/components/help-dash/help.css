@@ -38,3 +38,31 @@
   align-items: center;
   justify-content: center;
 }
+
+.t-channel {
+  font-size: 10px;
+  position: absolute;
+  background-color: gray;
+  border-radius: 6px 6px 0 0px;
+  width: 50px;
+  height: 14px;
+  padding-left: 7px;
+}
+.t-channel-1 {
+  font-size: 10px;
+  position: absolute;
+  background-color: gray;
+  border-radius: 6px 6px 0 0px;
+  width: 50px;
+  height: 14px;
+  padding-left: 14px;
+}
+.t-channel {
+  font-size: 10px;
+  position: absolute;
+  background-color: gray;
+  border-radius: 6px 6px 0 0px;
+  width: 50px;
+  height: 14px;
+  padding-left: 7px;
+}

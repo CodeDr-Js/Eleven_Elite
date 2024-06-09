@@ -67,11 +67,12 @@ const HelpDash = ({ isHelp, setIsHelp }) => {
         </div>
       </div>
 
-      <div className="bg-transparent mt-5 ">
+      <div className="bg-transparent mt-3 ">
         <p className="bg-transparent fw-bold">Follow us</p>
         <div className="main-color1 p-3 d-flex rounded-2 ">
           <div className="bg-transparent pe-4">
             <Link to="https://t.me/+KLqcImLckXAxMmZk">
+              <p className="t-channel">Channel</p>
               <img
                 className="bg-transparent"
                 src={telegram1}
@@ -82,6 +83,7 @@ const HelpDash = ({ isHelp, setIsHelp }) => {
           </div>
           <div className="bg-transparent pe-4">
             <Link to="https://t.me/+zBqiIu5teztiM2M0">
+            <p className="t-channel-1">Chat</p>
               <img
                 className="bg-transparent"
                 src={telegram1}
@@ -104,40 +106,46 @@ const HelpDash = ({ isHelp, setIsHelp }) => {
       </div>
 
       <div className="bg-transparent">
-        <p className="bg-transparent fw-bold mt-5">Contact us</p>
+        <p className="bg-transparent fw-bold mt-3">Contact us</p>
         <div className="main-color1 p-3 rounded-2">
           <div className="bg-transparent pe-4 d-flex">
             <div className="bg-transparent">
-              <img
+              {/* <img
                 className="bg-success"
                 src={phone}
                 alt="telegram"
                 style={{ width: "25px" }}
-              />
+              /> */}
+               <i className="fa fa-phone bg-transparent"> </i>
+             
             </div>
-            <p className="bg-transparent ps-3">+1-209-8941-029
-</p>
+           
+            <p className="bg-transparent ps-3">+1-209-8941-029</p>
+            
           </div>
           <div className="bg-transparent pe-4 d-flex">
             <div className="bg-transparent">
-              <img
+              {/* <img
                 className="bg-success"
                 src={email}
                 alt="telegram"
                 style={{ width: "25px" }}
-              />
+              /> */}
+                <i className="fas fa-envelope bg-transparent"> </i>
+                
             </div>
             <p className="bg-transparent ps-3">elevenelite@gmail.com</p>
           </div>
 
           <div className="bg-transparent pe-4 d-flex">
             <div className="bg-transparent">
-              <img
+              {/* <img
                 className="bg-success"
                 src={address}
                 alt="telegram"
                 style={{ width: "25px" }}
-              />
+              /> */}
+              <i className="fas fa-map-marker-alt bg-transparent"> </i>
             </div>
             <p className="bg-transparent ps-3">Ala Moana Blvd, Suite 567 Honolulu, HI 96814 USA</p>
           </div>
