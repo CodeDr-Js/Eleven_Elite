@@ -14,7 +14,7 @@
 14. witdrawal amount not showing
 15. Adjust secured bet width and make it responsive for all viewpoint
 
-17.
+17. When help is click on profile show help module.
 18.
 19.
 20.

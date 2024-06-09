@@ -134,7 +134,7 @@ const HelpDash = ({ isHelp, setIsHelp }) => {
                 <i className="fas fa-envelope bg-transparent"> </i>
                 
             </div>
-            <p className="bg-transparent ps-3">elevenelite@gmail.com</p>
+            <p className="bg-transparent ps-3">elevenelitefb@gmail.com</p>
           </div>
 
           <div className="bg-transparent pe-4 d-flex">
