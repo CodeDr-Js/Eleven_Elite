@@ -2,7 +2,7 @@
 
 // export default () => {
 
-    let serverUrl = 'https://eef-478a01632e14.herokuapp.com/api/'
+    let serverUrl = 'https://eef-staging-f608d9a34c34.herokuapp.com/api/'
     let currentDateNow,client_timezone,client_date_str,IDBConfig;
 
     function range(start, end) { return (new Array(end - start + 1)).fill(undefined).map((_, i) => i + start); }

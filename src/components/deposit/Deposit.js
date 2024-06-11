@@ -17,7 +17,7 @@ import "../fontawesome/css/all.css";
 
 
 const Deposit = () => {
-  const { setActiveToken, activities_g, setActivities_g, result, setResult } =
+  const { setActiveToken, activities_g, setActivities_g, result, setResult,getUserData, hasRunRetrieve } =
     useContext(DataContext);
    // console.log(activities_g);
   const navigate = useNavigate();
@@ -40,6 +40,12 @@ const Deposit = () => {
   };
 
   
+  useEffect(()=> {
+    if(!hasRunRetrieve){
+      getUserData()
+    }
+  }, [])
+
 
  
   

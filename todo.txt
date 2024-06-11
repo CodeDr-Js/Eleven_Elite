@@ -8,13 +8,13 @@
 8. flag - default logos
 9. history => data not set to useContext
 10. Home witdrawal card
-11. Link help to the Modal
+
 12. General transaction => Site notification
 
 14. witdrawal amount not showing
-15. Adjust secured bet width and make it responsive for all viewpoint
+15. Adjust secured bet width and make it responsive for all viewpoint X
 
-17. When help is click on profile show help module.
-18.
+
+
 19.
 20.

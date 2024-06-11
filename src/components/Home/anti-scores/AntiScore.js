@@ -10,10 +10,17 @@ import Loader from "../../loader/loader";
 
 const AntiScore = () => {
   const navigate = useNavigate();
-   const { data, allData, activeToken, activities_g, user } =
+   const { data, allData, activeToken, activities_g, user, getUserData, hasRunRetrieve } =
      useContext(DataContext);
   const token = Cookies.get("auth-token");
   const [loadings, setLoadings] = useState(false);
+
+ 
+  useEffect(()=> {
+    if(!hasRunRetrieve){
+      getUserData()
+    }
+  }, [])
 
   useEffect(() => {
     setLoadings(true);

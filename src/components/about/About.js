@@ -49,7 +49,7 @@ const About = () => {
 
           <li>🛅Satisfactory for withdrawal after 4 company's game </li>
           <li>🛅 minimum withdrawal $10 </li>
-          <liv>🛅3% withdrawal charges </liv>
+          <li>🛅3% withdrawal charges </li>
           <li>🛅 minimum deposit $10</li>
           </ol>
         </div>
@@ -71,7 +71,7 @@ const About = () => {
             <img src={f4} alt="fliers" style={{ width: "100%" }} />
           </div>
           <p>
-            <spam className="fw-bold">REFERRAL COMMISSION</spam>  <br></br>
+            <span className="fw-bold">REFERRAL COMMISSION</span>  <br></br>
             Eleven Elite rewards it's members with a
             referral commission. 🇺🇲Punters earn 12% on 1st generation referral
             deposit, when they place a bet. 🇺🇲Punters earn 6% on 2nd generation
@@ -94,6 +94,16 @@ const About = () => {
             $150
           </p>
         </div>
+
+        <p className="">
+        EEFC is a fully regulated gambling service licensed by National Lottery Regulatory Commission (NLRC) issued  No 0014899
+    <br/><br/>
+      The EEFC team has united crypto-enthusiasts from all over the world. We are all bound up in the idea of developing crypto Gaming and do our best to serve you with a  smooth service.
+      <br/><br/>
+      We are interested in creating a profitable and enjoyable gaming platform for everyone. Therefore, we take the maximum capability to develop a blockchain secured gaming system to provide a number of advantages: scaling of the platform, paltry commission, min bets and instant transactions.
+      <br/><br/>
+      The EEFC group hopes to change the traditional sports and e-sports industry through blockchain technology, and constantly explore innovative game methods through the value application of digital currency round the globe
+        </p>
       </article>
     </>
   );

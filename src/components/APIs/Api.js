@@ -39,6 +39,7 @@ const DataProvider = ({ children }) => {
   const [invite , setInvite] = useState(null);
   const [pending, setPending] = useState(null);
   const [loadingNew, setLoadingNew] = useState();
+  const [hasRunRetrieve, setHasRunRetrieve] = useState(false);
 
  console.log("all results is:", result);
   
@@ -417,6 +418,7 @@ const DataProvider = ({ children }) => {
           setUser_g(result.user);
           setSettled_g(result.activities.bet.settled);
           setOpenBet_g(result.activities.bet.openbet);
+          setHasRunRetrieve(true)
         } else if(result.detail) {
           //console.log("removing token");
           navigate("/login")
@@ -438,7 +440,7 @@ const DataProvider = ({ children }) => {
     }
   }
   useEffect(() => {
-    getUserData();
+    //getUserData();
   }, [activeToken]);
 
   // useEffect(() => {
@@ -492,7 +494,7 @@ const DataProvider = ({ children }) => {
 
   return (
     <DataContext.Provider
-      value={{ data, allData, activeToken, activities_g, setActivities_g, user_g, setUser_g, openBet_g, setOpenBet_g, settled_g, setSettled_g, setActiveToken, result, setResult, notification, setNotification, promotion, setPromotion , pending, setPending , invite, setInvite, checkData, setCheckData, loadingNew, setLoadingNew }}
+      value={{ data, allData, activeToken, activities_g, setActivities_g, user_g, setUser_g, openBet_g, setOpenBet_g, settled_g, setSettled_g, setActiveToken, result, setResult, notification, setNotification, promotion, setPromotion , pending, setPending , invite, setInvite, checkData, setCheckData, loadingNew, setLoadingNew, getUserData, hasRunRetrieve }}
     >
       {children}
     </DataContext.Provider>

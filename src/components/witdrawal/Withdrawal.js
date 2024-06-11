@@ -13,11 +13,12 @@ import Cookies  from "js-cookie";
 import Pin from "../withdrawal pin/pin";
 import { API } from "../api-service/api-service";
 import WithdrawSuccess from "./withdrawSuccess";
+import Loader from "../loader/loader";
 
 
 const Withdrawal = () => {
   const navigate = useNavigate();
-  const { setActiveToken, activities_g, setActivities_g } =
+  const { setActiveToken, activities_g, setActivities_g, getUserData, hasRunRetrieve } =
     useContext(DataContext);
   const token = Cookies.get("auth-token");
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +37,7 @@ const Withdrawal = () => {
   const [errorWithdraw, setErrorWithdraw] = useState();
   const [amountWithdrawn, setAmountWithdraw] = useState();
   const [withdrawnSuccessMsg, setWithdrawSuccessMsg] = useState();
-
+  const [loadings, setLoadings] = useState(false);
   // const [amount, setAmount] = useState('');
   const checkToken = () => {
 
@@ -52,6 +53,19 @@ const Withdrawal = () => {
   useEffect(() => {
     checkToken();
   }, [token]);
+
+  
+  useEffect(()=> {
+    if(!hasRunRetrieve){
+      getUserData()
+    }
+  }, [])
+
+  useEffect(()=> {setLoadings(true) 
+    if(!Array.isArray(activities_g)){
+    setLoadings(false)
+  }},[activities_g])
+
 
   const handleAllClick = () => {
     setValues((prev) => ({
@@ -357,6 +371,8 @@ const Withdrawal = () => {
         withdrawnSuccessMsg={withdrawnSuccessMsg}
         />
       </div>) : ""}
+
+      {loadings && <Loader/>}
 
       {/* {isOpen ? (
             <div>

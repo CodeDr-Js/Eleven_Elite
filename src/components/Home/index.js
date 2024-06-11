@@ -24,7 +24,7 @@ import SecureCard from "./main/secureCard";
 const Index = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, allData, activeToken, setActiveToken, activities, activities_g, user, result } =
+  const { data, allData, activeToken, setActiveToken, activities, activities_g, user, result, getUserData, hasRunRetrieve  } =
     useContext(DataContext);
     //console.log(activities_g);
   //const [token] = useCookies(["auth-token"]);
@@ -44,6 +44,12 @@ const Index = () => {
       navigate("/login");
     }
   }, [token1]);
+  
+  useEffect(()=> {
+    if(!hasRunRetrieve){
+      getUserData()
+    }
+  }, [])
 
   useEffect(() => {
     if(result) {

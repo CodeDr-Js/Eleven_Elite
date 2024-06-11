@@ -29,6 +29,7 @@ import ChangePassword from "../changePins/changePassword";
 import ChangePin from "../changePins/changePin";
 import RewardCoupon from "../reward/rewardCoupon";
 import Footer from "../Home/anti-scores/footer";
+import HelpDash from "../help-dash/helpDash";
 
 //console.log(origin);
 
@@ -52,7 +53,7 @@ const Profile = () => {
   const [isOpen_pin, setIsOpen_pin] = useState(false);
   const [isOpen_gift, setIsOpen_gift] = useState(false);
   const [activeButton, setActiveButton] = useState("profile")
-
+  const [isHelp, setIsHelp] = useState(false);
   //console.log("Activities global is:", activities_g, "resull is:", result, "user is:", user_g );
   const navigate = useNavigate();
   const token = Cookies.get("auth-token");
@@ -536,7 +537,7 @@ const Profile = () => {
           </div>
           <div
             className="bg-transparent d-flex"
-            onClick={() => handleLink("/help")}
+            onClick={() => setIsHelp(true)}
           >
             <div className="bg-transparent">
               <img
@@ -547,7 +548,7 @@ const Profile = () => {
               />
             </div>
             <p className="bg-transparent">Help</p>
-            <Link to="/help" className="bg-transparent ms-auto">
+            <Link onClick={() => setIsHelp(true)} className="bg-transparent ms-auto">
               <i
                 id=""
                 className="fa fa-chevron-right  fa-fw fa-sm  bg-transparent "
@@ -596,6 +597,8 @@ const Profile = () => {
       ) : (
         ""
       )}
+       {isHelp && <div className="modal-overlay-profile"> <HelpDash isHelp={isHelp}
+            setIsHelp={setIsHelp} /></div> }
       
       <Footer activeButton={activeButton} setActiveButton={setActiveButton} />
     </div>): navigate(`/${activeButton}`)}

@@ -7,6 +7,7 @@ import Bet from "./bet";
 import Cookies  from "js-cookie";
 import { padNum } from "../../qickfun/qickfun";
 import NoData from "../../noData/noData";
+import Loader from "../../loader/loader";
 
 
 //import './Modal.css'
@@ -15,9 +16,10 @@ import NoData from "../../noData/noData";
 const Odd = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, allData, activeToken, setActiveToken, activities_g, user } =
+  const { data, allData, activeToken, setActiveToken, activities_g, user, getUserData, hasRunRetrieve } =
     useContext(DataContext);
   const token = Cookies.get("auth-token");
+  const [loadings, setLoadings] = useState(false);
 
   //Checking for token/Activ
   useEffect(() => {
@@ -30,9 +32,21 @@ const Odd = () => {
     }
   }, [token]);
 
+  
+  useEffect(()=> {
+    if(!hasRunRetrieve){
+      getUserData()
+    }
+  }, [])
+
   const [modalData, setModalData] = useState({});
 
-  
+  useEffect(() => {
+    setLoadings(true);
+    if(!Array.isArray(activities_g) ) {
+      setLoadings(false)
+    }
+   }, [activities_g])
 
   const onHandleClick = () => {
     e.preventDefault();
@@ -750,6 +764,7 @@ const Odd = () => {
       ) : (
         <div><NoData/></div>
       )}
+      {loadings && <Loader/>}
     </>
   );
 };

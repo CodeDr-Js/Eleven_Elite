@@ -2,26 +2,37 @@ import React from 'react'
 
 const Secure = ({home, away, league, hflag, aflag, odd, score, time, style, text, FS, onClick, e, s
 }) => {
+  function getFirstAndSecondWords(input) {
+    // Split the input string by spaces
+    const words = input.split(' ');
+
+    // Get the first and second words
+    const firstWord = words[0] || '';
+    const secondWord = words[1] || '';
+
+    // Concatenate the first and second words with a space
+    return `${firstWord} ${secondWord}`.trim();
+}
   return (
     <div>
         <div className="container bg-transparent mt-4">
         <p className="ps-3">Secured Bet 👑</p>
         <div className="m-color rounded-4 p-3">
           <div className=" bg-transparent d-flex justify-content-between">
-            <div className=" bg-transparent ps-3 d-flex flex-column align-items-center ">
+            <div className=" bg-transparent ps-3 d-flex flex-column align-items-center secureW-1 w-100">
               <div
                 className= {`rounded-circle mb-2 ${e}`}  
                 style={{ width: "60px", height: "60px" }}
               >
-                <img className=" bg-transparent" src={hflag} style={{ width: "60px", height: "60px" }} />
+                <img className=" bg-transparent" src={hflag} style={{ width: "60px", height: "60px"  }} />
               </div>
               <p className=" bg-transparent"> {home}</p>
             </div>
-            <div className=" bg-transparent d-flex flex-column align-items-center mt-1">
-              <p className=" bg-transparent opacity">{league}</p>
+            <div className=" bg-transparent d-flex flex-column align-items-center mt-1 secureW-2 w-100">
+              <p className=" bg-transparent opacity">{getFirstAndSecondWords(league)}</p>
               <p className={`bg-transparent ${FS}`}> {time}</p>
             </div>
-            <div className=" bg-transparent pe-3 d-flex flex-column align-items-center">
+            <div className=" bg-transparent pe-3 d-flex flex-column align-items-center secureW-1 w-100">
               <div
                 className={`rounded-circle mb-2 ${s}`}
                 style={{ width: "60px", height: "60px" }}
