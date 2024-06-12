@@ -499,15 +499,23 @@ margin-bottom: 3.75rem;
 
 
 /* Error and Success Card */
-.error-div {
+.error-div-1 {
     border-radius: 1.875rem;
       padding: 1.875rem 2.5rem;
       margin: 0 1.25rem;
       width: 65%;
-      height: 12.5rem;
+      height: 13.8rem;
       background-color: rgb(7, 24, 59);    
 }
 
 .tx {
   font-size: 9px;
+}
+
+
+@media screen and (max-width: 380px) { /* Adjust breakpoint as needed */
+  .cs-sm {
+    font-size: 17px;
+    padding-top: 4px;
+  }
 }

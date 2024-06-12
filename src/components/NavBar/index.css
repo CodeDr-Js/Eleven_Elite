@@ -41,3 +41,9 @@
   background-color: #02123D;
   color: wheat;
 }
+
+/* @media screen and (max-width: 380px) { /* Adjust breakpoint as needed */
+  /* .am-sm {
+    width: 40%;
+  }
+}  */

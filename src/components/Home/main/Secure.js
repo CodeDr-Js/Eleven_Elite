@@ -19,25 +19,25 @@ const Secure = ({home, away, league, hflag, aflag, odd, score, time, style, text
         <p className="ps-3">Secured Bet 👑</p>
         <div className="m-color rounded-4 p-3">
           <div className=" bg-transparent d-flex justify-content-between">
-            <div className=" bg-transparent ps-3 d-flex flex-column align-items-center secureW-1 w-100">
+            <div className=" bg-transparent ps-3 d-flex flex-column align-items-center secureW-1">
               <div
                 className= {`rounded-circle mb-2 ${e}`}  
                 style={{ width: "60px", height: "60px" }}
               >
-                <img className=" bg-transparent" src={hflag} style={{ width: "60px", height: "60px"  }} />
+                <img className=" bg-transparent rounded-circle" src={hflag} style={{ width: "60px", height: "60px"  }} />
               </div>
               <p className=" bg-transparent"> {home}</p>
             </div>
-            <div className=" bg-transparent d-flex flex-column align-items-center mt-1 secureW-2 w-100">
+            <div className=" bg-transparent d-flex flex-column align-items-center mt-1 secureW-2 ">
               <p className=" bg-transparent opacity">{getFirstAndSecondWords(league)}</p>
               <p className={`bg-transparent ${FS}`}> {time}</p>
             </div>
-            <div className=" bg-transparent pe-3 d-flex flex-column align-items-center secureW-1 w-100">
+            <div className=" bg-transparent pe-3 d-flex flex-column align-items-center secureW-1">
               <div
                 className={`rounded-circle mb-2 ${s}`}
                 style={{ width: "60px", height: "60px" }}
               >
-                <img className=" bg-transparent" src={aflag} style={{ width: "60px", height: "60px" }} />
+                <img className=" bg-transparent rounded-circle" src={aflag} style={{ width: "60px", height: "60px" }} />
               </div>
               <p className=" bg-transparent"> {away}</p>
             </div>

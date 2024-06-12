@@ -295,7 +295,7 @@ const Bet = ({
             </div>
 
             <div className="bg-primary rounded-4 w-75 text-center fs-4 btn btn-primary bet-cs-div d-flex justify-content-center">
-              <p className="bg-primary bet-font-1">
+              <p className="bg-primary bet-font-1 cs-sm">
                 Correct Score <img /> {correctScore}{" "}
               </p>
             </div>

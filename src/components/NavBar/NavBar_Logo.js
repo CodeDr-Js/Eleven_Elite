@@ -26,13 +26,13 @@ const NavBar_Logo = ({ search, setSearch }) => {
       {/* <a className="ms-auto" href="/">
         <img src={Logo} alt="Logo" className="" style={{ width: "40px" }} />
       </a> */}
-      <div className=" ms-2 wg-card d-flex">
+      <div className=" ms-2 wg-card d-flex w-50">
         <div>
           <img src={dollar} alt="Logo" className="" style={{ width: "33px" }} />
         </div>
 
         {!Array.isArray(activities_g) ? (
-          <p className="ps-2 pt-1 fw-bold ">
+          <p className="ps-2 pt-1 fw-bold   ">
             $ {activities_g.wallet.bal_info.bal.toFixed(2)}
           </p>
         ) : (
@@ -41,7 +41,7 @@ const NavBar_Logo = ({ search, setSearch }) => {
         {/* <p className='ps-2 pt-1 fw-bold '>$ 30000</p> */}
       </div>
 
-      <div className="ms-auto">
+      <div className="">
         {/* <i className="fa fa-search position-absolute mt-2 ms-2"></i> */}
         {/* <input
           type="text"
@@ -53,7 +53,7 @@ const NavBar_Logo = ({ search, setSearch }) => {
           }}
         /> */}
         <input
-          className="form-control w-75 form-username-1 rounded-4 g-sub-color mb-3 "
+          className="form-control w-75 ms-auto form-username-1 rounded-4 g-sub-color mb-3 "
           type="text"
           placeholder="search for league or team..."
           name="search"

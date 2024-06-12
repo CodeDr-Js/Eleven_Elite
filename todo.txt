@@ -3,7 +3,7 @@
 3. static files
 4. security
 5. cancel
-6. viewPoint note 8 (secured bet)
+
 7. language - translate
 8. flag - default logos
 9. history => data not set to useContext
@@ -12,9 +12,10 @@
 12. General transaction => Site notification
 
 14. witdrawal amount not showing
-15. Adjust secured bet width and make it responsive for all viewpoint X
 
 
 
-19.
-20.
+
+19. Live score widget
+
+21. Add success logo to the bet card module and also to the error
