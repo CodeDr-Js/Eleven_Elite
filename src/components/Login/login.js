@@ -15,7 +15,7 @@ import Register from "../Register/register";
 
 
 const Login = () => {
-  const {setActiveToken, activeToken } = useContext(DataContext);
+  const {setActiveToken, activeToken, setHasRunRetrieve } = useContext(DataContext);
   const [activeButton, setActiveButton] = useState('login');
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState('');
@@ -66,6 +66,7 @@ const Login = () => {
     e.preventDefault();
 
     setShowLoader(true);
+    setHasRunRetrieve(false);
    // console.log("sending.....");
     const removeErr = document.getElementById("errorr");
     API.loginUser(values)

@@ -18,28 +18,28 @@ const Secure = ({home, away, league, hflag, aflag, odd, score, time, style, text
         <div className="container bg-transparent mt-4">
         <p className="ps-3">Secured Bet 👑</p>
         <div className="m-color rounded-4 p-3">
-          <div className=" bg-transparent d-flex justify-content-between">
-            <div className=" bg-transparent ps-3 d-flex flex-column align-items-center secureW-1">
+          <div className=" bg-transparent d-flex justify-content-between w-100">
+            <div className=" bg-transparent  d-flex flex-column align-items-center secureW-1">
               <div
                 className= {`rounded-circle mb-2 ${e}`}  
-                style={{ width: "60px", height: "60px" }}
+                style={{ width: "50px", height: "50px" }}
               >
-                <img className=" bg-transparent rounded-circle" src={hflag} style={{ width: "60px", height: "60px"  }} />
+                <img className=" bg-transparent rounded-circle" src={hflag} style={{ width: "50px", height: "50px"  }} />
               </div>
-              <p className=" bg-transparent"> {home}</p>
+              <p className=" bg-transparent secured-font"> {home}</p>
             </div>
             <div className=" bg-transparent d-flex flex-column align-items-center mt-1 secureW-2 ">
               <p className=" bg-transparent opacity">{getFirstAndSecondWords(league)}</p>
               <p className={`bg-transparent ${FS}`}> {time}</p>
             </div>
-            <div className=" bg-transparent pe-3 d-flex flex-column align-items-center secureW-1">
+            <div className=" bg-transparent  d-flex flex-column align-items-center secureW-1">
               <div
                 className={`rounded-circle mb-2 ${s}`}
-                style={{ width: "60px", height: "60px" }}
+                style={{ width: "50px", height: "50px" }}
               >
-                <img className=" bg-transparent rounded-circle" src={aflag} style={{ width: "60px", height: "60px" }} />
+                <img className=" bg-transparent rounded-circle" src={aflag} style={{ width: "50px", height: "50px" }} />
               </div>
-              <p className=" bg-transparent"> {away}</p>
+              <p className=" bg-transparent secured-font"> {away}</p>
             </div>
           </div>
 

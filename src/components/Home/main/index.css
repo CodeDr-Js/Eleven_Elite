@@ -54,13 +54,19 @@ background: radial-gradient(circle, rgba(255, 0, 0, 0.123), rgba(255, 255, 0, 0.
   color: rgba(255, 255, 255, 0.438);
 }
 
-.secureW-1 {
-  
+.secured-font {
+  font-size: 0.80rem;
 }
 
-/* .secureW-2{
-  width: 20%;
-} */
+.secureW-1 {
+  width: 35%;
+}
+
+.secureW-2{
+  width: 30%;
+  margin-right: 10px;
+  margin-left: 10px;
+}
 /* .fire {
 
 margin-left: 4.6rem;
@@ -68,6 +74,14 @@ margin-left: 4.6rem;
 } */
 
 @media screen and (max-width: 380px) { /* Adjust breakpoint as needed */
+  .secured-font {
+    font-size: 0.70rem;
+  }
+  .secureW-2{
+    width: 30%;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
  
 }
 

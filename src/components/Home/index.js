@@ -24,7 +24,7 @@ import SecureCard from "./main/secureCard";
 const Index = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, allData, activeToken, setActiveToken, activities, activities_g, user, result, getUserData, hasRunRetrieve  } =
+  const { data, allData, activeToken, setActiveToken, activities, activities_g, user, result, getUserData, hasRunRetrieve, setHasRunRetrieve  } =
     useContext(DataContext);
     //console.log(activities_g);
   //const [token] = useCookies(["auth-token"]);
