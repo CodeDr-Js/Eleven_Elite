@@ -41,7 +41,7 @@ const Promotion = () => {
     if (promotion === null) {
       API.promotion(token)
         .then((result) => {
-          // console.log(result, token["auth-token"]);
+          console.log("Promotion is:",result);
           if (result.success) {
             setPromotion(result);
           } else if (result.detail) {
@@ -273,9 +273,9 @@ const Promotion = () => {
                           }
                           withdrawn={
                             promotion.activities.referral.generation_track[1]
-                              .gen_withdraw
+                              .gen_withdrawal
                               ? Number(promotion.activities.referral
-                                  .generation_track[1].gen_withdraw.amount).toFixed(2)
+                                  .generation_track[1].gen_withdrawal.amount).toFixed(2)
                               : "0.0"
                           }
                           total={
@@ -345,9 +345,9 @@ const Promotion = () => {
                           }
                           withdrawn={
                             promotion.activities.referral.generation_track[2]
-                              .gen_withdraw
+                              .gen_withdrawal
                               ? Number(promotion.activities.referral
-                                  .generation_track[2].gen_withdraw.amount).toFixed(2)
+                                  .generation_track[2].gen_withdrawal.amount).toFixed(2)
                               : "0.0"
                           }
                           total={
@@ -417,9 +417,9 @@ const Promotion = () => {
                           }
                           withdrawn={
                             promotion.activities.referral.generation_track[3]
-                              .gen_withdraw
+                              .gen_withdrawal
                               ? Number(promotion.activities.referral
-                                  .generation_track[3].gen_withdraw.amount).toFixed(2)
+                                  .generation_track[3].gen_withdrawal.amount).toFixed(2)
                               : "0.0"
                           }
                           total={
