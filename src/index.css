@@ -7,6 +7,9 @@
 
 body {
   background-color: rgb(1, 1, 54) !important;
+  position: relative; 
+  min-height: 100%; 
+  top: 0px !important;
  
 }
 
