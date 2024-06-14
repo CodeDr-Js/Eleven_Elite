@@ -54,18 +54,18 @@ const NavBar = () => {
           </a>
         </div> */}
 
-        <div className="select-div   me-auto main-color rounded-2 fw-bold ps-2 pe-2 pt-1">
-          {/* <h4 className="d-flex bg-transparent "> <span className="selete-text">EN</span> <i
+        {/* <div className="select-div   me-auto main-color rounded-2 fw-bold ps-2 pe-2 pt-1">
+         <h4 className="d-flex bg-transparent "> <span className="selete-text">EN</span> <i
                 id=""
                 className="fa fa-chevron-down  fa-fw ps-1 bg-transparent mt-1 opacity-50 "
-              ></i></h4> */}
+              ></i></h4> 
           
-          {/* <option>Home</option>
+           <option>Home</option>
           <option>Live</option>
           <option>Anti-Score</option>
-          <option>Sports</option> */}
-        </div>
-
+          <option>Sports</option>
+        </div> */}
+    
         <div className="bg-transparent pe-2 " onClick={handleClick}>
               <i
                 id=""

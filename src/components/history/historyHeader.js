@@ -39,12 +39,12 @@ const HistoryHeader = ({loading, settled, openBet, setOpenBet, setSettled, activ
               <img src={Arrow} alt="arrow-back" className="nav-arrow" />
   
           </div>
-          <div className=" d-flex justify-content-center ms-5 ps-5 wg-card ">
+          <div className=" d-flex justify-content-center ms-5 ps-4 wg-card ">
             <h2 className="text-center fs-2 ms-3 wg-card-1">History</h2>
           </div>
           <div className="ms-auto wg-card d-flex" >
             <div>
-            <img src={dollar} alt="Logo" className="d-size" style={{ width: "2.063rem" }} />
+            <img src={dollar} alt="Logo" className="d-size" style={{ width: "1.263rem" }} />
             </div>
 
             {!Array.isArray(activities_g) ? (<p className='ps-2 pt-1 fw-bold '>$  {activities_g.wallet.bal_info.bal.toFixed(2)}</p>) : "" }

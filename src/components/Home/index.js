@@ -86,7 +86,7 @@ const Index = () => {
       {/* <Ad /> */}
       <CarouselComponent />
    
-      <h2 className="company-name text-center ">Hi {user_g.username}</h2>
+      <h2 className="company-name ps-3 ">Hi {user_g.username} 👨‍💼</h2>
       <Main />
       <SecureCard/>
       <Sport />
