@@ -113,7 +113,7 @@ const Invite = () => {
 
               <small className="bg-transparent">Awaiting Payment</small>
             </div>
-            <div className="bg-transparent ms-auto pe-5">
+            <div className="bg-transparent ms-auto ">
               {invite !== null ? (
                 invite.activities.referral.invite_eaning_levels ? (
                   <p className="bg-transparent text-primary fw-bold ">

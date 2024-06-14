@@ -33,16 +33,16 @@ import "./components/Home/main/googletranslator.css";
 
 
 
-// const googleTranslateElementInit = () => {
-//   new window.google.translate.TranslateElement(
-//     {
-//       pageLanguage: "en",
-//       layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
-//       autoDisplay: true
-//     },
-//     "google_translate_element"
-//   );
-// };
+const googleTranslateElementInit = () => {
+  new window.google.translate.TranslateElement(
+    {
+      pageLanguage: "en",
+      layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+      autoDisplay: true
+    },
+    "google_translate_element"
+  );
+};
 export default function App() {
   const [loading, setLoading] = useState(true);
 
@@ -53,23 +53,26 @@ export default function App() {
       setLoading(false); // Once data is fetched, set loading to false
     }, 3000); // Simulating a 3-second delay
 
-    // var addScript = document.createElement("script");
-    // var languageSelector=document.createElement('div')
-    // languageSelector.id='google_translate_element'
-    // // <div id="google_translate_element"></div>
-    // addScript.setAttribute(
-    //   "src",
-    //   "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    // );
+    var addScript = document.createElement("script");
+    var languageSelector=document.createElement('div')
+    languageSelector.id='google_translate_element'
+    // <div id="google_translate_element"></div>
+    addScript.setAttribute(
+      "src",
+      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    );
     
-    // window.googleTranslateElementInit = googleTranslateElementInit;
-    // try {
-    //   document.body.appendChild(addScript);
-    //   document.body.appendChild(languageSelector);
+    window.googleTranslateElementInit = googleTranslateElementInit;
+    try {
+      setTimeout(() => {
+        document.body.appendChild(addScript);
+        //document.body.appendChild(languageSelector);
+        
+      }, 5000);
       
-    // } catch (error) {console.log(error);
+    } catch (error) {console.log(error);
       
-    // }
+    }
   }, []);
 
   return (

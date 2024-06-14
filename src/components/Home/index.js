@@ -89,7 +89,8 @@ const Index = () => {
       <h2 className="company-name ps-3 ">Hi {user_g.username} 👨‍💼</h2>
       <Main />
       <SecureCard/>
-      <Sport />
+      {/* <Sport /> */}
+      
       {/* <ScoreAnti /> */}
       <Footer activeButton={activeButton} setActiveButton={setActiveButton} />
     </div>

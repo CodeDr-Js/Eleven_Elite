@@ -292,7 +292,7 @@ const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) 
             <div className="main-color d-flex">
               <div id={matchCard} className="d-none"> 
                 <div className="main-color d-flex flex-column align-items-center cancel-main-div ">
-                  <p id={endId}  className="main-color opacity-50 fw-bold pb-1 pt-3 text-danger">
+                  <p translate="no" id={endId}  className="main-color opacity-50 fw-bold pb-1 pt-3 text-danger">
                     Ends in:
                   </p>
                   

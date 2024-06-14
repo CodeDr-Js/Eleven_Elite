@@ -125,13 +125,13 @@ const Promotion = () => {
 
             <div className="mt-4 commission-div rounded-4 p-3">
               <div className="bg-transparent d-flex">
-                <p className="bg-transparent">Commission income</p>
+                <p className="bg-transparent">Commission</p>
                 <button
-                  className="btn btn-light rounded-5 commission-btn ms-auto pe-1"
+                  className="btn white rounded-5 commission-btn ms-auto pe-1 "
                   onClick={handleInvite}
                 >
                   {" "}
-                  INVITE REWARDS{" "}
+                  REWARDS{" "}
                   <i
                     id=""
                     className="fa fa-chevron-right bg-transparent fa-fw fa-lg icon-color "
@@ -155,7 +155,7 @@ const Promotion = () => {
                 <small className="bg-transparent">Today</small>
               </div>
               <div className="bg-transparent d-flex w-100 pb-4 av-border ">
-                <div className="bg-transparent d-flex w-75  ">
+                <div className="bg-transparent d-flex w-100  ">
                   <div className="bg-transparent amt-div mt-wg me-auto">
                     {promotion !== null ? (
                       promotion.activities.referral.commissions.earnings ? (
@@ -172,7 +172,7 @@ const Promotion = () => {
 
                     <small className="bg-transparent">Available Bal.</small>
                   </div>
-                  <div className="bg-transparent amt-div mt-wg">
+                  <div className="bg-transparent amt-div mt-wg ms-auto">
                     {promotion !== null ? (
                       promotion.current_earning ? (
                         <p className="bg-transparent txt-color fw-bold ">
@@ -193,7 +193,7 @@ const Promotion = () => {
               </div>
 
               <div className="bg-transparent mt-3 d-flex justify-content-around amt-div">
-                <div className="bg-transparent pt-2">Invited Friends</div>
+                {/* <div className="bg-transparent pt-2">Friends</div> */}
                 <div className="bg-transparent d-flex flex-column align-items-center">
                   <p className="bg-transparent txt-color1">Total</p>
                   {promotion !== null ? (

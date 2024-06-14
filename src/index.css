@@ -1,8 +1,13 @@
 *{
   margin: 0;
   padding: 0;
-  background-color: rgb(1, 1, 54);
-  color: white;
+  color: white ;
+ 
+}
+
+body {
+  background-color: rgb(1, 1, 54) !important;
+ 
 }
 
 @media screen and (min-width: 530px) { /* Adjust breakpoint as needed */

@@ -22,7 +22,8 @@
     height: 1.438rem;
     padding-top: 0;
     font-size: small;
-    color: #163a76;
+    /* color: #163a76 !important; */
+    /* color: #06b45d !important; */
     font-weight: bold;
 }
 

@@ -317,7 +317,7 @@ const ScoreAnti = () => {
               </div>
 
               <div>
-                <div id={endId} className="text-center  opacity-50" style={{"fontFamily": "Orbitron, sans-serif", "fontSize": "12px"}}>
+                <div translate="no" id={endId} className="text-center  opacity-50" style={{"fontFamily": "Orbitron, sans-serif", "fontSize": "12px"}}>
                   Ends in
                 </div>
                 <div className="d-flex justify-content-center">
