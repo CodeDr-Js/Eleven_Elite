@@ -40,6 +40,7 @@ const DataProvider = ({ children }) => {
   const [pending, setPending] = useState(null);
   const [loadingNew, setLoadingNew] = useState();
   const [hasRunRetrieve, setHasRunRetrieve] = useState(false);
+  const [hasRunDB,  setHasRunDB] = useState(false);
 
  console.log("all results is:", result);
   
@@ -61,9 +62,9 @@ const DataProvider = ({ children }) => {
     checkToken();
   }, [token1])
   
-  useEffect(() => {
-   dbFetch()
-  },[])
+  // useEffect(() => {
+  //  dbFetch()
+  // },[])
 
   // useEffect(() => {
   //   dbFetch(true)
@@ -220,6 +221,7 @@ const DataProvider = ({ children }) => {
   // }, [])
 
   const dbFetch = async (req_next_date=false) => {
+    setHasRunDB(true);
     try {
       // Check if data is found in IndexedDB storage
 
@@ -494,7 +496,7 @@ const DataProvider = ({ children }) => {
 
   return (
     <DataContext.Provider
-      value={{ data, allData, activeToken, activities_g, setActivities_g, user_g, setUser_g, openBet_g, setOpenBet_g, settled_g, setSettled_g, setActiveToken, result, setResult, notification, setNotification, promotion, setPromotion , pending, setPending , invite, setInvite, checkData, setCheckData, loadingNew, setLoadingNew, getUserData, hasRunRetrieve, setHasRunRetrieve }}
+      value={{ data, allData, activeToken, activities_g, setActivities_g, user_g, setUser_g, openBet_g, setOpenBet_g, settled_g, setSettled_g, setActiveToken, result, setResult, notification, setNotification, promotion, setPromotion , pending, setPending , invite, setInvite, checkData, setCheckData, loadingNew, setLoadingNew, getUserData, hasRunRetrieve, setHasRunRetrieve, hasRunDB,  setHasRunDB, dbFetch }}
     >
       {children}
     </DataContext.Provider>
