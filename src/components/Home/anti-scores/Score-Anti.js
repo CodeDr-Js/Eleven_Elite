@@ -361,10 +361,10 @@ const ScoreAnti = () => {
     <div className="score-div-main">
       
       {newGames}
-      {loading && <p>Loading...</p>}
+      {/* {loading && <p>Loading...</p>} */}
       {hasMore && <div ref={lastElementRef} style={{ height: 20 }}></div>}
 
-      {/* {!e[0] ? <Loader /> : ""} */}
+      {!e[0] ? <Loader /> : ""} 
     </div>
     </div>
   );
