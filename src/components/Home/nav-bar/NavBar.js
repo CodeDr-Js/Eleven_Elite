@@ -19,7 +19,7 @@ import "../../largeScreen/largeHeader.css";
 const NavBar = () => {
   const navigate = useNavigate();
   const {activities_g, user_g} = useContext(DataContext);
-
+  
 
   const handleClick = () => {
     navigate("/notification")
@@ -42,7 +42,7 @@ const NavBar = () => {
           </div>
 
           
-          <h2 className="company-name text-center ">Hi {user_g.username}</h2>
+          {/* <h2 className="company-name text-center ">Hi {user_g.username}</h2> */}
           {/* {!Array.isArray(activities_g) ? (<h2 className="company-name text-center ">Hi {}</h2>) : "" }
        */}
       <div className=" d-flex  ">
@@ -55,10 +55,10 @@ const NavBar = () => {
         </div> */}
 
         <div className="select-div   me-auto main-color rounded-2 fw-bold ps-2 pe-2 pt-1">
-          <h4 className="d-flex bg-transparent "> <span className="selete-text">EN</span> <i
+          {/* <h4 className="d-flex bg-transparent "> <span className="selete-text">EN</span> <i
                 id=""
                 className="fa fa-chevron-down  fa-fw ps-1 bg-transparent mt-1 opacity-50 "
-              ></i></h4>
+              ></i></h4> */}
           
           {/* <option>Home</option>
           <option>Live</option>

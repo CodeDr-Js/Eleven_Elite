@@ -24,7 +24,7 @@ import SecureCard from "./main/secureCard";
 const Index = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, allData, activeToken, setActiveToken, activities, activities_g, user, result, getUserData, hasRunRetrieve, setHasRunRetrieve  } =
+  const { data, allData, activeToken, setActiveToken, activities, activities_g, user, result, getUserData, hasRunRetrieve, setHasRunRetrieve, user_g  } =
     useContext(DataContext);
     //console.log(activities_g);
   //const [token] = useCookies(["auth-token"]);
@@ -85,6 +85,8 @@ const Index = () => {
       <NavBar />
       {/* <Ad /> */}
       <CarouselComponent />
+   
+      <h2 className="company-name text-center ">Hi {user_g.username}</h2>
       <Main />
       <SecureCard/>
       <Sport />
