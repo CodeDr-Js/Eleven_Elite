@@ -5,9 +5,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { DataContext } from "../../APIs/Api";
 import Bet from "./bet";
 import Cookies  from "js-cookie";
-import { padNum } from "../../qickfun/qickfun";
+import { AddImg, padNum } from "../../qickfun/qickfun";
 import NoData from "../../noData/noData";
 import Loader from "../../loader/loader";
+
 
 
 //import './Modal.css'
@@ -481,12 +482,15 @@ const Odd = () => {
                     <small className="me-auto d-none " id="startDate">
                       {value.fixture.timestamp}
                     </small>
-                    <img
+
+                    {AddImg(value.league.flag,[17,17,'📷'], "leagueFlag" )}
+                    
+                    {/* <img
                       id="leagueFlag"
                       src={value.league.flag}
                       alt="flag"
                       style={{ width: "17px" }}
-                    />
+                    /> */}
                   </div>
                   <div
                     id="leagueName"
@@ -506,8 +510,11 @@ const Odd = () => {
                         className="rounded-circle"
                         style={{ width: "40px" }}
                       />
-                      <p id="homeName" className="odd-div-color text-center">
+                      <p className="odd-div-color text-center">
                         {leagueShortName(value.teams.home.name)}
+                      </p>
+                      <p id="homeName" className="odd-div-color text-center d-none">
+                        {value.teams.home.name}
                       </p>
                     </div>
                     <div className="odd-div-color opacity-75 odd-img-text "></div>
@@ -568,8 +575,11 @@ const Odd = () => {
                         className="rounded-circle"
                         style={{ width: "40px" }}
                       />
-                      <p id="awayName" className="odd-div-color text-center">
+                      <p className="odd-div-color text-center">
                         {leagueShortName(value.teams.away.name)}
+                      </p>
+                      <p id="awayName" className="odd-div-color text-center d-none">
+                        {value.teams.away.name}
                       </p>
                     </div>
                   </div>

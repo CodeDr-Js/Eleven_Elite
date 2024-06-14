@@ -301,8 +301,8 @@ const Bet = ({
             </div>
           </div>
 
-          <div className="bet-color bet-amount-div">
-            <div className="bet-color d-flex ">
+          <div className="bet-color bet-amount-div" >
+            <div className="bet-color d-flex pt-2 ps-3 pe-3" style={{height:"100px"}}>
               <div className="bet-color">
                 <div className="bet-color ms-4">
                   <p className="bet-color opacity-50 bet-font">Amount</p>
@@ -352,13 +352,13 @@ const Bet = ({
                 </div>
               </div>
             </div>
-            <div className="bet-color">
+            {/* <div className="bet-color">
               {" "}
               <p className="bet-color bet-font-2 text-end opacity-50">
                 {" "}
-                (processing fee: 5%)
+                (processing...)
               </p>{" "}
-            </div>
+            </div> */}
           </div>
 
           <div className="d-flex justify-content-center">

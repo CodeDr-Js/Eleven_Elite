@@ -24,6 +24,7 @@ import Invite from "./components/invite-reward/invite";
 import Loader from "./components/loader/loader";
 import Reward from "./components/reward/reward";
 import About from "./components/about/About";
+import "./components/Home/main/googletranslator.css";
 
 
 
@@ -32,14 +33,43 @@ import About from "./components/about/About";
 
 
 
+// const googleTranslateElementInit = () => {
+//   new window.google.translate.TranslateElement(
+//     {
+//       pageLanguage: "en",
+//       layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+//       autoDisplay: true
+//     },
+//     "google_translate_element"
+//   );
+// };
 export default function App() {
   const [loading, setLoading] = useState(true);
+
 
   // Simulating data fetching/loading
   useEffect(() => {
     setTimeout(() => {
       setLoading(false); // Once data is fetched, set loading to false
     }, 3000); // Simulating a 3-second delay
+
+    // var addScript = document.createElement("script");
+    // var languageSelector=document.createElement('div')
+    // languageSelector.id='google_translate_element'
+    // // <div id="google_translate_element"></div>
+    // addScript.setAttribute(
+    //   "src",
+    //   "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    // );
+    
+    // window.googleTranslateElementInit = googleTranslateElementInit;
+    // try {
+    //   document.body.appendChild(addScript);
+    //   document.body.appendChild(languageSelector);
+      
+    // } catch (error) {console.log(error);
+      
+    // }
   }, []);
 
   return (

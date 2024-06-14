@@ -22,6 +22,10 @@ const HelpDash = ({ isHelp, setIsHelp }) => {
     setIsHelp(false);
   };
 
+  const navigateUrl = (url) => {
+    navigate(url);
+  }
+
   //Toggle Modal
 
   return (
@@ -32,18 +36,23 @@ const HelpDash = ({ isHelp, setIsHelp }) => {
       </div>
       <p className="bg-transparent fw-bold">Live Support</p>
       <div className=" rounded-2 main-color1 pt-3 ps-3">
-        <div className="bg-transparent d-flex ">
-          <div className="bg-transparent">
-            <img
-              className="bg-transparent"
-              src={support1}
-              alt="support1"
-              style={{ width: "30px" }}
-            />
-          </div>
-          <p className="bg-transparent ps-3 pad">Support 1</p>
+      <Link to="https://t.me/EEF_CustomercareOfficial">
+      <div className="bg-transparent d-flex " >
+        
+        <div className="bg-transparent">
+          <img
+            className="bg-transparent"
+            src={support1}
+            alt="support1"
+            style={{ width: "30px" }}
+          />
         </div>
-        <div className="bg-transparent d-flex ">
+        <p className="bg-transparent ps-3 pad">Support 1</p>
+      </div>
+      </Link>
+      
+        <Link to="https://t.me/Bastain1">
+        <div className="bg-transparent d-flex " >
           <div className="bg-transparent">
             <img
               className="bg-transparent"
@@ -54,7 +63,11 @@ const HelpDash = ({ isHelp, setIsHelp }) => {
           </div>
           <p className="bg-transparent ps-3 pad">Support 2</p>
         </div>
-        <div className="bg-transparent d-flex ">
+        </Link>
+        
+
+        <Link to="https://t.me/eefhelpteam">
+        <div className="bg-transparent d-flex " >
           <div className="bg-transparent">
             <img
               className="bg-transparent"
@@ -65,6 +78,8 @@ const HelpDash = ({ isHelp, setIsHelp }) => {
           </div>
           <p className="bg-transparent ps-3 pad">Support 3</p>
         </div>
+        </Link>
+       
       </div>
 
       <div className="bg-transparent mt-3 ">

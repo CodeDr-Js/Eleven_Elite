@@ -18,6 +18,7 @@ const Secure = ({home, away, league, hflag, aflag, odd, score, time, style, text
         <div className="container bg-transparent mt-4">
         <p className="ps-3">Secured Bet 👑</p>
         <div className="m-color rounded-4 p-3">
+          {/* Start 1st */}
           <div className=" bg-transparent d-flex justify-content-between w-100">
             <div className=" bg-transparent  d-flex flex-column align-items-center secureW-1">
               <div
@@ -42,6 +43,25 @@ const Secure = ({home, away, league, hflag, aflag, odd, score, time, style, text
               <p className=" bg-transparent secured-font"> {away}</p>
             </div>
           </div>
+          {/* Start Here */}
+          {/* <div className=" bg-transparent"  style={{"display": "flex", "justify-content": "space-between"}}>
+            <div className='row bg-transparent'>
+                <div className='bg-transparent'><img className=" bg-transparent" src={hflag} style={{ width: "40px", height: "40px",float:'left' }} /></div>
+                <div className='bg-transparent'><p style={{"font-size":"15px"} } className=" bg-transparent"> {home}</p>  </div>
+            </div>
+
+            <div style={{"textAlign":"center"} } className=" bg-transparent  align-items-center mt-1 row">
+                <p className=" bg-transparent opacity">{league}</p>
+                <p style={{"font-family": "Orbitron, sans-serif",'font-size':'12px'}} className={`bg-transparent`}> {time}</p>
+              </div>
+
+            <div className='row bg-transparent'>
+              <div className='bg-transparent'><img className=" bg-transparent" src={aflag} style={{ width: "40px", height: "40px", float: "right"}} /></div>
+              <div className='bg-transparent'><p style={{"textAlign":"right","font-size":"15px"} } className="  bg-transparent"> {away}</p></div>
+            </div>
+          </div> */}
+
+            {/* End here */}
 
           <div className=" bg-transparent d-flex justify-content-between">
             <div

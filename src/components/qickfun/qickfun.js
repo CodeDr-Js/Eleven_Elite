@@ -1,3 +1,5 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 export function numberWithCommas(x) {
   return parseFloat(x)
     .toFixed(2)
@@ -94,4 +96,20 @@ export function capitalizeFirstLetter(word) {
 export async function getRealTimeDate(){
   let e = await fetch('https://worldtimeapi.org/api/ip')
   return e.json()
+}
+
+export function AddImg(ImageUrl,properties, id) {
+  let [width,height,alt]=properties
+  if(!alt){alt='📷'}
+  if (!ImageUrl){
+    ImageUrl='https://media.api-sports.io/football/teams/15630.png'
+  }
+  return (
+    <span className="me-2 rounded-circle" id={id}>
+      <LazyLoadImage src={ImageUrl}
+        width={width} height={height}
+        alt={alt}
+      />
+     </span>
+  );
 }

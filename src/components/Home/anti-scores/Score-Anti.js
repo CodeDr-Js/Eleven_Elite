@@ -16,6 +16,7 @@ import NoData from "../../noData/noData";
 import Loader from "../../loader/loader";
 import NavBar_Anti from "./NavBar-Anti";
 import NavBar_Logo from "../../NavBar/NavBar_Logo";
+import { AddImg } from "../../qickfun/qickfun";
 
 
 const ScoreAnti = () => {
@@ -283,24 +284,26 @@ const ScoreAnti = () => {
                 <div className="me-auto score-div-2">
                   <div className="fw-bold d-flex mb-2">
                     <span>
-                      <img
+                      {AddImg(game.teams.home.logo,[15,15,'📷'])}
+                      {/* <img
                         className="me-2 rounded-circle"
                         src={game.teams.home.logo}
                         alt="Logo"
                         style={{ width: "15px" }}
-                      />
+                      /> */}
                     </span>
                     <div>{game.teams.home.name}</div>
                   </div>
 
                   <div className="fw-bold d-flex">
                     <span>
-                      <img
+                    {AddImg(game.teams.away.logo,[15,15,'📷'])}
+                      {/* <img
                         className="me-2 rounded-circle"
                         src={game.teams.away.logo}
                         alt="Logo"
                         style={{ width: "15px" }}
-                      />
+                      /> */}
                     </span>
                     <div>{game.teams.away.name}</div>
                   </div>

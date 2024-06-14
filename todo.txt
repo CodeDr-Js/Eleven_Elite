@@ -11,11 +11,12 @@
 
 12. General transaction => Site notification
 
-14. witdrawal amount not showing
+
 
 
 
 
 19. Live score widget
 
-21. Add success logo to the bet card module and also to the error
+21. History card - remove correct score, date, home, away on one line, anti full width, ... remove from the data sent to server.
+22. The eye for the login for smaller screen

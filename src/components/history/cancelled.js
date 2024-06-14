@@ -8,6 +8,7 @@ import SettledNav from "./settledNav";
 import { DataContext } from "../APIs/Api";
 import Spinner from "../spinner/Spinner";
 import NoData from "../noData/noData";
+import { AddImg } from "../qickfun/qickfun";
 
 
 
@@ -125,28 +126,38 @@ const Cancelled = ({loading, settled}) => {
   //  console.log(item);
     return (
       <div key={item.id} className="history-card-div main-color rounded-4 shadow-lg">
-      <div className="main-color d-flex">
-        <div className="main-color me-2">
-        <img
+              <div className="main-color d-flex">
+          <div className="main-color me-2">
+          {AddImg(item.market.league.flag,[18,18,'📷'])}
+            {/* <img
               src={item.market.league.flag}
               alt="flag"
               style={{ width: "18px" }}
-            />
+            /> */}
+          </div>
+          <p className="main-color fs-5 opacity-50">
+            {leagueShortName2(item.market.league.name)}
+          </p>
         </div>
-        <p className="main-color fs-5 opacity-50">{leagueShortName2(item.market.league.name)}</p>
-      </div>
 
-      <div className="main-color d-flex">
-        <p className="main-color me-auto opacity-75 ">
-        {leagueShortName(item.market.teams.home)} - {leagueShortName(item.market.teams.away)}
-        </p>
-        <small className="main-color pt-1 opacity-50 ">
-        {convertTimestampToRealTime(item.market.timestamp)}
-        </small>
-      </div>
-      <div className="main-color">
-        <p className="main-color pt-2 fw-bold ">Correct Score</p>
+        <div className="main-color d-flex">
+          <p className="main-color me-auto opacity-75 ">
+          </p>
+          <small className="main-color pt-1 opacity-50 ">
+          {convertTimestampToRealTime(item.market.timestamp)}
+          </small>
+        </div>
 
+        <div className="main-color">
+          <p className="main-color me-auto opacity-75 ">
+            {item.market.teams.home}
+          </p>
+          <p className="main-color me-auto opacity-75 ">
+             {item.market.teams.away}
+          </p>
+        </div>
+        <div className="main-color">
+          {/* <p className="main-color pt-2 fw-bold ">Correct Score</p> */}
         <div
           className=" u-color d-flex rounded-3 ps-2 pe-2 pt-2 anti-card-div"
           style={{ height: "30px" }}

@@ -513,7 +513,7 @@ margin-bottom: 3.75rem;
 }
 
 
-@media screen and (max-width: 380px) { /* Adjust breakpoint as needed */
+@media screen and (max-width: 390px) { /* Adjust breakpoint as needed */
   .cs-sm {
     font-size: 17px;
     padding-top: 4px;
