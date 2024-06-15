@@ -26,7 +26,7 @@ const History = () => {
       setActiveToken(token)
       API.retrieveData(token)
         .then((result) => {
-          console.log(result);
+         // console.log(result);
           setLoading(false);
           if (result.success) {
             setActivities(result.activities);

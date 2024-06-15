@@ -52,7 +52,7 @@ const Bet = ({
   //Checking for token/Activ
   useEffect(() => {
     if (!token) {
-      console.log("Your token is", token);
+      //console.log("Your token is", token);
       navigate("/login");
       setActiveToken("")
     } else {
@@ -90,7 +90,7 @@ const Bet = ({
     stake_amount: values.amount,
   };
 
-  console.log(dbValues);
+  //console.log(dbValues);
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -121,7 +121,7 @@ const Bet = ({
   
           API.paynow(dbValues, token)
             .then((result) => {
-              console.log(result);
+              //console.log(result);
               setShowLoader(false);
               if (result.success) {
                 setActivities_g(result.activities)
@@ -235,7 +235,7 @@ const Bet = ({
   };
 
   return (
-    <div className="bet-div container">
+    <div className="bet-div container default_color">
       {filteredIdGame.map((value) => (
         <div key={value.fixture.id} className="">
           <div className="text-center fs-3 ">

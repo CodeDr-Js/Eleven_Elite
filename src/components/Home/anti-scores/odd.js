@@ -25,7 +25,7 @@ const Odd = () => {
   //Checking for token/Activ
   useEffect(() => {
     if (!token) {
-      console.log("Your token is", token);
+      //console.log("Your token is", token);
       navigate("/login");
       setActiveToken("");
     } else {
@@ -202,7 +202,7 @@ const Odd = () => {
         item.bets.forEach((scores) => {
           if (scores.name === "Exact Score") {
             // setOdds(scores.values);
-            console.log("bet365", scores.values);
+            //console.log("bet365", scores.values);
             e = scores.values;
 
             //     e.push(odds);
@@ -360,8 +360,8 @@ const Odd = () => {
     return { ...item, odd: e[reversedIndex].odd };
   });
 
-  console.log(e);
-  console.log(reversedOdds);
+  //console.log(e);
+  //console.log(reversedOdds);
   //Fixing the Odds to Scores
   const homeOdds = reversedOdds.map((item) => {
     if (
@@ -473,10 +473,10 @@ const Odd = () => {
     <>
     <OddNav />
       {validId.length === 1 ? (
-        <div className="">
+        <div translate="no" className="">
           <div className="margin">
-            {filteredIdGame.map((value) => (
-              <div className="odd-div odd-div-color" key={value.fixture.id}>
+            {filteredIdGame.map((value,index) => (
+              <div  className="odd-div odd-div-color" key={index}>
                 <div className="odd-div-color ms-3 odd-league-name d-flex ">
                   <div className="odd-div-color mt-2 me-2 ">
                     <small className="me-auto d-none " id="startDate">

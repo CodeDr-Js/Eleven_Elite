@@ -21,13 +21,13 @@
 
     addEventListener('message', e => { // eslint-disable-line no-restricted-globals
 
-      console.log(e,'length',e.length)
+      //console.log(e,'length',e.length)
       
       if (!e||!e.data)return;
       try {
         
         [currentDateNow,client_timezone,client_date_str,IDBConfig]  = e.data;
-        console.log({IDBConfig})
+       // console.log({IDBConfig})
         if(!IDBConfig)return;
 
        const dbData = IDBConfig.working_dir.data;
@@ -64,7 +64,9 @@
             postMessage({data:IDBConfig.working_dir.data.odds,type:'setAllData',lastPage:true})            
             if(dbData.run_list.current_page<dbData.run_list.to_run.length){fetchOddData(dbData,currentDateNow);}}
         }
-      } catch (error) {console.log(e)}
+      } catch (error) {//console.log(e)
+
+      }
            
     })
 
@@ -153,7 +155,11 @@
                     if(!not_run) {
 
                         let odds_pagination =  await request_APi(page)
-                        if(!odds_pagination||!odds_pagination.response) {console.log('NO ODDS FOUND');not_run=true;return}
+                        if(!odds_pagination||!odds_pagination.response) {
+                            //console.log('NO ODDS FOUND');
+                            not_run=true;
+                            return
+                        }
                         
                         // console.log('UPDATING>><<',{odds_pagination:odds_pagination.response,page})
                             

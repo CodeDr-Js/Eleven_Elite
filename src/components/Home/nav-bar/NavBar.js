@@ -5,12 +5,14 @@ import "./index.css";
 // import Dropdown from "react-bootstrap/Dropdown";
 import HomeIcon from "../../../assets/images/bell.png";
 import dollar from "../../../assets/icons/dollar.png"
-import tether from "../../../assets/icons/tether.png"
-import usdt from "../../../assets/icons/usdt.png"
-import usd from "../../../assets/icons/usd.png"
-import usd1 from "../../../assets/icons/usd1.png"
+// import tether from "../../../assets/icons/tether.png"
+// import usdt from "../../../assets/icons/usdt.png"
+// import usd from "../../../assets/icons/usd.png"
+// import usd1 from "../../../assets/icons/usd1.png"
 import { DataContext } from "../../APIs/Api";
 import "../../largeScreen/largeHeader.css";
+import { timer } from "../../Functions/timer";
+
 
 
 
@@ -25,12 +27,29 @@ const NavBar = () => {
     navigate("/notification")
   }
   //console.log(activities_g);
+
+  useEffect(()=>{
+   const x = setInterval(() => {
+      try {
+        let timerDiv = document.getElementById("timer");
+        timerDiv.innerText = timer();
+      } catch (error) {
+        clearInterval(x)
+        console.log(error);
+      }
+     
+
+
+    }, 1000);
+
+  },[])
+
   return (
     <div className="">
 
 
    
-    <div className="container pt-2 d-flex justify-content-between fixed-top">
+    <div className="container pt-2 d-flex justify-content-between fixed-top default_color">
       <div className=" d-flex" >
             <div>
             <img src={dollar} alt="Logo" className="" style={{ width: "33px" }} />
@@ -47,6 +66,9 @@ const NavBar = () => {
        */}
       <div className=" d-flex  ">
   
+        <div id="timer" translate="no" className="ms-5 opacity-75 fs-5 timer" style={{"fontFamily": "Orbitron, sans-serif"}}>
+         
+        </div>
         {/* <div className="d-flex ms-5">
           <p className="fw-bold lang">EN</p>
           <a href="" className="mt-1 text-decoration-none text-white drop">

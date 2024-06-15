@@ -23,7 +23,7 @@ import HelpDash from "../../help-dash/helpDash";
 const Main = () => {
   const navigate = useNavigate();
   const token = Cookies.get("auth-token");
-  const { setActiveToken, setHasRunRetrieve } = useContext(DataContext);
+  const { setActiveToken, setHasRunRetrieve, setActivities_g, user_g, setUser_g } = useContext(DataContext);
   const [isOpen_gift, setIsOpen_gift] = useState(false);
   const [isHelp, setIsHelp] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -39,6 +39,8 @@ const Main = () => {
         if (result.success) {
           Cookies.remove("auth-token");
           setActiveToken("");
+          setActivities_g([]);
+          setUser_g([]);
           setHasRunRetrieve(false);
           navigate("/login");
         } else {

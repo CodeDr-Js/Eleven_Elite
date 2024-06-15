@@ -103,7 +103,7 @@ const Transaction = () => {
     <TransactionHeader handleSearch={handleSearch} setValue={setValue} isLoading={isLoading}/>
     </div>
 
-    <div className='' style={{marginTop:"160px"}}>
+    <div className='' style={{marginTop:"0"}}>
     {data[0] ? transactionCard : (<NoData/>) }
 
     

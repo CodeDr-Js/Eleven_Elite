@@ -50,14 +50,14 @@ const Register = () => {
     invited: "",
     password: "",
   });
-  console.log(values);
+  //console.log(values);
 
   const [login, setLogin] = useState({
     username: values.username,
     password: values.password,
   });
 
-  console.log(login);
+  //console.log(login);
   
 
   //Checking for token/Activ

@@ -46,6 +46,10 @@ const Profile = () => {
     activities,
     result,
     user_g,
+    setUser_g,
+    setHasRunRetrieve,
+    hasRunRetrieve,
+    getUserData
   } = useContext(DataContext);
   const [isLoading, setIsLoading] = useState(false);
   const [loadings, setLoadings] = useState(false);
@@ -57,6 +61,12 @@ const Profile = () => {
   //console.log("Activities global is:", activities_g, "resull is:", result, "user is:", user_g );
   const navigate = useNavigate();
   const token = Cookies.get("auth-token");
+
+  useEffect(()=> {
+    if(!hasRunRetrieve){
+      getUserData()
+    }
+  }, [])
 
   useEffect(() => {
     setLoadings(true);
@@ -85,6 +95,10 @@ const Profile = () => {
         Cookies.remove("auth-token");
         setActiveToken("");
         navigate("/login");
+        setActiveToken("");
+        setActivities_g([]);
+        setUser_g([]);
+        setHasRunRetrieve(false);
       } else {
         Cookies.remove("auth-token");
         setActiveToken("");
@@ -132,7 +146,7 @@ const Profile = () => {
       </div>
       {loadings ? <Loader /> : ""}
 
-      <div className="container mt-5 pt-2 ">
+      <div className="container mt-5 mb-5 pt-2 ">
         <div className="d-flex ">
           <div className=" mt-1 ">
             <img

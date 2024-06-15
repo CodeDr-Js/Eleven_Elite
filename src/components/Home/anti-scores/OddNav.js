@@ -44,7 +44,7 @@ const OddNav = () => {
   //fetchOdd();
 
   return (
-    <div className="fixed-top container ps-3 d-flex odd-nav-div pt-2 ">
+    <div className="fixed-top container ps-3 d-flex odd-nav-div pt-2 default_color ">
       <div onClick={goBack} >
           <img src={Arrow} alt="arrow-back" className="nav-arrow-2" />
       </div>

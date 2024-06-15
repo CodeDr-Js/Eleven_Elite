@@ -42,7 +42,7 @@ const DataProvider = ({ children }) => {
   const [hasRunRetrieve, setHasRunRetrieve] = useState(false);
   const [hasRunDB,  setHasRunDB] = useState(false);
 
- console.log("all results is:", result);
+ //console.log("all results is:", result);
   
   const token1 = Cookies.get("auth-token");
   
@@ -244,7 +244,7 @@ const DataProvider = ({ children }) => {
      const timeOut = setInterval(() => {if (IDBConfig.working_dir !== null) {clearInterval(timeOut);startWorker();}}, 100);
 
      const startWorker = ()=>{
-       console.log('STARTTIng worker<<MMM')
+       //console.log('STARTTIng worker<<MMM')
        
        const webWorker = new Worker(
          new URL('../../worker.mjs', import.meta.url),
@@ -258,9 +258,9 @@ const DataProvider = ({ children }) => {
      
        webWorker.addEventListener('message', (event) => {
          let webWorkerData = event.data;
-         console.log(({webWorkerData}))
+         //console.log(({webWorkerData}))
          if(webWorkerData.saveStoreObj){
-           console.log('SAVING STORE >><<')
+           //console.log('SAVING STORE >><<')
            saveStoreObj(webWorkerData.saveStoreObj.working_dir)
          }
          if (webWorkerData.type=='setData'){
@@ -269,7 +269,7 @@ const DataProvider = ({ children }) => {
            try {
              setAllData((prevData) => [...prevData, ...webWorkerData.data])
            } catch (error) {
-             console.log(error)
+             //console.log(error)
            }
            if(webWorkerData.lastPage) {setCheckData(true)}
          }

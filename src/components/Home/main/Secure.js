@@ -30,8 +30,8 @@ const Secure = ({home, away, league, hflag, aflag, odd, score, time, style, text
               <p className=" bg-transparent secured-font"> {home}</p>
             </div>
             <div className=" bg-transparent d-flex flex-column align-items-center mt-1 secureW-2 ">
-              <p className=" bg-transparent opacity">{getFirstAndSecondWords(league)}</p>
-              <p style={{"font-family": "Orbitron, sans-serif"}} className={`bg-transparent ${FS}`}> {time}</p>
+              <p className=" bg-transparent opacity text-center">{getFirstAndSecondWords(league)}</p>
+              <p style={{"fontFamily": "Orbitron, sans-serif"}} className={`bg-transparent ${FS}`}> {time}</p>
             </div>
             <div className=" bg-transparent  d-flex flex-column align-items-center secureW-1">
               <div

@@ -122,10 +122,10 @@ const Cancelled = ({loading, settled}) => {
     });
   });
 
-  const historycard = e.map(([item, ticket_head]) => {
+  const historycard = e.map(([item, ticket_head],index) => {
   //  console.log(item);
     return (
-      <div key={item.id} className="history-card-div main-color rounded-4 shadow-lg">
+      <div key={item.id+index} className="history-card-div main-color rounded-4 shadow-lg">
               <div className="main-color d-flex">
           <div className="main-color me-2">
           {AddImg(item.market.league.flag,[18,18,'📷'])}

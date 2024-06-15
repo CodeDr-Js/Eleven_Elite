@@ -41,7 +41,7 @@ const Promotion = () => {
     if (promotion === null) {
       API.promotion(token)
         .then((result) => {
-          console.log("Promotion is:",result);
+         // console.log("Promotion is:",result);
           if (result.success) {
             setPromotion(result);
           } else if (result.detail) {

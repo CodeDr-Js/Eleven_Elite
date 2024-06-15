@@ -15,6 +15,10 @@ import Loader from "../loader/loader";
 import Reward from "../reward/reward";
 import { API } from "../api-service/api-service";
 import SecureCard from "./main/secureCard";
+import NoData from "../noData/noData";
+import nodata4 from '../../assets/images/nodata4.png';
+
+
 
 
 
@@ -53,7 +57,9 @@ const Index = () => {
 
   useEffect(() => {
     if(result) {
-      if(result.bonus){
+      //console.log("bonus", result.bonus);
+      if(result.bonus !== undefined && Object.keys(result.bonus).includes("amount")){
+       // console.log("loading bonus...");
         setLoading(true)
         API.removeBonus(token1)
         .then((result) => {
@@ -76,7 +82,6 @@ const Index = () => {
   }},[activities_g])
 
 
-
   return (
     <>
     {activeButton === "" ? (<div className="main1">
@@ -90,7 +95,15 @@ const Index = () => {
       <Main />
       <SecureCard/>
       {/* <Sport /> */}
-      
+      <div>
+        <p className="p-3">Site Activities <span><img style={{"width":"20px"}} src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg"/></span></p>
+        <div className="nodata">
+        <div className=' d-flex flex-column align-items-center justify-content-center '>
+        <img className='opacity-25' src={nodata4} alt='nodataLogo'style={{width:"170px"}}/>
+        <p className='fw-bold opacity-50'>No Data</p>
+    </div>
+        </div>
+      </div>
       {/* <ScoreAnti /> */}
       <Footer activeButton={activeButton} setActiveButton={setActiveButton} />
     </div>

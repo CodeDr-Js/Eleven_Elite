@@ -13,7 +13,7 @@ const SecureCard = () => {
   const [loading2, setLoading2] = useState(false);
   const [loading3, setLoading3] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  console.log(result);
+  //console.log(result);
 
   const handleCloseModal = (e) => {
       setIsOpen(false);
@@ -33,7 +33,7 @@ const company_game = Array.isArray(result.company_game) ? result.company_game[0]
 //console.log(company_game);
 
 const data1 = company_game ? JSON.parse(company_game.fields.data) : "";
-console.log("data1 is:", data1);
+//console.log("data1 is:", data1);
 
 
 //Assigning Data 1
@@ -58,8 +58,8 @@ id1 = company_game ? company_game.fields.fixture: "";
 const company_game2 = Array.isArray(result.company_game) ? result.company_game[1] : "";
 
 const data2 = company_game2 ? JSON.parse(company_game2.fields.data) : "";
-console.log("company game 2 is:", company_game2, "1 is", company_game);
-console.log("data2 is:", data2);
+//console.log("company game 2 is:", company_game2, "1 is", company_game);
+//console.log("data2 is:", data2);
 
 //console.log(company_game);
 
@@ -129,7 +129,7 @@ function convertTimestampToRealTime(timestamp) {
 
 const userDate = Date.now();
 
-console.log(userDate, convertTimestampToRealTime(timestamp1), timestamp1 * 1000, timestamp2 * 1000);
+//console.log(userDate, convertTimestampToRealTime(timestamp1), timestamp1 * 1000, timestamp2 * 1000);
 
 const newTimestamp1 = timestamp1 * 1000;
 const newTimestamp2 = timestamp2 * 1000;

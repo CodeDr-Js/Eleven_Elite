@@ -149,10 +149,10 @@ const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) 
           .then((result) => {
           spinner.classList.add("d-none");
           button.classList.remove("d-none");
-          console.log(result);
+          //console.log(result);
           if(result.success) {
-          console.log("Cancelled");
-          console.log(result);
+          //console.log("Cancelled");
+          //console.log(result);
           setActivities(result.activities);
           setActivities_g(result.activities);
           setSettled(result.activities.bet.settled);
@@ -189,7 +189,7 @@ const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) 
 
   const historycard = e.map(([item, ticket_head, id, date], index) => {
 
-    console.log(item);
+    //console.log(item);
     const gameStartTime = item.market.timestamp * 1000;
     let gameTime = CalculateStartDiff(gameStartTime);
 
@@ -225,7 +225,7 @@ const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) 
 
 
     
-    const hisCard =  <div id={mainCard} className="history-card-div main-color rounded-4 shadow-lg">
+    const hisCard =  <div key={id+index} id={mainCard} className="history-card-div main-color rounded-4 shadow-lg">
       
         <div className="main-color d-flex">
           <div className="main-color me-2">

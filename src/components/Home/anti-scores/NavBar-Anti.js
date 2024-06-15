@@ -9,9 +9,9 @@ import "./index.css";
 import "../../largeScreen/largeHeader.css";
 
 const NavBar_Anti = ({search, setSearch}) => {
-  console.log("searchNav-Anti", search);
+  //console.log("searchNav-Anti", search);
   return (
-    <div className="fixed-top container">
+    <div className="fixed-top container default_color">
       <NavBar_Logo search={search } setSearch={setSearch}  />
       <div className="d-flex g-main bg-transparent">
         <div className="market-main-div bg-transparent">

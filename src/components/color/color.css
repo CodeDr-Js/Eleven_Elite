@@ -1,4 +1,7 @@
 /* Colors */
+.default_color {
+  background-color: rgb(1, 1, 54) !important;
+}
 .main-color {
   background-color: #02123D;
 }

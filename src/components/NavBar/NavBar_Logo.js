@@ -11,7 +11,7 @@ import usd1 from "../../assets/icons/usd1.png";
 import { DataContext } from "../APIs/Api";
 
 const NavBar_Logo = ({ search, setSearch }) => {
-  console.log("searchNav-Logo", search);
+  //console.log("searchNav-Logo", search);
   const { activities_g } = useContext(DataContext);
 
   const goBack = () => {
@@ -19,7 +19,7 @@ const NavBar_Logo = ({ search, setSearch }) => {
   };
 
   return (
-    <div className="container-sm ms-1 d-flex mt-2 w-100 ">
+    <div className="container-sm ms-1 d-flex mt-2 w-100 default_color">
       <div onClick={goBack}>
         <img src={Arrow} alt="arrow-back" className="nav-arrow" />
       </div>

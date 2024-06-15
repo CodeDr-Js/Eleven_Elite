@@ -20,7 +20,7 @@ const Footer = ({activeButton, setActiveButton}) => {
     {activeButton === "transaction"? (<Transaction/>): ""}
     {activeButton === "profile"? (<Profile1/>): ""}
     {activeButton === "friends"? (<Pending/>): ""} */}
-    <div className="fixed-bottom container pb-2 font-footer">
+    <div className="fixed-bottom container pb-2 font-footer default_color">
       <div className="d-flex justify-content-around">
       {activeButton === ""? (
         <div onClick={() => setActiveButton("")} className=" ms-3 d-flex flex-column align-items-center">

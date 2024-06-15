@@ -19,7 +19,7 @@ const ArrowNav = ({ name }) => {
     window.history.back();
   };
   return (
-    <div className="container">
+    <div className="container default_color">
       <div className="ms-1 d-flex pt-3  ">
         <div onClick={goBack} className="wg-card">
           <img src={Arrow} alt="arrow-back" className="nav-arrow" />

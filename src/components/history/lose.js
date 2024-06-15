@@ -109,9 +109,9 @@ const Lose = ({settled}) => {
  
   let e = [];
   Object.entries(settled).forEach(([date, tickets]) => {
-    console.log(date); // Print the date
+    //console.log(date); // Print the date
     Object.entries(tickets).forEach(([id, ticketData]) => {
-      console.log(id, ticketData); // Print the ID
+      //console.log(id, ticketData); // Print the ID
       if (ticketData.ticket_head.outcome === "loss") {
         ticketData.games.forEach((item) => {
             e.push([item, ticketData.ticket_head]);
@@ -122,10 +122,10 @@ const Lose = ({settled}) => {
     });
   });
 
-  const historycard = e.map(([item, ticket_head]) => {
-    console.log(item);
+  const historycard = e.map(([item, ticket_head], index) => {
+    //console.log(item);
     return (
-      <div key={item.id} className="history-card-div main-color rounded-4 shadow-lg">
+      <div key={item.id +index} className="history-card-div main-color rounded-4 shadow-lg">
               <div className="main-color d-flex">
           <div className="main-color me-2">
           {AddImg(item.market.league.flag,[18,18,'📷'])}

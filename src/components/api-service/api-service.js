@@ -60,7 +60,7 @@ export class API {
 
 
     static registerUser(body){
-        console.log(body);
+        //console.log(body);
          let endpoint = "register/";
          return fetch(url + endpoint, {
            method: "POST",
@@ -73,7 +73,7 @@ export class API {
     }
 
     static forgetPassword(body){
-        console.log(body);
+        //console.log(body);
          let endpoint = "forgot-password/";
          return fetch(url + endpoint, {
            method: "POST",
@@ -86,7 +86,7 @@ export class API {
     }
 
     static logout(body){
-        console.log(body);
+       // console.log(body);
          let endpoint = "logout/";
          return fetch(url + endpoint, {
            method: "POST",
@@ -99,7 +99,7 @@ export class API {
     }
 
     static paynow(body, Token){
-        console.log(body);
+       // console.log(body);
          let endpoint = "betdir/paynow/";
          return fetch(url + endpoint, {
            method: "POST",
@@ -139,7 +139,7 @@ export class API {
     }
 
     static cancelTicket(body, Token){
-      console.log(body);
+      //console.log(body);
        let endpoint = "betdir/cancel_bet/";
        return fetch(url + endpoint, {
          method: "POST",
