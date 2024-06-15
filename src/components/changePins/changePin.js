@@ -20,7 +20,7 @@ const ChangePin = ({
     const [success, setSuccess] = useState();
     const [error, setError] = useState();
   
-    console.log(values);
+    //console.log(values);
   
     const togglePasswordVisibility = () => {
       setPasswordVisible(!passwordVisible);

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import "./change_pin.css";
 import { API } from '../api-service/api-service';
-import { useCookies } from 'react-cookie';
+// import { useCookies } from 'react-cookie';
+import Cookies  from "js-cookie";
+
+
 import { useNavigate } from 'react-router-dom';
 
 
@@ -12,7 +15,7 @@ const ChangePassword = ({
     setIsOpen,
   }) => {
     const navigate = useNavigate();
-    const [token, setToken, removeToken] = useCookies(["auth-token"]);
+    const token = Cookies.get("auth-token");    
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [values, setValues] = useState({
       old_password: "",
@@ -30,13 +33,13 @@ const ChangePassword = ({
 
     const handleCloseModal = () => {
         setIsLoadingPin(true);
-        API.changePassword(values, token["auth-token"],)
+        API.changePassword(values, token)
         .then((result) => {
             setIsLoadingPin(false);
   //          console.log(result);
             if(result.success){
                 alert(result.message)
-                removeToken("auth-token");
+                Cookies.remove("auth-token");
                 navigate("/login")
                 
             } else {

@@ -15,7 +15,7 @@ const Pin = ({
   success,
   setIsOpen,
 }) => {
-  console.log(pin, isOpen1, success, error);
+  //console.log(pin, isOpen1, success, error);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [values, setValues] = useState({
     transaction_pin: "",

@@ -28,21 +28,21 @@ const NavBar = () => {
   }
   //console.log(activities_g);
 
-  useEffect(()=>{
-   const x = setInterval(() => {
-      try {
-        let timerDiv = document.getElementById("timer");
-        timerDiv.innerText = timer();
-      } catch (error) {
-        clearInterval(x)
-        console.log(error);
-      }
+  // useEffect(()=>{
+  //  const x = setInterval(() => {
+  //     try {
+  //       let timerDiv = document.getElementById("timer");
+  //       timerDiv.innerText = ;
+  //     } catch (error) {
+  //       clearInterval(x)
+  //       console.log(error);
+  //     }
      
 
 
-    }, 1000);
+  //   }, 1000);
 
-  },[])
+  // },[])
 
   return (
     <div className="">
@@ -67,7 +67,7 @@ const NavBar = () => {
       <div className=" d-flex  ">
   
         <div id="timer" translate="no" className="ms-5 opacity-75 fs-5 timer" style={{"fontFamily": "Orbitron, sans-serif"}}>
-         
+         {timer()}
         </div>
         {/* <div className="d-flex ms-5">
           <p className="fw-bold lang">EN</p>
