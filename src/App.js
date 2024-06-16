@@ -80,6 +80,32 @@ export default function App() {
     // }
   }, []);
 
+  // setTimeout(() => {
+  //   if(!window.googleTranslateElementInit) {
+
+  //     var addScript = document.createElement("script");
+  //     var languageSelector=document.createElement('div')
+  //     languageSelector.id='google_translate_element'
+  //     // <div id="google_translate_element"></div>
+  //     addScript.setAttribute(
+  //       "src",
+  //       "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+  //     );
+     
+  //     window.googleTranslateElementInit = googleTranslateElementInit;
+  //     try {
+  //       document.body.appendChild(addScript);
+  //       // setTimeout(() => {
+  //       //   //document.body.appendChild(languageSelector);
+  //         // 
+  //       // }, 5000);
+        
+  //     } catch (error) {console.log(error);
+        
+  //     }
+  //   }
+  // }, 10000);
+
   return (
     <>
     {/* <DisableCopyComponent/> */}

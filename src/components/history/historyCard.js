@@ -10,6 +10,7 @@ import Button from "../loader-btn/loader-cancel";
 import SpinnerCancel from "../spinner/SpinnerCancel";
 import Spinner from "../spinner/Spinner";
 import NoData from "../noData/noData";
+import vs from "../../assets/svg/vs.svg";
 
 
 
@@ -253,6 +254,7 @@ const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) 
           <p className="main-color me-auto opacity-75 ">
             {item.market.teams.home}
           </p>
+          <p className="position-absolute VS" ><img  src={vs} alt="Vs" style={{"width":"15px"}}/></p>
           <p className="main-color me-auto opacity-75 ">
              {item.market.teams.away}
           </p>

@@ -220,12 +220,12 @@ const DataProvider = ({ children }) => {
   //   dbFetch(true);
   // }, [])
 
-  const dbFetch = async (req_next_date=false) => {
+  const dbFetch = (req_next_date=false) => {
     setHasRunDB(true);
     try {
       // Check if data is found in IndexedDB storage
 
-     let client = await getRealTimeDate() ;
+     getRealTimeDate().then((client) =>{
      client_timezone=client.timezone
      let currentDateNow = new Date(client.datetime).toISOString().split("T")[0];
      
@@ -233,14 +233,14 @@ const DataProvider = ({ children }) => {
        let add_24 =  addHours(new Date(currentDateNow),24);
        currentDateNow=add_24.toISOString().split("T")[0]
      }
-     
+
      // let remove_24 =  addHours(new Date(currentDateNow),24,'remove')
      // console.log({add_24,remove_24})
      // currentDateNow=remove_24.toISOString().split("T")[0]
      // currentDateNow=add_24.toISOString().split("T")[0]
 
      client_date_str=currentDateNow
-     await retriveData(currentDateNow);
+     retriveData(currentDateNow);
      const timeOut = setInterval(() => {if (IDBConfig.working_dir !== null) {clearInterval(timeOut);startWorker();}}, 100);
 
      const startWorker = ()=>{
@@ -277,6 +277,9 @@ const DataProvider = ({ children }) => {
 
      }
       
+     });
+     
+     
 
       
     } catch (error) {console.log({error});}

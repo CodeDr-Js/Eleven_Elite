@@ -37,6 +37,12 @@
 
 }
 
+.VS {
+  z-index: 1;
+  margin-top: -17px;
+
+}
+
 @media screen and (max-width: 380px) { /* Adjust breakpoint as needed */
   .wg-card {
    font-size: 14px;

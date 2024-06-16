@@ -49,7 +49,9 @@ const Profile = () => {
     setUser_g,
     setHasRunRetrieve,
     hasRunRetrieve,
-    getUserData
+    getUserData,
+    setPromotion,
+    setNotification
   } = useContext(DataContext);
   const [isLoading, setIsLoading] = useState(false);
   const [loadings, setLoadings] = useState(false);
@@ -98,6 +100,8 @@ const Profile = () => {
         setActiveToken("");
         setActivities_g([]);
         setUser_g([]);
+        setPromotion(null);
+        setNotification(null);
         setHasRunRetrieve(false);
       } else {
         Cookies.remove("auth-token");

@@ -9,6 +9,8 @@ import { DataContext } from "../APIs/Api";
 import Spinner from "../spinner/Spinner";
 import NoData from "../noData/noData";
 import { AddImg } from "../qickfun/qickfun";
+import vs from "../../assets/svg/vs.svg";
+
 
 
 
@@ -152,6 +154,7 @@ const Lose = ({settled}) => {
           <p className="main-color me-auto opacity-75 ">
             {item.market.teams.home}
           </p>
+          <p className="position-absolute VS" ><img  src={vs} alt="Vs" style={{"width":"15px"}}/></p>
           <p className="main-color me-auto opacity-75 ">
              {item.market.teams.away}
           </p>

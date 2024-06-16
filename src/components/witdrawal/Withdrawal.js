@@ -124,13 +124,19 @@ const Withdrawal = () => {
     })
   
   };
-
+  console.log("A.P",activities_g.profile,"A:", activities_g);
   const handleActivities = () => {
     setTimeout(() => {
-      if (!activities_g.profile) {
+      if (!activities_g.profile ) {
+        setIsOpen(true);
+      } else if(Object.keys(activities_g.profile).includes("transaction_pin")) {
         setIsOpen(true);
       }
+      
     }, 7000);
+    
+ 
+
   };
 
   useEffect(() => {

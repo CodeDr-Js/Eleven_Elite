@@ -29,7 +29,7 @@ const Promotion = () => {
   } else {
     setActiveToken(token);
   }
-  //console.log(promotion);
+  console.log(promotion);
   useEffect(() => {
     setLoadings(true);
     if (promotion !== null) {
@@ -158,9 +158,9 @@ const Promotion = () => {
                 <div className="bg-transparent d-flex w-100  ">
                   <div className="bg-transparent amt-div mt-wg me-auto">
                     {promotion !== null ? (
-                      promotion.activities.referral.commissions.earnings ? (
+                      promotion.current_earning ? (
                         <p className="bg-transparent ">
-                          {Number(promotion.activities.referral.commissions.earnings).toFixed(2)}{" "}
+                          {Number(promotion.current_earning).toFixed(2)}{" "}
                           USD
                         </p>
                       ) : (
@@ -174,9 +174,11 @@ const Promotion = () => {
                   </div>
                   <div className="bg-transparent amt-div mt-wg ms-auto">
                     {promotion !== null ? (
-                      promotion.current_earning ? (
+                      promotion.total_withdrawn
+ ? (
                         <p className="bg-transparent txt-color fw-bold ">
-                          {Number(promotion.current_earning).toFixed(2)} USD
+                          {Number(promotion.total_withdrawn
+).toFixed(2)} USD
                         </p>
                       ) : (
                         <p className="bg-transparent txt-color fw-bold ">

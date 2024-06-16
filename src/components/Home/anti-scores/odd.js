@@ -370,11 +370,11 @@ const Odd = () => {
       item.value === "2:1" ||
       item.value === "3:0" ||
       item.value === "3:1" ||
-      item.value === "3:2" ||
-      item.value === "4:0" ||
-      item.value === "4:1" ||
-      item.value === "4:2" ||
-      item.value === "4:3"
+      item.value === "3:2" 
+      // item.value === "4:0" ||
+      // item.value === "4:1" ||
+      // item.value === "4:2" ||
+      // item.value === "4:3"
     ) {
       return (
         <div>
@@ -397,8 +397,8 @@ const Odd = () => {
       item.value === "0:0" ||
       item.value === "1:1" ||
       item.value === "2:2" ||
-      item.value === "3:3" ||
-      item.value === "4:4"
+      item.value === "3:3" 
+      // item.value === "4:4"
     ) {
       return (
         <div className="odd-sl d-flex" onClick={toggleModal}>
@@ -418,11 +418,11 @@ const Odd = () => {
       item.value === "1:2" ||
       item.value === "0:3" ||
       item.value === "1:3" ||
-      item.value === "2:3" ||
-      item.value === "0:4" ||
-      item.value === "1:4" ||
-      item.value === "2:4" ||
-      item.value === "3:4"
+      item.value === "2:3" 
+      // item.value === "0:4" ||
+      // item.value === "1:4" ||
+      // item.value === "2:4" ||
+      // item.value === "3:4"
     ) {
       return (
         <div>

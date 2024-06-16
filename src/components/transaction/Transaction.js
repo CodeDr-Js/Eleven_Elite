@@ -104,7 +104,7 @@ const Transaction = () => {
     </div>
 
     <div className='' style={{marginTop:"0"}}>
-    {data[0] ? transactionCard : (<NoData/>) }
+    {data[0] ? <div className='transaction-div'>{transactionCard }</div>: (<NoData/>) }
 
     
     </div>
