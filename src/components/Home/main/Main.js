@@ -88,9 +88,9 @@ const Main = () => {
         ""
       )}
 
-      {isHelp && <div className="modal-overlay-profile"> <HelpDash isHelp={isHelp}
+     
+ {isHelp && <div className="modal-overlay-profile"> <HelpDash isHelp={isHelp}
             setIsHelp={setIsHelp} /></div> }
-
       
     </>
   );

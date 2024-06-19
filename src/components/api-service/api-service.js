@@ -260,4 +260,16 @@ export class API {
      }).then((resp) => resp.json());
 }
 
+  static local_payment(body, Token){
+     let endpoint = "local-payment/";
+     return fetch(url + endpoint, {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+         'Authorization':`Token ${Token}`
+       },
+       body: JSON.stringify(body)
+     }).then((resp) => resp.json());
+}
+
 }

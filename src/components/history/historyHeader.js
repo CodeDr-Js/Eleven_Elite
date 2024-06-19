@@ -32,7 +32,7 @@ const HistoryHeader = ({loading, settled, openBet, setOpenBet, setSettled, activ
   const [activeButton, setActiveButton] = useState("unsettled");
   return (
     <>
-      <div className="fixed-top container">
+      <div className="fixed-top container default_color">
         <div className="container ms-1 d-flex pt-3  ">
           <div onClick={goBack} className='wg-card'>
          

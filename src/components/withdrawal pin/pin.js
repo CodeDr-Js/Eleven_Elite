@@ -21,7 +21,7 @@ const Pin = ({
     transaction_pin: "",
   });
 
-  console.log(values);
+  //console.log(values);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);

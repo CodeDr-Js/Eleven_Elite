@@ -22,6 +22,8 @@ const HelpDash = ({ isHelp, setIsHelp }) => {
     setIsHelp(false);
   };
 
+  
+
   const navigateUrl = (url) => {
     navigate(url);
   }

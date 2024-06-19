@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState,  } from "react";
 import Arrow from "../../assets/images/document-management-system-return-icon-48 - Copy copy.png";
 import "./index.css";
 import "../color/color.css";
@@ -14,6 +14,9 @@ import Cookies from "js-cookie";
 import { API } from "../api-service/api-service";
 import QRCodeGenerator from "../qr-code/qrCode";
 import "../fontawesome/css/all.css";
+import Other from "./Other";
+
+
 
 
 const Deposit = () => {
@@ -25,6 +28,9 @@ const Deposit = () => {
   const [message, setMessage] = useState();
   const [reloadTriggered, setReloadTriggered] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
+  const [selectedPage, setSelectedPage] = useState();
+  const [isOther, setIsOther] = useState(false);
+
   
   //console.log(activities_g);
   const handleCopy = (text) => {
@@ -47,7 +53,13 @@ const Deposit = () => {
   }, [])
 
 
- 
+  const navigatePage = () => (
+    <div>
+      <Other/>
+    </div>
+  )
+
+
   
 
   const checkPayaddress = () => {
@@ -107,6 +119,41 @@ const Deposit = () => {
     window.history.back();
   }
 
+  // const handleSelectChange = (event) => {
+  //   const selectedValue = event.target.value;
+  //   if (selectedValue) {
+  //     window.history.push(selectedValue);
+  //   }
+  //   // navigate(url);
+  // };
+
+  const handleSelectChange = (event) => {
+    const selectedValue = event.target.value;
+    if (selectedValue) {
+      setSelectedPage(selectedValue);
+      setIsOther(true);
+      // setIsModalOpen(true);
+    }
+  };
+
+  const closeModal = () => {
+    // setIsModalOpen(false);
+    // setSelectedPage(null);
+  };
+
+  const renderSelectedPage = () => {
+    switch (selectedPage) {
+      case 'idn':
+        return <Other setIsOther={setIsOther} />;
+      // case 'page2':
+      //   return <Page2 />;
+      // case 'page3':
+      //   return <Page3 />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="container">
       <div className="d-flex pt-3">
@@ -131,16 +178,19 @@ const Deposit = () => {
               <p className="main-color ps-3 pt-3 fw-bold">USDT</p>
             </div>
 
-            <div
+            <select
               className="d-flex main-color w-50 ms-2 rounded-3 shadow-lg"
               style={{ height: "55px" }}
+              onChange={handleSelectChange}
             >
-              <p className="ps-3 pt-3 fw-bold main-color">TRC20</p>
-              <i
+              <option value=""> Others</option>
+              <option className="" value="idn" >
+              IDN-(IDR) </option>
+              {/* <i
                 id="envelope2"
                 className="fa fa-circle fa-fw opacity-50 text-warning ms-auto me-3 main-color"
-              ></i>
-            </div>
+              ></i> */}
+            </select>
           </div>
 
           <div className="mt-4">
@@ -216,6 +266,9 @@ const Deposit = () => {
               for USDT deposits. USDT deposits may take some time related to the
               network hash rate.
             </p> */}
+             {isOther && <div className="modal-overlay-profile"> {renderSelectedPage()}</div> }
+
+            
           </div>
         </div>
       </div>

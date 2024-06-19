@@ -76,7 +76,150 @@ margin-left: 4.6rem;
   background-color: none;
  }
 
-@media screen and (max-width: 380px) { /* Adjust breakpoint as needed */
+ /* UPDATED SYLE FOR SITE ACTIVITIES */
+ @keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes moveDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.activity-item {
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+.move-down {
+  animation: moveDown 0.5s ease-out forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.5s ease-out forwards;
+}
+
+
+
+ /* @keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+.slide-down {
+  animation: slideDown 0.5s ease-out forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.5s ease-out forwards;
+} */
+
+/* SECOND METHOD */
+/* @keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes moveDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.activity-item {
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+.move-down {
+  animation: moveDown 0.5s ease-out forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.5s ease-out forwards;
+} */
+
+
+
+ @media screen and (max-width: 380px) { /* Adjust breakpoint as needed */
   .secured-font {
     font-size: 0.70rem;
   }
@@ -87,4 +230,5 @@ margin-left: 4.6rem;
   }
  
 }
+
 

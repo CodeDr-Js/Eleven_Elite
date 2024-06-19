@@ -96,7 +96,7 @@ const Withdrawal = () => {
 
     API.withdraw(values, token)
     .then((result) => {
-      console.log(result);
+      //console.log(result);
       setIsLoading(false);
       if(result.success) {
         setIsOpen3(true);
@@ -124,7 +124,7 @@ const Withdrawal = () => {
     })
   
   };
-  console.log("A.P",activities_g.profile,"A:", activities_g);
+  //console.log("A.P",activities_g.profile,"A:", activities_g);
   const handleActivities = () => {
     setTimeout(() => {
       if (!activities_g.profile ) {
@@ -148,10 +148,10 @@ const Withdrawal = () => {
     setError("");
 
     setIsLoadingPin(true);
-    console.log(value);
+    //console.log(value);
     API.setPin(value, token)
       .then((result) => {
-        console.log(result);
+        //console.log(result);
         setIsLoadingPin(false);
 
         if (result.success) {
