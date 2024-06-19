@@ -5,11 +5,11 @@
 5. cancel
 
 7. language - translate
-8. flag - default logos
-9. history => data not set to useContext
-10. Home witdrawal card
 
-12. General transaction => Site notification
+9. history => data not set to useContext
+
+
+
 
 
 
@@ -20,3 +20,4 @@
 
 21. History card - remove correct score, date, home, away on one line, anti full width, ... remove from the data sent to server.
 22. The eye for the login for smaller screen
+23. Profile ref link
