@@ -6,6 +6,15 @@
     margin-top: 1.25rem;
 }
 
+.error-div-other {
+    border-radius: 30px;
+      padding: 1.875rem 1.5rem;
+      margin: 0 1.25rem;
+      width: 85%;
+      height: 48.5rem;
+      /* background-color: rgb(8, 34, 87);     */
+}
+
 .text-justify {
     /* text-align: justify; */
     line-height: 1.125rem;

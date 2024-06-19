@@ -3,6 +3,8 @@ import "./index.css";
 import ArrowNav from '../arrowNav/ArrowNav';
 import { API } from '../api-service/api-service';
 import Cookies from "js-cookie";
+import { Link } from 'react-router-dom';
+
 
 
 const Other = ({setIsOther}) => {
@@ -39,7 +41,7 @@ const token = Cookies.get("auth-token");
   return (
     <>
     {/* <ArrowNav name="Others"/> */}
-    <div className=' error-div-help main-color container mt-3'>
+    <div className=' error-div-other main-color container mt-3'>
     <div className="bg-transparent d-flex">
         <div className="bg-transparent"></div>
         <i onClick={close} className="fa fa-close ms-auto "></i>
@@ -48,17 +50,17 @@ const token = Cookies.get("auth-token");
             <h2 className=''>Account Details</h2>
             <div className='opacity-75'>
             <p className='fw-bold'>Account Number</p>
-            <p>***************</p>
+            <p>2740409266</p>
             <p className='fw-bold'>Account Name</p>
-            <p>-</p>
+            <p>MUDASIR</p>
             <p className='fw-bold'>Bank Name</p>
-            <p>-</p>
+            <p>BCA</p>
             </div>
         </div>
 
         <div className='mt-3 '>
             <h3>Submit details:</h3>
-            <div className='m-color p-4 text-center'>
+            <div className='m-color p-4 text-center rounded-4'>
             {/* <input
               className="form-control w-100 form-username g-sub-color mb-3 "
               type="text"
@@ -87,15 +89,19 @@ const token = Cookies.get("auth-token");
               onChange={handleFileChange}
             /> */}
             <small className='text-warning text-center  opacity-50'>Kindly click on the upload button and upload your Successful Transaction Receipt along side with Amount Sent and the Sender's fullname on Telegram Customer Care Service for Automatic Confirmation and Approval</small>
-            <button
+            <br></br>
+            <br></br>
+            <small className='text-danger fw-bold text-center  opacity-50 '>Note: 200,000 IDR is the minimum deposit accepted.</small>
+            
+            <Link
               id="withdraw_id"
-              onClick={handleSubmit}
+              to="https://t.me/Pamelladz"
               className={
-                 "btn btn-primary w-100 p-3 fw-bold disabled opacity-50 "
+                 "btn btn-primary w-100 p-3 fw-bold text-decoration-none mt-3 "
               }
             >
               Upload Receipt 
-            </button>
+            </Link>
             </div>
         </div>
     </div>
