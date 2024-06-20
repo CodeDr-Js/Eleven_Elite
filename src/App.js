@@ -27,6 +27,7 @@ import About from "./components/about/About";
 import "./components/Home/main/googletranslator.css";
 import DisableCopyComponent from "./disableCopy";
 import Other from "./components/deposit/Other";
+import LocalWithdrawal from "./components/witdrawal/LocalWithdrawal";
 
 
 
@@ -134,6 +135,7 @@ export default function App() {
             <Route path="loader" element={<Loader />} />
             <Route path="reward" element={<Reward />} />
             <Route path="about" element={<About />} />
+            <Route path="other" element={<LocalWithdrawal />} />
             {/* <Route path="deposit/other_payment" element={<Other />} /> */}
             {/* <Route path="api-call" element={<ApiCall />} /> */}
 

@@ -16,7 +16,7 @@ import WithdrawSuccess from "./withdrawSuccess";
 import Loader from "../loader/loader";
 
 
-const Withdrawal = () => {
+const LocalWithdrawal = () => {
   const navigate = useNavigate();
   const { setActiveToken, activities_g, setActivities_g, getUserData, hasRunRetrieve } =
     useContext(DataContext);
@@ -27,6 +27,9 @@ const Withdrawal = () => {
     amount: "",
     address: "",
     transaction_pin: "",
+    family : "",
+    select_bank:"",
+    account_name:""
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingPin, setIsLoadingPin] = useState(false);
@@ -96,7 +99,7 @@ const Withdrawal = () => {
 
     API.withdraw(values, token)
     .then((result) => {
-      console.log(result);
+      //console.log(result);
       setIsLoading(false);
       if(result.success) {
         setIsOpen3(true);
@@ -218,46 +221,90 @@ const Withdrawal = () => {
             <img src={Arrow} alt="arrow-back" className="nav-arrow" />
          
         </div>
-        <h3 className="text-center w-100">Withdraw</h3>
+        <h3 className="text-center w-100">Local Withdraw</h3>
       </div>
 
       <div className="mt-4">
         <div className="d-flex">
           <div
-            className="d-flex w-50 main-color rounded-3 shadow-lg me-2"
-            style={{ height: "55px" }}
+            className="d-flex w-50 m-color rounded-3 shadow-lg me-2"
+            style={{ height: "55px" }} onClick={()=>handleNavigate("/withdraw")}
           >
-            <div className="main-color pt-3 ps-3">
+            <div className="m-color pt-3 ps-3">
               <img src={usdt} alt="usdt logo" style={{ width: "27px" }} />
             </div>
-            <p className="main-color ps-3 pt-3 fw-bold">USDT</p>
+            <p className="m-color ps-3 pt-3 fw-bold">USDT</p>
           </div>
 
-       
           <div
-            className="d-flex main-color w-50 ms-2 rounded-3 shadow-lg"
-            style={{ height: "55px" }} onClick={()=>handleNavigate("/other")}
+            className="d-flex m-color w-50 ms-2 rounded-3 shadow-lg"
+            style={{ height: "55px" }}
           >
-            <p className="ps-3 pt-3 fw-bold main-color">OTHER</p>
+            <p className="ps-3 pt-3 fw-bold m-color">OTHER</p>
             <i
               id="envelope2"
               className="fa fa-circle fa-fw opacity-50 text-warning ms-auto me-3 main-color"
             ></i>
           </div>
-        
         </div>
 
         <div className="mt-5">
-          <p className="fw-bold opacity-75">Your wallet address</p>
+          <p className="fw-bold opacity-75">Your Account Number</p>
           <input
-            className="form-control pb-5 form-username main-color p-3 opacity-75"
+            className="form-control form-username main-color p-3 opacity-75"
             type="text"
-            placeholder="Enter your wallet address"
+            placeholder="Enter your Account Number"
             name="address"
             onChange={(e) =>
               setValues({ ...values, address: e.target.value })
             }
           />
+        </div>
+
+        <div className="mt-4">
+          <p className="fw-bold opacity-75">Your Account Name</p>
+          <input
+            className="form-control form-username main-color p-3 opacity-75"
+            type="text"
+            placeholder="Enter your Account Name"
+            name="account_name"
+            onChange={(e) =>
+              setValues({ ...values, account_name: e.target.value })
+            }
+          />
+        </div>
+
+        <div className="mt-4">
+          <p className="fw-bold opacity-75">Your Bank Name</p>
+          <input
+            className="form-control form-username main-color p-3 opacity-75"
+            type="text"
+            placeholder="Enter your Bank Name"
+            name="select_bank"
+            onChange={(e) =>
+              setValues({ ...values, select_bank: e.target.value })
+            }
+          />
+        </div>
+
+        <div className="mt-4">
+          <p className="fw-bold opacity-75">Select Currency</p>
+          <select className="form-control form-username main-color p-3 opacity-75" name="select_bank" 
+            onChange={(e) =>
+              setValues({ ...values, family: e.target.value })
+            }>
+            <option value="">-SELECT CURRENCY-</option>
+            <option value="RUPIAH">Indonesia - (IDR)</option>
+          </select>
+          {/* <input
+            className="form-control form-username main-color p-3 opacity-75"
+            type="text"
+            placeholder="Enter your Bank Name"
+            name="select_bank"
+            onChange={(e) =>
+              setValues({ ...values, select_bank: e.target.value })
+            }
+          /> */}
         </div>
 
         <div className="mt-4">
@@ -337,7 +384,7 @@ const Withdrawal = () => {
               id="withdraw_id"
               onClick={handleSubmitWitdrawal}
               className={
-                Number(values.amount) >= 10 && values.address.length > 10 && values.transaction_pin !== ""
+                Number(values.amount) >= 10 && values.transaction_pin !== ""
                   ? "btn btn-primary w-100 p-3 fw-bold "
                   : "btn btn-primary w-100 p-3 fw-bold disabled opacity-50 "
               }
@@ -427,4 +474,4 @@ const Withdrawal = () => {
   );
 };
 
-export default Withdrawal;
+export default LocalWithdrawal;

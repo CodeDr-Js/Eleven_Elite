@@ -46,7 +46,7 @@ const token = Cookies.get("auth-token");
         <div className="bg-transparent"></div>
         <i onClick={close} className="fa fa-close ms-auto "></i>
       </div>
-        <div className='m-color rounded-4 p-3 text-center'>
+        <div className='m-color rounded-4 p-3 text-center' style={{"lineHeight":"1px"}}>
             <h2 className=''>Account Details</h2>
             <div className='opacity-75'>
             <p className='fw-bold'>Account Number</p>
@@ -88,7 +88,7 @@ const token = Cookies.get("auth-token");
               required
               onChange={handleFileChange}
             /> */}
-            <small className='text-warning text-center  opacity-50'>Kindly click on the upload button and upload your Successful Transaction Receipt along side with Amount Sent and the Sender's fullname on Telegram Customer Care Service for Automatic Confirmation and Approval</small>
+            <small className='text-warning text-center  opacity-50'>Kindly click on the upload button and upload your Successful Transaction Receipt along side with Amount Sent, Username and the Sender's fullname on Telegram Customer Care Service for Automatic Confirmation and Approval</small>
             <br></br>
             <br></br>
             <small className='text-danger fw-bold text-center  opacity-50 '>Note: 200,000 IDR is the minimum deposit accepted.</small>

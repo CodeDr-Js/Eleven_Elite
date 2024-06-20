@@ -341,7 +341,7 @@ const Odd = () => {
 
   //Function to convert to percentage
   function convertToPercentage(odd) {
-    const randomOdds = [7.0];
+    const randomOdds = [6.0];
     const randomOdd = getRandomNumberFromArray(randomOdds);
 
     let divided = odd * 0.09;
@@ -349,7 +349,7 @@ const Odd = () => {
       const newDividedRandom = randomOdd;
       return newDividedRandom.toFixed(2);
     } else {
-      const newDivided = odd * 0.05;
+      const newDivided = odd * 0.04;
       return newDivided.toFixed(2);
     }
   }
