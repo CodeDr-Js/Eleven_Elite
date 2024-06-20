@@ -240,7 +240,7 @@ const BetSecure = ({
   };
 
   return (
-    <div className="bet-div-1 container">
+    <div className="bet-div-1 container z-indexs" >
       <div className="bg-transparent">
         
         <div className="text-center fs-3 bg-transparent d-flex ">

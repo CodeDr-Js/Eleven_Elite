@@ -96,7 +96,7 @@ const Withdrawal = () => {
 
     API.withdraw(values, token)
     .then((result) => {
-      console.log(result);
+      //console.log(result);
       setIsLoading(false);
       if(result.success) {
         setIsOpen3(true);

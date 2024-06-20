@@ -194,7 +194,7 @@ export const SiteActivities = () => {
                         ""
                       )}
 
-                      <p className="bg-transparent text-dark fw-bold at-font opacity-75">
+                      <p className="bg-transparent text-dark fw-bold at-font time-ago">
                         {timeAgo(item.fields.timestamp)}
                       </p>
                     </div>

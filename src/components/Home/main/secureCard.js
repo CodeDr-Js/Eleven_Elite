@@ -159,7 +159,7 @@ useEffect(()=>{
     
     </div>
 
-    {loading1 ? (isOpen ? (<div className="modal-overlay">
+    {loading1 ? (isOpen ? (<div className="modal-overlay z-indexs">
     <BetSecure correctScore={score1}
     oddPer={odd1}
     profit={odd1}

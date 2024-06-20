@@ -76,6 +76,14 @@ margin-left: 4.6rem;
   background-color: none;
  }
 
+ .z-indexs {
+  z-index: 9999 !important;
+ }
+
+
+ .time-ago {
+  color: rgba(7, 7, 7, 0.705) !important;
+ }
  /* UPDATED SYLE FOR SITE ACTIVITIES */
  @keyframes slideIn {
   from {

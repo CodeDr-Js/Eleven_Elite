@@ -154,6 +154,8 @@ const Deposit = () => {
     }
   };
 
+
+
   return (
     <div className="container">
       <div className="d-flex pt-3">
@@ -192,6 +194,10 @@ const Deposit = () => {
               ></i> */}
             </select>
           </div>
+          
+          <div className="moving-text-container mt-2">
+      <div className="moving-text"><a href="https://t.me/EEF_OFFICIAL_INDONESIA" className="fw-bold fs-3 text-success text-decoration-none">Click Here  </a> to join Indonesia Official Telegroup Group Page.</div>
+    </div>
 
           <div className="mt-4">
             <p className="fw-bold">Your USDT deposit address</p>
