@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState,  } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Arrow from "../../assets/images/document-management-system-return-icon-48 - Copy copy.png";
 import "./index.css";
 import "../color/color.css";
@@ -16,13 +16,18 @@ import QRCodeGenerator from "../qr-code/qrCode";
 import "../fontawesome/css/all.css";
 import Other from "./Other";
 
-
-
-
 const Deposit = () => {
-  const { setActiveToken, activities_g, setActivities_g, result, setResult,getUserData, hasRunRetrieve } =
-    useContext(DataContext);
-   // console.log(activities_g);
+  const {
+    setActiveToken,
+    activities_g,
+    setActivities_g,
+    result,
+    setResult,
+    getUserData,
+    hasRunRetrieve,
+    telegram
+  } = useContext(DataContext);
+  // console.log(activities_g);
   const navigate = useNavigate();
   const token = Cookies.get("auth-token");
   const [message, setMessage] = useState();
@@ -31,7 +36,6 @@ const Deposit = () => {
   const [selectedPage, setSelectedPage] = useState();
   const [isOther, setIsOther] = useState(false);
 
-  
   //console.log(activities_g);
   const handleCopy = (text) => {
     navigator.clipboard
@@ -45,50 +49,44 @@ const Deposit = () => {
       });
   };
 
-  
-  useEffect(()=> {
-    if(!hasRunRetrieve){
-      getUserData()
+  useEffect(() => {
+    if (!hasRunRetrieve) {
+      getUserData();
     }
-  }, [])
-
+  }, []);
 
   const navigatePage = () => (
     <div>
-      <Other/>
+      <Other />
     </div>
-  )
-
-
-  
+  );
 
   const checkPayaddress = () => {
-  
     // const token1 = token["auth-token"];
     //console.log(typeof activities_g.wallet.pay_address);
     // setTimeout(() => {
     //  console.log(activities_g);
-      if (!Array.isArray(activities_g) && !activities_g.wallet.pay_address) {
-        setIsOpen(false);
+    if (!Array.isArray(activities_g) && !activities_g.wallet.pay_address) {
+      setIsOpen(false);
       //  console.log("loading... Not object");
-        //setReloadTriggered(true);
-        API.retrieveData(token)
-          .then((result) => {
-        //    console.log(result);
-            setIsOpen(true)
-            if (result.success || result.message === "success") {
-              setResult(result);
-              setActivities_g(result.activities);
-            } else if (!result.success) {
-          //    console.log("removing token");
-              // removeToken("auth-token");
-              Cookies.remove("auth-remove")
-            }
-          })
-          .catch((err) => console.log(err));
-      } else {
-       // console.log("Pay address is found in useContext result");
-      }
+      //setReloadTriggered(true);
+      API.retrieveData(token)
+        .then((result) => {
+          //    console.log(result);
+          setIsOpen(true);
+          if (result.success || result.message === "success") {
+            setResult(result);
+            setActivities_g(result.activities);
+          } else if (!result.success) {
+            //    console.log("removing token");
+            // removeToken("auth-token");
+            Cookies.remove("auth-remove");
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      // console.log("Pay address is found in useContext result");
+    }
     // }, 1000);
   };
 
@@ -98,7 +96,7 @@ const Deposit = () => {
 
   const checkToken = () => {
     if (token) {
-     // console.log("token", token1);
+      // console.log("token", token1);
       setActiveToken(token);
     } else {
       setActiveToken("");
@@ -117,7 +115,7 @@ const Deposit = () => {
   }, 3000);
   const goBack = () => {
     window.history.back();
-  }
+  };
 
   // const handleSelectChange = (event) => {
   //   const selectedValue = event.target.value;
@@ -143,10 +141,34 @@ const Deposit = () => {
 
   const renderSelectedPage = () => {
     switch (selectedPage) {
-      case 'idn':
-        return <Other setIsOther={setIsOther} />;
-      // case 'page2':
-      //   return <Page2 />;
+      case "idn":
+        return (
+          <Other
+            setIsOther={setIsOther}
+            account_number="2740409266"
+            account_name="MUDASIR"
+            bank_name="BCA"
+            telegram={ <div className=" moving-text-container" > <div className="moving-text">
+              <a
+                href="https://t.me/EEF_OFFICIAL_INDONESIA"
+                className="fw-bold fs-3 text-success text-decoration-none"
+              >
+                Click Here{" "}
+              </a>{" "}
+              to join Indonesia Official Telegroup Group Page.
+            </div></div>   }
+          />
+        );
+      case "CIV":
+        return (
+          <Other
+            setIsOther={setIsOther}
+            account_number="*************"
+            account_name="************"
+            bank_name="**************"
+            style="disabled"
+          />
+        );
       // case 'page3':
       //   return <Page3 />;
       default:
@@ -154,15 +176,11 @@ const Deposit = () => {
     }
   };
 
-
-
   return (
     <div className="container">
       <div className="d-flex pt-3">
         <div onClick={goBack}>
-        
-            <img src={Arrow} alt="arrow-back" className="nav-arrow" />
-       
+          <img src={Arrow} alt="arrow-back" className="nav-arrow" />
         </div>
         <h3 className="text-center w-100">Deposit</h3>
       </div>
@@ -186,18 +204,22 @@ const Deposit = () => {
               onChange={handleSelectChange}
             >
               <option value=""> Others</option>
-              <option className="" value="idn" >
-              IDN-(IDR) </option>
+              <option className="" value="idn">
+                IDN-(IDR){" "}
+              </option>
+              <option className="" value="CIV">
+              XOF-(CIV){" "}
+              </option>
               {/* <i
                 id="envelope2"
                 className="fa fa-circle fa-fw opacity-50 text-warning ms-auto me-3 main-color"
               ></i> */}
             </select>
           </div>
-          
+
           <div className="moving-text-container mt-2">
-      <div className="moving-text"><a href="https://t.me/EEF_OFFICIAL_INDONESIA" className="fw-bold fs-3 text-success text-decoration-none">Click Here  </a> to join Indonesia Official Telegroup Group Page.</div>
-    </div>
+         
+          </div>
 
           <div className="mt-4">
             <p className="fw-bold">Your USDT deposit address</p>
@@ -219,17 +241,15 @@ const Deposit = () => {
             style={{ height: "55px" }}
           >
             {!Array.isArray(activities_g) && isOpen ? (
-               <p className="ps-3 pt-3 main-color">
-               {activities_g.wallet.pay_address  
-}
+              <p className="ps-3 pt-3 main-color">
+                {activities_g.wallet.pay_address}
               </p>
-            ) : ( <p className="ps-3 pt-3 main-color text-warning">
-            Loading...
-           </p>)}
-            
+            ) : (
+              <p className="ps-3 pt-3 main-color text-warning">Loading...</p>
+            )}
+
             <i
-              onClick={() => handleCopy(activities_g.wallet.pay_address 
-              )}
+              onClick={() => handleCopy(activities_g.wallet.pay_address)}
               id="envelope"
               className="fa fa-copy fa-fw fa-lg opacity-50 ms-auto me-3 mt-4"
             ></i>
@@ -237,7 +257,11 @@ const Deposit = () => {
 
           <div className="d-flex justify-content-center w-100 mt-3">
             <QRCodeGenerator
-              text={!Array.isArray(activities_g) ? activities_g.wallet.pay_address  : ""}
+              text={
+                !Array.isArray(activities_g)
+                  ? activities_g.wallet.pay_address
+                  : ""
+              }
             />
           </div>
 
@@ -259,28 +283,53 @@ const Deposit = () => {
 
           <div className="mt-4">
             <div className="opacity-50 pe-2 text-justify fst-italic bg-transparent">
-            <span className="text-warning ">NOTE:</span> 
-            <ol>
-              <li className="pb-2 pt-1"> <small> Please do not deposit any assets other than TRC20-USDT to the above address, as the assets will be irretrievable. The minimum recharge amount is 10 USDT, and recharges below the minimum amount will not be credited and cannot be refunded.</small></li>
-              <li className="pb-2 "><small>Your recharge address will change frequently after a success transaction and cannot be reused for deposits. In case of any changes, we will notify you through website announcements or emails. Please ensure the security of your computer and browser to prevent information tampering and leakage.</small></li>
-              <li> <small>After you deposit to the above address, it requires confirmation from the entire network nodes. The funds will be credited after 1 network confirmation, and you can withdraw them after 1 network confirmation tips</small></li>
-            </ol>
-          
+              <span className="text-warning ">NOTE:</span>
+              <ol>
+                <li className="pb-2 pt-1">
+                  {" "}
+                  <small>
+                    {" "}
+                    Please do not deposit any assets other than TRC20-USDT to
+                    the above address, as the assets will be irretrievable. The
+                    minimum recharge amount is 10 USDT, and recharges below the
+                    minimum amount will not be credited and cannot be refunded.
+                  </small>
+                </li>
+                <li className="pb-2 ">
+                  <small>
+                    Your recharge address will change frequently after a success
+                    transaction and cannot be reused for deposits. In case of
+                    any changes, we will notify you through website
+                    announcements or emails. Please ensure the security of your
+                    computer and browser to prevent information tampering and
+                    leakage.
+                  </small>
+                </li>
+                <li>
+                  {" "}
+                  <small>
+                    After you deposit to the above address, it requires
+                    confirmation from the entire network nodes. The funds will
+                    be credited after 1 network confirmation, and you can
+                    withdraw them after 1 network confirmation tips
+                  </small>
+                </li>
+              </ol>
             </div>
             {/* <p className="opacity-50">
               Maximum deposit amount is not limited. EEF doesn't have any fee
               for USDT deposits. USDT deposits may take some time related to the
               network hash rate.
             </p> */}
-             {isOther && <div className="modal-overlay-profile"> {renderSelectedPage()}</div> }
-
-            
+            {isOther && (
+              <div className="modal-overlay-profile">
+                {" "}
+                {renderSelectedPage()}
+              </div>
+            )}
           </div>
         </div>
       </div>
-      
-      
-                
     </div>
   );
 };
