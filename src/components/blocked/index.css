@@ -1,0 +1,9 @@
+.blocked {
+    border-radius: 1.875rem;
+      padding: 1.875rem 2.5rem;
+      margin: 0 1.25rem;
+      width: 75%;
+      height: 15rem;
+      background-color: rgb(7, 24, 59);  
+      z-index: 9999;  
+}

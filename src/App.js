@@ -1,12 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/js/bootstrap.bundle";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import AntiScore from "./components/Home/anti-scores/AntiScore";
 import Login from "./components/Login/login";
 import Register from "./components/Register/register";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import LogoLoader from "./components/loaderPage";
 import Odd from "./components/Home/anti-scores/odd";
 import ApiCall from "./components/APIs/ApiCall";
@@ -28,6 +28,9 @@ import "./components/Home/main/googletranslator.css";
 import DisableCopyComponent from "./disableCopy";
 import Other from "./components/deposit/Other";
 import LocalWithdrawal from "./components/witdrawal/LocalWithdrawal";
+import { DataContext } from "./components/APIs/Api";
+import Blocked from "./components/blocked/blocked";
+import Cookies from "js-cookie";
 
 
 
@@ -38,18 +41,42 @@ import LocalWithdrawal from "./components/witdrawal/LocalWithdrawal";
 
 
 
-const googleTranslateElementInit = () => {
-  new window.google.translate.TranslateElement(
-    {
-      pageLanguage: "en",
-      layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
-      autoDisplay: true
-    },
-    "google_translate_element"
-  );
-};
+
+// const googleTranslateElementInit = () => {
+//   new window.google.translate.TranslateElement(
+//     {
+//       pageLanguage: "en",
+//       layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+//       autoDisplay: true
+//     },
+//     "google_translate_element"
+//   );
+// };
+
+
 export default function App() {
+  const navigate = useNavigate();
+  const { activities_g } =
+  useContext(DataContext);
+const token = Cookies.get("auth-token");
+const [blocked, setBlocked] = useState(false);
+
+
+console.log(activities_g);
+
   const [loading, setLoading] = useState(true);
+
+  useEffect(()=> {
+    if(token){
+      if(!Array.isArray(activities_g)){
+        if(activities_g.blocked){
+          setBlocked(true);
+        }
+      }
+    } else {
+      navigate("/login")
+    }
+  },[activities_g])
 
 
   // Simulating data fetching/loading
@@ -116,6 +143,7 @@ export default function App() {
         <LogoLoader />
       ) : (
         <>
+        {blocked && <div className="modal-overlay-profile" style={{"zIndex": 9999}}><Blocked/></div> }
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="anti-score" element={<AntiScore />} />

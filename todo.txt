@@ -22,3 +22,4 @@
 22. The eye for the login for smaller screen
 23. Profile ref link
 24. Withdraw small screen all icon and eye for pin
+25. Notification page logout if no token
