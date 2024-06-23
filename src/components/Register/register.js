@@ -50,7 +50,7 @@ const Register = () => {
     invited: "",
     password: "",
   });
-  //console.log(values);
+  console.log(values);
 
   const [login, setLogin] = useState({
     username: values.username,
@@ -65,7 +65,7 @@ const Register = () => {
   useEffect(() => {
     if (token1) {
    //   console.log("Your token is", token1);
-     // navigate("/");
+      navigate("/");
       setActiveToken(token1)
     } else {
       
@@ -249,9 +249,16 @@ const Register = () => {
               className="form-control w-100 mb-3 form-password g-sub-color"
               type="text"
               placeholder="Referral Code (Optional)"
-              value={values.invited}
+              // value={values.invited}
+              value={invitedUser && invitedUser}
               name="invited"
-              readOnly
+              onChange={(e) =>
+                setValues({
+                  ...values,
+                  invited: e.target.value,
+                })
+              }
+              // readOnly
             />
 
             <i
