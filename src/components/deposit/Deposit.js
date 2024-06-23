@@ -201,15 +201,15 @@ const Deposit = () => {
             <select
               className="d-flex main-color w-50 ms-2 rounded-3 shadow-lg"
               style={{ height: "55px" }}
-              onChange={handleSelectChange}
+              // onChange={handleSelectChange}
             >
               <option value=""> Others</option>
-              <option className="" value="idn">
+              {/* <option className="" value="idn">
                 IDN-(IDR){" "}
               </option>
               <option className="" value="CIV">
               XOF-(CIV){" "}
-              </option>
+              </option> */}
               {/* <i
                 id="envelope2"
                 className="fa fa-circle fa-fw opacity-50 text-warning ms-auto me-3 main-color"
