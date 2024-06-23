@@ -65,7 +65,7 @@ const Register = () => {
   useEffect(() => {
     if (token1) {
    //   console.log("Your token is", token1);
-      navigate("/");
+     // navigate("/");
       setActiveToken(token1)
     } else {
       
