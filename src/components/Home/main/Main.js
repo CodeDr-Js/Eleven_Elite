@@ -73,7 +73,7 @@ const Main = () => {
           <IconCon image={Soccer} text="Soccer" link="/anti-score" />
           <IconCon image={History} text="History" link="/history" />
           <IconCon image={Rewards} text="Rewards" link="/invite" />
-          <IconCon image={Telegram} text="Telegram" link="https://t.me/+9DiOHiI7Yr8yODk0" />
+          <IconCon image={Telegram} text="Telegram" link="https://t.me/+RBzDryc0eKI1MWQ0" />
           <IconCon image={Logout} text="Logout" onClick={handleLogoutClick} />
         </div>
       </div>
