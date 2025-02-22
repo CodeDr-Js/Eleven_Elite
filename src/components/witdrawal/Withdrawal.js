@@ -356,7 +356,7 @@ const Withdrawal = () => {
               <ArrowNav name="Withdraw" bg="main-color" />
 
               <div className="blur d-flex justify-content-center align-items-center " >
-            <p translate="no" className="text-center text-success fw-bold ">Total Withdraw:  {!Array.isArray(activities_g) && activities_g.wallet.history
+            <p translate="no" className="text-center pt-3 text-success fw-bold ">Total Withdraw:  {!Array.isArray(activities_g) && activities_g.wallet.history
           ? activities_g.init_currency.symbol +
           activities_g.wallet.history.withdraw
           : ""}
@@ -366,6 +366,8 @@ const Withdrawal = () => {
             
         </div>
       </div>
+
+      <br/>
 
       
 

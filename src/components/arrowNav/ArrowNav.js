@@ -21,7 +21,7 @@ const ArrowNav = ({ name, bg }) => {
   return (
     <div className={`container shadow-lg ${bg} round-header`}>
       <div className="ms-1 d-flex pt-3 w-100 ">
-        <div onClick={goBack} className="wg-card">
+        <div translate="no" onClick={goBack} className="wg-card">
           <img src={Arrow} alt="arrow-back" className="nav-arrow" />
         </div>
         <div className=" d-flex justify-content-center w-100 wg-card " style={{marginLeft:"-27px"}}>

@@ -178,7 +178,7 @@ ctx.transform(1, Math.random() * 0.1, Math.random() * 0.1, 1, 0, 0); // Apply sk
 
           <input
             type="text"
-            placeholder="Enter your username/email"
+            placeholder="Enter your username"
             className="form-control w-100 form-name mb-4 opacity"
             required
             name="username"

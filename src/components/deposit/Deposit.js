@@ -19,6 +19,7 @@ import UsdCard from "./usd_card";
 import { FALSE } from "sass";
 import { use } from "react";
 import Loader from "../loader/loader";
+import ArrowNav from "../arrowNav/ArrowNav";
 
 const Deposit = () => {
   const {
@@ -402,14 +403,30 @@ const Deposit = () => {
   return (
     <>
       <div>
-        <div className="container d-flex pt-3">
+      <div className="pt-4">
+        <div className="fixed-top ">
+          <ArrowNav name="Withdraw" bg="main-color" />
+
+          <div className="blur d-flex justify-content-center align-items-center " >
+            <p translate="no" className="text-center text-success pt-3  fw-bold ">Total Deposit:  {!Array.isArray(activities_g) && activities_g.wallet.history
+              ? activities_g.init_currency.symbol +
+              activities_g.wallet.history.deposit
+              : ""}
+            </p>
+
+          </div>
+
+        </div>
+              <br/>
+      </div>
+        {/* <div className="container d-flex pt-3">
           <div onClick={goBack}>
             <img src={Arrow} alt="arrow-back" className="nav-arrow" />
           </div>
           <h3 className="text-center w-100">Deposit</h3>
 
 
-        </div>
+        </div> */}
 
         <p translate="no" className="text-center w-100 text-success fw-bold ">Total Deposit:  {!Array.isArray(activities_g) && activities_g.wallet.history
           ? activities_g.init_currency.symbol +

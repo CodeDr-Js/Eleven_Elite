@@ -45,11 +45,11 @@ const NavBar = () => {
   // },[])
 
   return (
-    <div className="">
+    <div translate="no" className="">
 
 
    
-    <div className="container pt-2 d-flex justify-content-between fixed-top default_color round-header">
+    <div translate="no" className="container pt-2 d-flex justify-content-between fixed-top default_color round-header">
       <div translate="no" className=" d-flex vip-text-3" >
             <div translate="no">
             {/* <img src={dollar} alt="Logo" className="" style={{ width: "33px" }} /> */}
