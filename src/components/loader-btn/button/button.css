@@ -28,12 +28,12 @@ body {
 } 
 
 .form-login-btn {
-  background-color: rgba(5, 74, 202, 0.575);
+  background-color: rgb(5, 74, 202);
   padding: 0.938rem;
   border-radius: 0.813rem;
   color: whitesmoke;
   font-size: 1.063rem;
-  opacity: 70%;
+  
 
 }
 

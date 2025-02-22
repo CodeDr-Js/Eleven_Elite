@@ -9,7 +9,10 @@ import { DataProvider } from "./components/APIs/Api";
 // const store =  configureStore();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+//console.log("Starting now");
+
 root.render(
+
   <BrowserRouter>
     <DataProvider>
       <App />

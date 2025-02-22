@@ -19,7 +19,9 @@ import SecureCard from "./main/secureCard";
 import NoData from "../noData/noData";
 import nodata4 from "../../assets/images/nodata4.png";
 import { SiteActivities } from "./main/SiteActivities";
+import flier from "../../assets/images/flier.jpg";
 
+const globe = "🌎";
 const Index = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -37,7 +39,7 @@ const Index = () => {
     setHasRunRetrieve,
     user_g,
   } = useContext(DataContext);
-  //console.log(activities_g);
+  //console.log("Activities are:",activities_g);
   //const [token] = useCookies(["auth-token"]);
   const [loadings, setLoadings] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -60,7 +62,7 @@ const Index = () => {
     if (!hasRunRetrieve) {
       getUserData();
     }
-  }, []);
+  }, [activeToken]);
 
   useEffect(() => {
     if (result) {
@@ -109,23 +111,30 @@ const Index = () => {
           <NavBar />
           {/* <Ad /> */}
           <CarouselComponent />
+          {/* <div>
+            <img src={flier} style={{width:"25.75rem", borderRadius:"20px"}} className="container mt-5 pt-4 s-home-image"/>
+          </div> */}
+             <div className="vip-gold-1  ms-3 " style={{width:"35%"}}> 
+              <div className="">
+              <i class="fa-solid fa-crown gold-crown pe-1"></i>
+              <span className="vip-text">VIP</span>  <span className="vip-text-2">{result && result.activities ? result.activities.wallet.vip:""}</span>
 
-          <h2 className="company-name ps-3 ">Hi {user_g.username} 👨‍💼</h2>
+              </div>
+           
+            </div>
+          <h2 className="company-name ps-3 "> <span className="vip-text-2">Hi {user_g.username}</span> <spam>👨‍💼</spam></h2>
           <Main />
           <SecureCard />
           {/* <Sport /> */}
           <div>
             <p className="ps-3 pt-3">
-              Site Activities{" "}
+              Site Activities {globe}
               <span>
-                <img
-                  style={{ width: "20px" }}
-                  src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg"
-                />
+               
               </span>
             </p>
-            <div className="nodata-1 mb-5 pb-3">
-            <div className="ms-3 me-3 pt-3 pb-3 rounded-4 m-color ">
+            <div className="nodata-1 mb-5">
+            <div className="ms-3 me-3 pt-3 mb-5 pb-3 rounded-4 transparent-color ">
 
               <SiteActivities/>
               {/* <SiteActivities/>
@@ -143,6 +152,7 @@ const Index = () => {
                 <p className="fw-bold opacity-50">No Data</p>
               </div>  */}
             </div>
+          
              
             </div>
           </div>

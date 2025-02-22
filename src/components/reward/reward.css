@@ -69,11 +69,11 @@ body {
 
 
 /* gift code */
-.pin-div-1 {
+.pin-div- {
     border-radius: 1.875rem;
       padding: 1.875rem 2.5rem;
       margin: 0 1.25rem;
-      width: 65%;
+      width: 80%;
       height: 13.75rem;
       background-color: rgb(7, 24, 59);    
 }

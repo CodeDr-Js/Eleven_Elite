@@ -14,33 +14,34 @@ import Pin from "../withdrawal pin/pin";
 import { API } from "../api-service/api-service";
 import WithdrawSuccess from "./withdrawSuccess";
 import Loader from "../loader/loader";
+import ArrowNav from "../arrowNav/ArrowNav";
 
 
-const LocalWithdrawal = () => {
+const LocalWithdrawal = ({amountWithdrawn, setAmountWithdraw, activities_g, setActivities_g, isOpen3, setIsOpen3, withdrawnSuccessMsg, setWithdrawSuccessMsg}) => {
   const navigate = useNavigate();
-  const { setActiveToken, activities_g, setActivities_g, getUserData, hasRunRetrieve } =
+  const { setActiveToken, getUserData, hasRunRetrieve } =
     useContext(DataContext);
   const token = Cookies.get("auth-token");
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpen3, setIsOpen3] = useState(false);
   const [values, setValues] = useState({
     amount: "",
     address: "",
-    transaction_pin: "",
-    family : "",
-    select_bank:"",
-    account_name:""
+    bank:"",
+    account_holder:"",
+    withdrawal_code: ""
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingPin, setIsLoadingPin] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [error, setError] = useState();
   const [success, setSuccess] = useState(null);
+
+  const [successOtp, setSuccessOtp] = useState(null);
   const [pin, setPin] = useState();
   const [errorWithdraw, setErrorWithdraw] = useState();
-  const [amountWithdrawn, setAmountWithdraw] = useState();
-  const [withdrawnSuccessMsg, setWithdrawSuccessMsg] = useState();
   const [loadings, setLoadings] = useState(false);
+  const [codeLoading, setCodeLoading] = useState(false);
+  const [slideId, setSlideId] = useState("")
   // const [amount, setAmount] = useState('');
   const checkToken = () => {
 
@@ -60,7 +61,7 @@ const LocalWithdrawal = () => {
   
   useEffect(()=> {
     if(!hasRunRetrieve){
-      getUserData()
+      //getUserData()
     }
   }, [])
 
@@ -97,9 +98,11 @@ const LocalWithdrawal = () => {
     setErrorWithdraw('');
     setAmountWithdraw("");
 
-    API.withdraw(values, token)
-    .then((result) => {
-      //console.log(result);
+    console.log(values);
+    
+    API.sendRequest({ action: "create_withdraw", ...values }, token)
+      .then((result) => {
+      console.log(result);
       setIsLoading(false);
       if(result.success) {
         setIsOpen3(true);
@@ -107,13 +110,7 @@ const LocalWithdrawal = () => {
         setWithdrawSuccessMsg(result.message)
         setActivities_g((prev) => ({
           ...prev,
-          wallet: {
-            bal_info: {
-              bal: result.activities.wallet.bal_info.bal
-            }
-
-          }
-          
+          wallet: result.activities.wallet
 
         }))
       } else if (result.detail || result.detail === "Invalid token.") {
@@ -121,82 +118,87 @@ const LocalWithdrawal = () => {
         setActiveToken('')
         navigate("/login")
 
-      } else {
-        setErrorWithdraw(result.message)
+      } else if(result.success === false) {
+       // console.log(result);
+        alert(result.message || result.message.error)
+        setErrorWithdraw(result.message || result.message.error)
       }
+    }) 
+    .catch((err) => {console.log(err);  setIsLoading(false);
     })
   
   };
+
   //console.log("A.P",activities_g.profile,"A:", activities_g);
-  const handleActivities = () => {
-    setTimeout(() => {
-      if (!activities_g.profile ) {
-        setIsOpen(true);
-      } else if(Object.keys(activities_g.profile).includes("transaction_pin")) {
-        setIsOpen(true);
-      }
+  // const handleActivities = () => {
+  //   setTimeout(() => {
+  //     if (!activities_g.profile ) {
+  //       setIsOpen(true);
+  //     } else if(Object.keys(activities_g.profile).includes("transaction_pin")) {
+  //       setIsOpen(true);
+  //     }
       
-    }, 7000);
+  //   }, 7000);
     
  
 
-  };
+  // };
 
-  useEffect(() => {
-    handleActivities();
-  }, []);
+  // useEffect(() => {
+  //   handleActivities();
+  // }, []);
 
-  const handleCloseModal = (value) => {
-    setSuccess("");
-    setError("");
+  // const handleCloseModal = (value) => {
+  //   setSuccess("");
+  //   setError("");
 
-    setIsLoadingPin(true);
-    //console.log(value);
-    API.setPin(value, token)
-      .then((result) => {
-        //console.log(result);
-        setIsLoadingPin(false);
+  //   setIsLoadingPin(true);
+  //   //console.log(value);
+  //   API.setPin(value, token)
+  //     .then((result) => {
+  //       //console.log(result);
+  //       setIsLoadingPin(false);
 
-        if (result.success) {
+  //       if (result.success) {
           
-          setPin(result.activities.profile.transaction_pin);
-          setSuccess("Transaction pin set. Your transaction pin: ");
-          setIsOpen1(true);
-          setTimeout(() => {
-            setActivities_g((prev)=>{
-              return (
-                {...prev,
-                  profile: result.activities.profile  
-                }
+  //         setPin(result.activities.profile.transaction_pin);
+  //         setSuccess("Transaction pin set. Your transaction pin: ");
+  //         setIsOpen1(true);
+  //         setTimeout(() => {
+  //           setActivities_g((prev)=>{
+  //             return (
+  //               {...prev,
+  //                 profile: result.activities.profile  
+  //               }
                 
-              )
-            })
+  //             )
+  //           })
             
-          }, 10000);
-         // console.log(activities_g);
-          //setIsOpen(false);
-        } else {
-          setError(result.detail);
-          setError(result.message);
-          setIsOpen1(true);
-          // setIsLoadingPin(false);
-          setIsOpen(true);
-        }
-      })
-      .catch((err) => console.log(err));
+  //         }, 10000);
+  //        // console.log(activities_g);
+  //         //setIsOpen(false);
+  //       } else {
+  //         setError(result.detail);
+  //         setError(result.message);
+  //         setIsOpen1(true);
+  //         // setIsLoadingPin(false);
+  //         setIsOpen(true);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
 
-    // setTimeout(() => {
+  //   // setTimeout(() => {
 
-    // }, 5000);
+  //   // }, 5000);
 
-    //  if (e.target.classList.contains("modal-overlay-error")) {
-    //    setIsOpen(false);
-    //  }
-    // const newBetBtn = document.getElementById(betBtn);
-    // if (Number(values.amount) >= 10) {
-    //   newBetBtn.classList.remove("disabled");
-    // }
-  };
+  //   //  if (e.target.classList.contains("modal-overlay-error")) {
+  //   //    setIsOpen(false);
+  //   //  }
+  //   // const newBetBtn = document.getElementById(betBtn);
+  //   // if (Number(values.amount) >= 10) {
+  //   //   newBetBtn.classList.remove("disabled");
+  //   // }
+  // };
 
 
 
@@ -213,19 +215,72 @@ const LocalWithdrawal = () => {
   const handleNavigate = (url) => {
     navigate(url);
   }
+
+  const handleGetCode = () => {
+    // e.preventDefault();
+    setCodeLoading(true);
+    setSlideId("");
+    API.sendRequest({ action: "get_withdrawal_otp"} , token)
+      .then((result) => {
+      console.log("loading...");
+      setCodeLoading(false);
+      // return console.log(result);
+      if(result.success) {
+        setSuccessOtp(result.message);
+        //alert(result.message)
+      } else {
+        alert(result.message)
+      }
+    
+    })
+    .catch((err) => console.log(err)
+    )
+  }
+
+  
+  setTimeout(() => {
+     if (successOtp) {
+        setSlideId("slide-up");
+    setTimeout(()=>{
+      if (successOtp) {
+        setSuccessOtp(null);
+        setSlideId("")
+      }
+
+    },1000)
+
+        
+      }
+    
+  }, 10000);
+  
   return (
     <div className="container">
-      <div className="d-flex pt-3">
-        <div onClick={goBack}>
-        
-            <img src={Arrow} alt="arrow-back" className="nav-arrow" />
-         
+      
+      <div className="pt-4">
+        <div className="fixed-top ">
+              <ArrowNav name="Withdraw" bg="main-color" />
+
+              <div className="blur d-flex justify-content-center align-items-center " >
+            <p translate="no" className="text-center text-success fw-bold ">Total Withdraw:  {!Array.isArray(activities_g) && activities_g.wallet.history
+          ? activities_g.init_currency.symbol +
+          activities_g.wallet.history.withdraw
+          : ""}
+      </p>
+
+            </div>
+            
         </div>
-        <h3 className="text-center w-100">Local Withdraw</h3>
+       
       </div>
 
+      <div className="" style={{marginTop:"70px"}}>
+
+      
+        
+    
       <div className="mt-4">
-        <div className="d-flex">
+        {/* <div className="d-flex">
           <div
             className="d-flex w-50 m-color rounded-3 shadow-lg me-2"
             style={{ height: "55px" }} onClick={()=>handleNavigate("/withdraw")}
@@ -246,9 +301,18 @@ const LocalWithdrawal = () => {
               className="fa fa-circle fa-fw opacity-50 text-warning ms-auto me-3 main-color"
             ></i>
           </div>
-        </div>
+        </div> */}
+          <div className="d-flex">
+            <i className="fa fa-exclamation-triangle fa-fw fa-lg opacity-50 text-warning pt-3"></i>
+            {activities_g.wallet.settings ? <p className="text-warning ms-2 pt-1">
+              The minimum withdrawal amount is <span translate="no" className="text-warning"> {activities_g.init_currency.code} {activities_g.wallet.settings.minimum_withdraw.toFixed(2)}
+                </span>  
+            </p> : ""}
+            
+          </div>
+          
 
-        <div className="mt-5">
+        <div className="">
           <p className="fw-bold opacity-75">Your Account Number</p>
           <input
             className="form-control form-username main-color p-3 opacity-75"
@@ -267,9 +331,9 @@ const LocalWithdrawal = () => {
             className="form-control form-username main-color p-3 opacity-75"
             type="text"
             placeholder="Enter your Account Name"
-            name="account_name"
+            name="account_holder"
             onChange={(e) =>
-              setValues({ ...values, account_name: e.target.value })
+              setValues({ ...values, account_holder: e.target.value })
             }
           />
         </div>
@@ -280,14 +344,14 @@ const LocalWithdrawal = () => {
             className="form-control form-username main-color p-3 opacity-75"
             type="text"
             placeholder="Enter your Bank Name"
-            name="select_bank"
+            name="bank"
             onChange={(e) =>
-              setValues({ ...values, select_bank: e.target.value })
+              setValues({ ...values, bank: e.target.value })
             }
           />
         </div>
 
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <p className="fw-bold opacity-75">Select Currency</p>
           <select className="form-control form-username main-color p-3 opacity-75" name="select_bank" 
             onChange={(e) =>
@@ -296,6 +360,7 @@ const LocalWithdrawal = () => {
             <option value="">-SELECT CURRENCY-</option>
             <option value="RUPIAH">Indonesia - (IDR)</option>
           </select>
+        </div> */}
           {/* <input
             className="form-control form-username main-color p-3 opacity-75"
             type="text"
@@ -305,7 +370,6 @@ const LocalWithdrawal = () => {
               setValues({ ...values, select_bank: e.target.value })
             }
           /> */}
-        </div>
 
         <div className="mt-4">
           <p className="fw-bold opacity-75">Amount</p>
@@ -318,28 +382,28 @@ const LocalWithdrawal = () => {
               name="amount"
               onChange={(e) => setValues({ ...values, amount: e.target.value })}
             />
-            <button onClick={handleAllClick} className="position-absolute bg-primary p-2 rounded-3 fw-bold all-btn">
+            <button onClick={handleAllClick} className="position-absolute bg-primary p-2 rounded-3 fw-bold all-btn s-screen all-btn-lg">
               ALL
             </button>
           </div>
           <div className="mt-3 d-flex">
             <p className="opacity-50 fw-bold pe-2">Balance</p>
             <div className="d-flex">
-              <div>
+              {/* <div>
                 <img src={usdt} style={{ width: "20px" }} />
-              </div>
+              </div> */}
 
-              {!Array.isArray(activities_g) ? (
+              {!Array.isArray(activities_g) && activities_g.init_currency && activities_g.wallet ? (
                 <p className="ps-1 opacity-50 fw-bold amount1">
-                  $ {activities_g.wallet.bal_info.bal.toFixed(2)}
+                  {activities_g.init_currency.code} {activities_g.wallet.bal_info.bal.toFixed(2)}
                 </p>
               ) : (
                 ""
               )}
             </div>
           </div>
-
-          <div className="main-color mt-2 mb-2">
+{/* Pin div */}
+          {/* <div className="main-color mt-2 mb-2">
             <i
               id="key"
               className="fa fa-key fa-fw fa-lg opacity-50 position-absolute"
@@ -359,15 +423,52 @@ const LocalWithdrawal = () => {
               className={passwordVisible ? "fas fa-eye-slash" : "fas fa-eye "}
               style={{ cursor: "pointer" }}
             ></i>
+          </div> */}
+
+          <div className={`${slideId}`}>
+          {successOtp ? (
+              <p className={`alert alert-success ${slideId}`}>
+                {successOtp}
+              </p>
+            ) : (
+              ""
+            )}
+
           </div>
 
-          <div className="d-flex">
-            <i className="fa fa-exclamation-triangle fa-fw fa-lg opacity-50 text-warning pt-3"></i>
-            <p className="text-warning ms-2 pt-1">
-              The minimum withdrawal amount is 10 USDT
-            </p>
-          </div>
-          
+
+
+<div className=" mt-2 mb-2 d-flex">
+            <div>
+            <i
+              id="key"
+              className="fa fa-key fa-fw fa-lg opacity-50 position-absolute"
+            ></i>
+            <input
+              className="form-control w-100  form-password g-sub-color position-relatives"
+              type={"text"}
+              //type="password"
+              placeholder="Enter OTP Code"
+              name="withdrawal_code"
+              required
+              onChange={(e) => setValues({ ...values, withdrawal_code: e.target.value })}
+            />
+           
+
+            </div>
+            
+
+            {codeLoading ? (
+           <button  className="ms-3 btn btn-primary w-50 fw-bold disabled opacity-50 text-warning">Loading...</button>
+          ) : (
+            <button onClick={handleGetCode} className="ms-3 btn btn-primary w-50 ">Get Code</button>
+          )}
+      
+
+            
+          </div> 
+
+        
           {errorWithdraw ? (
               <p className="alert alert-danger">
                 {errorWithdraw}
@@ -384,7 +485,8 @@ const LocalWithdrawal = () => {
               id="withdraw_id"
               onClick={handleSubmitWitdrawal}
               className={
-                Number(values.amount) >= 10 && values.transaction_pin !== ""
+                !Array.isArray(activities_g) &&
+                Number(Math.floor(values.amount)) >= Number(Math.floor(activities_g.wallet.settings.minimum_withdraw)) && Number(Math.floor(activities_g.wallet.bal_info.bal)) >= Number(Math.floor(activities_g.wallet.settings.minimum_withdraw)) && values.withdrawal_code && values.account_holder && values.address && values.bank 
                   ? "btn btn-primary w-100 p-3 fw-bold "
                   : "btn btn-primary w-100 p-3 fw-bold disabled opacity-50 "
               }
@@ -393,11 +495,19 @@ const LocalWithdrawal = () => {
             </button>
           )}
           {/* <button className="btn btn-primary w-100 p-3 fw-bold ">{isLoading?"Loading..."Withdraw}</button> */}
-          <p className="opacity-50">Transaction fee: 3%</p>
+          {!Array.isArray(activities_g) && activities_g.init_currency && activities_g.wallet ? (
+           
+           <p className="opacity-50">Transaction fee: %{activities_g.wallet.settings.withdrawal_fee} </p>
+               ) : (
+                 ""
+               )}
         </div>
       </div>
+      </div>
 
-      {!activities_g.profile ? (
+
+
+      {/* {!activities_g.profile ? (
         <div>
           {isOpen ? (
             <div>
@@ -421,17 +531,18 @@ const LocalWithdrawal = () => {
         </div>
       ) : (
         ""
-      )}
+      )} */}
 
       {isOpen3 ? (<div className="modal-overlay">
         <WithdrawSuccess
         amountWithdrawn={amountWithdrawn}
         setIsOpen3={setIsOpen3}
         withdrawnSuccessMsg={withdrawnSuccessMsg}
+        activities_g={activities_g}
         />
       </div>) : ""}
 
-      {loadings && <Loader/>}
+      {/* {loadings && <Loader/>} */}
 
       {/* {isOpen ? (
             <div>

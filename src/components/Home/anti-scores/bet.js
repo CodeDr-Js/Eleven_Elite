@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./index.css";
+import "./Modal.css";
 import { DataContext } from "../../APIs/Api";
 import usdt from "../../../assets/icons/usdt.png";
 import tether from "../../../assets/icons/tether.png";
@@ -24,13 +25,16 @@ const Bet = ({
   awayLogo,
   leagueFlag,
   startDate,
+
 }) => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, allData, activeToken, setActivities_g, setActiveToken, activities, user } =
+  const { data, allData, activeToken, setActivities_g, setActiveToken, activities_g, user, settled, setSettled, openBet, setOpenBet, result } =
     useContext(DataContext);
   const token = Cookies.get("auth-token");
 
+  //console.log(activities_g);
+  
   //handling logout token
   // const handleLogout = async () => {
   //   try {
@@ -48,6 +52,7 @@ const Bet = ({
   // };
 
   const [showLoader, setShowLoader] = useState(false);
+  const [showLoader1, setShowLoader1] = useState(false);
 
   //Checking for token/Activ
   useEffect(() => {
@@ -90,7 +95,7 @@ const Bet = ({
     stake_amount: values.amount,
   };
 
-  //console.log(dbValues);
+  console.log({dbValues});
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -126,6 +131,76 @@ const Bet = ({
               if (result.success) {
                 setActivities_g(result.activities)
                 setSuccess(result.message);
+                setSettled(result.activities.betdir.settled);
+            setOpenBet(result.activities.betdir.openbet);
+                //setValues((values.amount = ""));
+              } else if(result.detail) {
+                Cookies.remove("auth-token");
+                navigate("/login");
+                //setValues(values.amount = "")
+              } else {
+                setError(result.message);
+              }
+            })
+            .catch((err) => setError(err));
+     
+
+
+
+
+
+      // API.retrieveData(token["auth-token"])
+      // .then((result) => {
+      //   console.log(result);
+        
+      //   if (result.success) {
+      //     API.paynow(dbValues, token["auth-token"])
+      //       .then((result) => {
+      //         console.log(result);
+      //         setShowLoader(false);
+      //         if (result.success) {
+      //           setSuccess(result.message);
+      //           //setValues((values.amount = ""));
+      //         } else if(result.status === 400) {
+      //           removeToken("auth-token");
+      //           navigate("/login");
+      //           //setValues(values.amount = "")
+      //         } else {
+      //           setError(result.message);
+      //         }
+      //       })
+      //       .catch((err) => setError(err));
+      //   } else if (!result.success) {
+      //     // removeToken("auth-token");
+      //     // navigate("/login");
+      //   }
+      // })
+      // .catch((err) => console.log(err));
+  };
+  
+  const handleSubmitSecure = (e) => {
+    e.preventDefault();
+    setIsOpen(!isOpen);
+
+    //handling logout token
+    setShowLoader1(true);
+    if (error) {
+      setError(null);
+    }
+
+    if (success) {
+      setSuccess(null);
+    }
+
+  
+          API.setSecure(dbValues, token)
+            .then((result) => {
+              console.log(result);
+              setShowLoader1(false);
+              if (result.success) {
+               // setActivities_g(result.activities)
+                setSuccess(result.message);
+               
                 //setValues((values.amount = ""));
               } else if(result.detail) {
                 Cookies.remove("auth-token");
@@ -178,7 +253,7 @@ const Bet = ({
   const handleChange = (event) => {
     const { name, value } = event.target;
     // Limit the number of digits to 5
-    if (value.length <= 6 || value === "") {
+    if (value.length <= 60 || value === "") {
       setValues({ ...values, [name]: value });
     } else {
       // If the input length exceeds 5 characters, prevent further input
@@ -187,10 +262,10 @@ const Bet = ({
     }
   };
 
-  const filteredIdGame = data.filter((item) => Number(id) === item.fixture.id);
-  const filteredIdOdd = allData.filter(
-    (item) => Number(id) === item.fixture.id
-  );
+  let filteredIdOdd = result.matches  ? result.matches.odds[Number(id)] : [];
+  
+   
+  const filteredIdGame = [JSON.parse(localStorage.filterOdd)];
 
   const leagueShortName2 = (name) => {
     if (name.length > 10) {
@@ -234,24 +309,33 @@ const Bet = ({
     }
   };
 
+  const handleAllClick = () => {
+    setValues((prev) => ({
+      ...prev,
+      amount: !Array.isArray(activities_g) ? activities_g.wallet.bal_info.bal.toFixed(2) : ""
+    }))
+    // setValues(!Array.isArray(activities_g) ? activities_g.wallet.bal_info.bal.toFixed(2):""); // Set the amount to total available amount
+  };
+
+
   return (
-    <div className="bet-div container default_color">
+    <div className="bet-div container-fluid default_color">
       {filteredIdGame.map((value) => (
         <div key={value.fixture.id} className="">
           <div className="text-center fs-3 ">
             {" "}
             <p> Selected Game </p>
           </div>
-          <div className="bet-color bet-div-2">
-            <div className="bet-color">
-              <div className="bet-color opacity-50 ">
+          <div className="secondary-color bet-div-2 ">
+            <div className="bg-transparent">
+              <div className="bg-transparent ">
                 {value.league.country} {value.league.name}
               </div>
             </div>
 
-            <div className="bet-color d-flex bet-team-div mt-3 ">
-              <div className="bet-color width-1 d-flex flex-column align-items-center">
-                <div className="bet-color bet-logo-div  ">
+            <div className="bg-transparent d-flex bet-team-div mt-3 ">
+              <div className="bg-transparent width-1 d-flex flex-column align-items-center">
+                <div className="bg-transparent bet-logo-div  ">
                   <img
                     src={value.teams.home.logo}
                     alt="logo"
@@ -259,7 +343,7 @@ const Bet = ({
                     style={{ width: "26px" }}
                   />
                 </div>
-                <p className="bet-color opacity-50 bet-font text-center">
+                <p className="bg-transparent bet-font text-center">
                   {leagueShortName2(value.teams.home.name)}
                 </p>
               </div>
@@ -277,10 +361,10 @@ const Bet = ({
                 </div>
               </div> */}
 
-              <div className="bet-color opacity-50 fs-5 mt-2">VS</div>
+              <div className="bg-transparent fs-5 mt-2">VS</div>
 
-              <div className="bet-color width-1 d-flex flex-column align-items-center">
-                <div className="bet-color bet-logo-div  ">
+              <div className="bg-transparent width-1 d-flex flex-column align-items-center">
+                <div className="bg-transparent bet-logo-div  ">
                   <img
                     src={value.teams.away.logo}
                     alt="logo"
@@ -288,7 +372,7 @@ const Bet = ({
                     style={{ width: "26px" }}
                   />
                 </div>
-                <p className="bet-color opacity-50 bet-font">
+                <p className="bg-transparent bet-font">
                   {leagueShortName2(value.teams.away.name)}
                 </p>
               </div>
@@ -296,40 +380,57 @@ const Bet = ({
 
             <div className="bg-primary rounded-4 w-75 text-center fs-5 btn btn-primary bet-cs-div d-flex justify-content-center">
               <p className="bg-primary bet-font-1 cs-sm">
-                Correct Score <img /> {correctScore}{" "}
+                Score <img /> {correctScore}{" "}
               </p>
             </div>
           </div>
 
-          <div className="bet-color bet-amount-div" >
-            <div className="bet-color d-flex pt-2 ps-3 pe-3" style={{height:"100px"}}>
-              <div className="bet-color">
-                <div className="bet-color ms-4">
-                  <p className="bet-color opacity-50 bet-font">Amount</p>
+          <div className="secondary-color bet-amount-div" >
+          <div className="d-flex bg-transparent bet-pg-div w-100 ps-3 pe-3 pt-2 ">
+                <div className="bg-transparent me-auto ">
+                  <div className="bg-transparent bet-font">Profit</div>
+                  <div className="bg-transparent ">{profit + "%"}</div>
                 </div>
-                <div className="bet-color">
-                  <div className="bet-color bet-input-div mt-3 ">
-                    <div className="bet-color">
+
+                <div className="bg-transparent ms-auto">
+                  <div className="bg-transparent bet-font">Gain</div>
+                  <div className="bg-transparent ">
+                    {percentageAdd(values.amount, profit)}
+                  </div>
+                </div>
+              </div>
+
+            <div className="bg-transparent d-flex pt-2 ps-3 pe-3" style={{height:"100px"}}>
+              <div className="bg-transparent">
+                {/* <div className="bg-transparent ms-4">
+                  <p className="bg-transparent bet-font">Amount</p>
+                </div> */}
+                <div className="bg-transparent">
+                  <div className="bg-transparent bet-input-div mt-3 ">
+                    <div className="bg-transparent">
                       {/* <img
                         className="amount-icon amount-icon-1 bg-white mt-2"
                         src={usdt}
                         alt="usdt"
                         style={{ width: "20px" }}
                       /> */}
-                      <img
-                        className="amount-icon amount-icon-2 ms-1 mt-2"
-                        src={dollar}
-                        alt="usd"
-                        style={{ width: "29px" }}
-                      />
+                      <div  translate="no" className="amount-icon amount-icon-2 ms-1 mt-2 text-primary  fw-bold fs-5">
+                      
+                      {activities_g.init_currency.symbol}
+                      </div>
+                      <button onClick={handleAllClick} className="bg-primary p-2 rounded-3 fw-bold all-btn position-absolute all-s-screen all-btn-big"  style={{marginLeft:"17.3rem", marginTop:"2px"}}>
+              ALL
+            </button>
                     </div>
                     <input
-                      className="btn btn-light bet-input fw-bold fs-5"
+                      className="btn btn-light bet-input fw-bold fs-5 bet-input-lg"
                       type="Number"
                       id="amount"
                       name="amount"
-                      maxLength="6"
+                      maxLength="60"
                       onChange={handleChange}
+                      placeholder="Amount"
+                      value={values.amount}
                     />
                   </div>
                 </div>
@@ -338,19 +439,7 @@ const Bet = ({
               {/* <div className="bet-color bet-x-div fs-5">
                 <div className="bet-color opacity-50">X</div>
               </div> */}
-              <div className="d-flex bet-color bet-pg-div ">
-                <div className="bet-color ms-2">
-                  <div className="bet-color bet-font">Profit</div>
-                  <div className="bet-color bet-per">{profit + "%"}</div>
-                </div>
-
-                <div className="bet-color ms-4">
-                  <div className="bet-color bet-font">Gain</div>
-                  <div className="bet-color bet-per">
-                    {amountLength(percentageAdd(values.amount, profit))}
-                  </div>
-                </div>
-              </div>
+             
             </div>
             {/* <div className="bet-color">
               {" "}
@@ -365,7 +454,7 @@ const Bet = ({
             <div>
               <img />
             </div>
-            <div className="text-danger mt-3">Minimum amount: 10</div>
+            <div className="text-danger mt-3">Minimum amount: <span className="text-danger" translate="no">{activities_g.init_currency.symbol} {activities_g.betdir.settings.minimum_bet_amount}</span></div>
             <div>
               <img />
             </div>
@@ -389,8 +478,22 @@ const Bet = ({
               disabled={showLoader}
               value={values.amount}
               betBtn={betBtn}
+              validValue={Number(activities_g.betdir.settings.minimum_bet_amount)}
             />
+            {result.is_teacher ? showLoader1 ? (<button className=" mt-2 btn btn-success opacity-50 disabled text-warning w-100">Loading...</button>) : <button onClick={handleSubmitSecure} className=" mt-2 btn btn-success w-100">Secure Bet</button>  : ""
+            // <Button
+            //   onSubmit={handleSubmit}
+            //   text="Secure Bet"
+            //   loading={showLoader}
+            //   disabled={showLoader}
+            //   betBtn={betBtn}
+            //   c={"btn-success"}
+        
+            // />
+
+            }
           </div>
+
           {isOpen ? (
             <div>
               {error ? (

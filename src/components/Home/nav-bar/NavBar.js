@@ -49,15 +49,15 @@ const NavBar = () => {
 
 
    
-    <div className="container pt-2 d-flex justify-content-between fixed-top default_color">
-      <div className=" d-flex" >
-            <div>
-            <img src={dollar} alt="Logo" className="" style={{ width: "33px" }} />
+    <div className="container pt-2 d-flex justify-content-between fixed-top default_color round-header">
+      <div translate="no" className=" d-flex vip-text-3" >
+            <div translate="no">
+            {/* <img src={dollar} alt="Logo" className="" style={{ width: "33px" }} /> */}
             </div>
 
-            {!Array.isArray(activities_g) ?(activities_g.wallet ? (<p className='ps-2 pt-1 fw-bold '>$  {activities_g.wallet.bal_info.bal.toFixed(2)}</p>):"")  : "" }
+            {!Array.isArray(activities_g) ?(activities_g.wallet ? (<p translate="no" className='ps-2 pt-1 fw-bold  '>{activities_g.init_currency.symbol}  {activities_g.wallet.bal_info.bal.toFixed(2)}</p>):"")  : "" }
           {/* <p className='ps-2 pt-1 fw-bold '>$ 30000</p> */}
-
+       
           </div>
 
           

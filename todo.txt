@@ -1,3 +1,31 @@
+1. Background color => Orange
+2. Currency Symbol for all pages
+3. Currency Symbol for all headers
+4. New Card Design 
+5. Withdrawal page => Condition, if USD   (USDT) else (Other)
+6. Deposit: Amount=>Submit amount(Check minimum deposit) => if currency is usdt = (usdt page, if amount is less than 100 show input for hashcode) else local: Check currency and display the account for the currency.
+7. if message pop up
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+..........................................
+Old Todo
+..........................................
 1.search anti-score
 2. pagination
 3. static files

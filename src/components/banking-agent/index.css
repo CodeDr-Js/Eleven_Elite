@@ -1,0 +1,80 @@
+.text-font {
+ 
+}
+
+.line-h {
+  line-height: 0;
+
+}
+
+.slide-up {
+  animation: slideRight 2s ease-out;
+}
+
+/* Slide-out animation */
+@keyframes slideRight {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.gradient {
+  background: linear-gradient(to right, #1E3A8A, #4C1D95);
+}
+
+.option-div option {
+    font-size: 0.75rem;
+    width: 100%;
+    /* box-sizing: border-box; 
+    margin-left: 200px; */
+}
+
+
+/* Style the calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: #d9ff00; /* Example background color */
+    color: white; /* Example text color */
+    padding: 0.25rem; /* Example padding */
+    border-radius: 50%; /* Example border radius */
+    cursor: pointer; /* Show pointer cursor on hover */
+  }
+  
+  /* Hide the default input arrow */
+  input[type="date"]::-webkit-inner-spin-button {
+    /* display: none; */
+  }
+  
+  /* Hide the clear button (Chrome and Safari) */
+  input[type="date"]::-webkit-clear-button {
+    /* display: none; */
+  }
+  
+  /* Hide the calendar button (Firefox) */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    /* display: none; */
+  }
+  
+
+  .transaction-div {
+    margin-top: 180px;
+  }
+
+  .transparent-block {
+    background: rgba(255, 255, 255, 0.01); /* Almost invisible but blocks content */
+    position: relative;
+    backdrop-filter: blur(10px); /* Blurs content behind */
+    z-index: 10;
+  }
+
+  @media screen and (max-width: 365px) { /* Adjust breakpoint as needed */
+    .t-date-size {
+      font-size: 12px !important;
+      width: 35% !important;
+     
+    }
+  }

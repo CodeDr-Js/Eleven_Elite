@@ -4,6 +4,8 @@ import ArrowNav from "../arrowNav/ArrowNav";
 import { API } from "../api-service/api-service";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import Arrow from "../../assets/images/document-management-system-return-icon-48 - Copy copy.png";
+import SwipeCard from "./swipeCard";
 
 const Other = ({
   setIsOther,
@@ -11,8 +13,146 @@ const Other = ({
   account_number,
   bank_name,
   style,
-  telegram
+  telegram,
+  activities_g,
+  isLocalAcc,
+  setActivities_g,
+  setFileUrl,
+  fileUrl,
+  awaiting,
+  setAwaiting
 }) => {
+  console.log("Local", activities_g);
+  console.log(isLocalAcc);
+  console.log("Awaiting is:",awaiting);
+  
+  
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [file, setFile] = useState(false);
+  const [transactionId, setTransactionId] = useState("");
+ const [isReceipt, setIsReceipt] = useState(false);
+
+
+ const handleShowReceipt = () => {
+  setIsReceipt(!isReceipt);
+ }
+
+
+ function formatTimestamp(timestamp) {
+  const [date, time] = timestamp.split("T");
+  const formattedTime = time.split(".")[0]; // Remove milliseconds and 'Z'
+  return `${date} ${formattedTime}`;
+}
+
+
+
+
+ 
+
+  
+  const handleFileChange = (e) => {
+    setFile(false);
+    const selectedFile = e.target.files[0];
+
+    // Validate file type
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "application/pdf"];
+    if (selectedFile && allowedTypes.includes(selectedFile.type)) {
+
+      setFile(true);
+      //console.log(selectedFile.type);
+      console.log("Selected",file);
+      
+    } else {
+      alert("Only PDF, JPEG, JPG, and PNG files are allowed.");
+      setFile(false);
+      console.log("Not selected",file);
+    }
+  };
+
+  const handleUpload = async () => {
+   // e.preventDefault();
+    // setIsLoading(true);
+    console.log("Running upload check", file);
+  
+
+      var form = document.getElementById('sendersName');
+      
+      form.onsubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        const form = e.currentTarget;
+        const url = form.action;
+       // console.log("running...2");
+
+       if (!file) {
+        setIsLoading(false);
+       alert("Please select a valid file.");
+
+       return;
+      }
+
+        try {
+            const formData = new FormData(form);
+            console.log({formData});
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response=>response.json())
+            .then(data=>{ 
+              setIsLoading(false);
+              console.log(data); 
+              if(data.deposit_dir.awaiting_deposit[0].fields.generator === "awaiting_deposit_confirmation") {
+                setActivities_g((prev)=>({...prev, deposit_dir: data.deposit_dir}));
+
+                setAwaiting(true);
+
+                setFileUrl(data.deposit_dir.awaiting_deposit[0].fields.file_url);
+              } else {
+                setAwaiting(false);
+              }
+            
+            })
+            // console.log(response);
+        } catch (error) {
+            console.error(error);
+        }
+
+      
+
+    // const formData = new FormData(document.getElementById('sendersName'));
+    // // formData.append("file", file);
+    
+    // console.log("FormData", formData);
+    
+    // API.uploadForm({transaction_id: transactionId, data_id: activities_g.deposit_dir.awaiting_deposit[0].pk, myfile: file}, token )
+    // .then((result)=> {
+    //   console.log(result);
+      
+    // })
+    // .catch((err)=>console.log(err)
+    // )
+
+  }
+
+    // try {
+    //   const response = await axios.post("http://localhost:5000/upload", formData, {
+    //     headers: { "Content-Type": "multipart/form-data" },
+    //   });
+
+    //   alert("File uploaded successfully: " + response.data.fileName);
+    // } catch (error) {
+    //   console.error("Error uploading file", error);
+    //   alert("Upload failed!");
+    // }
+  };
+
+  const goBack = () => {
+    window.history.back();
+  };
+
   const [values, setValues] = useState({
     sender: "",
     amount: "",
@@ -28,12 +168,12 @@ const Other = ({
     setIsOther(false);
   };
 
-  const handleFileChange = (event) => {
-    setValues((prev) => ({
-      ...prev,
-      file_upload: event.target.files[0],
-    }));
-  };
+  // const handleFileChange = (event) => {
+  //   setValues((prev) => ({
+  //     ...prev,
+  //     file_upload: event.target.files[0],
+  //   }));
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,80 +184,186 @@ const Other = ({
 
   return (
     <>
-      {/* <ArrowNav name="Others"/> */}
-      <div className=" error-div-other main-color container mt-3">
-        <div className="bg-transparent d-flex">
-          <div className="bg-transparent"></div>
-          <i onClick={close} className="fa fa-close ms-auto "></i>
-        </div>
-        {telegram}
-        <div
-          className="m-color rounded-4 p-3 text-center"
-          style={{ lineHeight: "1px" }}
-        >
-          <h2 className="">Account Details</h2>
-          <div className="opacity-75">
-            <p className="fw-bold">Account Number </p>
-            <p>{account_number}</p>
-            <p className="fw-bold">Account Name </p>
-            <p>{account_name}</p>
-            <p className="fw-bold">Bank Name </p>
-            <p>{bank_name}</p>
+      <div className="container">
+        {/* <div className="d-flex pt-3">
+          <div onClick={goBack}>
+            <img src={Arrow} alt="arrow-back" className="nav-arrow" />
           </div>
+          <h3 className="text-center w-100">Deposit</h3>
+        </div> */}
+      {awaiting ?
+        <div className="card-slide">
+          <p className="opacity-50 p-3 text-center">Note: Local deposit confirmation takes up to 0-3 hours based on your bank network status. For help please contact  support.</p>
+          <div className="w-100 bg-warning rounded-4 shadow-sm p-2 pt-4 pb-4 text-center ">
+          <div class="spinner-border text-primary" role="status"></div>
+            <h4 className="text-center fw-bold shadow-sm">Pending Transaction</h4>
+            <small className="fw-bold">Amount</small>
+            <p className="fw-bold text-primary fs-3 shadow-sm"> {!Array.isArray(activities_g) && activities_g.deposit_dir && activities_g.deposit_dir.awaiting_deposit !== null ? activities_g.deposit_dir.awaiting_deposit[0].fields.method + " " + Math.floor(activities_g.deposit_dir.awaiting_deposit[0].fields.amount) : ""}</p>
+
+            <small className="fw-bold">Time</small>
+            <p className="fw-bold text-primary fs-3 shadow-sm"> {!Array.isArray(activities_g) && activities_g.deposit_dir && activities_g.deposit_dir.awaiting_deposit !== null ? formatTimestamp(activities_g.deposit_dir.awaiting_deposit[0].fields.timestamp): ""}</p>
+            <small className="fw-bold">Status</small>
+            <p className="fw-bold text-warning fs-3 shadow-sm bg-dark p-2 rounded text-center  "> PENDING </p>
+            
+            <button onClick={handleShowReceipt} className="btn btn-primary w-100 p-2 fs-3 fw-bold">{isReceipt?"Hide Receipt":"View Receipt"}</button>
+            {isReceipt && <div>
+            <img src={fileUrl} className="rounded-3 mt-3 image-size"/>
+            </div>}
+            
+           
+          </div>
+        </div> 
+       
+      :  
+      <div className="mt-4 mb-5">
+      <div className="">
+        <div className="d-flex">
+       
         </div>
 
-        <div className="mt-3 ">
-          <h3>Submit details:</h3>
-          <div className="m-color p-4 text-center rounded-4">
-            {/* <input
-              className="form-control w-100 form-username g-sub-color mb-3 "
-              type="text"
-              placeholder="Provide Senders name"
-              name="sender"
-              required
-              onChange={(e) =>
-                setValues({ ...values, sender: e.target.value })
-              }
+        <div className="mt-4">
+          <p className="fw-bold">Payment Guide</p>
+          <ol className="text-justify opacity-50">
+            <li>
+              Copy any of the Bank details below to complete your
+              transaction.
+            </li>
+            <br></br>
+            <li>
+              Submit your success payment proof and the transaction ID or
+              sender's name for quick confirmation.{" "}
+            </li>
+          </ol>
+
+          <h3 className="text-center">
+            Copy account address here
+          </h3>
+        </div>
+        {isLocalAcc && 
+        <div >
+          <SwipeCard activities_g={activities_g} isLocalAcc={isLocalAcc} />
+
+          <div></div>
+
+          <div className="moving-text-container mt-2"></div>
+
+        
+
+          <br />
+
+          <div>
+          <form id="sendersName"
+            action="https://rrtcc-4a28b26f2705.herokuapp.com/api/upload/ "
+            method="POST"
+            enctype="multipart/form-data"
+          >
+
+            <input
+              type="hidden"
+              name="data_id"
+              className="form-control form-username main-color p-3 opacity-75"
+              value={activities_g.deposit_dir.awaiting_deposit[0].pk}
             />
             <input
-              className="form-control w-100 form-username g-sub-color mb-3 "
-              type="text"
-              placeholder="Enter Amount Sent"
-              name="amount"
-              required
-              onChange={(e) =>
-                setValues({ ...values, amount: e.target.value })
-              }
-            /> */}
-            {/* <input
-              className="form-control w-100 form-username g-sub-color mb-3 "
-              type="file"
-              name="file_upload"
-              required
-              onChange={handleFileChange}
-            /> */}
-            <small className="text-warning text-center  opacity-50">
-              Kindly click on the upload button and upload your Successful
-              Transaction Receipt along side with Amount Sent, Username and the
-              Sender's fullname on Telegram Customer Care Service for Automatic
-              Confirmation and Approval
-            </small>
-            <br></br>
-            <br></br>
-            <small className="text-danger fw-bold text-center  opacity-50 ">
-              Note: 200,000 IDR is the minimum deposit accepted.
-            </small>
+              type="hidden"
+              name="token"
+              className="form-control form-username main-color p-3 opacity-75"
+              value={token}
+            />
 
-            <Link
-              id="withdraw_id"
-              to="https://t.me/Pamelladz"
-              className={`btn btn-primary w-100 p-3 fw-bold text-decoration-none mt-3 ${style}`}
-            >
-              Upload Receipt
-            </Link>
+            <textarea
+              className="form-control form-username main-color p-3 opacity-75"
+              placeholder="Enter sender's name /transaction ID"
+              name="transaction_id"
+              required
+              onChange={(e)=>setTransactionId(e.target.value)}
+            />
+            <br />
+            <small className="text-warning">
+              Upload Receipt: pdf, jpg, jpeg, png
+            </small>
+            <input
+              type="file"
+              name="file"
+              className="form-control form-username main-color p-3 opacity-75"
+              placeholder="Upload Receipt"
+              onChange={handleFileChange}
+              required
+            />
+            <br />
+
+            <div className="mb-4">
+              {isLoading ? (
+                <button className="btn btn-primary w-100 p-3 fw-bold disabled opacity-50 text-warning">
+                  Loading...
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  id="withdraw_id"
+                  className={
+                    10 > 2
+                      ? "btn btn-primary w-100 p-3 fw-bold "
+                      : "btn btn-primary w-100 p-3 fw-bold disabled opacity-50 "
+                  }
+                  onClick={handleUpload}
+                >
+                  Submit Transaction
+                </button>
+              )}
+            </div>{" "}
+            <br/>
+            </form>
+
           </div>
-        </div>
+          
+        </div> }
+        {!isLocalAcc && <div className="fs-3 text-center mt-5 pt-5"><p className="text-center mt-5 opacity-25 pt-2">No available account</p>
+          <p className="text-center opacity-25 text-success fw-bold">Contact Support</p></div>}
+
+        {/* NOTE */}
+        {/* <div className="mt-4">
+          <div className="opacity-50 pe-2 text-justify fst-italic bg-transparent">
+            <span className="text-warning ">NOTE:</span>
+            <ol>
+              <li className="pb-2 pt-1">
+                {" "}
+                <small>
+                  {" "}
+                  Please do not deposit any assets other than TRC20-USDT to
+                  the above address, as the assets will be irretrievable.
+                  The minimum recharge amount is 10 USDT, and recharges
+                  below the minimum amount will not be credited and cannot
+                  be refunded.
+                </small>
+              </li>
+              <li className="pb-2 ">
+                <small>
+                  Your recharge address will change frequently after a
+                  success transaction and cannot be reused for deposits. In
+                  case of any changes, we will notify you through website
+                  announcements or emails. Please ensure the security of
+                  your computer and browser to prevent information tampering
+                  and leakage.
+                </small>
+              </li>
+              <li>
+                {" "}
+                <small>
+                  After you deposit to the above address, it requires
+                  confirmation from the entire network nodes. The funds will
+                  be credited after 1 network confirmation, and you can
+                  withdraw them after 1 network confirmation tips
+                </small>
+              </li>
+            </ol>
+          </div>
+          
+        </div> */}
       </div>
+    </div>}
+      </div>
+      {/* <ArrowNav name="Others"/> */}
     </>
   );
 };

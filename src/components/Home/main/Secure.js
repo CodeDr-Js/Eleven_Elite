@@ -16,8 +16,8 @@ const Secure = ({home, away, league, hflag, aflag, odd, score, time, style, text
   return (
     <div>
         <div className="container bg-transparent mt-4">
-        <p className="ps-3">Secured Bet 👑</p>
-        <div className="m-color rounded-4 p-3">
+        <p className="ps-3">Insured Bet 👑</p>
+        <div className="transparent-color rounded-4 p-3">
           {/* Start 1st */}
           <div className=" bg-transparent d-flex justify-content-between w-100">
             <div className=" bg-transparent  d-flex flex-column align-items-center secureW-1">
@@ -30,7 +30,7 @@ const Secure = ({home, away, league, hflag, aflag, odd, score, time, style, text
               <p className=" bg-transparent secured-font"> {home}</p>
             </div>
             <div className=" bg-transparent d-flex flex-column align-items-center mt-1 secureW-2 ">
-              <p className=" bg-transparent opacity text-center">{getFirstAndSecondWords(league)}</p>
+              {/* <p className=" bg-transparent opacity text-center">{getFirstAndSecondWords(league)}</p> */}
               <p style={{"fontFamily": "Orbitron, sans-serif"}} className={`bg-transparent ${FS}`}> {time}</p>
             </div>
             <div className=" bg-transparent  d-flex flex-column align-items-center secureW-1">
@@ -63,15 +63,19 @@ const Secure = ({home, away, league, hflag, aflag, odd, score, time, style, text
 
             {/* End here */}
 
-          <div className=" bg-transparent d-flex justify-content-between">
-            <div
-              className=" white text-dark ps-3 pe-3 fw-bold rounded-3 d-flex flex-column align-items-center line-height"
-              style={{ width: "30%", height: "50px" }}
+            <p translate='no' className=" bg-transparent text-white text-center fs-4 fw-bold shadow-lg">⚽{score} @ <span className='text-success'>{odd}%</span></p>
+
+            {/* <div
+              className=" white text-dark ps-3 pe-3 fw-bold rounded-3 d-flex flex-column align-items-center line-height w-50 justify-content-center"
+              style={{ height: "auto" }}
             >
-              <p className=" bg-transparent text-dark mt-3">Prediction</p>
-              <p className=" bg-transparent text-dark ">{score}</p>
-            </div>
-            <div
+    
+             
+            </div> */}
+
+          <div className=" bg-transparent d-flex justify-content-between">
+           
+            {/* <div
               className="  pink text-dark ps-3 pe-3 fw-bold rounded-3"
               style={{ width: "30%", height: "50px" }}
             >
@@ -87,10 +91,10 @@ const Secure = ({home, away, league, hflag, aflag, odd, score, time, style, text
 
                 <p className=" bg-transparent">{odd}%</p>
               </div>
-            </div>
+            </div> */}
             <button
-              className={`blue border-0 text-white ps-3 pe-3 fw-bold rounded-3 ${style}`}
-              style={{ width: "30%", height: "50px" }} onClick={onClick}
+              className={`btn blue border-0 text-white ps-3 pe-3 fw-bold rounded-3 text-wrap w-100 ${style}`}
+              style={{ width: "auto", height: "auto" }} onClick={onClick}
             >
               {text}
             </button>

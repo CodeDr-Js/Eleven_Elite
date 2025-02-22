@@ -27,17 +27,17 @@ const navigate = useNavigate();
        <div  className=" bg-transparent d-flex justify-content-center mb-1">
         <img className=" bg-transparent" src={error2} alt="success icon" style={{width: "35px"}}/>
       </div>
-      <div className="bet-color text-center text-danger fw-bold">{error}</div>
-      <div className="bet-color d-flex  mt-4">
+      <div className="bg-transparent text-center text-danger fw-bold">{error}</div>
+      <div className="bg-transparent d-flex  mt-4">
         <button
           onClick={handleCloseModal}
-          className="btn btn-success w-25 error-button bet-color me-auto "
+          className="btn btn-success w-25 error-button bg-transparent me-auto "
         >
           Ok
         </button>
         <button
           onClick={goBack}
-          className="btn btn-success error-button bet-color"
+          className="btn btn-success error-button bg-transparent"
         >
           Deposit
         </button>

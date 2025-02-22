@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./index.css";
+import "./forgetPassword.css";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/images/Logo.png";
 import Arrow from "../../assets/images/document-management-system-return-icon-48 - Copy copy.png";

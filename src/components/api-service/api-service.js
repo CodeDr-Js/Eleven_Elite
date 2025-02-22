@@ -3,7 +3,7 @@ import { pathname } from "../search_dir/search_dir"
 
 
 let Token='5e26b54473f0cce5a2e84a5a209ec5340ae2357e'
-let url = 'https://eef-478a01632e14.herokuapp.com/api/'
+let url = 'https://rrtcc-4a28b26f2705.herokuapp.com/api/'
 export class API {
 
     static loginUser(body){
@@ -44,9 +44,9 @@ export class API {
         .then(resp=>resp.json())
     }
     
-    static transaction(body, Token){
-       //console.log(body);
-        let endpoint=`transaction/?filter_date=${body.filter_date}&transaction_type=${body.transaction_type}`
+    static transaction(params, Token){
+       console.log(params);
+        let endpoint=`transaction/${params}`
         //console.log(endpoint);
         return fetch(url+endpoint,{
             'method':'GET',
@@ -99,8 +99,21 @@ export class API {
     }
 
     static paynow(body, Token){
+      // console.log(body);
+        let endpoint = "betdir/paynow/";
+        return fetch(url + endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization':`Token ${Token}`
+          },
+          body: JSON.stringify(body)
+        }).then((resp) => resp.json());
+   }
+
+    static setSecure(body, Token){
        // console.log(body);
-         let endpoint = "betdir/paynow/";
+         let endpoint = "betdir/set_secure/";
          return fetch(url + endpoint, {
            method: "POST",
            headers: {
@@ -111,9 +124,85 @@ export class API {
          }).then((resp) => resp.json());
     }
 
+    
+    static sendRequest(body, Token, headers=null){
+       // console.log(body);
+         let endpoint = "wallet/send_request/";
+         return fetch(url + endpoint, {
+           method: "POST",
+           headers: !headers ? {
+             "Content-Type": "application/json",
+             'Authorization':`Token ${Token}`
+           }: headers,
+           body: JSON.stringify(body)
+         }).then((resp) => resp.json());
+    }
+
     static retrieveData(token){
          let page = pathname.replace('/', "");
-         let endpoint = `retrieve-data/?page=${page}`;
+         let endpoint = `retrieve-data/?req_date=${new Date().toJSON()}`;
+        //  let endpoint = `retrieve-data/?req_date=${new Date('2025-02-16T01:09:30.420Z').toJSON()}`;
+         return fetch(url + endpoint, {
+           method: "GET",
+           headers: {
+             "Content-Type": "application/json",
+             'Authorization':`Token ${token}`
+           },
+         }).then((resp) => resp.json());
+    }
+    static bankingAgent(params, token){
+         let page = pathname.replace('/', "");
+         let endpoint = `banking-agent/${params}`;
+        //  let endpoint = `retrieve-data/?req_date=${new Date('2025-02-16T01:09:30.420Z').toJSON()}`;
+         return fetch(url + endpoint, {
+           method: "GET",
+           headers: {
+             "Content-Type": "application/json",
+             'Authorization':`Token ${token}`
+           },
+         }).then((resp) => resp.json());
+    }
+
+    static retrieveHistory(token){
+         let page = pathname.replace('/', "");
+         let endpoint = `betdir/history/`;
+         return fetch(url + endpoint, {
+           method: "GET",
+           headers: {
+             "Content-Type": "application/json",
+             'Authorization':`Token ${token}`
+           },
+         }).then((resp) => resp.json());
+    }
+
+
+    static retrieveDeposit(token){
+         let page = pathname.replace('/', "");
+         let endpoint = `wallet/deposit/`;
+         return fetch(url + endpoint, {
+           method: "GET",
+           headers: {
+             "Content-Type": "application/json",
+             'Authorization':`Token ${token}`
+           },
+         }).then((resp) => resp.json());
+    }
+
+    static retrieveWitdrawal(token){
+         let page = pathname.replace('/', "");
+         let endpoint = `wallet/withdraw/`;
+         return fetch(url + endpoint, {
+           method: "GET",
+           headers: {
+             "Content-Type": "application/json",
+             'Authorization':`Token ${token}`
+           },
+         }).then((resp) => resp.json());
+    }
+
+    static retrievePromotion(token){
+         let page = pathname.replace('/', "");
+         let endpoint = `promotion/teams/`;
          return fetch(url + endpoint, {
            method: "GET",
            headers: {
@@ -138,6 +227,19 @@ export class API {
  
     }
 
+    static submitBanking(body, Token){
+      //console.log(body);
+      let endpoint = "banking-agent/";
+       return fetch(url + endpoint, {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+           'Authorization':`Token ${Token}`
+         },
+         body: JSON.stringify(body)
+       }).then((resp) => resp.json());
+  }
+
     static cancelTicket(body, Token){
       //console.log(body);
        let endpoint = "betdir/cancel_bet/";
@@ -150,6 +252,8 @@ export class API {
          body: JSON.stringify(body)
        }).then((resp) => resp.json());
   }
+
+
     static logout(Token){
       //console.log(body);
        let endpoint = "logout/";
@@ -187,6 +291,18 @@ export class API {
     static invite(Token){
       //console.log(body);
        let endpoint = "promotion/invite_reward/"
+
+       return fetch(url + endpoint, {
+         method: "GET",
+         headers: {
+           "Content-Type": "application/json",
+           'Authorization':`Token ${Token}`
+         },
+       }).then((resp) => resp.json());
+  }
+    static task(Token){
+      //console.log(body);
+       let endpoint = "promotion/task/"
 
        return fetch(url + endpoint, {
          method: "GET",

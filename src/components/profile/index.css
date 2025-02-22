@@ -98,7 +98,80 @@
     word-wrap: break-word; /* For older browsers */
 }
 
+.vip-gold {
 
+    background: linear-gradient(135deg, #FFD700, #0a0a0a, #FFB700, #5b5c32);
+    color: rgb(241, 235, 215); /* Ensures text is readable */
+    font-weight: bold;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.5);
+    font-size: 15px;
+    
+}
+.vip-gold-1 {
+
+    
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 2px rgba(255, 215, 0, 0.5);
+    height: 25px;
+    margin-left: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
+ 
+    
+}
+
+.vip-text {
+    font-size: 15px;
+    font-weight: bold;
+    color: gold;
+    text-transform: uppercase;
+    text-shadow: 
+        1px 1px 0px #b8860b, 
+        2px 2px 0px #a57106, 
+        3px 3px 0px #8b6508, 
+        4px 4px 5px rgba(0, 0, 0, 0.5);
+    letter-spacing: 3px;
+}
+
+.vip-text-2 {
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(252, 251, 249);
+    text-transform: uppercase;
+    text-shadow: 
+        1px 1px 0px #b8860b, 
+        1px 2px 0px #a57106, 
+        0px 0px 0px #8b6508, 
+        4px 4px 5px rgba(0, 0, 0, 0.5);
+    letter-spacing: 3px;
+}
+.vip-text-3 {
+    font-size: 11px;
+    font-weight: bold;
+    color: rgb(252, 251, 249);
+    text-transform: uppercase;
+    text-shadow: 
+        1px 1px 0px #b8860b, 
+        0px 1.5px 0px #a57106, 
+        0px 0px 0px #8b6508, 
+        2px 2px 2px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+}
+
+.gold-crown {
+    color: gold;
+    font-size: 15px;
+    text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.7);
+}
+@media screen and (max-width: 378px) { /* Adjust breakpoint as needed */
+    .s-text-size {
+      font-size: 12px !important;
+     
+    }
+  }
 /* Modal.css */
 .modal-overlay-profile {
     position: fixed;

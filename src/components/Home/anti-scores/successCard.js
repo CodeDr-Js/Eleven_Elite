@@ -12,17 +12,17 @@ const SuccessCard = ({ success }) => {
       <div  className=" bg-transparent d-flex justify-content-center mb-1">
         <img className=" bg-transparent" src={success2} alt="success icon" style={{width: "35px"}}/>
       </div>
-      <div className="bet-color text-center text-success fw-bold">
+      <div className="bg-transparentr text-center text-success fw-bold">
         {success}
       </div>
-      <div className="bet-color d-flex  mt-4">
+      <div className="bg-transparent d-flex  mt-4">
         <button
           onClick={goBack}
-          className="btn btn-success error-button bet-color me-auto "
+          className="btn btn-success error-button bg-transparent me-auto "
         >
           Continue
         </button>
-        <Link to="/history" className="btn btn-success error-button bet-color">
+        <Link to="/history" className="btn btn-success error-button bg-transparent">
           History
         </Link>
       </div>

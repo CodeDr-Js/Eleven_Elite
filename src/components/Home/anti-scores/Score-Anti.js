@@ -11,12 +11,13 @@ import axios from "axios";
 import { DataContext } from "../../APIs/Api";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { CalculateStartDiff } from "../../qickfun/qickfun";
+import { CalculateStartDiff, addHours } from "../../qickfun/qickfun";
 import NoData from "../../noData/noData";
 import Loader from "../../loader/loader";
 import NavBar_Anti from "./NavBar-Anti";
 import NavBar_Logo from "../../NavBar/NavBar_Logo";
 import { AddImg } from "../../qickfun/qickfun";
+import { API } from "../../api-service/api-service";
 
 
 const ScoreAnti = () => {
@@ -33,6 +34,8 @@ const ScoreAnti = () => {
     setCheckDate,
     loadingNew,
     setLoadingNew,
+    result,
+    setResult
     
   } = useContext(DataContext);
   const [displayedData, setDisplayedData] = useState([]);
@@ -51,7 +54,7 @@ const ScoreAnti = () => {
   //Checking for token/Activ
   useEffect(() => {
     if (!token) {
-      console.log("Your token is", token);
+      //console.log("Your token is", token);
       navigate("/login");
       setActiveToken("");
     } else {
@@ -85,14 +88,14 @@ const ScoreAnti = () => {
   //   );
   //   setFilteredDatas(filtered);
   // };
-  const handleSearch = () => {
+  // const handleSearch = () => {
 
-    // Filter the data based on the search input
-    const filtered = filteredData[0] ? filteredData.filter(item => 
-      item.teams.home.name.toLowerCase().includes(search.toLowerCase()) 
-    ):"";
-    setFilteredSearch([filtered]);
-  };
+  //   // Filter the data based on the search input
+  //   const filtered = filteredData[0] ? filteredData.filter(item => 
+  //     item.teams.home.name.toLowerCase().includes(search.toLowerCase()) 
+  //   ):"";
+  //   setFilteredSearch([filtered]);
+  // };
 
   // useEffect(()=>{
   //   handleSearch()
@@ -152,14 +155,14 @@ const ScoreAnti = () => {
   //   console.log(filteredData);
   // });
 
-  const filterIds = new Set(allData.map((item) => item.fixture.id));
-  //console.log(filterIds);
+  // const filterIds = new Set(result.matches.fixtures.response.map((item) => item.fixture.id));
+  // console.log(filterIds);
 
   // Filtering data100 based on whether their ID exists in data20
-  const filteredData = data[0]
-    ? data.filter((item) => filterIds.has(item.fixture.id))
-    : "";
-  //console.log(filteredData);
+  // const filteredData = data[0]
+  //   ? data.filter((item) => filterIds.has(item.fixture.id))
+  //   : "";
+  // console.log(filteredData);
 
   useEffect(() => {
     setLoading(true);
@@ -167,194 +170,208 @@ const ScoreAnti = () => {
     // if(displayedData){
     //   setLoading(false);
     // }
-    setDisplayedData(filteredData)
+    //setDisplayedData(filteredData)
   }, []);
   //console.log(displayedData);
   
-  const loadMoreData = () => {
-    const newIndex = displayedData.length + limit;
-    if (newIndex >= filteredData.length) {
-      setDisplayedData(filteredData);
-      setHasMore(false);
-    } else {
-      setDisplayedData((prevData) => [
-        ...prevData,
-        ...filteredData.slice(prevData.length, newIndex),
-      ]);
-    }
-  };
+  // const loadMoreData = () => {
+  //   const newIndex = displayedData.length + limit;
+  //   if (newIndex >= filteredData.length) {
+  //     setDisplayedData(filteredData);
+  //     setHasMore(false);
+  //   } else {
+  //     setDisplayedData((prevData) => [
+  //       ...prevData,
+  //       ...filteredData.slice(prevData.length, newIndex),
+  //     ]);
+  //   }
+  // };
 
-  const lastElementRef = useCallback(
-    (node) => {
-      if (loading) return;
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          loadMoreData();
-        }
-      });
-      if (node) observer.current.observe(node);
-    },
-    [loading, hasMore]
-  );
+  // const lastElementRef = useCallback(
+  //   (node) => {
+  //     if (loading) return;
+  //     if (observer.current) observer.current.disconnect();
+  //     observer.current = new IntersectionObserver((entries) => {
+  //       if (entries[0].isIntersecting && hasMore) {
+  //         loadMoreData();
+  //       }
+  //     });
+  //     if (node) observer.current.observe(node);
+  //   },
+  //   [loading, hasMore]
+  // );
 
  // console.log("Filtered games :",filteredSearch);
-  
+  let hasGame = false
   const e = [];
   // const newGames = filteredData[0]? filteredData.map((game, index) => {
-  const newGames = filteredData[0]
-    ?  filteredData.map((game, index) => {
-       // console.log("game is",game);
-        //console.log(game);
-        const gameStatus = game.fixture.status.short;
-        //console.log(gameStatus);
-        const gameStartTime = game.fixture.timestamp * 1000;
-        let gameTime = CalculateStartDiff(gameStartTime);
+  const newGames = [];
+  console.log({newGames});
+  
+  if(result.matches){ result.matches.fixtures.response.map((game, index) => {
+    //console.log("game is",game);
+    hasGame = true;
+     //console.log(game);
+     const gameStatus = game.fixture.status.short;
+     //console.log(gameStatus);
+     const gameStartTime = game.fixture.timestamp * 1000;
+     let gameTime = CalculateStartDiff(gameStartTime);
 
-        //console.log(gameTime);
+     //console.log(gameTime);
 
-        const userTime = Date.now();
+     const userTime = Date.now();
 
-        // filteredSearch.map((item)=>{
-        //   return item.map((items)=>{
-        //     console.log("items are: ", items);
+     // filteredSearch.map((item)=>{
+     //   return item.map((items)=>{
+     //     console.log("items are: ", items);
 
-        //     })
-          
-        //   //console.log("The items are :",item);
-        // })
+     //     })
+       
+     //   //console.log("The items are :",item);
+     // })
 
-        // const timeout = setTimeout(() => {
+     // const timeout = setTimeout(() => {
 
-        // }, 1000);
+     // }, 1000);
 
-        // console.log(userTime, gameStartTime);
-        //CHECK USERTIME AND GAMESTARTTIME
-       // console.log("yes1", game);
+     // console.log(userTime, gameStartTime);
+     //CHECK USERTIME AND GAMESTARTTIME
+    // console.log("yes1", game);
 
-        if (gameStatus === "NS" && !gameTime.expired) {
-          //console.log("yes2");
-          e.push(game);
-          //console.log("The pushed data is ", game);
-          let endId = "ends-" + game.fixture.id;
-          let matchCard = "match-" + game.fixture.id;
-          const timeout = (endId, matchCard) => {
-            let x = setInterval(() => {
-              const end = document.getElementById(endId);
-              if (end) {
-                gameTime = CalculateStartDiff(gameStartTime);
-                if (!gameTime.expired) {
-                  const hour = gameTime.counter.hours;
-                  const days = gameTime.counter.days;
-                  const minutes = gameTime.counter.minutes;
-                  const seconds = gameTime.counter.seconds;
-                  end.innerText = `Ends in ${hour}${minutes}${seconds}`;
-                } else {
-                  clearInterval(x);
-                  const matchCardDiv = document.getElementById(matchCard);
-                  //matchCard.style.display = 'none';
-                  matchCardDiv.remove();
-                  // console.log(gameTime, "expired");
-                }
-                //console.log(end);
-              }
-            }, 1000);
-          };
-          // if (gameStatus === "FT") {
+     if (gameStatus === "NS" && !gameTime.expired) {
+       //console.log("yes2");
+       e.push(game);
+       //console.log("The pushed data is ", game);
+       let endId = "ends-" + game.fixture.id;
+       let matchCard = "match-" + game.fixture.id;
+       const timeout = (endId, matchCard) => {
+        
+           const end = document.getElementById(endId);
+           if (end) {
+             gameTime = CalculateStartDiff(gameStartTime);
+             if (!gameTime.expired) {
+               const hour = gameTime.counter.hours;
+               const days = gameTime.counter.days;
+               const minutes = gameTime.counter.minutes;
+               const seconds = gameTime.counter.seconds;
+               end.innerText = `Ends in ${hour}${minutes}${seconds}`;
+             } 
+             //console.log(end);
+           }
+     
+       };
+       // if (gameStatus === "FT") {
 
-          const scoreCard = (
-            <div
-              // ref={lastItemRef}
-              id={matchCard}
-              onClick={() => {
-                navigate("/odd/" + game.fixture.id);
-              }}
-              key={game.fixture.id}
-              className="score-div"
-            >
-              <div className="d-flex small-div opacity-50">
-                <small className="me-auto ">
-                  {convertTimestampToRealTime(game.fixture.timestamp)}
-                </small>
-                <small>
-                  {leagueShortName(game.league.name)} {game.league.country}
-                </small>
-              </div>
-              <div className=" d-flex">
-                <div className="me-auto score-div-2">
-                  <div className="fw-bold d-flex mb-2">
-                    <span>
-                      {AddImg(game.teams.home.logo,[15,15,'📷'])}
-                      {/* <img
-                        className="me-2 rounded-circle"
-                        src={game.teams.home.logo}
-                        alt="Logo"
-                        style={{ width: "15px" }}
-                      /> */}
-                    </span>
-                    <div>{game.teams.home.name}</div>
-                  </div>
+       const scoreCard = (
+         <div
+           // ref={lastItemRef}
+           id={matchCard}
+           data-fixture={JSON.stringify(game)}
+           onClick={() => {
+             localStorage.filterOdd = JSON.stringify(game)
+             navigate("/odd/" + game.fixture.id);
+           }}
+           key={game.fixture.id}
+           className="score-div"
+         >
+           <div className="d-flex small-div opacity-50">
+             <small className="me-auto ">
+               {convertTimestampToRealTime(game.fixture.timestamp)}
+             </small>
+             <small>
+               {leagueShortName(game.league.name)} {game.league.country}
+             </small>
+           </div>
+           <div className=" d-flex">
+             <div className="me-auto score-div-2">
+               <div className="fw-bold d-flex mb-2">
+                 <span>
+                   {AddImg(game.teams.home.logo,[15,15,'📷'])}
+                   {/* <img
+                     className="me-2 rounded-circle"
+                     src={game.teams.home.logo}
+                     alt="Logo"
+                     style={{ width: "15px" }}
+                   /> */}
+                 </span>
+                 <div>{game.teams.home.name}</div>
+               </div>
 
-                  <div className="fw-bold d-flex">
-                    <span>
-                    {AddImg(game.teams.away.logo,[15,15,'📷'])}
-                      {/* <img
-                        className="me-2 rounded-circle"
-                        src={game.teams.away.logo}
-                        alt="Logo"
-                        style={{ width: "15px" }}
-                      /> */}
-                    </span>
-                    <div>{game.teams.away.name}</div>
-                  </div>
-                </div>
-                <div className="rounded-circle volume-div ms-3 shadow d-none">
-                  <div>
-                    <div className="">Volume</div>
-                    <div>4708K</div>
-                  </div>
-                </div>
-              </div>
+               <div className="fw-bold d-flex">
+                 <span>
+                 {AddImg(game.teams.away.logo,[15,15,'📷'])}
+                   {/* <img
+                     className="me-2 rounded-circle"
+                     src={game.teams.away.logo}
+                     alt="Logo"
+                     style={{ width: "15px" }}
+                   /> */}
+                 </span>
+                 <div>{game.teams.away.name}</div>
+               </div>
+             </div>
+             <div className="rounded-circle volume-div ms-3 shadow d-none">
+               <div>
+                 <div className="">Volume</div>
+                 <div>4708K</div>
+               </div>
+             </div>
+           </div>
 
-              <div>
-                <div translate="no" id={endId} className="text-center  opacity-50" style={{"fontFamily": "Orbitron, sans-serif", "fontSize": "12px"}}>
-                  Ends in
-                </div>
-                <div className="d-flex justify-content-center">
-                  <div className="rounded-4 against-div pt-2 pb-2 bg-primary w-75 ps-3 pe-3 "></div>
-                </div>
+           <div>
+             {/* <div translate="no" id={endId} className="text-center  opacity-50 mt-2" style={{"fontFamily": "Orbitron, sans-serif", "fontSize": "12px"}}>
+               Ends in
+             </div> */}
+             {/* <div className="d-flex justify-content-center">
+               <div className="rounded-4 against-div pt-2 pb-2 bg-primary w-75 ps-3 pe-3 "></div>
+             </div> */}
 
-                <div className="d-flex against-div-2 ">
-                  <div className="against-color ">
-                    {" "}
-                    <span className="opacity-50 against">Against</span>
-                  </div>
-                  <div className="fw-bold ps-3 pe-3 score ">
-                    {" "}
-                    Score - {game.fixture.status.short}{" "}
-                  </div>
-                  <div className="odd pe-5 ps-3 d-none ">21.24%</div>
-                </div>
-              </div>
-            </div>
-          );
-          timeout(endId, matchCard);
-          return scoreCard;
-        }
-      }) 
-    : "";
+             <div className="d-flex justify-content-center ">
+               {/* <div className="against-color ">
+                 {" "}
+                 <span className="opacity-50 against">Against</span>
+               </div> */}
+               <div className="fw-bold ps-3 pe-3 score text-warning">
+                 {" "}
+                 Score - Anti{" "}
+               </div>
+               {/* <div className="odd pe-5 ps-3 d-none ">21.24%</div> */}
+             </div>
+           </div>
+         </div>
+       );
+       timeout(endId, matchCard);
+       newGames.push(scoreCard);
+     } else {console.log("Time Expired");
+     }
+   }) 
+  
+   if (!newGames[0]) {
+    //console.log("No game is found");
+    API.fetchFixtures({req_date: addHours(new Date(), 24).toJSON()})
+    .then((result) => {//console.log(result)
+    setResult((prev) => ({
+      ...prev, matches: result.matches
+    }))
+    })
+    .catch((err) => console.log(err)
+    )
+    
+  }
+  } else {}
+  
 
-  useEffect(() => {
-    if (checkData) {
-      if (e[0]) {
-        setLoadingNew(true);
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //     if (hasGame) {
+  //       console.log("No game is found");
+        
+  //     }
+    
+  // }, []);
 
   return (
     <div>
-    <div>
+    <div className="">
     <NavBar_Anti search={search } setSearch={setSearch} />
     </div>
 
@@ -362,9 +379,9 @@ const ScoreAnti = () => {
       
       {newGames}
       {/* {loading && <p>Loading...</p>} */}
-      {hasMore && <div ref={lastElementRef} style={{ height: 20 }}></div>}
+      {/* {hasMore && <div ref={lastElementRef} style={{ height: 20 }}></div>} */}
 
-      {!e[0] ? <Loader /> : ""} 
+      {!newGames[0] ? <Loader /> : ""} 
     </div>
     </div>
   );

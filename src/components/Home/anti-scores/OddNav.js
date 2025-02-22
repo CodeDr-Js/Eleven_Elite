@@ -44,17 +44,17 @@ const OddNav = () => {
   //fetchOdd();
 
   return (
-    <div className="fixed-top container ps-3 d-flex odd-nav-div pt-2 default_color ">
+    <div translate="no" className="fixed-top container ps-3 d-flex odd-nav-div pt-2 default_color round-header">
       <div onClick={goBack} >
           <img src={Arrow} alt="arrow-back" className="nav-arrow-2" />
       </div>
 
-      <div className="ms-auto wg-card d-flex" >
+      <div translate="no" className="ms-auto wg-card d-flex" >
             <div>
-            <img src={dollar} alt="Logo" className="" style={{ width: "33px" }} />
+            {/* <img src={dollar} alt="Logo" className="" style={{ width: "33px" }} /> */}
             </div>
 
-            {!Array.isArray(activities_g) ? (<p className='ps-2 pt-1 fw-bold '>$  {activities_g.wallet.bal_info.bal.toFixed(2)}</p>) : "" }
+            {!Array.isArray(activities_g) ? (<p className='ps-2 pt-1 fw-bold '>{activities_g.init_currency.symbol}  {activities_g.wallet.bal_info.bal.toFixed(2)}</p>) : "" }
            {/* <p className='ps-2 pt-1 fw-bold '>$ 30000</p> */}
           </div>
     </div>

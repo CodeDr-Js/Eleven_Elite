@@ -60,7 +60,7 @@ const Profile = () => {
   const [isOpen_gift, setIsOpen_gift] = useState(false);
   const [activeButton, setActiveButton] = useState("profile")
   const [isHelp, setIsHelp] = useState(false);
-  //console.log("Activities global is:", activities_g, "resull is:", result, "user is:", user_g );
+  //console.log("Activities global is:", {activities_g}, "resull is:", result, "user is:", {user_g} );
   const navigate = useNavigate();
   const token = Cookies.get("auth-token");
 
@@ -92,7 +92,7 @@ const Profile = () => {
     setIsLoading(true);
     API.logout(token).then((result) => {
       setIsLoading(false);
-      console.log(result);
+      //console.log(result);
       if (result.success) {
         Cookies.remove("auth-token");
         setActiveToken("");
@@ -137,6 +137,13 @@ const Profile = () => {
     }
   };
 
+  const handleDownload = (url) => {
+    console.log(url);
+    
+    window.open(url, "_blank"); 
+    //window.location.href = url;
+  };
+
   setTimeout(() => {
     if (message) {
       setMessage("");
@@ -146,7 +153,7 @@ const Profile = () => {
     <>
     {activeButton === "profile"?(<div className="mb-5 pb-2">
       <div className="fixed-top">
-        <ArrowNav name="Profile" />
+        <ArrowNav name="Profile" bg="main-color" />
       </div>
       {loadings ? <Loader /> : ""}
 
@@ -159,9 +166,14 @@ const Profile = () => {
               className="rounded-circle bg-primary mt-2"
               style={{ width: "60px", height: "60px" }}
             />
+
+            <div className="vip-gold mt-3 ps-1 pe-1"> 
+            <i class="fa-solid fa-crown gold-crown pe-1"></i>
+              <span className="vip-text">VIP </span> <span className="vip-text-2">{result && result.activities ? result.activities.wallet.vip:""}</span>
+            </div>
           </div>
 
-          <small className="ms-auto pt-3">Hi {user_g.username}</small>
+          <small className="ms-auto pt-3 vip-text-2">Hi {user_g.username}</small>
         </div>
 
         <div className="mt-3  ">
@@ -177,9 +189,9 @@ const Profile = () => {
             style={{ height: "44px" }}
           >
             {!Array.isArray(activities_g) ? (
-              <p className="bg-transparent acct-info-text pt-3 ps-2">
+              <p className="bg-transparent acct-info-text pt-3 ps-2 s-text-size">
                 {hostName}
-                {activities_g.referral.url}
+                {activities_g.referral.invite_url}
               </p>
             ) : (
               ""
@@ -187,9 +199,9 @@ const Profile = () => {
             <p className="ps-3 pt-2 bg-transparent"></p>
 
             <i
-              onClick={() => handleCopy(hostName + activities_g.referral.url)}
+              onClick={() => handleCopy(hostName + activities_g.referral.invite_url)}
               id="envelope"
-              className="fa fa-copy fa-fw fa-lg opacity-50 ms-auto me-3 mt-4"
+              className="fa fa-copy fa-fw fa-lg opacity-50 ms-auto me-3 mt-4 "
             ></i>
           </div>
           <div className="copy-notice-div ps-3 pt-2">
@@ -205,17 +217,17 @@ const Profile = () => {
         >
           <p className="bg-transparent fw-bold ">WALLET BAL:</p>
           <div className="bg-transparent d-flex ms-auto">
-            <div className="bg-transparent">
+            {/* <div className="bg-transparent">
               <img
                 src={tether}
                 alt="Tether"
                 className="bg-transparent me-2 "
                 style={{ width: "30px" }}
               />
-            </div>
+            </div> */}
             {!Array.isArray(activities_g) ? (
-              <p className="bg-transparent fw-bold">
-                $ {activities_g.wallet.bal_info.bal.toFixed(2)}
+              <p translate="no" className="bg-transparent fw-bold">
+                {activities_g.init_currency.symbol} {activities_g.wallet.bal_info.bal.toFixed(2)}
               </p>
             ) : (
               ""
@@ -237,27 +249,26 @@ const Profile = () => {
             WITHDRAW
           </Link>
         </div>
-
-        <div className=" mt-4  ">
+          {activities_g.betdir ? <div className=" mt-4  ">
           <p className="bg-transparent">Bet Statistics</p>
-          <div
+          {activities_g.betdir.winning_record ?   <div
             className="d-flex main-color rounded-3 shadow-lg pt-1  "
             style={{ height: "55px" }}
           >
-            <div className="bg-transparent w-100 d-flex justify-content-around">
+            {activities_g.betdir.winning_record ?  <div  className="bg-transparent w-100 d-flex justify-content-around">
               <div className="bg-transparent d-flex flex-column align-items-center">
-                <small className="bg-transparent opacity-50">Total won</small>
+                <small className="bg-transparent opacity-50 fw-bold"  style={{color: "lightgreen"}}>Won ({activities_g.betdir.winning_record ? activities_g.betdir.winning_record.total.won.length  : ""})</small>
 
                 {!Array.isArray(activities_g) ? (
-                  <p className="bg-transparent">
-                    {activities_g.bet.winning_record.total.won.length}
+                  <p translate="no" className="bg-transparent" style={{color: "lightgreen"}}>
+                    {activities_g.init_currency.symbol} {activities_g.betdir.winning_record.profit.won.toFixed(2)}
                   </p>
                 ) : (
                   ""
                 )}
               </div>
 
-              <div className="bg-transparent">
+              {/* <div className="bg-transparent">
                 <i
                   id="envelop"
                   className="fa fa-chevron-right bg-transparent fa-fw fa-lg icon-color mt-4"
@@ -266,20 +277,20 @@ const Profile = () => {
                   id="envelop1"
                   className="fa fa-chevron-right icon-color  bg-transparent fa-fw  fa-lg mt-4"
                 ></i>
-              </div>
+              </div> */}
 
               <div className="bg-transparent d-flex flex-column align-items-center">
-                <small className="bg-transparent opacity-50">Total lost</small>
+                <small className="bg-transparent opacity-50 text-danger fw-bold ">Lost ({activities_g.betdir.winning_record.total.loss.length})</small>
                 {!Array.isArray(activities_g) ? (
-                  <p className="bg-transparent">
-                    {activities_g.bet.winning_record.total.loss.length}
+                  <p  translate="no" className="bg-transparent text-danger text-warp ">
+                   {activities_g.init_currency.symbol} {activities_g.betdir.winning_record.profit.loss.toFixed(2)} 
                   </p>
                 ) : (
                   ""
                 )}
               </div>
 
-              <div className="bg-transparent">
+              {/* <div className="bg-transparent">
                 <i
                   id="envelop"
                   className="fa fa-chevron-right bg-transparent icon-color fa-fw fa-lg mt-4"
@@ -288,21 +299,24 @@ const Profile = () => {
                   id="envelop1"
                   className="fa fa-chevron-right fa-fw bg-transparent  icon-color fa-lg mt-4"
                 ></i>
-              </div>
+              </div> */}
 
-              <div className="bg-transparent d-flex flex-column align-items-center">
+              {/* <div className="bg-transparent d-flex flex-column align-items-center">
                 <small className="bg-transparent opacity-50">Profit</small>
                 {!Array.isArray(activities_g) ? (
                   <p className="bg-transparent">
-                    $ {activities_g.bet.winning_record.profit.won.toFixed(2)}
+                    {activities_g.init_currency.symbol} {activities_g.betdir.winning_record.profit.won.toFixed(2)}
                   </p>
                 ) : (
                   ""
                 )}
-              </div>
-            </div>
-          </div>
-        </div>
+              </div> */}
+            </div>: ""}
+           
+          </div> : ""}
+        
+        </div> :""}
+       
 
         <div className="mt-4">
           <p>Account Info</p>
@@ -325,7 +339,7 @@ const Profile = () => {
                 {user_g.email}
               </p>
             </div>
-            <div className="bg-transparent d-flex acct-info-div pt-2">
+            {/* <div className="bg-transparent d-flex acct-info-div pt-2">
               <p className="bg-transparent w-50">Country</p>
               {!Array.isArray(activities_g) ? (
                 <p className="bg-transparent w-50 acct-info-text">
@@ -334,7 +348,7 @@ const Profile = () => {
               ) : (
                 ""
               )}
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -447,7 +461,7 @@ const Profile = () => {
             </Link>
           </div>
 
-          <div
+          {/* <div
             className="bg-transparent d-flex"
             onClick={() => setIsOpen_pin(true)}
           >
@@ -469,8 +483,8 @@ const Profile = () => {
                 className="fa fa-chevron-right bg-transparent fa-fw fa-sm  "
               ></i>
             </Link>
-          </div>
-
+          </div> */}
+{/* 
           <div
             className="bg-transparent d-flex"
             onClick={() => setIsOpen_gift(true)}
@@ -493,7 +507,7 @@ const Profile = () => {
                 className="fa fa-chevron-right bg-transparent fa-fw fa-sm  "
               ></i>
             </Link>
-          </div>
+          </div> */}
 
           <div
             className="bg-transparent d-flex"
@@ -508,13 +522,13 @@ const Profile = () => {
               />
             </div>
             <p className="bg-transparent">Notifications</p>
-            <div className="bg-transparent ms-auto ps-5">
+            <div translate="no" className="bg-transparent ms-auto ps-5">
               <i
                 id=""
                 className="far fa-bell  fa-fw fa-sm ps-5 bg-transparent "
               ></i>
               {!Array.isArray(activities_g) ? (
-                <p className="bg-danger rounded-circle bell-num">
+                <p translate="no"  className="bg-danger rounded-circle bell-num">
                   {activities_g.notification
                     ? activities_g.notification.unseen.length
                     : "0"}
@@ -545,12 +559,12 @@ const Profile = () => {
                 style={{ width: "" }}
               />
             </div>
-            <p className="bg-transparent">Pending friends</p>
+            <p clssName="bg-transparent">Pending friends</p>
             <Link to="/pending" className="bg-transparent ms-auto">
-              <i
+              <ia
                 id=""
                 className="fa fa-chevron-right  fa-fw fa-sm  bg-transparent "
-              ></i>
+              ></ia>
             </Link>
           </div>
           <div
@@ -567,6 +581,31 @@ const Profile = () => {
             </div>
             <p className="bg-transparent">Help</p>
             <Link onClick={() => setIsHelp(true)} className="bg-transparent ms-auto">
+              <i
+                id=""
+                className="fa fa-chevron-right  fa-fw fa-sm  bg-transparent "
+              ></i>
+            </Link>
+          </div>
+
+          <div
+            className="bg-transparent d-flex"
+            onClick={() => handleDownload(result && result.app_download  ? result.app_download.andriod:"")}
+          >
+            <div className="bg-transparent">
+              {/* <img
+                src={frown}
+                alt="help"
+                className="bg-transparent pe-2 pb-1"
+                style={{ width: "" }}
+              /> */}
+              <i style={{color:" skyblue"}}
+                id=""
+                className="fa fa-download pe-2 pb-1  fa-fw fa-sm  bg-transparent "
+              ></i>
+            </div>
+            <p clssName="bg-transparent">Download App</p>
+            <Link to={result && result.app_download  ? result.app_download.andriod:""} className="bg-transparent ms-auto">
               <i
                 id=""
                 className="fa fa-chevron-right  fa-fw fa-sm  bg-transparent "
@@ -596,14 +635,14 @@ const Profile = () => {
       ) : (
         ""
       )}
-
+{/* 
       {isOpen_pin ? (
         <div className="modal-overlay-profile">
           <ChangePin isOpen_pin={isOpen_pin} setIsOpen_pin={setIsOpen_pin} />
         </div>
       ) : (
         ""
-      )}
+      )} */}
 
       {isOpen_gift ? (
         <div className="modal-overlay-profile">

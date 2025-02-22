@@ -19,7 +19,7 @@ import vs from "../../assets/svg/vs.svg";
 
 const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) => {
   const navigate = useNavigate();
-  const {setActivities_g} = useContext(DataContext)
+  const {setActivities_g, activities_g} = useContext(DataContext)
   const [errorCancel, setErrorCancel] = useState();
   // const global_refresh = async () => {
   //   try {
@@ -132,9 +132,10 @@ const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) 
   //   getUserData();
   // }, []);
 
-  const handleCancel = async (startDate, ticket_id, matchCard) => {
+  const handleCancel = async (startDate, ticket_id, matchCard, mainCard) => {
        
         const matchCardDiv = document.getElementById(matchCard)
+        const mainCardDiv = document.getElementById(mainCard)
         const button = matchCardDiv.querySelector("button");
         const spinner = matchCardDiv.querySelector(".sweet-loading");
 
@@ -148,16 +149,30 @@ const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) 
 
           API.cancelTicket({startDate, ticket_id}, token)
           .then((result) => {
-          spinner.classList.add("d-none");
-          button.classList.remove("d-none");
           //console.log(result);
           if(result.success) {
           //console.log("Cancelled");
           //console.log(result);
-          setActivities(result.activities);
-          setActivities_g(result.activities);
-          setSettled(result.activities.bet.settled);
-          setOpenBet(result.activities.bet.openbet);
+          alert("Game cancelled successfully!!!");
+          mainCardDiv.classList.add("slide-up-1")
+          // spinner.classList.add("slide-up-1");
+
+          setTimeout(() => {
+            // card.classList.add("d-none");
+            mainCardDiv.classList.add("d-none")
+
+          }, 2000);
+
+          spinner.classList.add("d-none");
+            button.classList.remove("d-none");
+            setActivities(result.activities);
+            setActivities_g(result.activities);
+            setSettled(result.activities.betdir.settled);
+            setOpenBet(result.activities.betdir.openbet);
+         
+          
+       
+         
 
           // const mainCardDiv = document.getElementById(ticket_id);
           // mainCardDiv.classList.add("d-none");
@@ -263,12 +278,12 @@ const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) 
           {/* <p className="main-color pt-2 fw-bold ">Correct Score</p> */}
 
           <div
-            className=" u-color d-flex rounded-3 ps-2 pe-2 pt-2 anti-card-div"
+            className=" secondary-color d-flex rounded-3 ps-2 pe-2 pt-2 anti-card-div"
             style={{ height: "30px" }}
           >
-            <p className="u-color">Anti</p>
-            <p className="u-color">{item.market.pick}</p>
-            <p className="u-color fw-bold anti-percent">{item.market.odd}%</p>
+            <p className="bg-transparent">Anti</p>
+            <p className="bg-transparent">{item.market.pick}</p>
+            <p className="bg-transparent fw-bold anti-percent">{item.market.odd}%</p>
           </div>
 
           <div className="main-color pt-3 d-flex ">
@@ -277,13 +292,13 @@ const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) 
               <div className="main-color d-flex">
                 <img />
                 <p className="main-color opacity-75">
-                  $ {ticket_head.stake_amount}
+                {activities_g.init_currency.symbol} {ticket_head.stake_amount}
                 </p>
               </div>
             </div>
 
             <div className="main-color ms-auto fw-bold">
-              $ {ticket_head.potentail_winning}
+            {activities_g.init_currency.symbol} {ticket_head.potentail_winning}
             </div>
           </div>
 
@@ -298,7 +313,7 @@ const HistoryCard = ({loading, openBet, setOpenBet, setSettled, setActivities}) 
                     Ends in:
                   </p>
                   
-                  <button onClick={()=>handleCancel(date, id, matchCard)} className="btn btn-secondary cancel-btn w-100 fw-bold mb-4">Cancel</button> 
+                  <button onClick={()=>handleCancel(date, id, matchCard, mainCard)} className="btn btn-secondary cancel-btn w-100 fw-bold mb-4">Cancel</button> 
                   <SpinnerCancel/> 
                
 

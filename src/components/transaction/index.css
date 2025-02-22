@@ -36,5 +36,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   
 
   .transaction-div {
-    margin-top: 150px;
+    margin-top: 180px;
+  }
+
+  .transparent-block {
+     /* background: rgba(255, 255, 255, 0.01); Almost invisible but blocks content */
+    position: relative;
+    backdrop-filter: blur(10px); /* Blurs content behind */
+    z-index: 10;
+    border-radius: 0 0 30px 30px ;
+  }
+
+  @media screen and (max-width: 365px) { /* Adjust breakpoint as needed */
+    .t-date-size {
+      font-size: 12px !important;
+      width: 35% !important;
+     
+    }
   }

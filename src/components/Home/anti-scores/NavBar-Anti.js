@@ -11,36 +11,36 @@ import "../../largeScreen/largeHeader.css";
 const NavBar_Anti = ({search, setSearch}) => {
   //console.log("searchNav-Anti", search);
   return (
-    <div className="fixed-top container default_color">
+    <div className="fixed-top container main-color round-header pb-2">
       <NavBar_Logo search={search } setSearch={setSearch}  />
-      <div className="d-flex g-main bg-transparent">
+      <div className="d-flex g-main bg-transparent ">
         <div className="market-main-div bg-transparent">
-          <div className="btn btn-primary market-div">
-            <a href="" className="g-main-sp d-flex bg-primary">
-              <div className="me-1 bg-primary">
+          <div className="btn secondary-color market-div">
+            <a href="" className="g-main-sp d-flex bg-transparent">
+              <div className="me-1 ">
                 <img
-                  className="bg-primary market-icon"
+                  className="bg-transparent market-icon"
                   src={Market}
                   alt="market-logo"
                 />
               </div>
-              <div className=" g-main-sp bg-primary fw-bold">Market</div>
+              <div className=" g-main-sp bg-transparent fw-bold">Market</div>
             </a>
           </div>
         </div>
 
         <div className="market-main-div g-main-sp bg-transparent disabled ">
         <div className="position-absolute coming-soon-2"><p className="bg-transparent coming-soon-text-2">coming soon</p></div>
-          <div className="btn g-sub-color market-div">
-            <a href="" className="d-flex g-sub-color g-main-sp">
-              <div className="me-1 g-sub-color">
+          <div className="btn transparent-color market-div border">
+            <a href="" className="d-flex bg-transparent g-main-sp">
+              <div className="me-1 bg-transparent">
                 <img
-                  className="g-sub-color market-icon"
+                  className="bg-transparent market-icon"
                   src={IncentiveFund}
                   alt="IncentiveFund-logo"
                 />
               </div>
-              <div className="g-sub-color incensive-fund g-main-sp pe-3">
+              <div className="bg-transparent incensive-fund g-main-sp pe-3">
                 Live
               </div>
             </a>
@@ -49,16 +49,16 @@ const NavBar_Anti = ({search, setSearch}) => {
 
         <div className="market-main-div bg-transparent disabled">
           <div className="position-absolute coming-soon"><p className="bg-transparent coming-soon-text">coming soon</p></div>
-          <div className="btn g-sub-color market-div ">
-            <a href="" className=" g-main-sp d-flex g-sub-color">
-              <div className="me-1 g-sub-color">
+          <div className="btn transparent-color market-div border">
+            <a href="" className=" g-main-sp d-flex bg-transparent">
+              <div className="me-1 bg-transparent">
                 <img
-                  className="g-sub-color market-icon"
+                  className="bg-transparent market-icon"
                   src={ProtectivePlan}
                   alt="ProtectivePlan-logo"
                 />
               </div>
-              <div className=" g-main-sp g-sub-color incensive-fund">
+              <div className=" g-main-sp bg-transparent incensive-fund">
                 Finished
               </div>
             </a>

@@ -39,7 +39,7 @@ const Pending = () => {
       if (pending === null) {
         API.pending(token)
           .then((result) => {
-            console.log(result);
+            //console.log(result);
             if (result.success) {
            
               setPending(result);
@@ -47,7 +47,7 @@ const Pending = () => {
           })
           .catch((err) => console.log(err));
       } else {
-        console.log(" Invite is found in useContext");
+        //console.log(" Invite is found in useContext");
 
       }
     }, []);
@@ -58,11 +58,16 @@ const Pending = () => {
       const trimmedTimestamp = parts[0];
       return trimmedTimestamp;
     }
+
+    function convertToLocalTime(utcString) {
+      const date = new Date(utcString);
+      return date.toLocaleString(); // Returns the date/time in the user's local timezone
+  }
   
   return (
     <div className="mb-5 pb-1">
     <div>
-      <ArrowNav name="Pending" />
+      <ArrowNav name="Pending" bg="main-color" />
     </div>
     {loadings?(<Loader/>):""}
     <div className="container">
@@ -77,16 +82,16 @@ const Pending = () => {
       </div>
 
       <div className="main-color-5 d-flex justify-content-center text-center friend-div">
-        <p className="bg-transparent user pt-3 fw-bold">User</p>
+        <p className="bg-transparent user pt-3 fw-bold">User Profile Key</p>
         <p className="bg-transparent amount pt-3 fw-bold">Amount</p>
         <p className="bg-transparent date pt-3 fw-bold">Date</p>
       </div>
 
-      {pending !== null ? (Object.entries(pending.pending_friends).map(([keys,e])=> (
+      {pending !== null ? (Object.entries(pending.activities.pending_friends_dir.pending_friends).map(([keys,e])=> (
           <div key={keys} className="d-flex justify-content-center text-center main-color-5 opacity-50 level-div">
-          <p className="bg-transparent user">{e.fields.downline_username}</p>
-          <p className="bg-transparent amount">$0</p>
-          <p className="bg-transparent date">{trimTimestamp(e.fields.timestamp)}</p>
+          <p className="bg-transparent user">{e.pk ? e.pk : ""}</p>
+          <p translate="no" className="bg-transparent amount">{pending.activities.init_currency.symbol}0</p>
+          <p translate="no" className="bg-transparent date">{convertToLocalTime(trimTimestamp(e.fields.timestamp))}</p>
         </div>
       ))) :""}
 

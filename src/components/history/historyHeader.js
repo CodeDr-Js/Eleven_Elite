@@ -32,22 +32,22 @@ const HistoryHeader = ({loading, settled, openBet, setOpenBet, setSettled, activ
   const [activeButton, setActiveButton] = useState("unsettled");
   return (
     <>
-      <div className="fixed-top container default_color">
+      <div className="fixed-top container default_color round-header">
         <div className="container ms-1 d-flex pt-3  ">
           <div onClick={goBack} className='wg-card'>
          
               <img src={Arrow} alt="arrow-back" className="nav-arrow" />
   
           </div>
-          <div className=" d-flex justify-content-center ms-5 ps-4 wg-card ">
-            <h2 className="text-center fs-2 ms-3 wg-card-1">History</h2>
+          <div className=" d-flex justify-content-center ms-1 ps-2 wg-card ">
+            <h2 className=" fs-2 wg-card-1">History</h2>
           </div>
-          <div className="ms-auto wg-card d-flex" >
-            <div>
+          <div translate="no"  className="ms-auto wg-card d-flex" >
+            {/* <div>
             <img src={dollar} alt="Logo" className="d-size" style={{ width: "1.263rem" }} />
-            </div>
+            </div> */}
 
-            {!Array.isArray(activities_g) ? (<p className='ps-2 pt-1 fw-bold '>$  {activities_g.wallet.bal_info.bal.toFixed(2)}</p>) : "" }
+            {!Array.isArray(activities_g) ? (<p translate="no"  className='ps-2 pt-1 fw-bold '>{activities_g.init_currency.symbol}  {activities_g.wallet.bal_info.bal.toFixed(2)}</p>) : "" }
           {/* <p className='ps-2 pt-1 fw-bold '>$ 30000</p> */}
 
           </div>

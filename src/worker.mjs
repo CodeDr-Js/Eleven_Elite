@@ -2,7 +2,7 @@
 
 // export default () => {
 
-    let serverUrl = 'https://eef-staging-f608d9a34c34.herokuapp.com/api/'
+    let serverUrl = 'https://rrtcc-4a28b26f2705.herokuapp.com/api/'
     let currentDateNow,client_timezone,client_date_str,IDBConfig;
 
     function range(start, end) { return (new Array(end - start + 1)).fill(undefined).map((_, i) => i + start); }
@@ -27,7 +27,7 @@
       try {
         
         [currentDateNow,client_timezone,client_date_str,IDBConfig]  = e.data;
-       // console.log({IDBConfig})
+       console.log({IDBConfig})
         if(!IDBConfig)return;
 
        const dbData = IDBConfig.working_dir.data;
@@ -155,7 +155,7 @@
                     if(!not_run) {
 
                         let odds_pagination =  await request_APi(page)
-                        if(!odds_pagination||!odds_pagination.response) {
+                        if(!odds_pagination||!odds_pagination.response||odds_pagination.errors[0]) {
                             //console.log('NO ODDS FOUND');
                             not_run=true;
                             return

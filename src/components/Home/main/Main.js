@@ -19,12 +19,14 @@ import RewardCoupon from "../../reward/rewardCoupon";
 import Loader from "../../loader/loader";
 import fire from "../../../assets/svg/fire.svg";
 import HelpDash from "../../help-dash/helpDash";
+import DepositAmount from "../../deposit/deposit_amount"; 
 
 const Main = () => {
   const navigate = useNavigate();
   const token = Cookies.get("auth-token");
-  const { setActiveToken, setHasRunRetrieve, setActivities_g, user_g, setUser_g,setPromotion,setNotification } = useContext(DataContext);
+  const { setActiveToken, setHasRunRetrieve, setActivities_g, user_g, setUser_g,setPromotion,setNotification, activities_g } = useContext(DataContext);
   const [isOpen_gift, setIsOpen_gift] = useState(false);
+  const [isOpen_deposit, setIsOpen_deposit] = useState(false);
   const [isHelp, setIsHelp] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -53,27 +55,33 @@ const Main = () => {
       });
     }
   };
+
+  
+ 
+
+
   return (
     <>
-      <div className="main container">
+      <div className="main  container">
         {loading ? <Loader /> : ""}
-        <div className="rounded-4 main-div d-flex w-100">
+        <div className="rounded-4 main-div d-flex transparent-color w-100">
           <IconCon image={Deposit} text="Deposit" link="/deposit" />
           <IconCon image={Withdraw} text="Withdraw" link="/withdraw" />
           <IconCon image={About} text="About" link="/about" />
           <IconCon image={Help} text="Help" onClick={() => setIsHelp(true)}  />
           <IconCon
             image={Guide}
-            text="Gift"
-            onClick={() => setIsOpen_gift(true)}
+            text="Reward"
+            link="/invite"
+            // onClick={() => setIsOpen_gift(true)}
           />
         </div>
 
-        <div className="rounded-4 main-div-2 d-flex w-100">
+        <div className="rounded-4  main-div-2 d-flex w-100">
           <IconCon image={Soccer} text="Soccer" link="/anti-score" />
           <IconCon image={History} text="History" link="/history" />
-          <IconCon image={Rewards} text="Rewards" link="/invite" />
-          <IconCon image={Telegram} text="Telegram" link="https://t.me/+RBzDryc0eKI1MWQ0" />
+          <IconCon image={Rewards} text="Invites" link="/invite" />
+          <IconCon image={Telegram} text="Telegram" link="https://t.me/RRTOFFOCIALPPROJECT" />
           <IconCon image={Logout} text="Logout" onClick={handleLogoutClick} />
         </div>
       </div>
@@ -82,6 +90,16 @@ const Main = () => {
           <RewardCoupon
             isOpen_gift={isOpen_gift}
             setIsOpen_gift={setIsOpen_gift}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {isOpen_deposit ? (
+        <div className="modal-overlay-profile">
+          <DepositAmount
+            isOpen_depostit={isOpen_deposit}
+            setIsOpen_deposit ={setIsOpen_deposit}
           />
         </div>
       ) : (

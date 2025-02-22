@@ -14,18 +14,18 @@ import "./index.css";
 // import { DataContext } from "../APIs/Api";
 // import { useContext } from "react";
 
-const ArrowNav = ({ name }) => {
+const ArrowNav = ({ name, bg }) => {
   const goBack = () => {
     window.history.back();
   };
   return (
-    <div className="container default_color">
-      <div className="ms-1 d-flex pt-3  ">
+    <div className={`container shadow-lg ${bg} round-header`}>
+      <div className="ms-1 d-flex pt-3 w-100 ">
         <div onClick={goBack} className="wg-card">
           <img src={Arrow} alt="arrow-back" className="nav-arrow" />
         </div>
-        <div className=" d-flex justify-content-center ms-5 ps-5 wg-card ">
-          <h2 className="text-center fs-2 ms-3">{name}</h2>
+        <div className=" d-flex justify-content-center w-100 wg-card " style={{marginLeft:"-27px"}}>
+          <h2 className="text-center fs-2">{name}</h2>
         </div>
 
         {/* <div className="ms-auto wg-card d-flex"> */}

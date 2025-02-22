@@ -43,7 +43,7 @@ const Notification = () => {
     if (notification === null) {
       API.notification(token)
         .then((result) => {
-        //  console.log(result);
+        //console.log(result);
           if (result.success) {
            
             setNotification(result.activities.notification);
@@ -104,7 +104,7 @@ const Notification = () => {
     <div>
       <div className="fixed-top">
 
-      <ArrowNav name="Notice" />
+      <ArrowNav name="Notice" bg="main-color" />
 
       {loadings? (<Loader/>) :""}
 
@@ -122,7 +122,7 @@ const Notification = () => {
       {notification === null ? (
         <Spinner />
       ) : (
-        <div className="mt-4">
+        <div translate="no"  className="mt-4">
           {activeButton === "new" ? (
             notification !== null ? (
               notification.unseen[0] ? (

@@ -138,7 +138,8 @@ const ChangePin = ({
           </button>
         )}
   
-        {/* {isOpen1 ? (
+        {/* 
+        {isOpen1 ? (
           <div>
             {error ? (
               <div className="modal-overlay-error">
@@ -156,7 +157,8 @@ const ChangePin = ({
           ""
         )}
   
-        {isOpen1 ? (
+        {
+        isOpen1 ? (
           <div>
             {success ? (
           <div className="modal-overlay-success">

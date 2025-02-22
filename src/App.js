@@ -31,6 +31,11 @@ import LocalWithdrawal from "./components/witdrawal/LocalWithdrawal";
 import { DataContext } from "./components/APIs/Api";
 import Blocked from "./components/blocked/blocked";
 import Cookies from "js-cookie";
+import Task from "./components/task/task";
+
+import NewLogin from "./components/new-login/login";
+import NewRegister from "./components/new-login/regsister";
+import Banking from "./components/banking-agent/banking";
 
 
 
@@ -56,27 +61,29 @@ import Cookies from "js-cookie";
 
 export default function App() {
   const navigate = useNavigate();
-  const { activities_g } =
-  useContext(DataContext);
-const token = Cookies.get("auth-token");
-const [blocked, setBlocked] = useState(false);
+  
+//   const { activities_g } =
+//   useContext(DataContext);
+// const token = Cookies.get("auth-token");
+const [blocked, setBlocked] = useState(true);
+//const [blocked, setBlocked] = useState(false);
 
 
-console.log(activities_g);
+//console.log("App started");
 
   const [loading, setLoading] = useState(true);
 
-  useEffect(()=> {
-    if(token){
-      if(!Array.isArray(activities_g)){
-        if(activities_g.blocked){
-          setBlocked(true);
-        }
-      }
-    } else {
-      navigate("/login")
-    }
-  },[activities_g])
+  // useEffect(()=> {
+  //   if(token){
+  //     if(!Array.isArray(activities_g)){
+  //       if(activities_g.blocked){
+  //         setBlocked(true);
+  //       }
+  //     }
+  //   } else {
+  //     navigate("/login")
+  //   }
+  // },[activities_g])
 
 
   // Simulating data fetching/loading
@@ -143,12 +150,15 @@ console.log(activities_g);
         <LogoLoader />
       ) : (
         <>
-        {blocked && <div className="modal-overlay-profile" style={{"zIndex": 9999}}><Blocked/></div> }
+        {/* {blocked && <div className="modal-overlay-profile" style={{"zIndex": 9999}}><Blocked/></div> } */}
           <Routes>
+            <Route path="login" element={<NewLogin/>}/>
+            <Route path="register" element={<NewRegister/>}/>
             <Route path="/" element={<Home />} />
+            <Route path="/banking/agent" element={<Banking />} />
             <Route path="anti-score" element={<AntiScore />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
+            {/* <Route path="login" element={<Login />} /> */}
+            {/* <Route path="register" element={<Register />} /> */}
             <Route path="forget-password" element={<ForgetPassword />} />
             <Route path="history" element={<History />} />
             <Route path="odd/:id" element={<Odd />} />

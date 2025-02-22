@@ -9,22 +9,61 @@ import Cookies  from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import NoData from '../noData/noData';
 import Footer from '../Home/anti-scores/footer';
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/flatpickr.min.css";
+import DateRangePicker from './DateRangePicker';
+import { addHours, numberWithCommas } from '../qickfun/qickfun';
+import { DateTime } from 'luxon';
+
 
 
 
 
 
 const Transaction = () => {
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  function convertToServerTime(userDate) {
+    // Convert the user-selected date to a DateTime object
+    const userDateTime = DateTime.fromISO(userDate);
+    
+    // Convert to Africa/Lagos timezone
+    const serverTime = userDateTime.setZone('Africa/Lagos');
+    
+    return serverTime.toISO(); // Return in ISO format for backend
+  }
+
+
   const navigate = useNavigate();
   const token = Cookies.get("auth-token");
+
+  function formatDate(dateString) {
+    // Create a new Date object from the input string
+    const date = new Date(dateString);
+  
+    // Extract year, month, and day
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Ensure two digits
+    const day = String(date.getDate()).padStart(2, "0"); // Ensure two digits
+  
+    // Return formatted date as YYYY-MM-DD
+    return `${year}-${month}-${day}`;
+  }
+
+
   const [value, setValue] = useState({
-    filter_date: getFormattedDate(),
-    transaction_type: "withdraw",
+    // start: getFormattedDate(),
+    start: addHours(new Date(), 24*7, "remove").toJSON(),
+    stop: getFormattedDate(),
+    transaction_type: "all",
+    time_zone: userTimeZone
   });
+
   const [data, setData] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [activeButton, setActiveButton] = useState("transaction")
-  
+  const [dateRange, setDateRange] = useState([]);
  
 
   useEffect(() => {
@@ -55,8 +94,10 @@ const Transaction = () => {
   const handleSearch = (values) => {
     //console.log("The values are", values);
     setIsLoading(true);
-    API.transaction(values, token)
+    API.transaction(`?start=${values.start}&transaction_type=${values.transaction_type}&stop=${values.stop}`, token)
     .then((result) => {
+      console.log("Transaction",result);
+      setIsLoading(false)
       if(result.detail){
        Cookies.remove("auth-token")
         navigate("/login")
@@ -90,7 +131,7 @@ const Transaction = () => {
       // }
       return (
         <TransactionCard key={e.id}
-        id={e.sessionID} type={e.type} amount={e.amount} date={e.timestamp} status={e.status} 
+        id={e.sessionID} type={e.type} amount={numberWithCommas(Number(e.amount).toFixed(2))} date={e.timestamp} status={e.status} currency={e.currency}
         />
       )
     })
@@ -98,21 +139,40 @@ const Transaction = () => {
 
   return (
     <>
-      {activeButton === "transaction" ? ( <div className='mb-5'>
-    <div className='fixed-top container '>
+      {activeButton === "transaction" ? ( <div className='mb-5 pb-3'>
+    <div className='fixed-top container'>
     <TransactionHeader handleSearch={handleSearch} setValue={setValue} isLoading={isLoading}/>
     </div>
 
-    <div className='' style={{marginTop:"0"}}>
-    {data[0] ? <div className='transaction-div'>{transactionCard }</div>: (<NoData/>) }
+    {/* <DateRangePicker /> */}
 
+   
     
+    <div className='' style={{marginTop:"0", marginBottom:"60px"}}>
+    {data[0] ? <div className='transaction-div'>{transactionCard }</div>: (<NoData/>) }
+    
+    {/* <div className='mb-5'>
+      <label>Select Date Range:</label>
+      <Flatpickr
+        value={dateRange}
+        options={{
+          mode: "range", // Enables selecting two dates
+          dateFormat: "Y-m-d",
+        }}
+        onChange={(selectedDates) => setDateRange(selectedDates)}
+        c lassName="border p-2 rounded"
+      />
+      <p>Selected Range:{dateRange.length ? dateRange.join(" to ") : "None"}</p>
+    </div> */}
     </div>
 
     {/* <MySelect/> */}
       
+    
     <Footer activeButton={activeButton} setActiveButton={setActiveButton} />
     </div>) : navigate(`/${activeButton}`)}
+
+  
     </>
    
   )

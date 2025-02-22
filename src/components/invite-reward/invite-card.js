@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InviteCard = ({level, amount, date, status, style}) => {
+const InviteCard = ({level, amount, date, status, currency, style, required}) => {
   return (
     <>
     {status === "success" ? (<div className={`mt-3 light-green-1 d-flex pt-3 ps-4 pe-3 pb-1 rounded-5`}>
@@ -11,7 +11,7 @@ const InviteCard = ({level, amount, date, status, style}) => {
         </div>
 
         <div className='bg-transparent text-center ms-auto '>
-        <p className='bg-transparent ms text-dark fw-bold'>$ {amount}</p>
+        <p translate='no' className='bg-transparent ms text-dark fw-bold'>{currency} {amount}</p>
 
             <p className='bg-transparent text-dark fw-bold '>{status}</p>
         </div>
@@ -21,11 +21,11 @@ const InviteCard = ({level, amount, date, status, style}) => {
         <div className='bg-transparent '>  
             <p className='bg-transparent text-dark fw-bold'>{level}</p>
             <p className='bg-transparent text-dark fw-bold opacity-50'>{date}</p>
-           
+            <p className='fw-bold'>Total deposit required: {currency} {required}  </p>
         </div>
 
         <div className='bg-transparent text-center ms-auto '>
-        <p className='bg-transparent ms text-dark fw-bold'>$ {amount}</p>
+        <p className='bg-transparent ms text-dark fw-bold'>{currency} {amount}</p>
 
             <p className='bg-transparent text-dark fw-bold '>{status}</p>
         </div>
@@ -35,11 +35,13 @@ const InviteCard = ({level, amount, date, status, style}) => {
         <div className='bg-transparent '>  
             <p className='bg-transparent text-dark fw-bold'>{level}</p>
             <p className='bg-transparent text-dark fw-bold opacity-50'>{date}</p>
+
+           
            
         </div>
 
         <div className='bg-transparent text-center ms-auto '>
-        <p className='bg-transparent ms text-dark fw-bold'>$ {amount}</p>
+        <p translate='no' className='bg-transparent ms text-dark fw-bold'>{currency} {amount}</p>
 
             <p className='bg-transparent text-dark fw-bold '>{status}</p>
         </div>

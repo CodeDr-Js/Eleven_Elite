@@ -1,3 +1,5 @@
+
+
 *{
   margin: 0;
   padding: 0;
@@ -6,11 +8,43 @@
 }
 
 body {
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 1)), 
+  url('./assets/images/football-bg1.jpg');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+height: 100vh;
+width: 100%;
+margin: 0;
+padding: 0;
+position: relative; 
+min-height: 100%; 
+top: 0px !important;
+}
+
+/* body {
   background-color: rgb(1, 1, 54) !important;
   position: relative; 
   min-height: 100%; 
   top: 0px !important;
  
+} */
+
+.main-color {
+  background-color: #383749 !important ;
+}
+
+.transparent-color {
+  background-color: #383749c4 !important ;
+}
+
+.secondary-color{
+  background-color: #F29A39 !important ;
+}
+
+.round-header {
+  border-radius: 0 0 15px 15px;
 }
 
 @media screen and (min-width: 530px) { /* Adjust breakpoint as needed */

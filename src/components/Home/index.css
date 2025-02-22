@@ -10,10 +10,63 @@
   line-height: 0px;
 }
 
+
+.moving-text {
+
+  white-space: nowrap;
+  animation: scrollText cubic-bezier(0.755, 0.05, 0.855, 0.06) linear infinite alternate;
+}
+
+@keyframes scrollText {
+  0% {
+      transform: translateX(100%); /* Start off-screen (right) */
+  }
+  100% {
+      transform: translateX(-100%); /* Move fully to the left */
+  }
+ 
+}
+
+
+.moving-text1 {
+  white-space: nowrap;
+  animation: scrollText1 12s linear infinite;
+}
+
+@keyframes scrollText1 {
+  0% {
+      transform: translateX(100%); /* Start completely off-screen (right) */
+  }
+  5% {
+      transform: translateX(90%); /* Appears quickly */
+  }
+  95% {
+      transform: translateX(-100%); /* Moves very slowly across */
+  }
+  96% {
+      transform: translateX(100%); /* Instantly reset to the right */
+  }
+  100% {
+      transform: translateX(90%); /* Reappear smoothly */
+  }
+}
+
+
+
+
+
+
 @media screen and (min-width: 530px) { /* Adjust breakpoint as needed */
     body {
       max-width: 31.25rem; /* Example maximum width */
       margin: 0 auto; /* Center the container horizontally */
+     
+    }
+  }
+
+  @media screen and (max-width: 365px) { /* Adjust breakpoint as needed */
+    .s-home-image {
+      width: 22.50rem !important;
      
     }
   }

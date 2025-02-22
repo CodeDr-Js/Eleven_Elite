@@ -1,0 +1,83 @@
+/* Dropdown container */
+.dropdown-container {
+    position: relative;
+    width: 100%;
+    max-width: 250px; /* Adjust width as needed */
+    margin: auto;
+  }
+
+  
+  /* Dropdown button */
+  .dropdown-toggle-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    text-align: left;
+    font-weight: bold;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 20px;
+  }
+  
+  /* Arrow Icon */
+  .arrow {
+    display: inline-block;
+    margin-left: 8px;
+    width: 10px;
+    height: 10px;
+    border-left: 4px solid white;
+    border-bottom: 4px solid white;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Rotate arrow when open */
+  .arrow.up {
+    transform: rotate(135deg);
+  }
+  
+  /* Dropdown Menu */
+  .dropdown-menu-custom {
+    position: absolute;
+    width: 100%;
+    bottom: 100%;
+    background: rgba(59, 146, 245, 0.767);
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    margin-bottom: 5px;
+    list-style: none;
+    z-index: 1000;
+    text-align: center;
+    max-height: 200px; /* Set a max height for the dropdown */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+  
+  /* Dropdown Items */
+  .dropdown-menu-custom li {
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  .dropdown-menu-custom li:hover {
+    background: #0555eb;
+    color: white;
+  }
+  
+  /* Responsive: Smaller width on mobile */
+  @media (max-width: 768px) {
+    .dropdown-container {
+      max-width: 200px;
+      width: 100%; /* Full width on mobile */
+    }
+  }
+  
+

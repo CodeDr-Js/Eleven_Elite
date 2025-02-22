@@ -69,7 +69,7 @@ const ChangePassword = ({
     // }
 
     return (
-      <div className="pin-div ">
+      <div className="pin-div  main-color">
         <div className='d-flex w-100 bg-transparent '>
         <div className='w-100 bg-transparent '></div>
 
@@ -79,7 +79,7 @@ const ChangePassword = ({
           className="fa fa-close fa-fw fa-lg opacity-50 ps-5 bg-transparent ms-auto"
         ></i>
         </div>
-        <p className="bet-color text-center">Change password</p>
+        <p className="bg-transparent text-center">Change password</p>
         <div className='bg-transparent d-flex'>
 
         <i

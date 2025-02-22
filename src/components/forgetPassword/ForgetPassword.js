@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./index.css";
+import "./forgetPassword.css";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/Logo.png";
 import Arrow from "../../assets/images/document-management-system-return-icon-48 - Copy copy.png";
@@ -9,6 +9,7 @@ import Button from "../loader-btn/loader-btn";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { API } from "../api-service/api-service";
+import newLogo from "../../assets/images/newlogo.png";
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const ForgetPassword = () => {
     } else if (error) {
       setError("");
     }
-  }, 6000);
+  }, 10000);
 
   return (
     <div className="container mt-2">
@@ -74,21 +75,23 @@ const ForgetPassword = () => {
         />
       </Link>
 
-      <div className="d-flex justify-content-center mt-5">
+      <div className="d-flex justify-content-center mt-5 mb-4">
+        
         <div className="d-flex flex-column align-items-center">
           <img
-            src={Logo}
+            src={newLogo}
             alt="Logo"
             className="justify-content-center"
-            style={{ width: "90px" }}
+            style={{ width: "120px" }}
           />
-          <p className="text-center logo-">Eleven Elites Football</p>
+          {/* <p className="text-center logo-">R R T . C C Football</p> */}
         </div>
       </div>
+
       <div className="d-flex">
         <form
           onSubmit={handleSubmit}
-          className=" m-2 rounded-4 p-4 w-100 form-div g-sub-color"
+          className=" m-2 rounded-4 p-4 w-100 form-div main-color"
         >
           {error ? (
             <p className="alert alert-danger">
@@ -110,7 +113,7 @@ const ForgetPassword = () => {
           ></i>
 
           <input
-            className="form-control w-100 form-username g-sub-color mb-3 "
+            className="form-control w-100 form-username g-sub-color-forget mb-3 "
             type="text"
             placeholder="Enter your Email"
             name="email"
@@ -123,12 +126,12 @@ const ForgetPassword = () => {
             loading={showLoader}
             disabled={showLoader}
           />
-          <div className="d-flex g-sub-color">
-            <p className="form-have-account g-sub-color me-auto opacity-50">
+          <div className="d-flex bg-transparent">
+            <p className="form-have-account bg-transparent me-auto opacity-50">
               Don't you have an account?
             </p>
             <Link
-              className="sign-up g-sub-color text-decoration-none"
+              className="sign-up bg-transparent text-decoration-none"
               to="/login"
             >
               Login

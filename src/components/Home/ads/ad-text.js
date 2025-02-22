@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./CarouselComponent.css"; // Custom CSS file to override styles
-import flier1 from "../../../assets/images/flier1.jpg";
+import flier1 from "../../../assets/images/flier.jpg";
 import flier2 from "../../../assets/images/flier2.jpg";
 import flier3 from "../../../assets/images/flier3.jpg";
 import flier4 from "../../../assets/images/flier4.jpg";
@@ -13,25 +13,25 @@ import flier4 from "../../../assets/images/flier4.jpg";
 const CarouselComponent = () => {
   const settings = {
     dots: false, // Set to true if you want to keep the dots navigation
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true, // Enable autoplay
+    autoplay: false, // Enable autoplay
     autoplaySpeed: 3000,
   };
 
   return (
     <Slider {...settings}>
-      <div className="container">
+      <div className="container mt-3">
         <img
-          className="w-100 rounded-3 mt mb-3"
-          style={{ height: "80px" }}
+          className="w-100 rounded-3 mt-5 mb-3"
+          style={{ height: "200px" }}
           src={flier1}
           alt=""
         />
       </div>
-      <div className="container">
+      {/* <div className="container">
         <img
           className="w-100 rounded-3 mt "
           style={{ height: "80px" }}
@@ -54,7 +54,7 @@ const CarouselComponent = () => {
           src={flier4}
           alt=""
         />
-      </div>
+      </div> */}
 
       {/* <div>
         <img

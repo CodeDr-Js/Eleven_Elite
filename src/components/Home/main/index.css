@@ -1,5 +1,4 @@
 .main-div {
-  background-color: rgb(2, 2, 92);
   height: 7.5rem;
   padding: 0.625rem 0.125rem; 
   justify-content: space-around;
@@ -7,10 +6,10 @@
 }
 
 .main {
-  
+  height:auto ;
 }
 .main-div-2 {
-  background-color: rgb(2, 2, 92);
+ 
   margin: -3.75rem 0 0 0;
     padding: 0.625rem 0.125rem;
     height: 4.375rem;
@@ -18,7 +17,7 @@
 }
 
 .main-color {
-  background-color: rgb(2, 2, 92);
+  background-color: #383749;
 }
 
 
@@ -239,4 +238,24 @@ margin-left: 4.6rem;
  
 }
 
+@media screen and (max-width: 365px) { /* Adjust breakpoint as needed */
+  .all-s-screen {
+    margin-left: 14.3rem !important;
+    margin-top: 2px !important;
+   
+  }
+}
+
+
+@media screen and (min-width: 530px) { /* Adjust breakpoint as needed */
+ 
+  .all-btn-big-2 {
+    margin-left: 337px !important;
+    width: 8%;
+  }
+
+  .bet-input-lg {
+    width: 100% !important;
+  }
+}
 

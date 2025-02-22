@@ -17,7 +17,9 @@ const Loader = ({ className }) => (
   </div>
 );
 
-const Button = ({onSubmit, text, loading = false, disabled, value, betBtn }) => {
+const Button = ({onSubmit, text, loading = false, disabled, value, betBtn, validValue, c="btn-primary" }) => {
+  console.log(validValue);
+  
   return (
     // <button
     //   id={betBtn}
@@ -36,9 +38,9 @@ const Button = ({onSubmit, text, loading = false, disabled, value, betBtn }) => 
     <button
     id={betBtn}
       className={
-        Number(value) >= 10 && !loading
-          ? "btn btn-primary w-100 p-2 fs-4 opacity-75 mt-3 submit-btn1"
-          : "btn btn-primary w-100 p-2 fs-4 opacity-25 mt-3 text-warning disabled"
+        Number(value) >= Number(validValue) && !loading
+          ? `btn ${c} w-100 p-2 fs-4 opacity-75 mt-3 submit-btn1`
+          : `btn  ${c} w-100 p-2 fs-4 opacity-25 mt-3 text-warning disabled`
       }
     disabled={disabled}
     onClick={onSubmit}

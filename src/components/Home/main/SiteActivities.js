@@ -18,11 +18,11 @@ export const SiteActivities = () => {
 
   //console.log(result);
 
-  useEffect(() => {
-    if (!hasRunRetrieve) {
-      getUserData();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!hasRunRetrieve) {
+  //     getUserData();
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (result && Object.keys(result).length) {
@@ -104,12 +104,13 @@ export const SiteActivities = () => {
   // console.log(timeAgo(timestamp));  // Output will depend on the current time
 
   //console.log(displayData);
+  try {
   return (
-    <div translate="no" className="">
+    <div translate="no" className="" style={{marginBottom:"60px"}}>
       {displayData.length > 2
         ? displayData.map((item, idx) => (
             <div key={idx} className={`activity-item ${animations[idx]}`}>
-              <div className="d-flex white rounded-5 pt-2 ms-3 me-3 mb-2">
+              <div className="d-flex white rounded-5 pt-2 ms-3 me-3 mb-3">
                 <div className="bg-transparent d-flex ps-4">
                   <div
                     className="bg-success rounded-circle"
@@ -121,9 +122,10 @@ export const SiteActivities = () => {
                       style={{ width: "30px", height: "30px" }}
                     />
                   </div>
-                  <p className="bg-transparent text-dark fw-bold at-font ps-3 pt-2 me-3">
-                    {shortID(item.fields.user_id)}
-                  </p>
+                  {item.fields ? <p className="bg-transparent text-dark fw-bold at-font ps-3 pt-2 me-3">
+                    {item.fields ? shortID(item.fields.user_id) : ""}
+                  </p>:""}
+                  
                 </div>
                 <div className="bg-transparent  ps-2 d-flex  ">
                   {item.fields.type === "won" ? (
@@ -157,7 +159,7 @@ export const SiteActivities = () => {
                   {item.fields.type === "deposit" ? (
                     <div
                       className="bg-transparent me-3  rounded-3"
-                      style={{ width: "30px", height: "30px" }}
+                      style={{ width: "auto", height: "30px" }}
                     >
                       <img
                         className="bg-transparent"
@@ -187,7 +189,7 @@ export const SiteActivities = () => {
                         ""
                       )}
                       {item.fields.type === "deposit" ? (
-                        <p className="bg-transparent text-warning fw-bold at-font">
+                        <p className="bg-transparent text-warning fw-bold at-font ">
                           Deposit ${item.fields.amount}
                         </p>
                       ) : (
@@ -206,6 +208,9 @@ export const SiteActivities = () => {
         : ""}
     </div>
   );
+} catch (error) {
+    
+}
 };
 
 // SECOND METHOD

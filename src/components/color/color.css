@@ -1,9 +1,9 @@
 /* Colors */
 .default_color {
-  background-color: rgb(1, 1, 54) !important;
+  background-color: #383749 !important;
 }
 .main-color {
-  background-color: #02123D;
+  background-color: #383749;
 }
 .main-color-1 {
   background-color: #0842e0;
@@ -15,36 +15,36 @@
   background-color: #91097f;
 }
 .main-color-4 {
-  background-color: #0e070d;
+  background-color: #383749;
 }
 .main-color-5 {
-  background-color: #0d0714;
+  background-color: #383749;
 }
 
 .main-color1 {
-  background-color: rgb(8, 34, 87); 
+  background-color: #383749; 
 }
 
 .g-sub-color{
-  background-color: rgb(11, 11, 116);
+  background-color: #383749;
 }
 
 .div-color {
-  background-color: rgba(5, 5, 68, 0.548);
+  background-color: #383749;
 
 }
 
 .odd-color {
-  background-color: rgb(7, 24, 59);
+  background-color: #383749;
 }
 
 .bet-color {
-  background-color: rgb(7, 24, 59);
+  background-color: #383749;
 
 }
 
 .u-color {
-  background-color: rgba(18, 65, 158, 0.438);
+  background-color: #383749;
 
 }
 

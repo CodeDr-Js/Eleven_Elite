@@ -11,13 +11,9 @@ import NoData from "../noData/noData";
 import { AddImg } from "../qickfun/qickfun";
 import vs from "../../assets/svg/vs.svg";
 
-
-
-
-
-const Win = ({ settled}) => {
+const Win = ({ settled }) => {
   // const navigate = useNavigate();
-  // const {} = useContext(DataContext)
+   const {activities_g} = useContext(DataContext)
   // const [token, setToken, removeToken] = useCookies(["auth-token"]);
   // const [activities, setActivities] = useState([]);
   // const [settled, setSettled] = useState([]);
@@ -69,8 +65,7 @@ const Win = ({ settled}) => {
     }
   };
 
-
-const leagueShortName2 = (name) => {
+  const leagueShortName2 = (name) => {
     if (name.length > 23) {
       return name.toString().substr(0, 23) + "...";
     } else {
@@ -109,31 +104,69 @@ const leagueShortName2 = (name) => {
 
   //console.log(settled);
 
- 
   let e = [];
-  Object.entries(settled).forEach(([date, tickets]) => {
-    //console.log(date); // Print the date
-    Object.entries(tickets).forEach(([id, ticketData]) => {
-      //console.log(id, ticketData); // Print the ID
 
-        if (ticketData.ticket_head.outcome === "won") {
-            ticketData.games.forEach((item) => {
-                e.push([item, ticketData.ticket_head]);
-                // console.log(item);
-              });
-          }
-      
-      //console.log(ticketData); // Print the ticket data
+    Object.entries(settled).map(([month, monthData]) => {
+      console.log({ monthData });
+
+      Object.entries(monthData).map(([date, tickets]) => {
+        console.log({date, tickets}); // Print the date
+        Object.entries(tickets).forEach(([id, ticketData]) => {
+          console.log({id, ticketData});
+          console.log("Ticket[0]", ticketData[0]);
+
+          // Print the ID
+
+          Object.entries(ticketData).map(([key, values]) => {
+            console.log({key, values});
+
+            Object.entries(values).map(([ky, value]) => {
+              
+              console.log({ky, value});
+              
+              if (value.ticket_head.outcome === "won") {
+                value.games.forEach((item) => {
+                  console.log("New Ticket Head",value.ticket_head.outcome);
+  
+                  e.push([item, value.ticket_head]);
+                  console.log("New item:",item);
+                });
+              }
+            })
+
+          });
+
+          //console.log(ticketData); // Print the ticket data
+        });
+      });
     });
-  });
+
+  // Object.entries(settled).forEach(([date, tickets]) => {
+  //   //console.log(date); // Print the date
+  //   Object.entries(tickets).forEach(([id, ticketData]) => {
+  //     //console.log(id, ticketData); // Print the ID
+
+  //       if (ticketData.ticket_head.outcome === "won") {
+  //           ticketData.games.forEach((item) => {
+  //               e.push([item, ticketData.ticket_head]);
+  //               // console.log(item);
+  //             });
+  //         }
+
+  //     //console.log(ticketData); // Print the ticket data
+  //   });
+  // });
 
   const historycard = e.map(([item, ticket_head], index) => {
     //console.log(item);
     return (
-      <div key={item.id + index} className="history-card-div main-color rounded-4 shadow-lg">
-              <div className="main-color d-flex">
+      <div
+        key={item.id + index}
+        className="history-card-div main-color rounded-4 shadow-lg"
+      >
+        <div className="main-color d-flex">
           <div className="main-color me-2">
-          {AddImg(item.market.league.flag,[18,18,'📷'])}
+            {AddImg(item.market.league.flag, [18, 18, "📷"])}
             {/* <img
               src={item.market.league.flag}
               alt="flag"
@@ -146,10 +179,9 @@ const leagueShortName2 = (name) => {
         </div>
 
         <div className="main-color d-flex">
-          <p className="main-color me-auto opacity-75 ">
-          </p>
+          <p className="main-color me-auto opacity-75 "></p>
           <small className="main-color pt-1 opacity-50 ">
-          {convertTimestampToRealTime(item.market.timestamp)}
+            {convertTimestampToRealTime(item.market.timestamp)}
           </small>
         </div>
 
@@ -157,75 +189,95 @@ const leagueShortName2 = (name) => {
           <p className="main-color me-auto opacity-75 ">
             {item.market.teams.home}
           </p>
-          <p className="position-absolute VS" ><img  src={vs} alt="Vs" style={{"width":"15px"}}/></p>
+          <p className="position-absolute VS">
+            <img src={vs} alt="Vs" style={{ width: "15px" }} />
+          </p>
           <p className="main-color me-auto opacity-75 ">
-             {item.market.teams.away}
+            {item.market.teams.away}
           </p>
         </div>
         <div className="main-color">
           {/* <p className="main-color pt-2 fw-bold ">Correct Score</p> */}
 
-        <div
-          className=" u-color d-flex rounded-3 ps-2 pe-2 pt-2 anti-card-div"
-          style={{ height: "30px" }}
-        >
-          <p className="u-color">Anti</p>
-          <p className="u-color">{item.market.pick}</p>
-            <p className="u-color fw-bold anti-percent">{item.market.odd}%</p>
-        </div>
+          <div
+            className=" secondary-color d-flex rounded-3 ps-2 pe-2 pt-2 anti-card-div"
+            style={{ height: "30px" }}
+          >
+            <p className="bg-transparent">Anti</p>
+            <p className="bg-transparent">{item.market.pick}</p>
+            <p className="bg-transparent fw-bold anti-percent">{item.market.odd}%</p>
+          </div>
 
-        <div className="main-color pt-3 d-flex ">
-          <div className="main-color d-flex stake-div">
-            <p className="main-color opacity-75">Stake</p>
-            <div className="main-color d-flex">
-              <img />
-              <p className="main-color opacity-75">$ {ticket_head.stake_amount}</p>
+          <div className="main-color pt-3 d-flex ">
+            <div className="main-color d-flex stake-div">
+              <p className="main-color opacity-75">Stake</p>
+              <div className="main-color d-flex">
+                <img />
+                <p className="main-color opacity-75">
+                {activities_g.init_currency.symbol} {ticket_head.stake_amount}
+                </p>
+              </div>
+            </div>
+
+            <div className="main-color ms-auto fw-bold">
+            {activities_g.init_currency.symbol} {ticket_head.potentail_winning}
             </div>
           </div>
 
-          <div className="main-color ms-auto fw-bold">$ {ticket_head.potentail_winning}</div>
-        </div>
-
-        <div className="main-color opacity-50">
-          Ticket ID: {item.id}
-        </div>
-        <div className="main-color">
-          <div className="main-color d-flex">
-            {item.market.result? <p className="main-color text-primary  fw-bold pt-2">
-              Final score: {item.market.result.home} : {item.market.result.away}
-            </p> : "" }
-            {/* {!item.market.result? <p className="main-color text-warning  fw-bold pt-2">
+          <div className="main-color opacity-50">Ticket ID: {item.id}</div>
+          <div className="main-color">
+            <div className="main-color d-flex">
+              {item.market.result ? (
+                <p className="main-color text-primary  fw-bold pt-2">
+                  Final score: {item.market.result.home} :{" "}
+                  {item.market.result.away}
+                </p>
+              ) : (
+                ""
+              )}
+              {/* {!item.market.result? <p className="main-color text-warning  fw-bold pt-2">
               POSTPOND
             </p> : "" } */}
-            
-            {ticket_head.outcome === "won"? ( <p className="main-color text-success fw-bold fs-2 ms-auto pt-2">
-              Win
-            </p>):""}
-            {ticket_head.outcome === "loss"? ( <p className="main-color text-danger fw-bold fs-2 ms-auto pt-2">
-              Lose
-            </p>):""}
-            {ticket_head.outcome === "canc"? ( <p className="main-color text-secondary fw-bold fs-3 opacity-50 ms-auto pt-2">
-              Cancelled
-            </p>):""}
-            {ticket_head.outcome === "post"? ( <p className="main-color text-warning fw-bold fs-3 opacity-50 ms-auto pt-2">
-              Postpond
-            </p>):""}
-           
+
+              {ticket_head.outcome === "won" ? (
+                <p className="main-color text-success fw-bold fs-2 ms-auto pt-2">
+                  Win
+                </p>
+              ) : (
+                ""
+              )}
+              {ticket_head.outcome === "loss" ? (
+                <p className="main-color text-danger fw-bold fs-2 ms-auto pt-2">
+                  Lose
+                </p>
+              ) : (
+                ""
+              )}
+              {ticket_head.outcome === "canc" ? (
+                <p className="main-color text-secondary fw-bold fs-3 opacity-50 ms-auto pt-2">
+                  Cancelled
+                </p>
+              ) : (
+                ""
+              )}
+              {ticket_head.outcome === "post" ? (
+                <p className="main-color text-warning fw-bold fs-3 opacity-50 ms-auto pt-2">
+                  Postpond
+                </p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
     );
   });
 
-
-
   return (
     <>
-   
-      { historycard}
-      {!e[0]? <NoData/>:""}
-      
+      {historycard}
+      {!e[0] ? <NoData /> : ""}
     </>
   );
 };

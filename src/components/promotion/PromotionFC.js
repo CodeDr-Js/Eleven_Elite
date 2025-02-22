@@ -1,4 +1,5 @@
 import React from "react";
+import { convertToLocalTime } from "../qickfun/qickfun";
 
 const PromotionFC = ({promotion, activeButton}) => {
  // console.log(promotion,activeButton);
@@ -9,7 +10,7 @@ const PromotionFC = ({promotion, activeButton}) => {
   }
   return (
     <div>
-      <p className="ps-3 fw-bold ">Friends</p>
+      <p className="ps-3 fw-bold ">Earning Chart</p>
       {activeButton === "level-1" ? ( <div className="main-color d-flex justify-content-center text-center friend-div">
         <p className="bg-transparent user pt-3 fw-bold">User</p>
         <p className="bg-transparent amount pt-3 fw-bold">Amount</p>
@@ -29,28 +30,43 @@ const PromotionFC = ({promotion, activeButton}) => {
       
   
       
-          {activeButton === "level-1"? (promotion ? (promotion.a_level1[0] ? (Object.entries(promotion.a_level1).map(([k,e]) => (
-            <div key={k} className="d-flex justify-content-center text-center main-color opacity-50 level-div">
+          {activeButton === "level-1"? (promotion ? (promotion.activities.teams_dir.a_level1[0] ? (Object.entries(promotion.activities.teams_dir.a_level1).map(([k,e]) => (
+            <div key={k}>
+            <div className="d-flex justify-content-center text-center main-color opacity-50" > <p className="secondary-color ps-3 pe-3 round">{e.fields.module}</p></div>
+            <div  className="d-flex justify-content-center text-center main-color opacity-50 level-div">
+            
             <p className="bg-transparent user">{e.fields.transactionID}</p>
-            <p className="bg-transparent amount">$ {e.fields.amount}</p>
-            <p className="bg-transparent date">{splitData(e.fields.timestamp) }</p>
+            <p translate="no" className="bg-transparent amount">{promotion.activities.init_currency.symbol} {Number(e.fields.amount).toFixed(2)}</p>
+            <p className="bg-transparent date">{convertToLocalTime(splitData(e.fields.timestamp))}</p>
+          </div>
+            </div>
+          
+          ))) : "") : "") : ""}
+          {activeButton === "level-2"? (promotion ? (promotion.activities.teams_dir.a_level2[0] ? (Object.entries(promotion.activities.teams_dir.a_level2).map(([k,e]) => (
+            <div key={k}>
+               <div className="d-flex justify-content-center text-center main-color-1 opacity-50" > <p className="secondary-color ps-3 pe-3 round">{e.fields.module}</p></div>
+            <div  className="d-flex justify-content-center text-center main-color-1 opacity-50">
+            <p className="bg-transparent user">{e.fields.transactionID}</p>
+            <p translate="no" className="bg-transparent amount">{promotion.activities.init_currency.symbol} {Number(e.fields.amount).toFixed(2)}</p>
+            <p className="bg-transparent date">{convertToLocalTime(splitData(e.fields.timestamp)) }</p>
           </div>
 
-          ))) : "") : "") : ""}
-          {activeButton === "level-2"? (promotion ? (promotion.a_level2[0] ? (Object.entries(promotion.a_level2).map(([k,e]) => (
-            <div key={k} className="d-flex justify-content-center text-center main-color-1 opacity-50">
-            <p className="bg-transparent user">{e.fields.transactionID}</p>
-            <p className="bg-transparent amount">$ {e.fields.amount}</p>
-            <p className="bg-transparent date">{splitData(e.fields.timestamp) }</p>
-          </div>
+            </div>
+            
 
           ))) : "") : "") : ""}
-          {activeButton === "level-3"? (promotion ? (promotion.a_level3[0] ? (Object.entries(promotion.a_level3).map(([k,e]) => (
+          {activeButton === "level-3"? (promotion ? (promotion.activities.teams_dir.a_level3[0] ? (Object.entries(promotion.activities.teams_dir.a_level3).map(([k,e]) => (
+
+            <div key={k}>
+              <div className="d-flex justify-content-center text-center main-color-2 opacity-50" > <p className="secondary-color ps-3 pe-3 round">{e.fields.module}</p></div>
+
             <div key={k} className="d-flex justify-content-center text-center main-color-2 opacity-50">
             <p className="bg-transparent user">{e.fields.transactionID}</p>
-            <p className="bg-transparent amount">$ {e.fields.amount}</p>
-            <p className="bg-transparent date">{splitData(e.fields.timestamp) }</p>
+            <p translate="no" className="bg-transparent amount">{promotion.activities.init_currency.symbol} {Number(e.fields.amount).toFixed(2)}</p>
+            <p className="bg-transparent date">{convertToLocalTime(splitData(e.fields.timestamp)) }</p>
           </div>
+
+            </div>
 
           ))) : "") : "") : ""}
     </div>

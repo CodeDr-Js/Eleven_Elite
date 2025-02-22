@@ -6,14 +6,17 @@ import PromotionNav from "./PromotionNav/PromotionNav";
 import PromotionCard from "./promotionCard";
 import PromotionFC from "./PromotionFC";
 import { API } from "../api-service/api-service";
-import Cookies  from "js-cookie";
+import Cookies from "js-cookie";
 import { DataContext } from "../APIs/Api";
 import { host, hostname, origin } from "../search_dir/search_dir";
 import { useNavigate } from "react-router-dom";
 import Loader from "../loader/loader";
 import Footer from "../Home/anti-scores/footer";
+import { convertToLocalTime } from "../qickfun/qickfun";
 
 const hostName = `${origin}/register/?invited=`;
+
+//console.log(hostName);
 
 const Promotion = () => {
   const navigate = useNavigate();
@@ -24,12 +27,38 @@ const Promotion = () => {
   const [loadings, setLoadings] = useState(false);
   const [activeButton, setActiveButton] = useState("promotion");
 
+  
   if (!token) {
     navigate("/login");
   } else {
     setActiveToken(token);
   }
-  console.log(promotion);
+
+  const handlePromotion = () => {
+    if(promotion !== null) {
+
+    } else {
+      API.retrievePromotion(token)
+      .then((result) => {
+        console.log("Promotion is :", result);
+        if (result.success || result.message === "Success") {
+          setPromotion(result);
+        } else if (result.detail) {
+          Cookies.remove("auth-token");
+          setActiveToken("");
+          navigate("/login");
+        }
+      })
+      .catch((err) => console.log(err));
+    }
+   
+  };
+
+  useEffect(() => {
+    handlePromotion();
+  }, []);
+
+  //console.log(promotion);
   useEffect(() => {
     setLoadings(true);
     if (promotion !== null) {
@@ -37,30 +66,30 @@ const Promotion = () => {
     }
   }, [promotion]);
 
-  useEffect(() => {
-    if (promotion === null) {
-      API.promotion(token)
-        .then((result) => {
-         // console.log("Promotion is:",result);
-          if (result.success) {
-            setPromotion(result);
-          } else if (result.detail) {
-            Cookies.remove("auth-token")
-            setActiveToken("");
-            navigate("/login");
-          }
-        })
-        .catch((err) => console.log(err));
-    } else {
-      //console.log("Data is found in promotion..");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (promotion === null) {
+  //     API.promotion(token)
+  //       .then((result) => {
+  //         console.log("Promotion is:", result);
+  //         if (result.success) {
+  //           setPromotion(result);
+  //         } else if (result.detail) {
+  //           Cookies.remove("auth-token");
+  //           setActiveToken("");
+  //           navigate("/login");
+  //         }
+  //       })
+  //       .catch((err) => console.log(err));
+  //   } else {
+  //     //console.log("Data is found in promotion..");
+  //   }
+  // }, []);
 
   const handleCopy = (text) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        setMessage("Wallet address successfully copied to clipboard");
+        setMessage("Invite address successfully copied to clipboard");
       })
       .catch((err) => {
         setMessage("Failed to copy text");
@@ -82,13 +111,15 @@ const Promotion = () => {
     navigate("/pending");
   };
 
+ 
+
   return (
     <div className="mb-5">
       {" "}
       {activeButton === "promotion" ? (
         <div className="">
           <div className="fixed-top">
-            <ArrowNav name="Promotion" />
+            <ArrowNav name="Promotion" bg="main-color" />
           </div>
           {loadings ? <Loader /> : ""}
           <div className=" mt-5 pt-5 container">
@@ -106,7 +137,7 @@ const Promotion = () => {
                 <div className="bg-transparent d-flex w-100">
                   {promotion !== null ? (
                     <p className="opacity-50 pe-4 ref-link-1">
-                      {hostName + promotion.activities.referral.url}
+                      {hostName + promotion.activities.teams_dir.invite_url}
                     </p>
                   ) : (
                     <p className="opacity-50 pe-4">{hostName}</p>
@@ -114,7 +145,7 @@ const Promotion = () => {
 
                   <i
                     onClick={() =>
-                      handleCopy(hostName + promotion.activities.referral.url)
+                      handleCopy(hostName + promotion.activities.teams_dir.invite_url)
                     }
                     id=""
                     className="fa fa-copy fa-fw fa-lg opacity-50 d-flex-1 bg-transparent ms-auto pt-1 "
@@ -141,48 +172,47 @@ const Promotion = () => {
 
               <div className="bg-transparent amt-div mt-3 ">
                 {promotion !== null ? (
-                  promotion.activities.referral.earning_today.daily.amount ? (
+                  promotion.activities.teams_dir.next_pay_date ? (
                     <p className="bg-transparent text-warning">
-                      {Number(promotion.activities.referral.earning_today.daily.amount).toFixed(2)}
+                      {
+                        convertToLocalTime(promotion.activities.teams_dir.next_pay_date)
+                      }
                     </p>
                   ) : (
-                    <p className="bg-transparent text-warning">0.0 USD</p>
+                    <p className="bg-transparent text-warning"></p>
                   )
                 ) : (
                   ""
                 )}
 
-                <small className="bg-transparent">Today</small>
+                <small className="bg-transparent">Next Pay </small>
               </div>
               <div className="bg-transparent d-flex w-100 pb-4 av-border ">
                 <div className="bg-transparent d-flex w-100  ">
                   <div className="bg-transparent amt-div mt-wg me-auto">
                     {promotion !== null ? (
-                      promotion.current_earning ? (
-                        <p className="bg-transparent ">
-                          {Number(promotion.current_earning).toFixed(2)}{" "}
-                          USD
+                      promotion.activities.teams_dir ? (
+                        <p translate="no" className="bg-transparent ">
+                          {Math.floor(Number(promotion.activities.teams_dir.unpaid))} {promotion.activities.init_currency.code}
                         </p>
                       ) : (
-                        <p className="bg-transparent ">0.0 USD</p>
+                        <p translate="no" className="bg-transparent ">0.0 {promotion.activities.init_currency.code}</p>
                       )
                     ) : (
                       ""
                     )}
 
-                    <small className="bg-transparent">Available Bal.</small>
+                    <small className="bg-transparent fw-bold" style={{color:"black"}}>Frozen Commission</small>
                   </div>
                   <div className="bg-transparent amt-div mt-wg ms-auto">
                     {promotion !== null ? (
-                      promotion.total_withdrawn
- ? (
-                        <p className="bg-transparent txt-color fw-bold ">
-                          {Number(promotion.total_withdrawn
-).toFixed(2)} USD
+                      promotion.activities.teams_dir.total_paid ? (
+                        <p translate="no" className="bg-transparent txt-color fw-bold ">
+                          {Math.floor(Number(promotion.activities.teams_dir.total_paid))} {promotion.activities.init_currency.code}
                         </p>
                       ) : (
-                        <p className="bg-transparent txt-color fw-bold ">
-                          0.0 USD
+                        <p translate="no" className="bg-transparent txt-color fw-bold ">
+                          0.0 {promotion.activities.init_currency.code}
                         </p>
                       )
                     ) : (
@@ -199,9 +229,9 @@ const Promotion = () => {
                 <div className="bg-transparent d-flex flex-column align-items-center">
                   <p className="bg-transparent txt-color1">Total</p>
                   {promotion !== null ? (
-                    promotion.active || promotion.inactive ? (
+                    promotion.activities.teams_dir.active || promotion.activities.teams_dir.inactive ? (
                       <small className="bg-transparent">
-                        {promotion.active + promotion.inactive}
+                        {promotion.activities.teams_dir.active + promotion.activities.teams_dir.inactive}
                       </small>
                     ) : (
                       <small className="bg-transparent">0</small>
@@ -213,9 +243,9 @@ const Promotion = () => {
                 <div className="bg-transparent d-flex flex-column align-items-center">
                   <p className="bg-transparent txt-color1">Active</p>
                   {promotion !== null ? (
-                    promotion.active ? (
+                    promotion.activities.teams_dir.active ? (
                       <small className="bg-transparent">
-                        {promotion.active}
+                        {promotion.activities.teams_dir.active}
                       </small>
                     ) : (
                       <small className="bg-transparent">0</small>
@@ -230,9 +260,9 @@ const Promotion = () => {
                 >
                   <p className="bg-transparent txt-color1">Pending</p>
                   {promotion !== null ? (
-                    promotion.inactive ? (
+                    promotion.activities.teams_dir.inactive ? (
                       <small className="bg-transparent">
-                        {promotion.inactive}
+                        {promotion.activities.teams_dir.inactive}
                       </small>
                     ) : (
                       <small className="bg-transparent">0</small>
@@ -250,43 +280,66 @@ const Promotion = () => {
                 setActiveButton={setActiveButton1}
               />
             </div>
+        
 
             {activeButton1 === "level-1" ? (
               <div className="mt-3">
                 {promotion !== null ? (
-                  promotion["a_level1"] ? (
-                    promotion.activities.referral.generation_track ? (
-                      promotion.activities.referral.generation_track[1] ? (
+                  promotion.activities.teams_dir["a_level1"] ? (
+                    promotion.activities.teams_dir.generation_track ? (
+                      promotion.activities.teams_dir.generation_track[1] ? (
                         <PromotionCard
                           style="main-color"
                           deposited={
-                            promotion.activities.referral.generation_track[1]
+                            promotion.activities.teams_dir.generation_track[1]
                               .gen_deposit
-                              ? Number(promotion.activities.referral
+                              ? Number(promotion.activities.teams_dir
                                   .generation_track[1].gen_deposit.amount).toFixed(2)
                               : "0.0"
                           }
                           registered={
-                            promotion.activities.referral.generation_track[1]
+                            promotion.activities.teams_dir.generation_track[1]
                               .registered
-                              ? promotion.activities.referral
+                              ? promotion.activities.teams_dir
                                   .generation_track[1].registered.count
                               : "0"
                           }
                           withdrawn={
-                            promotion.activities.referral.generation_track[1]
+                            promotion.activities.teams_dir.generation_track[1]
                               .gen_withdrawal
-                              ? Number(promotion.activities.referral
-                                  .generation_track[1].gen_withdrawal.amount).toFixed(2)
+                              ? Math.floor(Number(promotion.activities.teams_dir
+                                  .generation_track[1].gen_withdrawal.amount))
                               : "0.0"
                           }
                           total={
-                            promotion.activities.referral.generation_track[1]
+                            promotion.activities.teams_dir.generation_track[1]
                               .commission
-                              ? Number(promotion.activities.referral
-                                  .generation_track[1].commission.amount).toFixed(2)
+                              ? Math.floor(Number(promotion.activities.teams_dir
+                                  .generation_track[1].commission.amount))
                               : "0.0"
                           }
+
+                          active={
+                            promotion.activities.teams_dir.generation_track[1]
+                              .commission
+                              ? Math.floor(Number(promotion.activities.teams_dir
+                                  .generation_track[1].active_user.count))
+                              : "0.0"
+                          }
+
+                          currency={
+                            promotion.activities.init_currency.symbol
+                              ? promotion.activities.init_currency.symbol
+                              : ""
+                          }
+
+                          code={
+                            promotion.activities.init_currency.code
+                              ? promotion.activities.init_currency.code
+                              : ""
+                          }
+
+                          level={"1"}
                         />
                       ) : (
                         <PromotionCard
@@ -295,6 +348,10 @@ const Promotion = () => {
                           registered={0}
                           withdrawn={0}
                           total={0}
+                          active={0}
+                          currency={""}
+                          code={""}
+                          level={"1"}
                         />
                       )
                     ) : (
@@ -304,6 +361,10 @@ const Promotion = () => {
                         registered={0}
                         withdrawn={"0.00"}
                         total={"0.0"}
+                        active={0}
+                        currency={""}
+                        code={""}
+                        level={"1"}
                       />
                     )
                   ) : (
@@ -313,6 +374,10 @@ const Promotion = () => {
                       registered={0}
                       withdrawn={"0.00"}
                       total={"0.0"}
+                      active={0}
+                      currency={""}
+                      code={""}
+                      level={"1"}
                     />
                   )
                 ) : (
@@ -326,39 +391,64 @@ const Promotion = () => {
             {activeButton1 === "level-2" ? (
               <div className="mt-3">
                 {promotion !== null ? (
-                  promotion["a_level2"] ? (
-                    promotion.activities.referral.generation_track ? (
-                      promotion.activities.referral.generation_track[2] ? (
+                  promotion.activities.teams_dir["a_level2"] ? (
+                    promotion.activities.teams_dir.generation_track ? (
+                      promotion.activities.teams_dir.generation_track[2] ? (
                         <PromotionCard
                           style="main-color-1"
                           deposited={
-                            promotion.activities.referral.generation_track[2]
+                            promotion.activities.teams_dir.generation_track[2]
                               .gen_deposit
-                              ? Number(promotion.activities.referral
-                                  .generation_track[2].gen_deposit.amount).toFixed(2)
+                              ? Math.floor(Number(
+                                  promotion.activities.teams_dir
+                                    .generation_track[2].gen_deposit.amount
+                                ))
                               : "0.0"
                           }
                           registered={
-                            promotion.activities.referral.generation_track[2]
+                            promotion.activities.teams_dir.generation_track[2]
                               .registered
-                              ? promotion.activities.referral
+                              ? promotion.activities.teams_dir
                                   .generation_track[2].registered.count
                               : "0"
                           }
                           withdrawn={
-                            promotion.activities.referral.generation_track[2]
+                            promotion.activities.teams_dir.generation_track[2]
                               .gen_withdrawal
-                              ? Number(promotion.activities.referral
-                                  .generation_track[2].gen_withdrawal.amount).toFixed(2)
+                              ? Math.floor(Number(
+                                  promotion.activities.teams_dir
+                                    .generation_track[2].gen_withdrawal.amount
+                                ))
                               : "0.0"
                           }
                           total={
-                            promotion.activities.referral.generation_track[2]
+                            promotion.activities.teams_dir.generation_track[2]
                               .commission
-                              ? promotion.activities.referral
-                                  .generation_track[2].commission.amount.toFixed(2)
+                              ? Math.floor(promotion.activities.teams_dir.generation_track[2].commission.amount)
                               : "0.0"
                           }
+
+                          active={
+                            promotion.activities.teams_dir.generation_track[2]
+                              .commission
+                              ? (Number(promotion.activities.teams_dir
+                                  .generation_track[2].active_user.count))
+                              : "0.0"
+                          }
+
+                          currency={
+                            promotion.activities.init_currency.symbol
+                              ? promotion.activities.init_currency.symbol
+                              : ""
+                          }
+
+                          code={
+                            promotion.activities.init_currency.code
+                              ? promotion.activities.init_currency.code
+                              : ""
+                          }
+                          
+                          level={2}
                         />
                       ) : (
                         <PromotionCard
@@ -367,6 +457,9 @@ const Promotion = () => {
                           registered={0}
                           withdrawn={0}
                           total={0}
+                          active={0}
+                          currency={""}
+                          code={""}
                         />
                       )
                     ) : (
@@ -376,6 +469,9 @@ const Promotion = () => {
                         registered={0}
                         withdrawn={0}
                         total={"0.0"}
+                        active={0}
+                        currency={""}
+                        code={""}
                       />
                     )
                   ) : (
@@ -385,6 +481,9 @@ const Promotion = () => {
                       registered={0}
                       withdrawn={0}
                       total={"0.0"}
+                      active={0}
+                      currency={""}
+                      code={""}
                     />
                   )
                 ) : (
@@ -398,39 +497,67 @@ const Promotion = () => {
             {activeButton1 === "level-3" ? (
               <div className="mt-3">
                 {promotion !== null ? (
-                  promotion["a_level3"] ? (
-                    promotion.activities.referral.generation_track ? (
-                      promotion.activities.referral.generation_track[3] ? (
+                  promotion.activities.teams_dir["a_level3"] ? (
+                    promotion.activities.teams_dir.generation_track ? (
+                      promotion.activities.teams_dir.generation_track[3] ? (
                         <PromotionCard
                           style="main-color-2"
                           deposited={
-                            promotion.activities.referral.generation_track[3]
+                            promotion.activities.teams_dir.generation_track[3]
                               .gen_deposit
-                              ? Number(promotion.activities.referral
-                                  .generation_track[3].gen_deposit.amount).toFixed(2)
+                              ? Math.floor(Number(
+                                  promotion.activities.teams_dir
+                                    .generation_track[3].gen_deposit.amount
+                                ))
                               : "0.0"
                           }
                           registered={
-                            promotion.activities.referral.generation_track[3]
+                            promotion.activities.teams_dir.generation_track[3]
                               .registered
-                              ? promotion.activities.referral
+                              ? promotion.activities.teams_dir
                                   .generation_track[3].registered.count
                               : "0"
                           }
                           withdrawn={
-                            promotion.activities.referral.generation_track[3]
+                            promotion.activities.teams_dir.generation_track[3]
                               .gen_withdrawal
-                              ? Number(promotion.activities.referral
-                                  .generation_track[3].gen_withdrawal.amount).toFixed(2)
+                              ? Math.floor(Number(
+                                  promotion.activities.teams_dir
+                                    .generation_track[3].gen_withdrawal.amount
+                                ))
                               : "0.0"
                           }
                           total={
-                            promotion.activities.referral.generation_track[3]
+                            promotion.activities.teams_dir.generation_track[3]
                               .commission
-                              ? Number(promotion.activities.referral
-                                  .generation_track[3].commission.amount).toFixed(2)
+                              ? Math.floor(Number(
+                                  promotion.activities.teams_dir
+                                    .generation_track[3].commission.amount
+                                ))
                               : "0.0"
                           }
+
+                          active={
+                            promotion.activities.teams_dir.generation_track[3]
+                              .commission
+                              ? Math.floor(Number(promotion.activities.teams_dir
+                                  .generation_track[3].active_user.count))
+                              : "0.0"
+                          }
+
+                          currency={
+                            promotion.activities.init_currency.symbol
+                              ? promotion.activities.init_currency.symbol
+                              : ""
+                          }
+
+                          code={
+                            promotion.activities.init_currency.code
+                              ? promotion.activities.init_currency.code
+                              : ""
+                          }
+
+                          level={3}
                         />
                       ) : (
                         <PromotionCard
@@ -439,6 +566,9 @@ const Promotion = () => {
                           registered={0}
                           withdrawn={0}
                           total={0}
+                          active={0}
+                          currency={""}
+                          code={""}
                         />
                       )
                     ) : (
@@ -448,6 +578,9 @@ const Promotion = () => {
                         registered={0}
                         withdrawn={0}
                         total={"0.0"}
+                        active={0}
+                        currency={""}
+                        code={""}
                       />
                     )
                   ) : (
@@ -457,6 +590,9 @@ const Promotion = () => {
                       registered={0}
                       withdrawn={0}
                       total={"0.0"}
+                      active={0}
+                      currency={""}
+                      code={""}
                     />
                   )
                 ) : (
@@ -467,14 +603,15 @@ const Promotion = () => {
               ""
             )}
 
-            <div className="mt-3">
+            <div className="mt-3 mb-3">
               <PromotionFC
                 promotion={promotion !== null ? promotion : ""}
                 activeButton={activeButton1}
               />
             </div>
-
-            <div></div>
+            <br/>
+            <br/>
+            
           </div>
 
           <Footer

@@ -41,8 +41,11 @@ const DataProvider = ({ children }) => {
   const [loadingNew, setLoadingNew] = useState();
   const [hasRunRetrieve, setHasRunRetrieve] = useState(false);
   const [hasRunDB,  setHasRunDB] = useState(false);
-
- //console.log("all results is:", result);
+  const [settled, setSettled] = useState({});
+  const [openBet, setOpenBet] = useState({});
+  const [banking, setBanking] = useState(null);
+ 
+ console.log("all results is:", result);
   
   const token1 = Cookies.get("auth-token");
   
@@ -212,22 +215,31 @@ const DataProvider = ({ children }) => {
   // }
   function addHours(date,hours,action = "add") { if (action === 'remove') { date.setHours(date.getHours() - hours); } else { date.setHours(date.getHours() + hours); }; return date; }
 
-  // useEffect(()=> {
-  //   // console.log("LoadingNew:",loadingNew);
-  //   // if(loadingNew){
+
+  //Loading new uncommented
+  useEffect(()=> {
+    // console.log("LoadingNew:",loadingNew);
+    if(loadingNew){
      
-  //   // }
-  //   dbFetch(true);
-  // }, [])
+    }
+    //dbFetch(true);
+  }, [])
+
+
+  
 
   const dbFetch = (req_next_date=false) => {
-    setHasRunDB(true);
+    console.log("run");
+    
     try {
+      return;
       // Check if data is found in IndexedDB storage
 
      getRealTimeDate().then((client) =>{
      client_timezone=client.timezone
      let currentDateNow = new Date(client.datetime).toISOString().split("T")[0];
+     
+     //console.log({currentDateNow});
      
      if(req_next_date){
        let add_24 =  addHours(new Date(currentDateNow),24);
@@ -410,10 +422,10 @@ const DataProvider = ({ children }) => {
     //console.log("Token sending....", activeToken);
    
     if (activeToken || token) {
-      //console.log("token", activeToken);
+      console.log("token", activeToken);
       API.retrieveData(activeToken || token).then((result) => {
         //console.log("Running API retrieve always",result);
-        //console.log("Running API retrieve always");
+        console.log("Running API retrieve always");
         if(result.success || result.message === "success") {
 
           setResult(result); 
@@ -421,8 +433,8 @@ const DataProvider = ({ children }) => {
           
           setActivities_g(result.activities);
           setUser_g(result.user);
-          setSettled_g(result.activities.bet.settled);
-          setOpenBet_g(result.activities.bet.openbet);
+          setSettled_g(result.activities.betdir.settled);
+          setOpenBet_g(result.activities.betdir.openbet);
           setHasRunRetrieve(true)
         } else if(result.detail) {
           //console.log("removing token");
@@ -444,9 +456,9 @@ const DataProvider = ({ children }) => {
       setResult([]);
     }
   }
-  useEffect(() => {
-    //getUserData();
-  }, [activeToken]);
+  // useEffect(() => {
+  //   //getUserData();
+  // }, [activeToken]);
 
   // useEffect(() => {
   //   API.notification(token["auth-token"])
@@ -499,7 +511,7 @@ const DataProvider = ({ children }) => {
 
   return (
     <DataContext.Provider
-      value={{ data, allData, activeToken, activities_g, setActivities_g, user_g, setUser_g, openBet_g, setOpenBet_g, settled_g, setSettled_g, setActiveToken, result, setResult, notification, setNotification, promotion, setPromotion , pending, setPending , invite, setInvite, checkData, setCheckData, loadingNew, setLoadingNew, getUserData, hasRunRetrieve, setHasRunRetrieve, hasRunDB,  setHasRunDB, dbFetch }}
+      value={{ data, allData, activeToken, activities_g, setActivities_g, user_g, setUser_g, openBet_g, setOpenBet_g, settled_g, setSettled_g, setActiveToken, result, setResult, notification, setNotification, promotion, setPromotion , pending, setPending , invite, setInvite, checkData, setCheckData, loadingNew, setLoadingNew, getUserData, hasRunRetrieve, setHasRunRetrieve, hasRunDB,  setHasRunDB, dbFetch,settled, setSettled, openBet, setOpenBet, banking, setBanking, }}
     >
       {children}
     </DataContext.Provider>
