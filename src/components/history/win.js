@@ -107,29 +107,29 @@ const Win = ({ settled }) => {
   let e = [];
 
     Object.entries(settled).map(([month, monthData]) => {
-      console.log({ monthData });
+      //console.log({ monthData });
 
       Object.entries(monthData).map(([date, tickets]) => {
-        console.log({date, tickets}); // Print the date
+       // console.log({date, tickets}); // Print the date
         Object.entries(tickets).forEach(([id, ticketData]) => {
-          console.log({id, ticketData});
-          console.log("Ticket[0]", ticketData[0]);
+          // console.log({id, ticketData});
+          // console.log("Ticket[0]", ticketData[0]);
 
           // Print the ID
 
           Object.entries(ticketData).map(([key, values]) => {
-            console.log({key, values});
+            //console.log({key, values});
 
             Object.entries(values).map(([ky, value]) => {
               
-              console.log({ky, value});
+             // console.log({ky, value});
               
               if (value.ticket_head.outcome === "won") {
                 value.games.forEach((item) => {
-                  console.log("New Ticket Head",value.ticket_head.outcome);
+                 // console.log("New Ticket Head",value.ticket_head.outcome);
   
                   e.push([item, value.ticket_head]);
-                  console.log("New item:",item);
+                 // console.log("New item:",item);
                 });
               }
             })

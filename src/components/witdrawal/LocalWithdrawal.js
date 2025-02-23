@@ -100,11 +100,11 @@ const LocalWithdrawal = ({ amountWithdrawn, setAmountWithdraw, activities_g, set
     setErrorWithdraw('');
     setAmountWithdraw("");
 
-    console.log(values);
+    //console.log(values);
 
     API.sendRequest({ action: "create_withdraw", ...values }, token)
       .then((result) => {
-        console.log(result);
+       // console.log(result);
         setIsLoading(false);
         if (result.success) {
           setIsOpen3(true);
@@ -225,7 +225,7 @@ const LocalWithdrawal = ({ amountWithdrawn, setAmountWithdraw, activities_g, set
     setSlideId("");
     API.sendRequest({ action: "get_withdrawal_otp" }, token)
       .then((result) => {
-        console.log("loading...");
+        //console.log("loading...");
         setCodeLoading(false);
         // return console.log(result);
         if (result.success) {

@@ -203,7 +203,7 @@ const Odd = () => {
   if(!filteredIdOdd) {
     filteredIdOdd = [];
   }
-  console.log(filteredIdOdd);
+  //console.log(filteredIdOdd);
   
    
   const filteredIdGame = [JSON.parse(localStorage.filterOdd)];

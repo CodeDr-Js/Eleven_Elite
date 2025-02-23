@@ -99,14 +99,14 @@ const Index = () => {
     <>
       {activeButton === "" ? (
         <div className="main1">
-          {loading ? (
+          {/* {loading ? (
             <Reward
               setLoading={setLoading}
               bonus={result.bonus ? result.bonus.amount : ""}
             />
           ) : (
             ""
-          )}
+          )} */}
           {loadings ? <Loader /> : ""}
           <NavBar />
           {/* <Ad /> */}

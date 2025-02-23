@@ -50,9 +50,9 @@ const Deposit = () => {
   const [fileUrl, setFileUrl] = useState("");
 
 
-  console.log(activities_g);
+  //console.log(activities_g);
 
-  console.log("My deposit is running...");
+  //console.log("My deposit is running...");
 
   const handleCopy = (text) => {
     navigator.clipboard
@@ -212,11 +212,11 @@ const Deposit = () => {
         const local = result.activities.deposit_dir
 
         if (local.local_address) {
-          console.log("Local found, true");
+          //console.log("Local found, true");
 
           setIsLocalAcc(true);
         } else {
-          console.log("Local not found, false");
+          //console.log("Local not found, false");
           setIsLocalAcc(false)
         }
 
@@ -233,7 +233,7 @@ const Deposit = () => {
           setLocalCard(true);
         }
 
-        console.log({ result });
+        //console.log({ result });
       })
       .catch((err) => console.log(err));
   };
@@ -247,32 +247,32 @@ const Deposit = () => {
     } else {
       if (Object.hasOwn(activities_g, "deposit_dir")) {
         setLoading(false);
-        console.log({ activities_g });
-        console.log("Running at this point");
+       // console.log({ activities_g });
+       // console.log("Running at this point");
 
 
 
         if (activities_g.deposit_dir) {
-          console.log("Loading check....");
+       //   console.log("Loading check....");
           const deposit = activities_g.deposit_dir.awaiting_deposit;
           const local = activities_g.deposit_dir
 
           if (local.local_address) {
-            console.log("Local found, true");
+        //    console.log("Local found, true");
             setIsLocalAcc(true);
           } else {
-            console.log("Local not found, false");
+        //    console.log("Local not found, false");
             setIsLocalAcc(false)
           };
           if (Array.isArray(deposit)) {
 
             if (deposit[0].fields.generator === "awaiting_deposit_confirmation") {
-              console.log("Awaiting is found");
+           //   console.log("Awaiting is found");
 
               setAwaiting(true);
               setFileUrl(deposit[0].fields.file_url);
             } else {
-              console.log("Awaiting is found");
+           //   console.log("Awaiting is found");
               setAwaiting(false);
             }
           }
@@ -304,19 +304,25 @@ const Deposit = () => {
 
 
         } else {
-          console.log("Awaiting_deposit not found");
+         // console.log("Awaiting_deposit not found");
         }
-        console.log("We have a deposit dir");
+       // console.log("We have a deposit dir");
       } else {
-        console.log("No Deposit_dir");
+      //  console.log("No Deposit_dir");
         setIsOpen(false);
         setUploadHash(false);
         API.retrieveDeposit(token)
           .then((result) => {
             setLoading(false);
-            console.log(result);
-            console.log("Server Response");
+            // console.log(result);
+            // console.log("Server Response");
+            if(result.detail === "Invalid token.") {
+                Cookies.remove("auth-token");
+               navigate("/login");
+               return;
+            } 
 
+            
             //setActivities_g(result.activities);
             // {
             //   bal_info: {
@@ -332,28 +338,28 @@ const Deposit = () => {
             }));
 
             if (result.activities.deposit_dir) {
-              console.log("Loading check....");
+              //console.log("Loading check....");
 
               const deposit = result.activities.deposit_dir.awaiting_deposit;
               const local = result.activities.deposit_dir
 
 
               if (local.local_address) {
-                console.log("Local found, true");
+               // console.log("Local found, true");
 
                 setIsLocalAcc(true);
               } else {
-                console.log("Local not found, false");
+                //console.log("Local not found, false");
                 setIsLocalAcc(false)
               }
 
               if (Array.isArray(deposit)) {
                 if (deposit[0].fields.generator === "awaiting_deposit_confirmation") {
-                  console.log("Awaiting is found", deposit[0].generator);
+                 // console.log("Awaiting is found", deposit[0].generator);
                   setAwaiting(true);
                   setFileUrl(deposit[0].fields.file_url);
                 } else {
-                  console.log("Awaiting is not found", deposit[0].generator);
+                  //console.log("Awaiting is not found", deposit[0].generator);
                   setAwaiting(false);
                 }
 
@@ -361,7 +367,7 @@ const Deposit = () => {
 
 
               if (deposit == null) {
-                console.log("It's running to this point");
+                //console.log("It's running to this point");
 
                 setIsOpen(true);
                 setUsdCard(false);
@@ -387,7 +393,7 @@ const Deposit = () => {
 
 
             } else {
-              console.log("Awaiting_deposit not found");
+             // console.log("Awaiting_deposit not found");
             }
 
             // setIsOpen(false);
@@ -405,7 +411,7 @@ const Deposit = () => {
       <div>
       <div className="pt-4">
         <div className="fixed-top ">
-          <ArrowNav name="Withdraw" bg="main-color" />
+          <ArrowNav name="Deposit" bg="main-color" />
 
           <div className="blur d-flex justify-content-center align-items-center " >
             <p translate="no" className="text-center text-success pt-3  fw-bold ">Total Deposit:  {!Array.isArray(activities_g) && activities_g.wallet.history

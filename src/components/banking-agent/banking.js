@@ -47,7 +47,7 @@ const Banking = () => {
 
   //Using the dir and gettin user invited code
   const bankingParams = dir("data");
-  console.log({ banking });
+  //console.log({ banking });
 
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const Banking = () => {
 
         API.bankingAgent(`?data=${bankingParams}`, token)
           .then((result) => {
-            console.log(result);
+           // console.log(result);
             if (result.success) {
               setBanking(result)
             } else if(result.detail === "Invalid token.") {
@@ -105,7 +105,7 @@ const Banking = () => {
       API.submitBanking({ action: "success", id }, token)
       .then((result) => {
         setLoading(false);
-       console.log(result);
+      // console.log(result);
         if(result.success) {
           alert("Payment Confirmed Successfully!!!");
 
@@ -451,14 +451,24 @@ const Banking = () => {
 
   return (
     <>
-      <div className='main-color pt-3 pb-2 fixed-top'>
+      <div className='fixed-top'>
+        <div className='main-color pt-3 pb-2'>
         <h4 className='text-center'>
           {banking !== null ? banking.type === "deposit" ? "Pending Deposit" : "Pending Withdraw" : ""}
         </h4>
+
+        </div>
+
+        <div className="blur d-flex justify-content-center align-items-center " >
+            <p translate="no" className="text-center text-success pt-3  fw-bold ">  
+            {banking !== null ? banking.type === "deposit" ? `Total Amount Deposit: ${banking.method} ${numberWithCommas(Number(banking.total_amount).toFixed(2))}`  : `Total Amount Withdraw: ${banking.method} ${numberWithCommas(Number(banking.total_amount).toFixed(2))}` : ""}
+            </p>
+
+          </div>
       </div>
 
-      <div className='' style={{ marginTop: "80px" }}>
-        {/* <div id='slide-up' className='main-color'>jdffffffffkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkffffffffffffff</div> */}
+      <div className='' style={{ marginTop: "120px" }}>
+        {/* <div  className='main-color mt-4'>jdffff</div> */}
         {transactionCard}
 
 

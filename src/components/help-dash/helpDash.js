@@ -12,7 +12,7 @@ import phone from "../../assets/svg/phone.svg";
 import email from "../../assets/svg/email.svg";
 import address from "../../assets/svg/address.svg";
 
-const HelpDash = ({ isHelp, setIsHelp }) => {
+const HelpDash = ({ isHelp, setIsHelp, result }) => {
   const navigate = useNavigate();
 
   //const [token,setToken, removeToken] = useCookies(["auth-token"]);
@@ -28,6 +28,78 @@ const HelpDash = ({ isHelp, setIsHelp }) => {
     navigate(url);
   }
 
+  // (()=>{
+  //   console.log("running");
+  //   if(result && result.online_support) {
+  //     Object.entries(result.online_support).map(([key, item]) => {
+  //       console.log("Key is",key);
+  //       console.log("Item is",item);
+  //       // return(
+  //       //   <div className="support-div d-flex">
+  //       //   <div className="bg-transparent">
+  //       //       <img
+  //       //         className="bg-transparent"
+  //       //         src={support1}
+  //       //         alt="support1"
+  //       //         style={{ width: "30px" }}
+  //       //       />
+  //       //     </div>
+    
+  //       //     <div className="ms-3 vip-text-2">
+  //       //       <p>Support 1</p>
+    
+  //       //       <p className="bg-primary lang-b position-absolute ms-4" style={{fontSize:"8px"}}>French</p>
+  //       //     </div>
+    
+            
+    
+  //       //     <div>
+  //       //     <p className=" ms-4 ps-2 pe-2 rounded-2 text-decoration-none bg-primary">Chat</p>
+  //       //     </div>
+  //       //   </div>
+  //       // )
+        
+  //     })
+  //   } else {
+  //     console.log("Else runned");
+      
+  //   }
+    
+  // })();
+
+  const supportCard = result && result.online_support ? Object.entries(result.online_support).map(([key, item], index) => {
+    // console.log(key);
+    // console.log(item, index);
+    return(
+      <Link to={item} className="text-decoration-none">
+         <div className="support-div d-flex mb-4">
+      <div className="bg-transparent">
+          <img
+            className="bg-transparent"
+            src={support1}
+            alt="support1"
+            style={{ width: "30px" }}
+          />
+        </div>
+
+        <div className="ms-3 vip-text-2">
+          <p>Support {index + 1}</p>
+
+          <p className="bg-primary lang-b position-absolute ms-4" style={{fontSize:"8px"}}>{key}</p>
+        </div>
+
+        
+
+        <div>
+        <p className=" ms-4 ps-2 pe-2 rounded-2 text-decoration-none bg-primary">Chat</p>
+        </div>
+      </div>
+      </Link>
+   
+    )
+    
+  }) : ""
+
   //Toggle Modal
 
   return (
@@ -38,8 +110,8 @@ const HelpDash = ({ isHelp, setIsHelp }) => {
       </div>
       <p className="bg-transparent fw-bold">Live Support</p>
       <div className=" rounded-2 main-color1 pt-3 ps-3">
-      <Link to="https://t.me/EEF_CustomercareOfficial">
-      <div className="bg-transparent d-flex " >
+      {/* <Link to="https://t.me/EEF_CustomercareOfficial">
+      <div className="bg-transparent d-flex text-decoration-none" >
         
         <div className="bg-transparent">
           <img
@@ -49,11 +121,23 @@ const HelpDash = ({ isHelp, setIsHelp }) => {
             style={{ width: "30px" }}
           />
         </div>
+        <div>
+
         <p className="bg-transparent ps-3 pad">Support 1</p>
+        
+
+
+        </div>
+        
+
 
         <p className=" ms-4 ps-2 pe-2 rounded-2 text-decoration-none bg-primary">Chat</p>
       </div>
-      </Link>
+      </Link> */}
+
+      <div>
+        {supportCard}
+      </div>
       
      
       </div>

@@ -41,7 +41,7 @@ const RewardCoupon = ({
         .then((result) => {
             setIsLoadingPin(false);
             // setSuccess(3);
-            console.log(result);
+            //console.log(result);
             if(result.success){
                 setSuccess(result.amount);
                 setActivities_g((prev) => ({

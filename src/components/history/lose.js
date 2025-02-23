@@ -108,7 +108,7 @@ const Lose = ({ settled }) => {
 
 
     Object.entries(settled).map(([month, monthData]) => {
-      console.log({ monthData });
+      //console.log({ monthData });
 
       Object.entries(monthData).map(([date, tickets]) => {
         //console.log({date, tickets}); // Print the date
@@ -124,7 +124,7 @@ const Lose = ({ settled }) => {
 
             Object.entries(values).map(([ky, value]) => {
               
-              console.log({ky, value});
+              //console.log({ky, value});
               
               if (value.ticket_head.outcome === "loss") {
                 value.games.forEach((item) => {

@@ -27,7 +27,7 @@
       try {
         
         [currentDateNow,client_timezone,client_date_str,IDBConfig]  = e.data;
-       console.log({IDBConfig})
+      //console.log({IDBConfig})
         if(!IDBConfig)return;
 
        const dbData = IDBConfig.working_dir.data;

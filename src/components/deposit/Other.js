@@ -22,9 +22,9 @@ const Other = ({
   awaiting,
   setAwaiting
 }) => {
-  console.log("Local", activities_g);
-  console.log(isLocalAcc);
-  console.log("Awaiting is:",awaiting);
+  // console.log("Local", activities_g);
+  // console.log(isLocalAcc);
+  // console.log("Awaiting is:",awaiting);
   
   
 
@@ -61,19 +61,19 @@ const Other = ({
 
       setFile(true);
       //console.log(selectedFile.type);
-      console.log("Selected",file);
+      //console.log("Selected",file);
       
     } else {
       alert("Only PDF, JPEG, JPG, and PNG files are allowed.");
       setFile(false);
-      console.log("Not selected",file);
+     // console.log("Not selected",file);
     }
   };
 
   const handleUpload = async () => {
    // e.preventDefault();
     // setIsLoading(true);
-    console.log("Running upload check", file);
+    //console.log("Running upload check", file);
   
 
       var form = document.getElementById('sendersName');
@@ -94,7 +94,7 @@ const Other = ({
 
         try {
             const formData = new FormData(form);
-            console.log({formData});
+            //console.log({formData});
             
             const response = await fetch(url, {
                 method: 'POST',
@@ -103,7 +103,7 @@ const Other = ({
             .then(response=>response.json())
             .then(data=>{ 
               setIsLoading(false);
-              console.log(data); 
+              //console.log(data); 
               if(data.deposit_dir.awaiting_deposit[0].fields.generator === "awaiting_deposit_confirmation") {
                 setActivities_g((prev)=>({...prev, deposit_dir: data.deposit_dir}));
 
@@ -178,7 +178,7 @@ const Other = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     API.local_payment(values, token).then((result) => {
-      console.log(result);
+     // console.log(result);
     });
   };
 

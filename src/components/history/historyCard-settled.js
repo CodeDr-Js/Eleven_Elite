@@ -109,30 +109,30 @@ const HistoryCardSettled = ({ loading, settled }) => {
   //console.log(settled);
 
   let e = [];
-  console.log(settled);
+  //console.log(settled);
 
 
 
 
     Object.entries(settled).map(([month, monthData]) => {
-      console.log({ monthData });
+      //console.log({ monthData });
 
       Object.entries(monthData).map(([date, tickets]) => {
-        console.log({ date, tickets }); // Print the date
+        //console.log({ date, tickets }); // Print the date
         Object.entries(tickets).forEach(([id, ticketData]) => {
-          console.log({ id, ticketData });
-          console.log("Ticket[0]", ticketData[0]);
+         // console.log({ id, ticketData });
+          //console.log("Ticket[0]", ticketData[0]);
 
           // Print the ID
 
           Object.entries(ticketData).map(([key, values]) => {
             Object.entries(values).map(([ky, value]) => {
               
-              console.log({ky, value});
+             // console.log({ky, value});
               
               value.games.forEach((item) => {
                 e.push([item, value.ticket_head]);
-                console.log({ item });
+              // console.log({ item });
               });
             })
 

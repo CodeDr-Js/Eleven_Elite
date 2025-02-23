@@ -45,7 +45,7 @@ export class API {
     }
     
     static transaction(params, Token){
-       console.log(params);
+       //console.log(params);
         let endpoint=`transaction/${params}`
         //console.log(endpoint);
         return fetch(url+endpoint,{
@@ -71,6 +71,17 @@ export class API {
            body: JSON.stringify(body),
          }).then((resp) => resp.json());
     }
+
+    static getCurrency(){
+      //console.log(body);
+       let endpoint = "register/";
+       return fetch(url + endpoint, {
+         method: "GET",
+         headers: {
+           "Content-Type": "application/json"
+         },
+       }).then((resp) => resp.json());
+  }
 
     static forgetPassword(body){
         //console.log(body);

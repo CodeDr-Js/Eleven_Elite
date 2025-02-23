@@ -45,7 +45,7 @@ const DataProvider = ({ children }) => {
   const [openBet, setOpenBet] = useState({});
   const [banking, setBanking] = useState(null);
  
- console.log("all results is:", result);
+ //console.log("all results is:", result);
   
   const token1 = Cookies.get("auth-token");
   
@@ -229,7 +229,7 @@ const DataProvider = ({ children }) => {
   
 
   const dbFetch = (req_next_date=false) => {
-    console.log("run");
+    //console.log("run");
     
     try {
       return;
@@ -422,10 +422,10 @@ const DataProvider = ({ children }) => {
     //console.log("Token sending....", activeToken);
    
     if (activeToken || token) {
-      console.log("token", activeToken);
+      //console.log("token", activeToken);
       API.retrieveData(activeToken || token).then((result) => {
         //console.log("Running API retrieve always",result);
-        console.log("Running API retrieve always");
+       // console.log("Running API retrieve always");
         if(result.success || result.message === "success") {
 
           setResult(result); 

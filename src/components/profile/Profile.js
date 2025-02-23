@@ -138,7 +138,7 @@ const Profile = () => {
   };
 
   const handleDownload = (url) => {
-    console.log(url);
+    //console.log(url);
     
     window.open(url, "_blank"); 
     //window.location.href = url;

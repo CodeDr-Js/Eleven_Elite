@@ -18,7 +18,7 @@ const Loader = ({ className }) => (
 );
 
 const Button = ({onSubmit, text, loading = false, disabled, value, betBtn, validValue, c="btn-primary" }) => {
-  console.log(validValue);
+  //console.log(validValue);
   
   return (
     // <button

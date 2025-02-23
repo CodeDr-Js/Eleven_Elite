@@ -96,7 +96,7 @@ const Transaction = () => {
     setIsLoading(true);
     API.transaction(`?start=${values.start}&transaction_type=${values.transaction_type}&stop=${values.stop}`, token)
     .then((result) => {
-      console.log("Transaction",result);
+      //console.log("Transaction",result);
       setIsLoading(false)
       if(result.detail){
        Cookies.remove("auth-token")

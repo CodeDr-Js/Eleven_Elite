@@ -47,7 +47,7 @@ const Task = () => {
   useEffect(() => {
     API.task(token)
       .then((result) => {
-        return console.log("Task response:", result);
+        return //console.log("Task response:", result);
         if (result.success || result.message === "Success") {
 
           setInvite(result);

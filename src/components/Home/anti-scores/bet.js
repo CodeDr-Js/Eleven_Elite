@@ -95,7 +95,7 @@ const Bet = ({
     stake_amount: values.amount,
   };
 
-  console.log({dbValues});
+  //console.log({dbValues});
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -195,7 +195,7 @@ const Bet = ({
   
           API.setSecure(dbValues, token)
             .then((result) => {
-              console.log(result);
+              //console.log(result);
               setShowLoader1(false);
               if (result.success) {
                // setActivities_g(result.activities)

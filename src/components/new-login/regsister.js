@@ -145,7 +145,7 @@ ctx.transform(1, Math.random() * 0.1, Math.random() * 0.1, 1, 0, 0); // Apply sk
         setIsLoading(false);
 
 
-        console.log(result);
+        //console.log(result);
         // if(result.statusCode === 400) {
         //   console.log("yes 400");
         // }
@@ -208,7 +208,7 @@ ctx.transform(1, Math.random() * 0.1, Math.random() * 0.1, 1, 0, 0); // Apply sk
     setSelectedValue(value); // Store selected value
     setIcon(icon)
     setIsOpen(false); // Close dropdown
-    console.log("Selected Value:", value); // Log value (send to backend later)
+   // console.log("Selected Value:", value); // Log value (send to backend later)
   };
 
 

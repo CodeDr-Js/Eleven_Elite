@@ -36,6 +36,8 @@ import Task from "./components/task/task";
 import NewLogin from "./components/new-login/login";
 import NewRegister from "./components/new-login/regsister";
 import Banking from "./components/banking-agent/banking";
+import Sidebar from "./components/notification/sideBar";
+
 
 
 
@@ -62,16 +64,20 @@ import Banking from "./components/banking-agent/banking";
 export default function App() {
   const navigate = useNavigate();
   
-//   const { activities_g } =
-//   useContext(DataContext);
+  const { result} =
+  useContext(DataContext);
 // const token = Cookies.get("auth-token");
 const [blocked, setBlocked] = useState(true);
+const [notification, setNotification] = useState(false);
+
 //const [blocked, setBlocked] = useState(false);
 
 
 //console.log("App started");
 
   const [loading, setLoading] = useState(true);
+
+  
 
   // useEffect(()=> {
   //   if(token){
@@ -143,6 +149,44 @@ const [blocked, setBlocked] = useState(true);
   //   }
   // }, 10000);
 
+  useEffect(()=>{
+    
+    if(result.length !== 0 && result.activities.notification.unseen.length !== 0){
+      
+      setNotification(true);
+    } else {
+      
+      setNotification(false)
+    }
+  },[result])
+
+
+  
+
+  // if(result.length !== 0 && result.activities.notification.unseen.length !== 0){
+  //   setNotification(true);
+  //   setIsOpen(true)
+  //   result.activities.notification.unseen.map((item, index) => {
+  //     console.log({item});
+  //     Object.entries(item).map(([key, value]) => {
+  //       console.log({value});
+        
+  //       const newCard = (
+  //         <div>
+  //           <
+  //         </div>
+  //       )
+  
+  
+        
+        
+  //     })
+
+  // })
+  // }
+  
+
+
   return (
     <>
     {/* <DisableCopyComponent/> */}
@@ -150,7 +194,13 @@ const [blocked, setBlocked] = useState(true);
         <LogoLoader />
       ) : (
         <>
+        
         {/* {blocked && <div className="modal-overlay-profile" style={{"zIndex": 9999}}><Blocked/></div> } */}
+        {notification && <div className="" style={{"zIndex": 9999}}>
+
+          <Sidebar />
+          
+        </div> }
           <Routes>
             <Route path="login" element={<NewLogin/>}/>
             <Route path="register" element={<NewRegister/>}/>

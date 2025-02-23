@@ -50,7 +50,7 @@ const Register = () => {
     invited: "",
     password: "",
   });
-  console.log(values);
+  //console.log(values);
 
   const [login, setLogin] = useState({
     username: values.username,

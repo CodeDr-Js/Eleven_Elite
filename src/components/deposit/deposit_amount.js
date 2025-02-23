@@ -41,7 +41,7 @@ const RewardCoupon = ({
         // if(Object.hasOwn())
         API.retrieveDeposit(token)
         .then((result) => {
-           return console.log(result);
+           return //console.log(result);
             if(result.success){
                 setSuccess(result.amount);
                 setActivities_g((prev) => ({
@@ -76,7 +76,7 @@ const RewardCoupon = ({
         .then((result) => {
             setIsLoadingPin(false);
             // setSuccess(3);
-            console.log(result);
+            //console.log(result);
             if(result.success){
                 setSuccess(result.amount);
                 setActivities_g((prev) => ({

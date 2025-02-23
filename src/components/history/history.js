@@ -15,7 +15,7 @@ const History = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
 
-  console.log({ activities_g });
+  //console.log({ activities_g });
   function getUserData() {
     if (token) {
       //   console.log("token", token1);

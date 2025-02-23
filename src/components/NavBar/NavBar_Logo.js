@@ -32,7 +32,7 @@ const NavBar_Logo = ({ search, setSearch }) => {
         </div> */}
 
         {!Array.isArray(activities_g) ? (
-          <p translate="no" className="ps-2 pt-1 fw-bold   ">
+          <p translate="no" className="ps-2 pt-1 fw-bold vip-text-3  ">
             {activities_g.init_currency.symbol} {activities_g.wallet.bal_info.bal.toFixed(2)}
           </p>
         ) : (

@@ -107,7 +107,7 @@ const Cancelled = ({ loading, settled }) => {
 
     //console.log({yearData});
     Object.entries(settled).map(([month, monthData]) => {
-      console.log({ monthData });
+      //console.log({ monthData });
 
 
       Object.entries(monthData).map(([date, tickets]) => {
@@ -123,7 +123,7 @@ const Cancelled = ({ loading, settled }) => {
 
             Object.entries(values).map(([ky, value]) => {
               
-              console.log({ky, value});
+              //console.log({ky, value});
               
               if (value.ticket_head.outcome === "cancelled") {
                 value.games.forEach((item) => {

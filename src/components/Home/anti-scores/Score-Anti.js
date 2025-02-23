@@ -206,7 +206,7 @@ const ScoreAnti = () => {
   const e = [];
   // const newGames = filteredData[0]? filteredData.map((game, index) => {
   const newGames = [];
-  console.log({newGames});
+  //console.log({newGames});
   
   if(result.matches){ result.matches.fixtures.response.map((game, index) => {
     //console.log("game is",game);
@@ -342,7 +342,7 @@ const ScoreAnti = () => {
        );
        timeout(endId, matchCard);
        newGames.push(scoreCard);
-     } else {console.log("Time Expired");
+     } else {//console.log("Time Expired");
      }
    }) 
   

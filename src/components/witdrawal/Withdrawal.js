@@ -46,6 +46,8 @@ const Withdrawal = () => {
   const [isUsd, setIsUsd] = useState(false);
   const [isLocal, setIsLocal] = useState(false);
   const [codeLoading, setCodeLoading] = useState(false);
+  const [successOtp, setSuccessOtp] = useState(null);
+  const [slideId, setSlideId] = useState("")
   // const [amount, setAmount] = useState('');
   const checkToken = () => {
 
@@ -104,7 +106,7 @@ const Withdrawal = () => {
 
     API.sendRequest({ action: "create_withdraw", ...values }, token)
     .then((result) => {
-    console.log(result);
+    //console.log(result);
     setIsLoading(false);
     if(result.success) {
       setIsOpen3(true);
@@ -213,8 +215,8 @@ const Withdrawal = () => {
         API.retrieveWitdrawal(token)
           .then((result) => {
             ///setLoading(false);
-            console.log(result);
-            console.log("Server Response");
+            // console.log(result);
+            // console.log("Server Response");
 
             setActivities_g((prev) => ({
               ...prev, init_currency: result.activities.init_currency,
@@ -334,11 +336,11 @@ const Withdrawal = () => {
     setCodeLoading(true);
     API.sendRequest({ action: "get_withdrawal_otp"} , token)
       .then((result) => {
-      console.log("loading...");
+      //console.log("loading...");
       setCodeLoading(false);
       // return console.log(result);
       if(result.success) {
-        alert(result.message)
+        setSuccessOtp(result.message);
       } else {
         alert(result.message)
       }
@@ -347,6 +349,22 @@ const Withdrawal = () => {
     .catch((err) => console.log(err)
     )
   }
+
+  setTimeout(() => {
+    if (successOtp) {
+      setSlideId("slide-up");
+      setTimeout(() => {
+        if (successOtp) {
+          setSuccessOtp(null);
+          setSlideId("")
+        }
+
+      }, 1000)
+
+
+    }
+
+  }, 10000);
   return (
     <> 
     {isUsd &&
@@ -448,6 +466,17 @@ const Withdrawal = () => {
               )}
             </div>
           </div>
+
+          <div className={`${slideId}`}>
+              {successOtp ? (
+                <p className={`alert alert-success ${slideId}`}>
+                  {successOtp}
+                </p>
+              ) : (
+                ""
+              )}
+
+            </div>
 
           <div className=" mt-2 mb-2 d-flex">
             <div>

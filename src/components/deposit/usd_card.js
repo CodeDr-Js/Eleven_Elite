@@ -19,7 +19,7 @@ import ErrorCard from "./errorCard";
 import SuccessCard from "./successCard";
 
 const UsdCard = ({uploadHash, localCard, activities_g}) => {
-  console.log({uploadHash});
+  //console.log({uploadHash});
   
   const {
     setActiveToken,
@@ -44,7 +44,7 @@ const UsdCard = ({uploadHash, localCard, activities_g}) => {
   const [hashSuccess, setHashSuccess] = useState("");
   const [hashError, setHashError] = useState("");
 
-  console.log(activities_g);
+  //console.log(activities_g);
   const handleCopy = (text) => {
     navigator.clipboard
       .writeText(text)
@@ -209,7 +209,7 @@ const UsdCard = ({uploadHash, localCard, activities_g}) => {
       } else {
         API.sendRequest({action: "submit_hash_id", hashID : hashId }, token)
         .then((result)=>{
-          console.log(result);
+          //console.log(result);
           setIsLoading(false);
           if(result.success) {
             setActivities_g((prev)=>({...prev, deposit_dir: result.deposit_dir }))
@@ -223,8 +223,7 @@ const UsdCard = ({uploadHash, localCard, activities_g}) => {
         })
         .catch((err)=>console.log(err)
         )
-        console.log(
-        );
+        //console.log();
 
       }
       

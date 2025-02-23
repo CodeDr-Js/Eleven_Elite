@@ -14,7 +14,7 @@ const SecureCard = () => {
   const [loading2, setLoading2] = useState(false);
   const [loading3, setLoading3] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  console.log("s",result);
+  //console.log("s",result);
 
   const handleCloseModal = (e) => {
       setIsOpen(false);
@@ -50,7 +50,7 @@ company_game.map((item, index) => {
 
 //Sort game by timestamp
 games = Object.values(games);
-console.log(games);
+//console.log(games);
 games.sort((a, b) => {
   // Convert the timestamps to Date objects
   var dateA = new Date(Number(a.timestamp * 1000));
@@ -74,7 +74,7 @@ for (let i = 0; i < games.length; i++) {
   // console.log({item});
   // console.log(new Date(Number(item.timestamp * 1000)));
   if (new Date() < new Date(Number(item.timestamp * 1000))) { 
-    console.log("breaking", item);
+    //console.log("breaking", item);
     gameCard = <Secure league={item.league.name} home={item.team.home} away={item.team.away} time={convertTimestampToRealTime(item.timestamp).split(" ")[1]} hflag={item.logo.home} aflag={item.logo.away} odd={item.odd} score={item.score} text={"Play 🎲"} FS={""} e="bg-transparent" s="bg-transparent" onClick={handleClick}
     />
 
@@ -103,7 +103,7 @@ for (let i = 0; i < games.length; i++) {
 } 
 
 
-console.log(games);
+//console.log(games);
 
 
 //const data1 = company_game ? JSON.parse(company_game.fields.data) : "";

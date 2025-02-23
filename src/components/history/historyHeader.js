@@ -40,14 +40,14 @@ const HistoryHeader = ({loading, settled, openBet, setOpenBet, setSettled, activ
   
           </div>
           <div className=" d-flex justify-content-center ms-1 ps-2 wg-card ">
-            <h2 className=" fs-2 wg-card-1">History</h2>
+            <h2 className=" fs-2 wg-card-1">Bets</h2>
           </div>
           <div translate="no"  className="ms-auto wg-card d-flex" >
             {/* <div>
             <img src={dollar} alt="Logo" className="d-size" style={{ width: "1.263rem" }} />
             </div> */}
 
-            {!Array.isArray(activities_g) ? (<p translate="no"  className='ps-2 pt-1 fw-bold '>{activities_g.init_currency.symbol}  {activities_g.wallet.bal_info.bal.toFixed(2)}</p>) : "" }
+            {!Array.isArray(activities_g) ? (<p translate="no"  className='ps-2 pt-1 fw-bold vip-text-3'>{activities_g.init_currency.symbol}  {activities_g.wallet.bal_info.bal.toFixed(2)}</p>) : "" }
           {/* <p className='ps-2 pt-1 fw-bold '>$ 30000</p> */}
 
           </div>

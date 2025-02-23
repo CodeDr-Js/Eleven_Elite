@@ -1,3 +1,26 @@
 .notice-div  {
     margin-top: 8.313rem;
 }
+
+.cardDiv {
+    max-width: 100%;
+    width: 100%;
+}
+
+.cardFit {
+    width: 20%; /* Ensures it takes full width */
+    display: flex;
+    flex-direction: column; /* Stacks content vertically */
+    flex-wrap: wrap; /* Allows text to wrap */
+    align-items: flex-start; /* Prevents shrinking of children */
+    overflow: visible; /* Allows text expansion */
+    max-width: 100%;
+}
+
+.cardText {
+    word-break: break-word;  /* Ensures long words wrap properly */
+    overflow-wrap: break-word; /* Alternative for better compatibility */
+    white-space: normal; /* Allows text to wrap onto the next line */
+    max-width: 100%; /* Makes sure text stays within the container */
+    display: block; /* Ensures it behaves as a block element */
+}

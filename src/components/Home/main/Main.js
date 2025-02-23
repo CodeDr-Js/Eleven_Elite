@@ -24,7 +24,7 @@ import DepositAmount from "../../deposit/deposit_amount";
 const Main = () => {
   const navigate = useNavigate();
   const token = Cookies.get("auth-token");
-  const { setActiveToken, setHasRunRetrieve, setActivities_g, user_g, setUser_g,setPromotion,setNotification, activities_g } = useContext(DataContext);
+  const { setActiveToken, setHasRunRetrieve, setActivities_g, user_g, setUser_g,setPromotion,setNotification, activities_g, result } = useContext(DataContext);
   const [isOpen_gift, setIsOpen_gift] = useState(false);
   const [isOpen_deposit, setIsOpen_deposit] = useState(false);
   const [isHelp, setIsHelp] = useState(false);
@@ -79,7 +79,7 @@ const Main = () => {
 
         <div className="rounded-4  main-div-2 d-flex w-100">
           <IconCon image={Soccer} text="Soccer" link="/anti-score" />
-          <IconCon image={History} text="History" link="/history" />
+          <IconCon image={History} text="Bets" link="/history" />
           <IconCon image={Rewards} text="Invites" link="/invite" />
           <IconCon image={Telegram} text="Telegram" link="https://t.me/RRTOFFOCIALPPROJECT" />
           <IconCon image={Logout} text="Logout" onClick={handleLogoutClick} />
@@ -108,7 +108,7 @@ const Main = () => {
 
      
  {isHelp && <div className="modal-overlay-profile"> <HelpDash isHelp={isHelp}
-            setIsHelp={setIsHelp} /></div> }
+            setIsHelp={setIsHelp} result={result} /></div> }
       
     </>
   );
