@@ -107,7 +107,7 @@ const Main = () => {
       )}
 
      
- {isHelp && <div className="modal-overlay-profile"> <HelpDash isHelp={isHelp}
+ {isHelp && <div className="modal-overlay-profile" style={{zIndex:"100"}}> <HelpDash isHelp={isHelp}
             setIsHelp={setIsHelp} result={result} /></div> }
       
     </>

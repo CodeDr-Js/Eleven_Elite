@@ -15,7 +15,8 @@ export const SiteActivities = () => {
   const [displayData, setDisplayData] = useState([]);
   const [index, setIndex] = useState(0);
   const [animations, setAnimations] = useState([]);
-
+    //console.log(displayData,result);
+    
   //console.log(result);
 
   // useEffect(() => {
@@ -104,10 +105,10 @@ export const SiteActivities = () => {
   // console.log(timeAgo(timestamp));  // Output will depend on the current time
 
   //console.log(displayData);
-  try {
+ try {
   return (
     <div translate="no" className="" style={{marginBottom:"60px"}}>
-      {displayData.length > 2
+      {displayData[1] && displayData.length > 2 && displayData[0] !== undefined
         ? displayData.map((item, idx) => (
             <div key={idx} className={`activity-item ${animations[idx]}`}>
               <div className="d-flex white rounded-5 pt-2 ms-3 me-3 mb-3">
@@ -205,12 +206,13 @@ export const SiteActivities = () => {
               </div>
             </div>
           ))
-        : ""}
+        : <p className="text-center vip-text-2">Loading...</p>}
     </div>
   );
 } catch (error) {
-    
+  
 }
+
 };
 
 // SECOND METHOD

@@ -95,7 +95,7 @@ for (let i = 0; i < games.length; i++) {
   } else {
     //console.log("No game");
     if(games.length === i+1) {
-      gameCard = <Secure league={item.league.name} home={item.team.home} away={item.team.away} time={convertTimestampToRealTime(item.timestamp).split(" ")[1]} hflag={item.logo.home} aflag={item.logo.away} odd={item.odd} score={item.score}  style={"disabled "} FS={"fs-4 text-danger"} text={"Expired"} e="bg-warning" s="bg-success"
+      gameCard = <Secure league={item.league.name} home={item.team.home} away={item.team.away} time={convertTimestampToRealTime(item.timestamp).split(" ")[1]} hflag={item.logo.home} aflag={item.logo.away} odd={item.odd} score={item.score}  style={"bg-transparent disabled"} FS={"fs-4 text-danger"} text={"Expired"} e="bg-warning" s="bg-success"
       />
 
     }
