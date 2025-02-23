@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./index.css";
 import "../color/color.css";
 import TransactionHeader from './transactionHeader';
@@ -14,7 +14,7 @@ import "flatpickr/dist/flatpickr.min.css";
 import DateRangePicker from './DateRangePicker';
 import { addHours, numberWithCommas } from '../qickfun/qickfun';
 import { DateTime } from 'luxon';
-
+import { DataContext } from "../APIs/Api";
 
 
 
@@ -22,6 +22,8 @@ import { DateTime } from 'luxon';
 
 const Transaction = () => {
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  const { setResult } = useContext(DataContext);
 
   function convertToServerTime(userDate) {
     // Convert the user-selected date to a DateTime object
@@ -103,12 +105,13 @@ const Transaction = () => {
         navigate("/login")
         
       } else if(result) {
+       // setResult(result);
         setData(result);
         setIsLoading(false)
         
+        //console.log(result);
         
       }
-      //console.log(result);
     })
     .catch(err => console.log("Error", err))
   }

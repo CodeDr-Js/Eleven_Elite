@@ -26,7 +26,7 @@ export const SiteActivities = () => {
   // }, []);
 
   useEffect(() => {
-    if (result && Object.keys(result).length) {
+    if (result[0] && Object.keys(result).length) {
       const results = result.latest_transactions;
       setData(results);
       setDisplayData(results.slice(0, 5));

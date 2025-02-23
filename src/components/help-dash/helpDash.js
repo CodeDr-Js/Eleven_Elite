@@ -71,7 +71,7 @@ const HelpDash = ({ isHelp, setIsHelp, result }) => {
     // console.log(key);
     // console.log(item, index);
     return(
-      <Link to={item} className="text-decoration-none">
+      <Link translate="no" to={item} className="text-decoration-none">
          <div className="support-div d-flex mb-4">
       <div className="bg-transparent">
           <img

@@ -49,7 +49,8 @@ const Deposit = () => {
   const [awaiting, setAwaiting] = useState(false);
   const [fileUrl, setFileUrl] = useState("");
 
-
+   console.log(result);
+   
   //console.log(activities_g);
 
   //console.log("My deposit is running...");
@@ -206,6 +207,7 @@ const Deposit = () => {
       .then((result) => {
         setIsOpen(false);
         setIsLoading(false);
+        setResult(result);
         setActivities_g(result.activities);
         const fields = result.activities.deposit_dir.awaiting_deposit[0].fields;
 
@@ -314,13 +316,15 @@ const Deposit = () => {
         API.retrieveDeposit(token)
           .then((result) => {
             setLoading(false);
-            // console.log(result);
             // console.log("Server Response");
             if(result.detail === "Invalid token.") {
                 Cookies.remove("auth-token");
                navigate("/login");
                return;
             } 
+
+            setResult(result);
+           // console.log(result);
 
             
             //setActivities_g(result.activities);

@@ -68,7 +68,8 @@ export default function App() {
   useContext(DataContext);
 // const token = Cookies.get("auth-token");
 const [blocked, setBlocked] = useState(true);
-const [notification, setNotification] = useState(false);
+const [notification1, setNotification1] = useState(false);
+const [notification, setNotification] = useState(null);
 
 //const [blocked, setBlocked] = useState(false);
 
@@ -152,11 +153,11 @@ const [notification, setNotification] = useState(false);
   useEffect(()=>{
     
     if(result.length !== 0 && result.activities.notification.unseen.length !== 0){
-      
-      setNotification(true);
+      setNotification(result.activities.notification.unseen);
+      setNotification1(true);
     } else {
       
-      setNotification(false)
+      setNotification1(false)
     }
   },[result])
 
@@ -196,9 +197,9 @@ const [notification, setNotification] = useState(false);
         <>
         
         {/* {blocked && <div className="modal-overlay-profile" style={{"zIndex": 9999}}><Blocked/></div> } */}
-        {notification && <div className="" style={{"zIndex": 9999}}>
+        {notification1 && <div className="" style={{"zIndex": 9999}}>
 
-          <Sidebar />
+          <Sidebar notification={notification} />
           
         </div> }
           <Routes>

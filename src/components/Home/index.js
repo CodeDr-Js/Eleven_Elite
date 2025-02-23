@@ -114,7 +114,7 @@ const Index = () => {
           {/* <div>
             <img src={flier} style={{width:"25.75rem", borderRadius:"20px"}} className="container mt-5 pt-4 s-home-image"/>
           </div> */}
-             <div className="vip-gold-1  ms-3 " style={{width:"35%"}}> 
+             <div translate="no" className="vip-gold-1  ms-3 " style={{width:"35%"}}> 
               <div className="">
               <i class="fa-solid fa-crown gold-crown pe-1"></i>
               <span className="vip-text">VIP</span>  <span className="vip-text-2">{result && result.activities ? result.activities.wallet.vip:""}</span>

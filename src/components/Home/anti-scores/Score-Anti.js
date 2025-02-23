@@ -103,6 +103,7 @@ const ScoreAnti = () => {
 
 
   // Ends
+  
 
   function convertTimestampToRealTime(timestamp) {
     // Convert the timestamp to milliseconds
@@ -346,7 +347,7 @@ const ScoreAnti = () => {
      }
    }) 
   
-   if (!newGames[0]) {
+   if (!newGames[0] ) {
     //console.log("No game is found");
     API.fetchFixtures({req_date: addHours(new Date(), 24).toJSON()})
     .then((result) => {//console.log(result)

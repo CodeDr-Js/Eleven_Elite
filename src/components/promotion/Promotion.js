@@ -20,7 +20,7 @@ const hostName = `${origin}/register/?invited=`;
 
 const Promotion = () => {
   const navigate = useNavigate();
-  const { setActiveToken, setPromotion, promotion } = useContext(DataContext);
+  const { setActiveToken, setPromotion, promotion,setResult } = useContext(DataContext);
   const [activeButton1, setActiveButton1] = useState("level-1");
   const [message, setMessage] = useState();
   const token = Cookies.get("auth-token");
@@ -42,6 +42,7 @@ const Promotion = () => {
       .then((result) => {
         //console.log("Promotion is :", result);
         if (result.success || result.message === "Success") {
+          setResult(result);
           setPromotion(result);
         } else if (result.detail) {
           Cookies.remove("auth-token");

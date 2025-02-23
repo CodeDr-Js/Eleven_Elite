@@ -6,9 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { API } from "../api-service/api-service";
 import { DataContext } from "../APIs/Api";
 
-const Sidebar = () => {
-const navigate = useNavigate();
-    const { notification, setNotification, setActiveToken } =
+const Sidebar = ({notification}) => {
+console.log({notification});
+
+  const navigate = useNavigate();
+    const {  setActiveToken, result } =
         useContext(DataContext);
       const token = Cookies.get("auth-token");
     const [isOpen, setIsOpen] = useState(false);
@@ -67,41 +69,50 @@ useEffect(() => {
   }, [token]);
 
   useEffect(() => {
-    if(notification !== null && notification.unseen[0]) {
-     
+    if(notification !== null && notification[0]) {
+     // console.log("running....");
+      
+      setIsOpen(true);
     } else {
-        API.notification(token)
-        .then((result) => {
-        //console.log(result);
-          if (result.success) {
-           setIsOpen(true);
-            setNotification(result.activities.notification);
-          } else {
-            Cookies.remove("auth-token");
-            navigate("/login");
-          }
-        })
-        .catch((err) => console.log(err));
+        // API.notification(token)
+        // .then((result) => {
+        // //console.log(result);
+        //   if (result.success) {
+        //    setIsOpen(true);
+        //     setNotification(result.activities.notification);
+        //   } else {
+        //     Cookies.remove("auth-token");
+        //     navigate("/login");
+        //   }
+        // })
+        // .catch((err) => console.log(err));
     }
-   }, [])
+   }, [notification])
 
 
 
-   const unseen = () =>
-    notification.unseen.map((item) => {
-      return Object.entries(item).map(([key, value]) => {
-       // console.log("keys is:.. ", key, value);
-        return (
-          <>
-            <NotificationCardnew
-              date={key}
-              header={value.header}
-              body={value.message}
-            />
-          </>
-        );
-      });
-    });
+   const unseen = notification !== null && notification[0] ? notification.map((item) => {
+    return Object.entries(item).map(([key, value]) =>{
+      return(
+        <>
+      <NotificationCardnew
+        date={key}
+        header={value.header}
+        body={value.message}
+      />
+    </>
+
+      ) 
+      
+   })
+}) :""
+   
+
+
+
+   //console.log([unseen]);
+   
+    
 
 
   
@@ -132,7 +143,7 @@ useEffect(() => {
 
         <div className='n-card'>
 
-            {notification !== null  ? (notification.unseen[0] ? (unseen()) : "") : ""}
+            {notification !== null  ? (notification[0] ? [unseen] : "") : ""}
            
 
         </div>
