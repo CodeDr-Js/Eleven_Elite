@@ -152,7 +152,8 @@ export class API {
 
     static retrieveData(token){
          let page = pathname.replace('/', "");
-         let endpoint = `retrieve-data/?req_date=${new Date().toJSON()}`;
+         let endpoint = `retrieve-data/`;
+        //  let endpoint = `retrieve-data/?req_date=${new Date().toJSON()}`;
         //  let endpoint = `retrieve-data/?req_date=${new Date('2025-02-16T01:09:30.420Z').toJSON()}`;
          return fetch(url + endpoint, {
            method: "GET",
