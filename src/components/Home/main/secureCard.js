@@ -9,7 +9,7 @@ import BetSecure from "./betSecure";
 
 
 const SecureCard = () => {
-  const { result, activities_g } = useContext(DataContext);
+  const { result, activities_g, secure } = useContext(DataContext);
   const [loading1, setLoading1] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [loading3, setLoading3] = useState(false);
@@ -29,7 +29,7 @@ const SecureCard = () => {
 let timestamp1, status1, home1, away1, homeName1, awayName1, league1, score1, odd1, leagueFlag1, startDate1, id1 ;
 let timestamp2, status2, home2, away2, homeName2, awayName2, league2, score2, odd2, leagueFlag2, startDate2, id2;
 
-const company_game = Array.isArray(result.company_game) ? result.company_game : [];
+const company_game = Array.isArray(secure.company_game) ? secure.company_game : [];
 
 company_game.map((item, index) => {
   games[index] = {}

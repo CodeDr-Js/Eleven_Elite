@@ -34,6 +34,7 @@ const DataProvider = ({ children }) => {
   const [user_g, setUser_g] = useState([]);
   const [activeToken, setActiveToken] = useState("");
   const [result, setResult] = useState([]);
+  const [secure, setSecure] = useState([]);
   const [notification, setNotification] = useState(null);
   const [promotion, setPromotion] = useState(null);
   const [invite , setInvite] = useState(null);
@@ -123,6 +124,7 @@ const DataProvider = ({ children }) => {
           setSettled_g(result.activities.betdir.settled);
           setOpenBet_g(result.activities.betdir.openbet);
           setSiteActivitiesData(result.latest_transactions)
+          setSecure(result)
           setHasRunRetrieve(true)
         } else if(result.detail) {
           //console.log("removing token");
@@ -148,7 +150,7 @@ const DataProvider = ({ children }) => {
   return (
     <DataContext.Provider
       value={{ data, allData, activeToken, activities_g, setActivities_g, user_g, setUser_g, openBet_g, setOpenBet_g, settled_g, setSettled_g, setActiveToken, result, setResult, notification, setNotification, promotion, setPromotion , pending, setPending , invite, setInvite, checkData, setCheckData, loadingNew, setLoadingNew, getUserData, hasRunRetrieve, setHasRunRetrieve, hasRunDB,  setHasRunDB, dbFetch,settled, setSettled, openBet, setOpenBet, banking, setBanking, SiteActivitiesData, matchData,setmatchData,
-          depositDir, setdepositDir,
+          depositDir, setdepositDir, secure, setSecure
        }}
     >
       {children}
