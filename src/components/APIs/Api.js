@@ -81,30 +81,21 @@ const DataProvider = ({ children }) => {
     //dbFetch(true);
   }, [])
 
-
-  
-
-  const dbFetch = () => {
-    API.fetchFixtures({req_date: addHours(new Date(), 24,'remove').toJSON()},Cookies.get("auth-token") )
+  const dbFetch = (req_date= new Date().toJSON()) => {
+    API.fetchFixtures({req_date,hasRunRetrieve},Cookies.get("auth-token") )
         .then((result) => {
-          console.log({result})
           if(result.success || result.message === "success") {
 
-            // if(hasRunRetrieve){
-            //   setResult((prev) => ({
-            //     ...prev, 
-            //     matches: result.matches,
-            //   }))          
-            // }else{setResult(result)}
-            // setActivities_g(result.activities);
-            // setUser_g(result.user);
-            // setSettled_g(result.activities.betdir.settled);
-            // setOpenBet_g(result.activities.betdir.openbet);
-            // setHasRunRetrieve(true)
+            if(!hasRunRetrieve){
+              setResult(result);           
+              setActivities_g(result.activities);
+              setUser_g(result.user);
+              // setSettled_g(result.activities.betdir.settled);
+              // setOpenBet_g(result.activities.betdir.openbet);
+              // setSiteActivitiesData(result.latest_transactions)
+              // setHasRunRetrieve(true)         
+            }
             setmatchData(result.matches)
-            // console.log({matchData}, result.matches)
-            // setHasRunDB(true)
-            // setLoadingNew(false)
           } else if(result.detail) {
             navigate("/login")
             setActiveToken("");

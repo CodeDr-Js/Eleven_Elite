@@ -36,7 +36,8 @@ const ScoreAnti = () => {
     setLoadingNew,
     result,
     setResult,
-    matchData,setmatchData
+    matchData,setmatchData,
+    dbFetch
     
   } = useContext(DataContext);
   const [displayedData, setDisplayedData] = useState([]);
@@ -247,19 +248,8 @@ const ScoreAnti = () => {
      }
     }) 
   
-   if (!newGames[0] ) {
-      //console.log("No game is found");
-      API.fetchFixtures({req_date: addHours(new Date(), 24).toJSON()},token)
-        .then((result) => {//console.log(result)
-        setmatchData(result.matches)
-      //   (prev) => ({
-      //   ...prev, matches: result.matches
-      // }))
-      })
-      .catch((err) => console.log(err)
-      )
-      
-    }
+   if (!newGames[0] ) {dbFetch(addHours(new Date(), 24).toJSON())}
+
   } 
   
   
