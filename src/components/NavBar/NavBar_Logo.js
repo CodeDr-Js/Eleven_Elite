@@ -9,6 +9,8 @@ import usdt from "../../assets/icons/usdt.png";
 import usd from "../../assets/icons/usd.png";
 import usd1 from "../../assets/icons/usd1.png";
 import { DataContext } from "../APIs/Api";
+import { numberWithCommas } from "../qickfun/qickfun";
+
 
 const NavBar_Logo = ({ search, setSearch }) => {
   //console.log("searchNav-Logo", search);
@@ -33,7 +35,7 @@ const NavBar_Logo = ({ search, setSearch }) => {
 
         {!Array.isArray(activities_g) ? (
           <p translate="no" className="ps-2 pt-1 fw-bold vip-text-3  ">
-            {activities_g.init_currency.symbol} {activities_g.wallet.bal_info.bal.toFixed(2)}
+            {activities_g.init_currency.symbol} {numberWithCommas(activities_g.wallet.bal_info.bal.toFixed(2))}
           </p>
         ) : (
           ""

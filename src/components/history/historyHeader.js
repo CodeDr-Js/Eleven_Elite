@@ -13,6 +13,7 @@ import usd from "../../assets/icons/usd.png"
 import usd1 from "../../assets/icons/usd1.png"
 import { DataContext } from '../APIs/Api';
 import { useContext } from 'react';
+import { numberWithCommas } from '../qickfun/qickfun';
 
 
 
@@ -47,7 +48,7 @@ const HistoryHeader = ({loading, settled, openBet, setOpenBet, setSettled, activ
             <img src={dollar} alt="Logo" className="d-size" style={{ width: "1.263rem" }} />
             </div> */}
 
-            {!Array.isArray(activities_g) ? (<p translate="no"  className='ps-2 pt-1 fw-bold vip-text-3'>{activities_g.init_currency.symbol}  {activities_g.wallet.bal_info.bal.toFixed(2)}</p>) : "" }
+            {!Array.isArray(activities_g) ? (<p translate="no"  className='ps-2 pt-1 fw-bold vip-text-3'>{activities_g.init_currency.symbol}  {numberWithCommas(activities_g.wallet.bal_info.bal.toFixed(2))}</p>) : "" }
           {/* <p className='ps-2 pt-1 fw-bold '>$ 30000</p> */}
 
           </div>

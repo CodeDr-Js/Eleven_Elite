@@ -16,6 +16,7 @@ import WithdrawSuccess from "./withdrawSuccess";
 import Loader from "../loader/loader";
 import LocalWithdrawal from "./LocalWithdrawal";
 import ArrowNav from "../arrowNav/ArrowNav";
+import { numberWithCommas } from "../qickfun/qickfun";
 
 
 const Withdrawal = () => {
@@ -376,7 +377,7 @@ const Withdrawal = () => {
               <div className="blur d-flex justify-content-center align-items-center " >
             <p translate="no" className="text-center pt-3 text-success fw-bold ">Total Withdraw:  {!Array.isArray(activities_g) && activities_g.wallet.history
           ? activities_g.init_currency.symbol +
-          activities_g.wallet.history.withdraw
+          numberWithCommas(Number(activities_g.wallet.history.withdraw).toFixed(2))
           : ""}
       </p>
 

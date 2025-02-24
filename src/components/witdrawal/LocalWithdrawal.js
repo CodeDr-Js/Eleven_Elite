@@ -15,6 +15,7 @@ import { API } from "../api-service/api-service";
 import WithdrawSuccess from "./withdrawSuccess";
 import Loader from "../loader/loader";
 import ArrowNav from "../arrowNav/ArrowNav";
+import { numberWithCommas } from "../qickfun/qickfun";
 
 
 const LocalWithdrawal = ({ amountWithdrawn, setAmountWithdraw, activities_g, setActivities_g, isOpen3, setIsOpen3, withdrawnSuccessMsg, setWithdrawSuccessMsg }) => {
@@ -267,7 +268,7 @@ const LocalWithdrawal = ({ amountWithdrawn, setAmountWithdraw, activities_g, set
           <div className="blur d-flex justify-content-center align-items-center " >
             <p translate="no" className="text-center text-success pt-3 fw-bold ">Total Withdraw:  {!Array.isArray(activities_g) && activities_g.wallet.history
               ? activities_g.init_currency.symbol +
-              activities_g.wallet.history.withdraw
+              numberWithCommas(Number(activities_g.wallet.history.withdraw).toFixed(2))
               : ""}
             </p>
 

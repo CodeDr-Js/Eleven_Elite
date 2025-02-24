@@ -20,6 +20,7 @@ import { FALSE } from "sass";
 import { use } from "react";
 import Loader from "../loader/loader";
 import ArrowNav from "../arrowNav/ArrowNav";
+import { numberWithCommas } from "../qickfun/qickfun";
 
 const Deposit = () => {
   const {
@@ -349,7 +350,7 @@ const Deposit = () => {
           <div className="blur d-flex justify-content-center align-items-center " >
             <p translate="no" className="text-center text-success pt-3  fw-bold ">Total Deposit:  {!Array.isArray(activities_g) && activities_g.wallet.history
               ? activities_g.init_currency.symbol +
-              activities_g.wallet.history.deposit
+              numberWithCommas(Number(activities_g.wallet.history.deposit).toFixed(2))
               : ""}
             </p>
 

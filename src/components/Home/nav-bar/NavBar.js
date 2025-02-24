@@ -12,6 +12,7 @@ import dollar from "../../../assets/icons/dollar.png"
 import { DataContext } from "../../APIs/Api";
 import "../../largeScreen/largeHeader.css";
 import { timer } from "../../Functions/timer";
+import { numberWithCommas } from "../../qickfun/qickfun";
 
 
 
@@ -38,7 +39,7 @@ const NavBar = () => {
             {/* <img src={dollar} alt="Logo" className="" style={{ width: "33px" }} /> */}
             </div>
 
-            {!Array.isArray(activities_g) ?(activities_g.wallet ? (<p translate="no" className='ps-2 pt-1 fw-bold  '>{activities_g.init_currency.symbol}  {activities_g.wallet.bal_info.bal.toFixed(2)}</p>):"")  : "" }
+            {!Array.isArray(activities_g) ?(activities_g.wallet ? (<p translate="no" className='ps-2 pt-1 fw-bold  '>{activities_g.init_currency.symbol}  {numberWithCommas(activities_g.wallet.bal_info.bal.toFixed(2))}</p>):"")  : "" }
           {/* <p className='ps-2 pt-1 fw-bold '>$ 30000</p> */}
        
           </div>
