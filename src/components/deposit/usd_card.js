@@ -228,6 +228,9 @@ const UsdCard = ({uploadHash, localCard, activities_g}) => {
       }
       
   }
+
+  // console.log({isOpen,activities_g});
+  
   return (
     <div className="container">
       {/* <div className="d-flex pt-3">

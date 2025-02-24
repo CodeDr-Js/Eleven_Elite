@@ -55,8 +55,6 @@ const Main = () => {
       });
     }
   };
-
-  console.log(result);
   
   return (
     <>

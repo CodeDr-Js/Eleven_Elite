@@ -30,7 +30,7 @@ const Deposit = () => {
     setResult,
     getUserData,
     hasRunRetrieve,
-    telegram,
+    telegram,depositDir, setdepositDir
   } = useContext(DataContext);
   // console.log(activities_g);
   const navigate = useNavigate();
@@ -77,35 +77,6 @@ const Deposit = () => {
       <Other />
     </div>
   );
-
-  // const checkPayaddress = () => {
-  //   // const token1 = token["auth-token"];
-  //   //console.log(typeof activities_g.wallet.pay_address);
-  //   // setTimeout(() => {
-  //   //  console.log(activities_g);
-  //   if (!Array.isArray(activities_g) && !activities_g.wallet.pay_address) {
-  //     setIsOpen(false);
-  //     //  console.log("loading... Not object");
-  //     //setReloadTriggered(true);
-  //     API.retrieveData(token)
-  //       .then((result) => {
-  //         //    console.log(result);
-  //         setIsOpen(true);
-  //         if (result.success || result.message === "success") {
-  //           setResult(result);
-  //           setActivities_g(result.activities);
-  //         } else if (!result.success) {
-  //           //    console.log("removing token");
-  //           // removeToken("auth-token");
-  //           Cookies.remove("auth-remove");
-  //         }
-  //       })
-  //       .catch((err) => console.log(err));
-  //   } else {
-  //     // console.log("Pay address is found in useContext result");
-  //   }
-  //   // }, 1000);
-  // };
 
   useEffect(() => {
     //checkPayaddress();
@@ -156,42 +127,6 @@ const Deposit = () => {
     // setSelectedPage(null);
   };
 
-  // const renderSelectedPage = () => {
-  //   switch (selectedPage) {
-  //     case "idn":
-  //       return (
-  //         <Other
-  //           setIsOther={setIsOther}
-  //           account_number="2740409266"
-  //           account_name="MUDASIR"
-  //           bank_name="BCA"
-  //           telegram={ <div className=" moving-text-container" > <div className="moving-text">
-  //             <a
-  //               href="https://t.me/EEF_OFFICIAL_INDONESIA"
-  //               className="fw-bold fs-3 text-success text-decoration-none"
-  //             >
-  //               Click Here{" "}
-  //             </a>{" "}
-  //             to join Indonesia Official Telegroup Group Page.
-  //           </div></div>   }
-  //         />
-  //       );
-  //     case "CIV":
-  //       return (
-  //         <Other
-  //           setIsOther={setIsOther}
-  //           account_number="*************"
-  //           account_name="************"
-  //           bank_name="**************"
-  //           style="disabled"
-  //         />
-  //       );
-  //     // case 'page3':
-  //     //   return <Page3 />;
-  //     default:
-  //       return null;
-  //   }
-  // };
 
   const [depositAmount, setDepositAmount] = useState("");
   const handleSubmitDeposit = (e) => {
@@ -208,6 +143,7 @@ const Deposit = () => {
         setIsLoading(false);
         setResult(result);
         setActivities_g(result.activities);
+        // setdepositDir(result.activities.deposit_dir)
         const fields = result.activities.deposit_dir.awaiting_deposit[0].fields;
 
         const local = result.activities.deposit_dir
@@ -240,19 +176,19 @@ const Deposit = () => {
   };
 
   const retrieveDepositInfo = () => {
+    // console.log({depositDir});
+    
     setUploadHash(false);
     setLoading(true);
     if (!token) {
       Cookies.remove("auth-token");
       navigate("/login");
     } else {
-      if (Object.hasOwn(activities_g, "deposit_dir")) {
+      
+      if (Object.hasOwn(activities_g, "deposit_dir")||depositDir) {
         setLoading(false);
-       // console.log({ activities_g });
-       // console.log("Running at this point");
 
-
-
+        if(!activities_g.deposit_dir){activities_g.deposit_dir=depositDir}
         if (activities_g.deposit_dir) {
        //   console.log("Loading check....");
           const deposit = activities_g.deposit_dir.awaiting_deposit;
@@ -304,9 +240,7 @@ const Deposit = () => {
           }
 
 
-        } else {
-         // console.log("Awaiting_deposit not found");
-        }
+        } 
        // console.log("We have a deposit dir");
       } else {
       //  console.log("No Deposit_dir");
@@ -341,15 +275,13 @@ const Deposit = () => {
             }));
 
             if (result.activities.deposit_dir) {
-              //console.log("Loading check....");
-
+              // console.log("setting deposit DIR");
+              setdepositDir(result.activities.deposit_dir)
               const deposit = result.activities.deposit_dir.awaiting_deposit;
               const local = result.activities.deposit_dir
 
 
               if (local.local_address) {
-               // console.log("Local found, true");
-
                 setIsLocalAcc(true);
               } else {
                 //console.log("Local not found, false");
@@ -395,9 +327,7 @@ const Deposit = () => {
               }
 
 
-            } else {
-             // console.log("Awaiting_deposit not found");
-            }
+            } 
 
             // setIsOpen(false);
           })

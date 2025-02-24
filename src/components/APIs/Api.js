@@ -47,7 +47,8 @@ const DataProvider = ({ children }) => {
 
   const [SiteActivitiesData, setSiteActivitiesData] = useState([]);
   const [matchData, setmatchData] = useState(null);
- 
+  const [depositDir, setdepositDir] = useState(null);
+
  //console.log("all results is:", result);
   
   const token1 = Cookies.get("auth-token");
@@ -146,7 +147,9 @@ const DataProvider = ({ children }) => {
 
   return (
     <DataContext.Provider
-      value={{ data, allData, activeToken, activities_g, setActivities_g, user_g, setUser_g, openBet_g, setOpenBet_g, settled_g, setSettled_g, setActiveToken, result, setResult, notification, setNotification, promotion, setPromotion , pending, setPending , invite, setInvite, checkData, setCheckData, loadingNew, setLoadingNew, getUserData, hasRunRetrieve, setHasRunRetrieve, hasRunDB,  setHasRunDB, dbFetch,settled, setSettled, openBet, setOpenBet, banking, setBanking, SiteActivitiesData, matchData,setmatchData }}
+      value={{ data, allData, activeToken, activities_g, setActivities_g, user_g, setUser_g, openBet_g, setOpenBet_g, settled_g, setSettled_g, setActiveToken, result, setResult, notification, setNotification, promotion, setPromotion , pending, setPending , invite, setInvite, checkData, setCheckData, loadingNew, setLoadingNew, getUserData, hasRunRetrieve, setHasRunRetrieve, hasRunDB,  setHasRunDB, dbFetch,settled, setSettled, openBet, setOpenBet, banking, setBanking, SiteActivitiesData, matchData,setmatchData,
+          depositDir, setdepositDir,
+       }}
     >
       {children}
     </DataContext.Provider>

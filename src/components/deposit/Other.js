@@ -97,8 +97,8 @@ const Other = ({
             .then(response=>response.json())
             .then(data=>{ 
               setIsLoading(false);
-              //console.log(data); 
-              if(data.deposit_dir.awaiting_deposit[0].fields.generator === "awaiting_deposit_confirmation") {
+              console.log(data); 
+              if(data.success&&data.deposit_dir.awaiting_deposit[0].fields.generator === "awaiting_deposit_confirmation") {
                 setActivities_g((prev)=>({...prev, deposit_dir: data.deposit_dir}));
 
                 setAwaiting(true);
