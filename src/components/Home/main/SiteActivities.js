@@ -28,38 +28,45 @@ export const SiteActivities = () => {
   }, [SiteActivitiesData]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setAnimations([
-        "slide-in",
-        "move-down",
-        "move-down",
-        "move-down",
-        "slide-out",
-      ]);
+      if(SiteActivitiesData&&SiteActivitiesData.length>5){
+      const interval = setInterval(() => {
+        setAnimations([
+          "slide-in",
+          "move-down",
+          "move-down",
+          "move-down",
+          "slide-out",
+        ]);
 
-      setTimeout(() => {
-        setDisplayData((prevDisplayData) => {
-          const newIndex = (index + 1) % data.length;
-          setIndex(newIndex);
-          
-          // Calculate the new set of data to display
-          if(!prevDisplayData){prevDisplayData=[]}
-          if(newIndex){
-            const newDisplayData = [
-              data[newIndex], // Add the new item at the top
-              ...prevDisplayData.slice(0, 4), // Keep only the first four items
-            ]
-            // :0;
+        setTimeout(() => {
+          setDisplayData((prevDisplayData) => {
+            const newIndex = (index + 1) % data.length;
+            setIndex(newIndex);
 
-            // Reset animations after the animation duration
-            setAnimations(["", "", "", "", ""]);            
-            return newDisplayData;
-        }
-        });
-      }, 500);
-    }, 5000);
+            // console.log({prevDisplayData});
+            
+            // Calculate the new set of data to display
+            if(!prevDisplayData){prevDisplayData=[]}
+            if(newIndex){
+              const newDisplayData = [
+                data[newIndex], // Add the new item at the top
+                ...prevDisplayData.slice(0, 4), // Keep only the first four items
+              ]
+              // :0;
 
-    return () => clearInterval(interval);
+              // Reset animations after the animation duration
+              setAnimations(["", "", "", "", ""]);            
+              return newDisplayData;
+            }else{
+              return prevDisplayData
+              // console.log('NO INDEX');
+            }
+          });
+        }, 500);
+      }, 5000);
+
+      return () => clearInterval(interval);
+    }
   }, [data, index]);
 
   function timeAgo(timestamp) {
@@ -96,24 +103,11 @@ export const SiteActivities = () => {
       return name;
     }
   };
-  // // Example usage:
-  // const timestamp = '2024-06-18T23:29:31.008Z';
-  // console.log(timeAgo(timestamp));  // Output will depend on the current time
-
-  // console.log(displayData);
-  // if(!displayData[0]){
-  //   if (result && Object.keys(result).length) {
-  //       const results = result.latest_transactions;
-  //      setData(results);
-  //       setDisplayData(results.slice(0, 5));
-  //      setAnimations(new Array(5).fill(""));
-  //   }
-  // }
-
+  
  try {
   return (
     <div translate="no" className="" style={{marginBottom:"60px"}}>
-      {displayData[1] && displayData.length > 2 && displayData[0] !== undefined
+      {displayData&& displayData.length >= 1
         ? displayData.map((item, idx) => (
             <div key={idx} className={`activity-item ${animations[idx]}`}>
               <div className="d-flex white rounded-5 pt-2 ms-3 me-3 mb-3">
