@@ -49,8 +49,6 @@ const Other = ({
 
 
  
-
-  
   const handleFileChange = (e) => {
     setFile(false);
     const selectedFile = e.target.files[0];
@@ -71,10 +69,6 @@ const Other = ({
   };
 
   const handleUpload = async () => {
-   // e.preventDefault();
-    // setIsLoading(true);
-    //console.log("Running upload check", file);
-  
 
       var form = document.getElementById('sendersName');
       
@@ -82,9 +76,9 @@ const Other = ({
         e.preventDefault();
         setIsLoading(true);
         const form = e.currentTarget;
-        const url = form.action;
-       // console.log("running...2");
-
+        let url = `https://rrtfb-27538490c8d8.herokuapp.com/api/upload/`;
+        console.log({url});
+        
        if (!file) {
         setIsLoading(false);
        alert("Please select a valid file.");
@@ -168,12 +162,6 @@ const Other = ({
     setIsOther(false);
   };
 
-  // const handleFileChange = (event) => {
-  //   setValues((prev) => ({
-  //     ...prev,
-  //     file_upload: event.target.files[0],
-  //   }));
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -185,12 +173,7 @@ const Other = ({
   return (
     <>
       <div className="container">
-        {/* <div className="d-flex pt-3">
-          <div onClick={goBack}>
-            <img src={Arrow} alt="arrow-back" className="nav-arrow" />
-          </div>
-          <h3 className="text-center w-100">Deposit</h3>
-        </div> */}
+       
       {awaiting ?
         <div className="card-slide">
           <p className="opacity-50 p-3 text-center">Note: Local deposit confirmation takes up to 0-3 hours based on your bank network status. For help please contact  support.</p>
@@ -253,7 +236,6 @@ const Other = ({
 
           <div>
           <form id="sendersName"
-            action="https://rrtcc-4a28b26f2705.herokuapp.com/api/upload/ "
             method="POST"
             enctype="multipart/form-data"
           >
@@ -321,45 +303,7 @@ const Other = ({
         {!isLocalAcc && <div className="fs-3 text-center mt-5 pt-5"><p className="text-center mt-5 opacity-25 pt-2">No available account</p>
           <p className="text-center opacity-25 text-success fw-bold">Contact Support</p></div>}
 
-        {/* NOTE */}
-        {/* <div className="mt-4">
-          <div className="opacity-50 pe-2 text-justify fst-italic bg-transparent">
-            <span className="text-warning ">NOTE:</span>
-            <ol>
-              <li className="pb-2 pt-1">
-                {" "}
-                <small>
-                  {" "}
-                  Please do not deposit any assets other than TRC20-USDT to
-                  the above address, as the assets will be irretrievable.
-                  The minimum recharge amount is 10 USDT, and recharges
-                  below the minimum amount will not be credited and cannot
-                  be refunded.
-                </small>
-              </li>
-              <li className="pb-2 ">
-                <small>
-                  Your recharge address will change frequently after a
-                  success transaction and cannot be reused for deposits. In
-                  case of any changes, we will notify you through website
-                  announcements or emails. Please ensure the security of
-                  your computer and browser to prevent information tampering
-                  and leakage.
-                </small>
-              </li>
-              <li>
-                {" "}
-                <small>
-                  After you deposit to the above address, it requires
-                  confirmation from the entire network nodes. The funds will
-                  be credited after 1 network confirmation, and you can
-                  withdraw them after 1 network confirmation tips
-                </small>
-              </li>
-            </ol>
-          </div>
-          
-        </div> */}
+        
       </div>
     </div>}
       </div>
