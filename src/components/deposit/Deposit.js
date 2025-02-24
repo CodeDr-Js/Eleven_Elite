@@ -49,7 +49,6 @@ const Deposit = () => {
   const [awaiting, setAwaiting] = useState(false);
   const [fileUrl, setFileUrl] = useState("");
 
-   console.log(result);
    
   //console.log(activities_g);
 

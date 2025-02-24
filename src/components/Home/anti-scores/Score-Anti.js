@@ -35,7 +35,8 @@ const ScoreAnti = () => {
     loadingNew,
     setLoadingNew,
     result,
-    setResult
+    setResult,
+    matchData,setmatchData
     
   } = useContext(DataContext);
   const [displayedData, setDisplayedData] = useState([]);
@@ -62,49 +63,7 @@ const ScoreAnti = () => {
     }
   }, [token]);
 
-  //console.log(allData);
-  //console.log(checkData);
-
-  // const lastItemRef = useRef(null);
-
-  // const goBack = () => {
-  //    window.history.back(); // Go back to the previous page and section
-
-  //    // Scroll to the last item
-  //    if (lastItemRef.current) {
-  //      lastItemRef.current.scrollIntoView({ behavior: "smooth" });
-  //    }
-  // };
-
-
-  // Search function
-  // const handleSearch = (event) => {
-  //   const value = event.target.value;
-  //   setSearchTerm(value);
-
-  //   // Filter the data based on the search input
-  //   const filtered = data.filter(item =>
-  //     item.toLowerCase().includes(value.toLowerCase())
-  //   );
-  //   setFilteredDatas(filtered);
-  // };
-  // const handleSearch = () => {
-
-  //   // Filter the data based on the search input
-  //   const filtered = filteredData[0] ? filteredData.filter(item => 
-  //     item.teams.home.name.toLowerCase().includes(search.toLowerCase()) 
-  //   ):"";
-  //   setFilteredSearch([filtered]);
-  // };
-
-  // useEffect(()=>{
-  //   handleSearch()
-  // },[filteredSearch])
-
-
-  // Ends
   
-
   function convertTimestampToRealTime(timestamp) {
     // Convert the timestamp to milliseconds
     var timestampInMillis = timestamp * 1000;
@@ -150,21 +109,6 @@ const ScoreAnti = () => {
     }
   };
 
-  // const filteredGames = allData.map((e) => {
-  //   const id = e.fixture.id
-  //   const filteredData = data.filter((value) => value.fixture.id.includes());
-  //   console.log(filteredData);
-  // });
-
-  // const filterIds = new Set(result.matches.fixtures.response.map((item) => item.fixture.id));
-  // console.log(filterIds);
-
-  // Filtering data100 based on whether their ID exists in data20
-  // const filteredData = data[0]
-  //   ? data.filter((item) => filterIds.has(item.fixture.id))
-  //   : "";
-  // console.log(filteredData);
-
   useEffect(() => {
     setLoading(true);
     // setDisplayedData(filteredData.slice(0, limit));
@@ -175,41 +119,14 @@ const ScoreAnti = () => {
   }, []);
   //console.log(displayedData);
   
-  // const loadMoreData = () => {
-  //   const newIndex = displayedData.length + limit;
-  //   if (newIndex >= filteredData.length) {
-  //     setDisplayedData(filteredData);
-  //     setHasMore(false);
-  //   } else {
-  //     setDisplayedData((prevData) => [
-  //       ...prevData,
-  //       ...filteredData.slice(prevData.length, newIndex),
-  //     ]);
-  //   }
-  // };
-
-  // const lastElementRef = useCallback(
-  //   (node) => {
-  //     if (loading) return;
-  //     if (observer.current) observer.current.disconnect();
-  //     observer.current = new IntersectionObserver((entries) => {
-  //       if (entries[0].isIntersecting && hasMore) {
-  //         loadMoreData();
-  //       }
-  //     });
-  //     if (node) observer.current.observe(node);
-  //   },
-  //   [loading, hasMore]
-  // );
-
  // console.log("Filtered games :",filteredSearch);
   let hasGame = false
   const e = [];
   // const newGames = filteredData[0]? filteredData.map((game, index) => {
   const newGames = [];
-  //console.log({newGames});
   
-  if(result.matches){ result.matches.fixtures.response.map((game, index) => {
+  if(matchData){ 
+    matchData.fixtures.response.map((game, index) => {
     //console.log("game is",game);
     hasGame = true;
      //console.log(game);
@@ -221,23 +138,6 @@ const ScoreAnti = () => {
      //console.log(gameTime);
 
      const userTime = Date.now();
-
-     // filteredSearch.map((item)=>{
-     //   return item.map((items)=>{
-     //     console.log("items are: ", items);
-
-     //     })
-       
-     //   //console.log("The items are :",item);
-     // })
-
-     // const timeout = setTimeout(() => {
-
-     // }, 1000);
-
-     // console.log(userTime, gameStartTime);
-     //CHECK USERTIME AND GAMESTARTTIME
-    // console.log("yes1", game);
 
      if (gameStatus === "NS" && !gameTime.expired) {
        //console.log("yes2");
@@ -345,31 +245,24 @@ const ScoreAnti = () => {
        newGames.push(scoreCard);
      } else {//console.log("Time Expired");
      }
-   }) 
+    }) 
   
    if (!newGames[0] ) {
-    //console.log("No game is found");
-    API.fetchFixtures({req_date: addHours(new Date(), 24).toJSON()})
-    .then((result) => {//console.log(result)
-    setResult((prev) => ({
-      ...prev, matches: result.matches
-    }))
-    })
-    .catch((err) => console.log(err)
-    )
-    
-  }
-  } else {}
+      //console.log("No game is found");
+      API.fetchFixtures({req_date: addHours(new Date(), 24).toJSON()},token)
+        .then((result) => {//console.log(result)
+        setmatchData(result.matches)
+      //   (prev) => ({
+      //   ...prev, matches: result.matches
+      // }))
+      })
+      .catch((err) => console.log(err)
+      )
+      
+    }
+  } 
   
-
-  // useEffect(() => {
-  //     if (hasGame) {
-  //       console.log("No game is found");
-        
-  //     }
-    
-  // }, []);
-
+  
   return (
     <div>
     <div className="">
@@ -382,7 +275,7 @@ const ScoreAnti = () => {
       {/* {loading && <p>Loading...</p>} */}
       {/* {hasMore && <div ref={lastElementRef} style={{ height: 20 }}></div>} */}
 
-      {!newGames[0] ? <Loader /> : ""} 
+      {!newGames[0] ? <Loader/>: ""} 
     </div>
     </div>
   );

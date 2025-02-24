@@ -10,45 +10,28 @@ import Loader from "../../loader/loader";
 
 const AntiScore = () => {
   const navigate = useNavigate();
-   const { data, allData, activeToken, activities_g, user, getUserData, hasRunRetrieve , hasRunDB,  setHasRunDB, dbFetch } =
+   const { data, allData, activeToken, activities_g, user, getUserData, hasRunRetrieve , hasRunDB,  setHasRunDB, dbFetch,matchData } =
      useContext(DataContext);
   const token = Cookies.get("auth-token");
   const [loadings, setLoadings] = useState(false);
 
- 
-  useEffect(()=> {
-    if(!hasRunRetrieve){
-      getUserData()
-    }
-  }, [])
+
 
   useEffect(()=> {
-    if(!hasRunDB){
-      dbFetch()
-    }
-  }, [])
-
-  useEffect(() => {
-    setLoadings(true);
-    if(!Array.isArray(activities_g) ) {
-      setLoadings(false)
-    }
-   }, [activities_g])
+    if(!matchData){dbFetch()}else{setLoadings(false)}
+  }, [matchData])
 
   //Checking for token/Activ
   useEffect(() => {
     
     if (!token) {
-//      console.log("Your token is", token1);
       navigate("/login");
-    } else {
-    }
+    } else {}
   }, [token]);
  
   return (
     <div>
       {loadings?(<Loader/>):""}
-      
       <ScoreAnti  />
     </div>
   );

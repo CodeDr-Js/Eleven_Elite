@@ -7,6 +7,11 @@ import SettledNav from "./settledNav";
 import { DataContext } from "../APIs/Api";
 
 const History = () => {
+  // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  // const scrollToTop = () => {
+  // };
+  console.log('scrool');
+  
   const navigate = useNavigate();
   const { setActivities_g, activities_g, setActiveToken, settled, setSettled, openBet, setOpenBet } =
     useContext(DataContext);
@@ -26,7 +31,6 @@ const History = () => {
         setSettled(activities_g.betdir.settled);
         setOpenBet(activities_g.betdir.openbet);
         
-
       } else {
     
         API.retrieveHistory(token)

@@ -26,23 +26,6 @@ const NavBar = () => {
   const handleClick = () => {
     navigate("/notification")
   }
-  //console.log(activities_g);
-
-  // useEffect(()=>{
-  //  const x = setInterval(() => {
-  //     try {
-  //       let timerDiv = document.getElementById("timer");
-  //       timerDiv.innerText = ;
-  //     } catch (error) {
-  //       clearInterval(x)
-  //       console.log(error);
-  //     }
-     
-
-
-  //   }, 1000);
-
-  // },[])
 
   return (
     <div translate="no" className="">
@@ -110,19 +93,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-// <Dropdown className="ms-3">
-//   <Dropdown.Toggle variant="primary" id="dropdown-basic"></Dropdown.Toggle>
-
-//   <Dropdown.Menu className="bg-none opacity-25 dropdown-menu">
-//             <Dropdown.Item className="text-center" href="#/action-1">
-//               Live
-//             </Dropdown.Item>
-//             <Dropdown.Item className="text-center" href="#/action-2">
-//               Anti-Score
-//             </Dropdown.Item>
-//             <Dropdown.Item className="text-center" href="#/action-3">
-//               G-Sport
-//             </Dropdown.Item>
-//           </Dropdown.Menu>
-// </Dropdown>;

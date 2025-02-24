@@ -4,6 +4,7 @@ import { pathname } from "../search_dir/search_dir"
 
 let Token='5e26b54473f0cce5a2e84a5a209ec5340ae2357e'
 let url = 'https://rrtfb-27538490c8d8.herokuapp.com/api/'
+url = 'http://127.0.0.1:8000/api/'
 export class API {
 
     static loginUser(body){
@@ -223,15 +224,14 @@ export class API {
          }).then((resp) => resp.json());
     }
 
-    static fetchFixtures(body){
+    static fetchFixtures(body,token){
         
       let endpoint = "soccer/retrieve_fixtures/";
       return fetch(url + endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // 'Content-Encoding': 'gzip'
-          // 'Authorization':Token ${token}
+          'Authorization':`Token ${token}`
         },
         body: JSON.stringify(body)
       }).then( async (resp) => resp.json())

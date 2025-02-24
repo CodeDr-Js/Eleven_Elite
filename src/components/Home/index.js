@@ -37,6 +37,7 @@ const Index = () => {
     getUserData,
     hasRunRetrieve,
     setHasRunRetrieve,
+    // hasS
     user_g,
   } = useContext(DataContext);
   //console.log("Activities are:",activities_g);
@@ -44,6 +45,7 @@ const Index = () => {
   const [loadings, setLoadings] = useState(false);
   const [loading, setLoading] = useState(false);
   const [activeButton, setActiveButton] = useState("");
+  // const [SiteActivities_, setSiteActivities_] = useState(false);
 
   // console.log("Token:",activeToken);
   //Checking for token/Activ
@@ -135,8 +137,8 @@ const Index = () => {
             </p>
             <div className="nodata-1 mb-5">
             <div className="ms-3 me-3 pt-3 mb-5 pb-3 rounded-4 transparent-color ">
-
-              <SiteActivities/>
+              {hasRunRetrieve?<SiteActivities/>:''}
+              
               {/* <SiteActivities/>
               <SiteActivities/>
               <SiteActivities/>

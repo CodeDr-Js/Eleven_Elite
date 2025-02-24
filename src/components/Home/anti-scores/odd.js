@@ -20,7 +20,7 @@ import "./Modal.css"
 const Odd = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, allData, activeToken, setActiveToken, activities_g, user, getUserData, hasRunRetrieve, result } =
+  const { data, allData, activeToken, setActiveToken, activities_g, user, getUserData, hasRunRetrieve, result,dbFetch,hasRunDB, matchData } =
     useContext(DataContext);    
   const token = Cookies.get("auth-token");
   const [loadings, setLoadings] = useState(false);
@@ -37,20 +37,12 @@ const Odd = () => {
   }, [token]);
 
   
-  useEffect(()=> {
-    if(!hasRunRetrieve){
-      getUserData()
-    }
-  }, [])
-
   const [modalData, setModalData] = useState({});
 
   useEffect(() => {
     setLoadings(true);
-    if(!Array.isArray(activities_g) ) {
-      setLoadings(false)
-    }
-   }, [activities_g])
+    if(!matchData){dbFetch()}else{setLoadings(false)}
+   }, [matchData])
 
   const onHandleClick = () => {
     e.preventDefault();
@@ -198,7 +190,7 @@ const Odd = () => {
 
   let e = [];
 
-  let filteredIdOdd = result.matches  ? result.matches.odds[Number(id)] : [];
+  let filteredIdOdd = matchData  ? matchData.odds[Number(id)] : [];
 
   if(!filteredIdOdd) {
     filteredIdOdd = [];
@@ -210,142 +202,6 @@ const Odd = () => {
 
 
   
-
-  // filteredIdOdd.forEach((bookmakers) => {
-  //   bookmakers.bookmakers.forEach((item) => {
-  //     if (item.name === "Bet365") {
-  //       //console.log(item.bets);
-  //       item.bets.forEach((scores) => {
-  //         if (scores.name === "Exact Score") {
-  //           // setOdds(scores.values);
-  //           //console.log("bet365", scores.values);
-  //           e = scores.values;
-
-  //           //     e.push(odds);
-  //           //   }
-  //           // scores.values.forEach((odds) => {
-  //           //   console.log(odds);
-  //           //   if(!e[0]) {
-  //           //     e.push(odds);
-  //           //   }
-  //           // });
-  //         }
-  //       });
-  //       return;
-  //     }
-  //     // if (item.name === "1xBet") {
-  //     //   //console.log(item.bets);
-  //     //   item.bets.forEach((scores) => {
-  //     //     if (scores.name === "Exact Score") {
-  //     //       // setOdds(scores.values);
-  //     //       console.log("1x", scores.values);
-  //     //       e = scores.values;
-
-  //     //       //     e.push(odds);
-  //     //       //   }
-  //     //       // scores.values.forEach((odds) => {
-  //     //       //   console.log(odds);
-  //     //       //   if(!e[0]) {
-  //     //       //     e.push(odds);
-  //     //       //   }
-  //     //       // });
-  //     //     }
-  //     //   });
-  //     //   return;
-  //     // }
-  //     // if (item.name === "Betway") {
-  //     //   //console.log(item.bets);
-  //     //   item.bets.forEach((scores) => {
-  //     //     if (scores.name === "Exact Score") {
-  //     //       // setOdds(scores.values);
-  //     //       console.log("betway", scores.values);
-  //     //       e = scores.values;
-
-  //     //       //     e.push(odds);
-  //     //       //   }
-  //     //       // scores.values.forEach((odds) => {
-  //     //       //   console.log(odds);
-  //     //       //   if(!e[0]) {
-  //     //       //     e.push(odds);
-  //     //       //   }
-  //     //       // });
-  //     //     }
-  //     //   });
-  //     //   return;
-  //     // }
-  //     // if (item.name === "10Bet") {
-  //     //   //console.log(item.bets);
-  //     //   item.bets.forEach((scores) => {
-  //     //     if (scores.name === "Exact Score") {
-  //     //       // setOdds(scores.values);
-  //     //       console.log("10bet", scores.values);
-  //     //       e = scores.values;
-
-  //     //       //     e.push(odds);
-  //     //       //   }
-  //     //       // scores.values.forEach((odds) => {
-  //     //       //   console.log(odds);
-  //     //       //   if(!e[0]) {
-  //     //       //     e.push(odds);
-  //     //       //   }
-  //     //       // });
-  //     //     }
-  //     //   });
-  //     //   return;
-  //     // }
-
-  //     // if (item.name === "1xBet") {
-  //     //   console.log(item.bets);
-  //     //   item.bets.forEach((scores) => {
-  //     //     if (scores.name === "Exact Score") {
-  //     //       // setOdds(scores.values);
-  //     //       scores.values.forEach((odds) => {
-  //     //         // console.log(odds);
-  //     //         e.push(odds);
-  //     //       });
-  //     //     }
-  //     //   });
-  //     //   return;
-  //     // }
-
-  //     // if (item.name === "Betway") {
-  //     //   console.log(item.bets);
-  //     //   item.bets.forEach((scores) => {
-  //     //     if (scores.name === "Exact Score") {
-  //     //       // setOdds(scores.values);
-  //     //       scores.values.forEach((odds) => {
-  //     //         // console.log(odds);
-  //     //         e.push(odds);
-  //     //       });
-  //     //     }
-  //     //   });
-  //     //   return;
-  //     // }
-
-  //     // if (item.name === "10Bet") {
-  //     //   console.log(item.bets);
-  //     //   item.bets.forEach((scores) => {
-  //     //     if (scores.name === "Exact Score") {
-  //     //       // setOdds(scores.values);
-  //     //       scores.values.forEach((odds) => {
-  //     //         // console.log(odds);
-  //     //         e.push(odds);
-  //     //       });
-  //     //     }
-  //     //   });
-  //     //   return
-  //     // }
-  //   });
-  // });
- 
-  //2. console.log(e);
-
-  // e.sort((a, b) => a.odd - b.odd);
-  // console.log(e);
-
-  //e.reverse();
-  // console.log(e);
-
   //function for picking a random number
   function getRandomNumberFromArray(array) {
     // Generate a random index within the range of the array length
