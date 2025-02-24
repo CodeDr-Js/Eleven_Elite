@@ -56,10 +56,8 @@ const Main = () => {
     }
   };
 
+  console.log(result);
   
- 
-
-
   return (
     <>
       <div className="main  container">
@@ -81,7 +79,7 @@ const Main = () => {
           <IconCon image={Soccer} text="Soccer" link="/anti-score" />
           <IconCon image={History} text="Bets" link="/history" />
           <IconCon image={Rewards} text="Invites" link="/invite" />
-          <IconCon image={Telegram} text="Telegram" link="https://t.me/RRTOFFOCIALPPROJECT" />
+          <IconCon image={Telegram} text="Telegram" link={result&&result.contact?result.contact.social.telegram:''}/>
           <IconCon image={Logout} text="Logout" onClick={handleLogoutClick} />
         </div>
       </div>

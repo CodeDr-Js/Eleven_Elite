@@ -28,48 +28,9 @@ const HelpDash = ({ isHelp, setIsHelp, result }) => {
     navigate(url);
   }
 
-  // (()=>{
-  //   console.log("running");
-  //   if(result && result.online_support) {
-  //     Object.entries(result.online_support).map(([key, item]) => {
-  //       console.log("Key is",key);
-  //       console.log("Item is",item);
-  //       // return(
-  //       //   <div className="support-div d-flex">
-  //       //   <div className="bg-transparent">
-  //       //       <img
-  //       //         className="bg-transparent"
-  //       //         src={support1}
-  //       //         alt="support1"
-  //       //         style={{ width: "30px" }}
-  //       //       />
-  //       //     </div>
-    
-  //       //     <div className="ms-3 vip-text-2">
-  //       //       <p>Support 1</p>
-    
-  //       //       <p className="bg-primary lang-b position-absolute ms-4" style={{fontSize:"8px"}}>French</p>
-  //       //     </div>
-    
-            
-    
-  //       //     <div>
-  //       //     <p className=" ms-4 ps-2 pe-2 rounded-2 text-decoration-none bg-primary">Chat</p>
-  //       //     </div>
-  //       //   </div>
-  //       // )
-        
-  //     })
-  //   } else {
-  //     console.log("Else runned");
-      
-  //   }
-    
-  // })();
 
   const supportCard = result && result.online_support ? Object.entries(result.online_support).map(([key, item], index) => {
-    // console.log(key);
-    // console.log(item, index);
+
     return(
       <Link translate="no" to={item} className="text-decoration-none">
          <div className="support-div d-flex mb-4">
@@ -83,9 +44,10 @@ const HelpDash = ({ isHelp, setIsHelp, result }) => {
         </div>
 
         <div className="ms-3 vip-text-2">
-          <p>Support {index + 1}</p>
+          <p> {key}</p>
+          {/* <p>Support {index + 1}</p> */}
 
-          <p className="bg-primary lang-b position-absolute ms-4" style={{fontSize:"8px"}}>{key}</p>
+          <p className="bg-primary lang-b position-absolute ms-4" style={{fontSize:"8px"}}>online</p>
         </div>
 
         
@@ -101,7 +63,7 @@ const HelpDash = ({ isHelp, setIsHelp, result }) => {
   }) : ""
 
   //Toggle Modal
-
+  
   return (
     <div className="error-div-help main-color container">
       <div className="bg-transparent d-flex">
@@ -146,7 +108,7 @@ const HelpDash = ({ isHelp, setIsHelp, result }) => {
         <p className="bg-transparent fw-bold">Follow us</p>
         <div className="main-color1 p-3 d-flex rounded-2 ">
           <div className="bg-transparent pe-4">
-            <Link to="https://t.me/rrtccinvestment">
+            <Link to={result.contact.social.channel}>
               <p className="t-channel">Channel</p>
               <img
                 className="bg-transparent"
@@ -157,7 +119,7 @@ const HelpDash = ({ isHelp, setIsHelp, result }) => {
             </Link>
           </div>
           <div className="bg-transparent pe-4">
-            <Link to="https://t.me/RRTOFFOCIALPPROJECT">
+            <Link to={result.contact.social.telegram}>
             <p className="t-channel-1">Chat</p>
               <img
                 className="bg-transparent"
