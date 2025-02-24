@@ -43,7 +43,7 @@ export const SiteActivities = () => {
           setIndex(newIndex);
           
           // Calculate the new set of data to display
-          // let newDisplayData = 0;
+          if(!prevDisplayData){prevDisplayData=[]}
           if(newIndex){
             const newDisplayData = [
               data[newIndex], // Add the new item at the top
