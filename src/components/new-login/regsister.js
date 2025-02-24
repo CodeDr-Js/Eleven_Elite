@@ -39,7 +39,10 @@ function Regsister() {
 
 
   //Using the dir and gettin user invited code
- const invitedUser = dir("invited");
+ let invitedUser = dir("invited");
+ if (!invitedUser) {invitedUser = localStorage.invitedUser}
+ else{localStorage.invitedUser=invitedUser}
+
  useEffect(() => {
    if (invitedUser) {
      setValues((prev) => ({
@@ -297,7 +300,7 @@ ctx.transform(1, Math.random() * 0.1, Math.random() * 0.1, 1, 0, 0); // Apply sk
               name="invited"
               onChange={(e)=> setValues({...values, invited : e.target.value})}
               
-              // readOnly
+              readOnly
             />
 
 {<CustomDropdown selectedValue={selectedValue} setSelectedValue={setSelectedValue} isOpen={isOpen} setIsOpen={setIsOpen} handleSelect={handleSelect} icon={icon} setIcon={setIcon}/>}
