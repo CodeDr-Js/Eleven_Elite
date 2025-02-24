@@ -13,21 +13,37 @@ import flier4 from "../../../assets/images/flier4.jpg";
 const CarouselComponent = () => {
   const settings = {
     dots: false, // Set to true if you want to keep the dots navigation
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: false, // Enable autoplay
+    autoplay: true, // Enable autoplay
     autoplaySpeed: 3000,
   };
 
   return (
     <Slider {...settings}>
-      <div className="container mt-3">
+      <div className="container mt-3 lazy">
         <img
           className="w-100 rounded-3 mt-5 mb-3"
           style={{ height: "200px" }}
           src={flier1}
+          alt=""
+        />
+      </div>
+      <div className="container mt-3 lazy">
+        <img
+          className="w-100 rounded-3 mt-5 mb-3"
+          style={{ height: "200px" }}
+          src={flier2}
+          alt=""
+        />
+      </div>
+      <div className="container mt-3 lazy">
+        <img
+          className="w-100 rounded-3 mt-5 mb-3"
+          style={{ height: "200px" }}
+          src={flier3}
           alt=""
         />
       </div>
@@ -54,7 +70,7 @@ const CarouselComponent = () => {
           src={flier4}
           alt=""
         />
-      </div> */}
+      </div> }
 
       {/* <div>
         <img
