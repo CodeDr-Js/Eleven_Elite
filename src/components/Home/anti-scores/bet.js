@@ -14,6 +14,8 @@ import SuccessCard from "./successCard";
 import Button from "../../loader-btn/loader-btn2";
 import "../../largeScreen/large.css";
 
+
+
 const Bet = ({
   correctScore,
   oddPer,

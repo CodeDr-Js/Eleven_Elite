@@ -36,7 +36,7 @@ const PromotionFC = ({promotion, activeButton}) => {
             <div  className="d-flex justify-content-center text-center main-color opacity-50 level-div">
             
             <p className="bg-transparent user">{e.fields.transactionID}</p>
-            <p translate="no" className="bg-transparent amount">{promotion.activities.init_currency.symbol} {Number(e.fields.amount).toFixed(2)}</p>
+            <p translate="no" className="bg-transparent amount">{promotion.activities.init_currency.code === "USD" ? promotion.activities.init_currency.symbol + Number(e.fields.amount) : promotion.activities.init_currency.symbol + Number(e.fields.amount).toFixed(2)}</p>
             <p className="bg-transparent date">{convertToLocalTime(splitData(e.fields.timestamp))}</p>
           </div>
             </div>
@@ -47,7 +47,7 @@ const PromotionFC = ({promotion, activeButton}) => {
                <div className="d-flex justify-content-center text-center main-color-1 opacity-50" > <p className="secondary-color ps-3 pe-3 round">{e.fields.module}</p></div>
             <div  className="d-flex justify-content-center text-center main-color-1 opacity-50">
             <p className="bg-transparent user">{e.fields.transactionID}</p>
-            <p translate="no" className="bg-transparent amount">{promotion.activities.init_currency.symbol} {Number(e.fields.amount).toFixed(2)}</p>
+            <p translate="no" className="bg-transparent amount">{promotion.activities.init_currency.code === "USD" ? promotion.activities.init_currency.symbol + Number(e.fields.amount) : promotion.activities.init_currency.symbol + Number(e.fields.amount).toFixed(2)}</p>
             <p className="bg-transparent date">{convertToLocalTime(splitData(e.fields.timestamp)) }</p>
           </div>
 
@@ -62,7 +62,7 @@ const PromotionFC = ({promotion, activeButton}) => {
 
             <div key={k} className="d-flex justify-content-center text-center main-color-2 opacity-50">
             <p className="bg-transparent user">{e.fields.transactionID}</p>
-            <p translate="no" className="bg-transparent amount">{promotion.activities.init_currency.symbol} {Number(e.fields.amount).toFixed(2)}</p>
+            <p translate="no" className="bg-transparent amount">{promotion.activities.init_currency.code === "USD" ? promotion.activities.init_currency.symbol + Number(e.fields.amount) : promotion.activities.init_currency.symbol + Number(e.fields.amount).toFixed(2)}</p>
             <p className="bg-transparent date">{convertToLocalTime(splitData(e.fields.timestamp)) }</p>
           </div>
 

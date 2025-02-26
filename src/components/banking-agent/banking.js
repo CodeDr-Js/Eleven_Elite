@@ -32,6 +32,8 @@ const Banking = () => {
     index: ""
   });
 
+ // const [isPDF, setIsPDF] = useState(false);
+
 
   useEffect(() => {
 
@@ -61,7 +63,7 @@ const Banking = () => {
 
         API.bankingAgent(`?data=${bankingParams}`, token)
           .then((result) => {
-           // console.log(result);
+           console.log(result);
             if (result.success) {
               setBanking(result)
             } else if(result.detail === "Invalid token.") {
@@ -198,9 +200,16 @@ const Banking = () => {
 
   // }
 
+  function isPDF(filename) {
+    return filename.toLowerCase().endsWith('.pdf');
+}
+
   const transactionCard = banking !== null ? banking.type === "deposit" ? banking.transaction.map((item, index) => {
     //console.log({ item });
     let cardDiv = "card-div"+index;
+
+
+
     return (
       <div id={cardDiv}>
 
@@ -213,9 +222,14 @@ const Banking = () => {
               <p className='text-center fw-bold line-h' >{item.fields.transactionID}</p>
             </div>
 
+            <div>
+              <p className='text-center fw-bold opacity-50' style={{ fontSize: "10px" }}>Username</p>
 
-            <div >
+              <p className='text-center fw-bold line-h' >{item.fields.transactionID}</p>
+            </div>
 
+
+            <div>
               <p className='text-center fw-bold opacity-50 ' style={{ fontSize: "10px" }}>Amount</p>
 
               <h1 translate='no' className='text-center text-warning' style={{ lineHeight: "0" }}>{item.fields.currency} {numberWithCommas(Number(item.fields.amount).toFixed(2))}</h1>
@@ -253,9 +267,15 @@ const Banking = () => {
             <div className='d-flex justify-content-center align-items-center mt-4'>
               <button onClick={() => handleShowReceipt(index)} className='btn secondary-color mb-4'>{receipt.loading && receipt.index === index ? "Hide Receipt" : "View Receipt"}</button>
             </div>
-            {receipt.loading && receipt.index === index ? <div className='d-flex justify-content-center align-items-center mb-4'>
+            {isPDF(item.fields.file_url) === true ?
+              receipt.loading && receipt.index === index ? <div className='d-flex justify-content-center align-items-center mb-4'>
+              <iframe
+ src={item.fields.file_url} style={{ width: "300px" }} />
+            </div> : ""
+            : 
+            receipt.loading && receipt.index === index ? <div className='d-flex justify-content-center align-items-center mb-4'>
               <img src={item.fields.file_url} style={{ width: "300px" }} />
-            </div> : ""}
+            </div> : "" }
 
 
 
