@@ -225,7 +225,7 @@ const Banking = () => {
             <div>
               <p className='text-center fw-bold opacity-50' style={{ fontSize: "10px" }}>Username</p>
 
-              <p className='text-center fw-bold line-h' >{item.fields.transactionID}</p>
+              <p className='text-center fw-bold line-h' >{item.fields.username}</p>
             </div>
 
 
