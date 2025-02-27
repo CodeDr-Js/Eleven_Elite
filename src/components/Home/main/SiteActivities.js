@@ -103,6 +103,9 @@ export const SiteActivities = () => {
       return name;
     }
   };
+
+  //console.log({displayData});
+  
   
  try {
   return (
@@ -175,22 +178,22 @@ export const SiteActivities = () => {
 
                     <div className="bg-transparent text-center at-line pt-2 ms-auto">
                       {item.fields.type === "won" ? (
-                        <p className="bg-transparent text-success fw-bold at-font">
-                          Won ${item.fields.amount}
+                        <p className="bg-transparent text-success fw-bold site-font">
+                          Won {item.fields.currency_symbol}{item.fields.amount}
                         </p>
                       ) : (
                         ""
                       )}
                       {item.fields.type === "withdraw" ? (
-                        <p className="bg-transparent text-primary fw-bold at-font">
-                          Withdraw ${item.fields.amount}
+                        <p className="bg-transparent text-primary fw-bold site-font">
+                          Withdraw {item.fields.currency_symbol} {item.fields.amount}
                         </p>
                       ) : (
                         ""
                       )}
                       {item.fields.type === "deposit" ? (
-                        <p className="bg-transparent text-warning fw-bold at-font ">
-                          Deposit ${item.fields.amount}
+                        <p className="bg-transparent text-warning fw-bold site-font ">
+                          Deposit {item.fields.currency_symbol}{item.fields.amount}
                         </p>
                       ) : (
                         ""

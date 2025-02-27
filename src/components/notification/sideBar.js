@@ -7,7 +7,7 @@ import { API } from "../api-service/api-service";
 import { DataContext } from "../APIs/Api";
 
 const Sidebar = ({notification}) => {
-console.log({notification});
+//console.log({notification});
 
   const navigate = useNavigate();
     const {  setActiveToken, result } =
