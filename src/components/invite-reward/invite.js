@@ -14,7 +14,7 @@ const Invite = () => {
   const token = Cookies.get("auth-token");
   const [loadings, setLoadings] = useState(false)
 
-  //console.log(invite);
+  //console.log({invite});
 
   const currentLevel =
     invite !== null
@@ -148,8 +148,8 @@ const Invite = () => {
               </p>
 
               {invite !== null ? (
-                invite.active ? (
-                  <p className="bg-transparent ">{invite.active}</p>
+                invite.activities.invite_reward_dir.active ? (
+                  <p className="bg-transparent ">{invite.activities.invite_reward_dir.active}</p>
                 ) : (
                   <p className="bg-transparent  ">0</p>
                 )
