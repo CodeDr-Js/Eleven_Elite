@@ -3,6 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import Worker from 'web-worker';
 
+
 import {
   retriveData,
   IDBConfig,
@@ -49,6 +50,7 @@ const DataProvider = ({ children }) => {
   const [SiteActivitiesData, setSiteActivitiesData] = useState([]);
   const [matchData, setmatchData] = useState(null);
   const [depositDir, setdepositDir] = useState(null);
+  const [yayLoad, setYayLoad] = useState();
 
  //console.log("all results is:", result);
   
@@ -121,6 +123,7 @@ const DataProvider = ({ children }) => {
           setResult(result);           
           setActivities_g(result.activities);
           setUser_g(result.user);
+          // localStorage.yayName = result.user.username
           setSettled_g(result.activities.betdir.settled);
           setOpenBet_g(result.activities.betdir.openbet);
           setSiteActivitiesData(result.latest_transactions)
@@ -150,7 +153,7 @@ const DataProvider = ({ children }) => {
   return (
     <DataContext.Provider
       value={{ data, allData, activeToken, activities_g, setActivities_g, user_g, setUser_g, openBet_g, setOpenBet_g, settled_g, setSettled_g, setActiveToken, result, setResult, notification, setNotification, promotion, setPromotion , pending, setPending , invite, setInvite, checkData, setCheckData, loadingNew, setLoadingNew, getUserData, hasRunRetrieve, setHasRunRetrieve, hasRunDB,  setHasRunDB, dbFetch,settled, setSettled, openBet, setOpenBet, banking, setBanking, SiteActivitiesData, matchData,setmatchData,
-          depositDir, setdepositDir, secure, setSecure
+          depositDir, setdepositDir, secure, setSecure, yayLoad, setYayLoad
        }}
     >
       {children}

@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/js/bootstrap.bundle";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Home from "./components/Home";
 import AntiScore from "./components/Home/anti-scores/AntiScore";
 import Login from "./components/Login/login";
@@ -37,6 +37,7 @@ import NewLogin from "./components/new-login/login";
 import NewRegister from "./components/new-login/regsister";
 import Banking from "./components/banking-agent/banking";
 import Sidebar from "./components/notification/sideBar";
+import yay from "./assets/images/yay.jpg";
 
 
 
@@ -70,6 +71,10 @@ export default function App() {
 const [blocked, setBlocked] = useState(true);
 const [notification1, setNotification1] = useState(false);
 const [notification, setNotification] = useState(null);
+const [yayLoading,setYayLoading] = useState(false);
+const location = useLocation();
+//console.log(location);
+
 
 //const [blocked, setBlocked] = useState(false);
 
@@ -185,8 +190,27 @@ const [notification, setNotification] = useState(null);
 
   // })
   // }
-  
 
+  useEffect(() => {
+   
+    if(location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forget-password" ) {
+      setYayLoading(false)
+    } else {
+
+      if(Number(localStorage.yay) === 1) {
+        setYayLoading(false)
+      } else {
+        localStorage.yay = 1;
+        setYayLoading(true);
+  
+        setTimeout(()=>{ setYayLoading(false)}, 20000)
+      }
+    }
+  },[location.pathname])
+  
+  const handleX = () => {
+    setYayLoading(false);
+  }
 
   return (
     <>
@@ -197,7 +221,17 @@ const [notification, setNotification] = useState(null);
         <>
         
         {/* {blocked && <div className="modal-overlay-profile" style={{"zIndex": 9999}}><Blocked/></div> } */}
-        {notification1 && <div className="" style={{"zIndex": 9999}}>
+        {yayLoading && <div className="modal-overlay-profile " style={{"zIndex": 9999,}}>
+
+          <div className="ms-4 me-4 animate">
+
+          <img className="rounded-4 " src={yay} alt="yay" style={{ "width":"100%", "height":"auto", "maxWidth":"400px"}}/>
+          <p onClick={handleX} className="text-center rounded-circle x pt-2 fs-4" style={{height:"50px", width:"50px", margin:"7px auto"}} >X</p>
+          </div>
+          
+        </div> }
+       
+        {notification1 && <div className="" style={{"zIndex": 9990}}>
 
           <Sidebar notification={notification} />
           

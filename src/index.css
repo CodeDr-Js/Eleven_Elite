@@ -47,6 +47,18 @@ top: 0px !important;
   border-radius: 0 0 15px 15px;
 }
 
+.animate {
+  animation: slideIn 2.5s ease-out forwards;
+  
+}
+
+.x {
+  background-color: rgba(255, 174, 0, 0.253);
+  color: yellow;
+  
+ 
+}
+
 @media screen and (min-width: 530px) { /* Adjust breakpoint as needed */
   body {
     max-width: 500px; /* Example maximum width */
