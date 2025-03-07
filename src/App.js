@@ -200,16 +200,16 @@ const location = useLocation();
       if(Number(localStorage.yay) === 1) {
         setYayLoading(false)
       } else {
-        localStorage.yay = 1;
         setYayLoading(true);
   
-        setTimeout(()=>{ setYayLoading(false)}, 20000)
+        // setTimeout(()=>{ setYayLoading(false)}, 20000)
       }
     }
   },[location.pathname])
   
   const handleX = () => {
     setYayLoading(false);
+    localStorage.yay = 1;
   }
 
   return (
