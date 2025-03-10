@@ -301,6 +301,7 @@ const Banking = () => {
     const extraField = JSON.parse(item.fields.extraField);
     const amount = item.fields.amount;
     const currency= item.fields.currency;
+    
     return (
       <div id={cardDiv}>
 
@@ -313,7 +314,7 @@ const Banking = () => {
             </div> :""}
        
             <p className='text-center fw-bold opacity-50 ' style={{ fontSize: "10px" }}>Amount</p>
-            <h1 translate='no' className='text-center text-primary fw-bold line-h'>{currency} {numberWithCommas(Number(amount).toFixed(2))} </h1>
+            <h1 translate='no' className='text-center text-primary fw-bold line-h'> {currency === "USD" ? "$" : currency} {numberWithCommas(Number(amount).toFixed(2))} </h1>
             <div className='d-flex w-100 mt-4'>
               <button className='btn btn-primary text-center ' style={{ paddingTop: "1px" }}>{isLoading.loading && isLoading.index === index ? "Hide" : "View"}</button>
 
