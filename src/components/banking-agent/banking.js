@@ -306,6 +306,12 @@ const Banking = () => {
 
         <div className='container'>
           <div onClick={() => handleBanking(index)} className='transparent-color mt-4 p-3 rounded'>
+            {currency === "USD" ?    <div>
+              <p className='text-center fw-bold opacity-50' style={{ fontSize: "10px" }}>Username</p>
+
+              <p className='text-center fw-bold line-h' >{item.fields.username}</p>
+            </div> :""}
+       
             <p className='text-center fw-bold opacity-50 ' style={{ fontSize: "10px" }}>Amount</p>
             <h1 translate='no' className='text-center text-primary fw-bold line-h'>{currency} {numberWithCommas(Number(amount).toFixed(2))} </h1>
             <div className='d-flex w-100 mt-4'>
