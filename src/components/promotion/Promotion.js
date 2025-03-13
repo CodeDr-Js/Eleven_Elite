@@ -59,7 +59,7 @@ const Promotion = () => {
     handlePromotion();
   }, []);
 
-  //console.log(promotion);
+  console.log(promotion);
   useEffect(() => {
     setLoadings(true);
     if (promotion !== null) {
@@ -307,9 +307,9 @@ const Promotion = () => {
                           }
                           withdrawn={
                             promotion.activities.teams_dir.generation_track[1]
-                              .gen_withdrawal
-                              ? Math.floor(Number(promotion.activities.teams_dir
-                                  .generation_track[1].gen_withdrawal.amount))
+                              .gen_withdraw
+                              ? Number(promotion.activities.teams_dir
+                                  .generation_track[1].gen_withdraw.amount).toFixed(2)
                               : "0.0"
                           }
                           total={
@@ -415,11 +415,11 @@ const Promotion = () => {
                           }
                           withdrawn={
                             promotion.activities.teams_dir.generation_track[2]
-                              .gen_withdrawal
-                              ? Math.floor(Number(
+                              .gen_withdraw
+                              ?Number(
                                   promotion.activities.teams_dir
-                                    .generation_track[2].gen_withdrawal.amount
-                                ))
+                                    .generation_track[2].gen_withdraw.amount
+                                ).toFixed(2)
                               : "0.0"
                           }
                           total={
@@ -521,11 +521,11 @@ const Promotion = () => {
                           }
                           withdrawn={
                             promotion.activities.teams_dir.generation_track[3]
-                              .gen_withdrawal
-                              ? Math.floor(Number(
+                              .gen_withdraw
+                              ? Number(
                                   promotion.activities.teams_dir
-                                    .generation_track[3].gen_withdrawal.amount
-                                ))
+                                    .generation_track[3].gen_withdraw.amount
+                                ).toFixed(2)
                               : "0.0"
                           }
                           total={
