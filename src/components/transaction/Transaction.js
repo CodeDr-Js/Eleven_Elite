@@ -69,7 +69,7 @@ const Transaction = () => {
   const [dateRange, setDateRange] = useState([]);
   const [options, setOptions] = useState();
 
-  console.log({options});
+  //console.log({options});
   
   useEffect(() => {
 
