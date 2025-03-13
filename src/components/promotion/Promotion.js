@@ -59,7 +59,7 @@ const Promotion = () => {
     handlePromotion();
   }, []);
 
-  console.log(promotion);
+  //console.log(promotion);
   useEffect(() => {
     setLoadings(true);
     if (promotion !== null) {
