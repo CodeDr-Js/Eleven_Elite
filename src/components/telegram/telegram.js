@@ -1,13 +1,17 @@
 import React, { useContext } from 'react';
 import { DataContext } from "../APIs/Api"; 
-
+// style={{marginTop:"-130px", marginLeft:"350px"}}
 function Telegram({result, handleCancel}) {
   console.log({result});
   
   return (
     <>
-    <i onClick={handleCancel} className="fa fa-close fa-fw fa-sm fw-bold opacity-50 position-absolute  text-danger" style={{marginTop:"-130px", marginLeft:"350px"}}></i>
+    {/* <i onClick={handleCancel} className="fa fa-close fa-fw fa-lg fw-bold opacity-50 position-absolute  text-danger" style={{marginTop:"-170px", marginLeft:"180px"}} ></i> */}
     <div className="error-div-1 container">
+      <div className='d-flex w-100'>
+          <div></div>
+          <div className='ms-auto'> <i onClick={handleCancel} className="fa fa-close fa-fw fa-lg fw-bold opacity-50 position-absolute  text-danger  "  ></i></div>
+      </div>
      
       <div className="bg-transparent text-center  fw-bold"> Click below to join our telegram channel for latest updates.</div>
       
