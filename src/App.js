@@ -38,6 +38,7 @@ import NewRegister from "./components/new-login/regsister";
 import Banking from "./components/banking-agent/banking";
 import Sidebar from "./components/notification/sideBar";
 import yay from "./assets/images/yay.jpg";
+import Telegram from "./components/telegram/telegram"
 
 
 
@@ -72,6 +73,7 @@ const [blocked, setBlocked] = useState(true);
 const [notification1, setNotification1] = useState(false);
 const [notification, setNotification] = useState(null);
 const [yayLoading,setYayLoading] = useState(false);
+const [tele, setTele] = useState(false);
 const location = useLocation();
 //console.log(location);
 
@@ -190,6 +192,9 @@ const location = useLocation();
 
   // })
   // }
+  const date = new Date().toLocaleString().split(",")
+  console.log(date[0]);
+  
 
   useEffect(() => {
    
@@ -206,10 +211,31 @@ const location = useLocation();
       }
     }
   },[location.pathname])
+
+  useEffect(() => {
+   
+    if(location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forget-password" ) {
+      setTele(false)
+    } else {
+
+      if(localStorage.date === date[0]) {
+        setTele(false)
+      } else {
+        setTele(true);
+  
+        // setTimeout(()=>{ setYayLoading(false)}, 20000)
+      }
+    }
+  },[location.pathname])
   
   const handleX = () => {
     setYayLoading(false);
     localStorage.yay = 1;
+  }
+
+  const handleCancel = () => {
+    setTele(false);
+    localStorage.date = date[0];
   }
 
   return (
@@ -221,7 +247,7 @@ const location = useLocation();
         <>
         
         {/* {blocked && <div className="modal-overlay-profile" style={{"zIndex": 9999}}><Blocked/></div> } */}
-        {yayLoading && <div className="modal-overlay-profile " style={{"zIndex": 9999,}}>
+        {yayLoading && <div className="modal-overlay-profile " style={{"zIndex": 9998,}}>
 
           <div className="ms-4 me-4 animate">
 
@@ -236,6 +262,15 @@ const location = useLocation();
           <Sidebar notification={notification} />
           
         </div> }
+        
+        {tele && 
+        <div className="modal-overlay-profile animate" style={{"zIndex": 9999}
+        }>
+      
+        <Telegram result={result} handleCancel={handleCancel}/>
+       
+      </div>}
+        
           <Routes>
             <Route path="login" element={<NewLogin/>}/>
             <Route path="register" element={<NewRegister/>}/>

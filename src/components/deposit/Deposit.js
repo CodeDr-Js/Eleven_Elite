@@ -31,7 +31,7 @@ const Deposit = () => {
     setResult,
     getUserData,
     hasRunRetrieve,
-    telegram,depositDir, setdepositDir
+    telegram, depositDir, setdepositDir
   } = useContext(DataContext);
   // console.log(activities_g);
   const navigate = useNavigate();
@@ -49,8 +49,10 @@ const Deposit = () => {
   const [isLocalAcc, setIsLocalAcc] = useState(false);
   const [awaiting, setAwaiting] = useState(false);
   const [fileUrl, setFileUrl] = useState("");
+  const [isCancelBtn, setIsCancelBtn] = useState(false);
+  const [isCancelBtnLoading, setIsCancelBtnLoading] = useState(false);
 
-   
+
   //console.log(activities_g);
 
   //console.log("My deposit is running...");
@@ -162,6 +164,7 @@ const Deposit = () => {
           setUsdCard(true);
           setIsOpen(false);
           setUploadHash(false);
+          setIsCancelBtn(true);
           const extraField = JSON.parse(fields.extraField);
 
           if (extraField.upload_hash_id) {
@@ -169,6 +172,7 @@ const Deposit = () => {
           }
         } else {
           setLocalCard(true);
+          setIsCancelBtn(true);
         }
 
         //console.log({ result });
@@ -178,39 +182,39 @@ const Deposit = () => {
 
   const retrieveDepositInfo = () => {
     // console.log({depositDir});
-    
+
     setUploadHash(false);
     setLoading(true);
     if (!token) {
       Cookies.remove("auth-token");
       navigate("/login");
     } else {
-      
-      if (Object.hasOwn(activities_g, "deposit_dir")||depositDir) {
+
+      if (Object.hasOwn(activities_g, "deposit_dir") || depositDir) {
         setLoading(false);
 
-        if(!activities_g.deposit_dir){activities_g.deposit_dir=depositDir}
+        if (!activities_g.deposit_dir) { activities_g.deposit_dir = depositDir }
         if (activities_g.deposit_dir) {
-       //   console.log("Loading check....");
+          //   console.log("Loading check....");
           const deposit = activities_g.deposit_dir.awaiting_deposit;
           const local = activities_g.deposit_dir
 
           if (local.local_address) {
-        //    console.log("Local found, true");
+            //    console.log("Local found, true");
             setIsLocalAcc(true);
           } else {
-        //    console.log("Local not found, false");
+            //    console.log("Local not found, false");
             setIsLocalAcc(false)
           };
           if (Array.isArray(deposit)) {
 
             if (deposit[0].fields.generator === "awaiting_deposit_confirmation") {
-           //   console.log("Awaiting is found");
+              //   console.log("Awaiting is found");
 
               setAwaiting(true);
               setFileUrl(deposit[0].fields.file_url);
             } else {
-           //   console.log("Awaiting is found");
+              //   console.log("Awaiting is found");
               setAwaiting(false);
             }
           }
@@ -221,6 +225,7 @@ const Deposit = () => {
             setIsOpen(true);
             setUsdCard(false);
             setLocalCard(false);
+            setIsCancelBtn(false);
           } else if (deposit[0].fields.method == "USD") {
             // console.log("Method is USD");
 
@@ -228,6 +233,7 @@ const Deposit = () => {
             setUsdCard(true);
             setIsOpen(false);
             setLocalCard(false);
+            setIsCancelBtn(true);
 
             const extraField = JSON.parse(deposit[0].fields.extraField);
 
@@ -238,29 +244,30 @@ const Deposit = () => {
             setLocalCard(true);
             setIsOpen(false);
             setUsdCard(false);
+            setIsCancelBtn(true);
           }
 
 
-        } 
-       // console.log("We have a deposit dir");
+        }
+        // console.log("We have a deposit dir");
       } else {
-      //  console.log("No Deposit_dir");
+        //  console.log("No Deposit_dir");
         setIsOpen(false);
         setUploadHash(false);
         API.retrieveDeposit(token)
           .then((result) => {
             setLoading(false);
             // console.log("Server Response");
-            if(result.detail === "Invalid token.") {
-                Cookies.remove("auth-token");
-               navigate("/login");
-               return;
-            } 
+            if (result.detail === "Invalid token.") {
+              Cookies.remove("auth-token");
+              navigate("/login");
+              return;
+            }
 
             setResult(result);
-           // console.log(result);
+            // console.log(result);
 
-            
+
             //setActivities_g(result.activities);
             // {
             //   bal_info: {
@@ -291,7 +298,7 @@ const Deposit = () => {
 
               if (Array.isArray(deposit)) {
                 if (deposit[0].fields.generator === "awaiting_deposit_confirmation") {
-                 // console.log("Awaiting is found", deposit[0].generator);
+                  // console.log("Awaiting is found", deposit[0].generator);
                   setAwaiting(true);
                   setFileUrl(deposit[0].fields.file_url);
                 } else {
@@ -308,6 +315,7 @@ const Deposit = () => {
                 setIsOpen(true);
                 setUsdCard(false);
                 setLocalCard(false);
+                setIsCancelBtn(false);
               } else if (deposit[0].fields.method == "USD") {
                 //console.log("Method is USD");
 
@@ -315,6 +323,7 @@ const Deposit = () => {
                 setUsdCard(true);
                 setIsOpen(false);
                 setLocalCard(false);
+                setIsCancelBtn(true);
 
                 const extraField = JSON.parse(deposit[0].fields.extraField);
 
@@ -325,10 +334,11 @@ const Deposit = () => {
                 setLocalCard(true);
                 setIsOpen(false);
                 setUsdCard(false);
+                setIsCancelBtn(true);
               }
 
 
-            } 
+            }
 
             // setIsOpen(false);
           })
@@ -340,25 +350,59 @@ const Deposit = () => {
   useEffect(() => {
     retrieveDepositInfo();
   }, []);
+
+
+  const handleCancelDeposit = () => {
+    setIsCancelBtnLoading(true);
+
+    API.sendRequest({ action: "delete"}, token).then((result) => {
+      // console.log(result);
+      // console.log("Running..");
+      setIsCancelBtnLoading(false);
+      if(result.message === "Success") {
+
+          setActivities_g((prev) => ({
+              ...prev,
+              wallet: result.activities.wallet,
+              deposit_dir: result.activities.deposit_dir,
+              init_currency: result.activities.init_currency,
+            }));
+              setdepositDir(result.activities.deposit_dir)
+
+              setUsdCard(false);
+      setLocalCard(false);
+      setIsOpen(true);
+      setIsCancelBtn(false);
+      setIsCancelBtnLoading(false);
+      }
+      
+      
+      
+  }).catch((err)=> console.log(err))
+
+ 
+
+
+  }
   return (
     <>
       <div>
-      <div className="pt-4">
-        <div className="fixed-top ">
-          <ArrowNav name="Deposit" bg="main-color" />
+        <div className="pt-4">
+          <div className="fixed-top ">
+            <ArrowNav name="Deposit" bg="main-color" />
 
-          <div className="blur d-flex justify-content-center align-items-center " >
-            <p translate="no" className="text-center text-success pt-3  fw-bold ">Total Deposit:  {!Array.isArray(activities_g) && activities_g.wallet.history
-              ? activities_g.init_currency.symbol +
-              numberWithCommas(Number(activities_g.wallet.history.deposit).toFixed(2))
-              : ""}
-            </p>
+            <div className="blur d-flex justify-content-center align-items-center " >
+              <p translate="no" className="text-center text-success pt-3  fw-bold ">Total Deposit:  {!Array.isArray(activities_g) && activities_g.wallet.history
+                ? activities_g.init_currency.symbol +
+                numberWithCommas(Number(activities_g.wallet.history.deposit).toFixed(2))
+                : ""}
+              </p>
+
+            </div>
 
           </div>
-
+          <br />
         </div>
-              <br/>
-      </div>
         {/* <div className="container d-flex pt-3">
           <div onClick={goBack}>
             <img src={Arrow} alt="arrow-back" className="nav-arrow" />
@@ -566,6 +610,17 @@ const Deposit = () => {
           </div>
         </div>
       )}
+
+      {isCancelBtn && <div className="mt-4 mb-4 container">
+        {isCancelBtnLoading ?  <button className="btn btn-danger w-100 p-2 text-warning disabled ">Loading...</button> :
+        
+        <button className="btn btn-danger w-100 p-2 " onClick={handleCancelDeposit}>Cancel Deposit</button>
+     }
+     <br/>
+     <br/>
+ 
+     </div>}
+      
 
       {loading && <Loader />}
     </>

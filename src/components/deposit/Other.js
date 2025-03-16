@@ -274,7 +274,7 @@ const Other = ({
             />
             <br />
 
-            <div className="mb-4">
+            <div className="">
               {isLoading ? (
                 <button className="btn btn-primary w-100 p-3 fw-bold disabled opacity-50 text-warning">
                   Loading...
@@ -294,7 +294,7 @@ const Other = ({
                 </button>
               )}
             </div>{" "}
-            <br/>
+            
             </form>
 
           </div>
