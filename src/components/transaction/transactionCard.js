@@ -30,9 +30,9 @@ const TransactionCard = ({id, type, amount, date, status, statusStyle, statusIco
     <div className='container mb-3'>
         <div className='main-color rounded-4 ps-4 pe-4 pt-3 pb-1'>
             <div className='bg-transparent d-flex'>
-                <p className='bg-transparent'>{capitalizeFirstLetter(type)}</p>
+                <p className='bg-transparent pe-2'>{capitalizeFirstLetter(type)}</p>
                 <div translate='no'>
-                <p translate="no" className='bg-transparent ms-auto fw-bold'>{currency} {amount}</p>
+                <p translate="no" className='bg-transparent ms-auto fw-bold'> {currency} {amount}</p>
 
                 </div>
             </div>

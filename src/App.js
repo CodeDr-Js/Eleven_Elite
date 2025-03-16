@@ -200,7 +200,7 @@ const location = useLocation();
    
     if(location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forget-password" ) {
       setYayLoading(false)
-    } else {
+    } else  {
 
       if(Number(localStorage.yay) === 1) {
         setYayLoading(false)
@@ -216,7 +216,7 @@ const location = useLocation();
    
     if(location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forget-password" ) {
       setTele(false)
-    } else {
+    } else if(location.pathname === "/") {
 
       if(localStorage.date === date[0]) {
         setTele(false)
