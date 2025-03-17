@@ -131,6 +131,7 @@ ctx.transform(1, Math.random() * 0.1, Math.random() * 0.1, 1, 0, 0); // Apply sk
         if (result.success) {
           Cookies.set("auth-token", result.token, { expires: 7 })
           //setToken("auth-token", result.token);
+          //console.log({result})
           setActiveToken(result.token)
           navigate("/");
         } else {

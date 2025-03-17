@@ -32,7 +32,7 @@ const TransactionCard = ({id, type, amount, date, status, statusStyle, statusIco
             <div className='bg-transparent d-flex'>
                 <p className='bg-transparent pe-2'>{capitalizeFirstLetter(type)}</p>
                 <div translate='no'>
-                <p translate="no" className='bg-transparent ms-auto fw-bold'> {currency} {amount}</p>
+                <p translate="no" className='bg-transparent ms-auto fw-bold'> {type === "ramadan bonus" ? `${JSON.parse(localStorage.init_currency).symbol} ${amount}` : `${currency}  ${amount}` }</p>
 
                 </div>
             </div>

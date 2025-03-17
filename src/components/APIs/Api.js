@@ -129,6 +129,7 @@ const DataProvider = ({ children }) => {
           setSiteActivitiesData(result.latest_transactions)
           setSecure(result)
           setHasRunRetrieve(true)
+          localStorage.init_currency = JSON.stringify(result.activities.init_currency);
         } else if(result.detail) {
           //console.log("removing token");
           navigate("/login")

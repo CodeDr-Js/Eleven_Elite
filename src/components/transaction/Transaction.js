@@ -323,6 +323,8 @@ const Transaction = () => {
 
   //console.log(data);
   const transactionCard = data.map(e => {
+    //console.log(e.type);
+    
       let cs;
       if(options !== undefined) {
         cs = options[e.currency].

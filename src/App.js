@@ -193,7 +193,7 @@ const location = useLocation();
   // })
   // }
   const date = new Date().toLocaleString().split(",")
-  console.log(date[0]);
+  //console.log(date[0]);
   
 
   useEffect(() => {
