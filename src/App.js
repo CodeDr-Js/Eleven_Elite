@@ -66,7 +66,8 @@ import Telegram from "./components/telegram/telegram"
 export default function App() {
   const navigate = useNavigate();
   
-  const { result} =
+  const { result,  user_g,
+    } =
   useContext(DataContext);
 // const token = Cookies.get("auth-token");
 const [blocked, setBlocked] = useState(true);
@@ -212,19 +213,43 @@ const location = useLocation();
     }
   },[location.pathname])
 
+
   useEffect(() => {
    
     if(location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forget-password" ) {
       setTele(false)
     } else if(location.pathname === "/") {
+        if(user_g.username !== undefined) {
+          //console.log("loading...1 ");
+          
+          if(user_g.username !== "Nam"){
+            //console.log("loading...2 ");
+            if(localStorage.date === date[0]) {
+              setTele(false)
+            } else {
+              setTele(true);
+        
+              // setTimeout(()=>{ setYayLoading(false)}, 20000)
+            }
+          }
+          
 
-      if(localStorage.date === date[0]) {
-        setTele(false)
-      } else {
-        setTele(true);
-  
-        // setTimeout(()=>{ setYayLoading(false)}, 20000)
-      }
+        } else {
+          //console.log("Loading Off");
+
+          if(user_g.username !== "Nam"){
+           // console.log("loading...2 ");
+            if(localStorage.date === date[0]) {
+              setTele(false)
+            } else {
+              setTele(true);
+        
+              // setTimeout(()=>{ setYayLoading(false)}, 20000)
+            }
+          }
+          
+        }
+      
     }
   },[location.pathname])
   

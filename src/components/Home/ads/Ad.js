@@ -14,7 +14,7 @@ const Ad = () => {
             <img
               className="d-block border-none w-100 bg-danger rounded-2"
               style={{ height: "80px" }}
-              src={flier1}
+              src={"flier1"}
               alt=""
             />
           </Carousel.Item>

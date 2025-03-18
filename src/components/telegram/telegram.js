@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { DataContext } from "../APIs/Api"; 
 // style={{marginTop:"-130px", marginLeft:"350px"}}
 function Telegram({result, handleCancel}) {
-  console.log({result});
+  //console.log({result});
   
   return (
     <>

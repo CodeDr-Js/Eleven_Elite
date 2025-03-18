@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./CarouselComponent.css"; // Custom CSS file to override styles
-import flier1 from "../../../assets/images/flier.jpg";
+import flier1 from "../../../assets/images/Home.jpg";
 import flier2 from "../../../assets/images/flier2.jpg";
 import flier3 from "../../../assets/images/flier3.jpg";
 import flier4 from "../../../assets/images/flier4.jpg";
