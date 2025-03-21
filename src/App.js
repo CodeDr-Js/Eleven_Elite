@@ -197,21 +197,21 @@ const location = useLocation();
   //console.log(date[0]);
   
 
-  // useEffect(() => {
+  useEffect(() => {
    
-  //   if(location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forget-password" ) {
-  //     setYayLoading(false)
-  //   } else  {
+    if(location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forget-password" ) {
+      setYayLoading(false)
+    } else  {
 
-  //     if(Number(localStorage.yay) === 1) {
-  //       setYayLoading(false)
-  //     } else {
-  //       setYayLoading(true);
+      if(Number(localStorage.yay) === 1) {
+        setYayLoading(false)
+      } else {
+        setYayLoading(true);
   
-  //       // setTimeout(()=>{ setYayLoading(false)}, 20000)
-  //     }
-  //   }
-  // },[location.pathname])
+        // setTimeout(()=>{ setYayLoading(false)}, 20000)
+      }
+    }
+  },[location.pathname])
 
 
   useEffect(() => {
@@ -272,7 +272,8 @@ const location = useLocation();
         <>
         
         {/* {blocked && <div className="modal-overlay-profile" style={{"zIndex": 9999}}><Blocked/></div> } */}
-        {/* {yayLoading && <div className="modal-overlay-profile " style={{"zIndex": 9998,}}>
+        
+        {yayLoading && <div className="modal-overlay-profile " style={{"zIndex": 9998,}}>
 
           <div className="ms-4 me-4 animate">
 
@@ -280,7 +281,7 @@ const location = useLocation();
           <p onClick={handleX} className="text-center rounded-circle x pt-2 fs-4" style={{height:"50px", width:"50px", margin:"7px auto"}} >X</p>
           </div>
           
-        </div> } */}
+        </div> }
        
         {notification1 && <div className="" style={{"zIndex": 9990}}>
 
