@@ -39,6 +39,8 @@ import Banking from "./components/banking-agent/banking";
 import Sidebar from "./components/notification/sideBar";
 import yay from "./assets/images/yay.jpg";
 import Telegram from "./components/telegram/telegram"
+import Leaders from "./components/leaders/Leaders";
+
 
 
 
@@ -272,7 +274,7 @@ const location = useLocation();
         <>
         
         {/* {blocked && <div className="modal-overlay-profile" style={{"zIndex": 9999}}><Blocked/></div> } */}
-        
+
         {yayLoading && <div className="modal-overlay-profile " style={{"zIndex": 9998,}}>
 
           <div className="ms-4 me-4 animate">
@@ -320,6 +322,7 @@ const location = useLocation();
             <Route path="reward" element={<Reward />} />
             <Route path="about" element={<About />} />
             <Route path="other" element={<LocalWithdrawal />} />
+            <Route path="leader" element={<Leaders />} />
             {/* <Route path="deposit/other_payment" element={<Other />} /> */}
             {/* <Route path="api-call" element={<ApiCall />} /> */}
 

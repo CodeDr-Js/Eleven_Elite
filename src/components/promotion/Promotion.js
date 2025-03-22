@@ -9,7 +9,7 @@ import { API } from "../api-service/api-service";
 import Cookies from "js-cookie";
 import { DataContext } from "../APIs/Api";
 import { host, hostname, origin } from "../search_dir/search_dir";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Loader from "../loader/loader";
 import Footer from "../Home/anti-scores/footer";
 import { convertToLocalTime } from "../qickfun/qickfun";
@@ -273,6 +273,10 @@ const Promotion = () => {
                   )}
                 </div>
               </div>
+            </div>
+
+            <div className="mt-3 d-flex align-item-center justify-content-center">
+              <Link to="/leader" className="btn vip-gold vip-text-3">Leaders Bonus</Link>
             </div>
 
             <div className="mt-4">
